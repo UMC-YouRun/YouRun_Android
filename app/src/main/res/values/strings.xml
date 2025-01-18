@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">YouRun</string>
+    <string name="img_up_background">img_up_background</string>
+    <string name="app_exp_up_you_run">YOU+RUN?</string>
+    <string name="app_exp_welcome">님 반가워요 ! \n지금부터 유런에 대해 \n알려드릴게요</string>
+    <string name="app_exp_run">만나지 않아도 함께 뛰어요, YOU+RUN!</string>
+    <string name="app_exp_mate">유런은 비대면 러닝 메이트와 함께 뛰는 러닝 앱이에요</string>
+    <string name="next">다음</string>
+    <string name="blur_img">blur</string>
+    <string name="characters">characters</string>
 </resources>
