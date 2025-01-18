@@ -8,4 +8,5 @@
     <string name="next">다음</string>
     <string name="blur_img">blur</string>
     <string name="characters">characters</string>
+    <string name="what_character">나는 어떤 캐릭터와 \n어울릴까?</string>
 </resources>
