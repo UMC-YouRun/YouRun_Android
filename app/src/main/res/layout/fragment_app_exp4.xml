@@ -39,13 +39,13 @@
             android:layout_gravity="center"
             android:layout_marginTop="28dp"
             android:layout_marginBottom="8dp"
-            android:fontFamily="@font/roboto_bold"
             android:gravity="center"
             android:letterSpacing="0.03"
             android:lineSpacingExtra="14sp"
             android:text="@string/app_exp_up_you_run"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
     </FrameLayout>
 
@@ -57,16 +57,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/up_app_exp">
+        app:layout_constraintTop_toBottomOf="@id/up_app_exp">
 
         <TextView
             android:id="@+id/txt_app_exp_who_run"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_bold"
             android:text="@string/app_exp_4"
             android:textSize="24sp"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:letterSpacing="-0.03"
             android:lineSpacingExtra="8sp"
             android:layout_marginTop="80dp"
@@ -136,10 +136,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
             android:text="@string/app_exp_4_1"
             android:textSize="15sp"
             android:textColor="@color/black"
+            android:textStyle="normal"
             android:letterSpacing="-0.07"
             android:lineSpacingExtra="10sp"
             android:layout_gravity="center"
@@ -148,10 +148,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
             android:text="@string/app_exp_4_2"
             android:textSize="15sp"
             android:textColor="@color/black"
+            android:textStyle="normal"
             android:letterSpacing="-0.07"
             android:lineSpacingExtra="10sp"
             android:layout_gravity="center"
@@ -164,7 +164,7 @@
             android:layout_gravity="center"
             android:background="@drawable/rounded_button"
             android:text="@string/next"
-            android:fontFamily="@font/roboto_bold"
+            android:textStyle="bold"
             android:layout_marginTop="33dp" />
 
     </LinearLayout>
