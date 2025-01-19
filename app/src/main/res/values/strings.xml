@@ -9,4 +9,7 @@
     <string name="blur_img">blur</string>
     <string name="characters">characters</string>
     <string name="what_character">나는 어떤 캐릭터와 \n어울릴까?</string>
+    <string name="running_test">러닝 성향 테스트를 통해</string>
+    <string name="running_character">나와 어울리는 러닝 캐릭터를 알아볼 수 있어요!</string>
+    <string name="back_button">back_button</string>
 </resources>

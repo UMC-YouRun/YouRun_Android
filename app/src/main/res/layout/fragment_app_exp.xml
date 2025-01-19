@@ -91,32 +91,32 @@
             <View
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                android:background="@drawable/circle_indicator"
+                android:background="@drawable/img_circle_indicator"
                 android:layout_marginEnd="8dp"
                 android:backgroundTint="@color/circle_background" />
 
             <View
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                android:background="@drawable/circle_indicator"
+                android:background="@drawable/img_circle_indicator"
                 android:layout_marginEnd="8dp" />
 
             <View
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                android:background="@drawable/circle_indicator"
+                android:background="@drawable/img_circle_indicator"
                 android:layout_marginEnd="8dp" />
 
             <View
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                android:background="@drawable/circle_indicator"
+                android:background="@drawable/img_circle_indicator"
                 android:layout_marginEnd="8dp" />
 
             <View
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                android:background="@drawable/circle_indicator" />
+                android:background="@drawable/img_circle_indicator" />
 
         </LinearLayout>
 

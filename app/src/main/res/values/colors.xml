@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="circle_background">#9285f6</color>
     <color name="yellow">#FFD45C</color>
+    <color name="text_purple">#5945D9</color>
 </resources>
