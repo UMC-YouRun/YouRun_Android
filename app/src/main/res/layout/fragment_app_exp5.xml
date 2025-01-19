@@ -1,6 +1,171 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@id/up_app_exp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@id/rounded_bottom_background"
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:background="@drawable/rounded_bottom_background" />
+
+        <ImageButton
+            android:id="@id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/img_arrow_left"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="28dp"
+            android:layout_marginStart="29dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@id/txt_app_exp_you_run"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="center"
+            android:letterSpacing="0.03"
+            android:lineSpacingExtra="14sp"
+            android:text="@string/app_exp_up_you_run"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/up_app_exp">
+
+        <TextView
+            android:id="@+id/txt_app_exp_how_run"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/app_exp_5"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:letterSpacing="-0.03"
+            android:lineSpacingExtra="8sp"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="74dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="121dp"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/blur_img"
+                android:src="@drawable/img_blur"
+                android:layout_gravity="center"
+                android:backgroundTint="@android:color/transparent"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/characters"
+                android:src="@drawable/img_characters" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="82dp"
+            android:layout_height="10dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/img_circle_indicator"
+                android:layout_marginEnd="8dp" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/img_circle_indicator"
+                android:layout_marginEnd="8dp" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/img_circle_indicator"
+                android:layout_marginEnd="8dp" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/img_circle_indicator"
+                android:layout_marginEnd="8dp" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/img_circle_indicator"
+                android:backgroundTint="@color/circle_background" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/app_exp_5_1"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:letterSpacing="-0.07"
+            android:lineSpacingExtra="10sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="32dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/app_exp_5_2"
+            android:textSize="15sp"
+            android:textColor="@color/black"
+            android:letterSpacing="-0.07"
+            android:lineSpacingExtra="10sp"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp" />
+
+        <Button
+            android:id="@id/next_btn"
+            android:layout_width="328dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="@drawable/rounded_button"
+            android:text="@string/next"
+            android:fontFamily="@font/roboto_bold"
+            android:layout_marginTop="35dp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

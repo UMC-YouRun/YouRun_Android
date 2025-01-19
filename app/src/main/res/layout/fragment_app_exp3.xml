@@ -128,8 +128,7 @@
             <View
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                android:background="@drawable/img_circle_indicator"
-                />
+                android:background="@drawable/img_circle_indicator" />
 
         </LinearLayout>
 
