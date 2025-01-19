@@ -1,4 +1,7 @@
 package com.example.yourun.view
 
-class AppExpFragment5 {
+import androidx.fragment.app.Fragment
+
+class AppExpFragment5 : Fragment() {
+
 }
