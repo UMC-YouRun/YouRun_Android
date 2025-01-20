@@ -36,6 +36,5 @@ class AppExpFragment : Fragment(R.layout.fragment_app_exp) {
                 requireActivity().finish()
             }
         }
-
     }
 }

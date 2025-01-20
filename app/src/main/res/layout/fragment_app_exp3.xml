@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/characters"
-                android:src="@drawable/img_characters" />
+                android:src="@drawable/img_characters3" />
 
         </FrameLayout>
 
