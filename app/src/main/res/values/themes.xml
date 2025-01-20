@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.YouRun" parent="Theme.AppCompat.Light.NoActionBar" />
+    <style name="Theme.YouRun" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:textViewStyle">@font/roboto</item>
+    <item name="android:buttonStyle">@font/roboto</item>
+    <item name="android:editTextStyle">@font/roboto</item>
+    <item name="android:radioButtonStyle">@font/roboto</item>
+    <item name="android:checkboxStyle">@font/roboto</item>
+    </style>
 </resources>

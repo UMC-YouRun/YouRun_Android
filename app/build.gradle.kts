@@ -42,7 +42,7 @@ android {
 dependencies {
 
     implementation("androidx.core:core:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation(libs.androidx.lifecycle.runtime.ktx.v262)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     testImplementation(libs.junit)
