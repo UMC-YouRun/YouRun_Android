@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.yourun.databinding.ActivitySignup1Binding
 
-class Signup1Activity : AppCompatActivity() {
+class SignUp1Activity : AppCompatActivity() {
     private lateinit var binding: ActivitySignup1Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,7 +15,7 @@ class Signup1Activity : AppCompatActivity() {
 
         binding.btnNext.setOnClickListener{
 
-            val intent= Intent(this, Signup2Activity::class.java)
+            val intent= Intent(this, SignUp2Activity::class.java)
             startActivity(intent)
         }
 

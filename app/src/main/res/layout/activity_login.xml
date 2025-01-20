@@ -14,25 +14,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/bar_login"
+        android:src="@drawable/img_login_bar"
         android:scaleType="fitXY"
         />
 
     <ImageView
-        android:id="@+id/image_logo"
+        android:id="@+id/tv_1"
         android:layout_width="153dp"
         android:layout_height="22dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="65dp"
         android:layout_marginEnd="190dp"
-        android:background="@drawable/image_logo"
+        android:background="@drawable/img_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_title_iv" />
 
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -48,7 +48,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="35dp"
@@ -57,20 +57,20 @@
         android:textColor="@color/gray"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/edit_text_id"
-        app:layout_constraintStart_toStartOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="@+id/tv_2" />
 
     <EditText
         android:id="@+id/edit_text_id"
         android:layout_width="322dp"
         android:layout_height="49dp"
         android:layout_marginTop="285dp"
-        android:background="@drawable/edittext_rounded_corner"
+        android:background="@drawable/bg_edittext_rounded_corner"
         android:fontFamily="@font/roboto_regular"
         android:hint="이메일"
         android:padding="10dp"
         android:textColorHint="@color/gray"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/image_logo"
+        app:layout_constraintStart_toStartOf="@+id/tv_1"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -78,7 +78,7 @@
         android:layout_width="324dp"
         android:layout_height="49dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/edittext_rounded_corner"
+        android:background="@drawable/bg_edittext_rounded_corner"
         android:hint="비밀번호"
         android:fontFamily="@font/roboto_regular"
         android:padding="10dp"
@@ -101,7 +101,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/idFindText"
+            android:id="@+id/idFindText_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -117,12 +117,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:background="@drawable/vector_49"
+            android:background="@drawable/img_line2"
             android:contentDescription="@null" />
 
 
         <Button
-            android:id="@+id/passwordFindText"
+            android:id="@+id/passwordFindText_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -138,11 +138,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:background="@drawable/vector_49"
+            android:background="@drawable/img_line2"
             android:contentDescription="@null" />
 
         <Button
-            android:id="@+id/signupText"
+            android:id="@+id/signupText_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="true"
@@ -158,13 +158,13 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/img_btn_next"
         android:layout_width="328dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="500dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/btn_l"
+        android:background="@drawable/img_login_btn"
         android:importantForAccessibility="no"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -174,14 +174,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="588dp"
-        android:src="@drawable/vector_54"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton"
+        android:src="@drawable/img_line"
+        app:layout_constraintEnd_toEndOf="@+id/img_btn_next"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageButton"
+        app:layout_constraintStart_toStartOf="@+id/img_btn_next"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_sns"
+        android:id="@+id/tv_sns"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="112dp"
@@ -196,12 +196,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
+        android:id="@+id/img_btn_kakao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="664dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/btn_kakao"
+        android:background="@drawable/img_kakao_btn"
         android:importantForAccessibility="no"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"

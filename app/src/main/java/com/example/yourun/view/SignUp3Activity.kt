@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.yourun.databinding.ActivitySignup3Binding
 
-class Signup3Activity : AppCompatActivity() {
+class SignUp3Activity : AppCompatActivity() {
     private lateinit var binding: ActivitySignup3Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {

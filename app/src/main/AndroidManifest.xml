@@ -23,13 +23,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.Signup1Activity">
+        <activity android:name=".view.SignUp1Activity">
         </activity>
 
-        <activity android:name=".view.Signup2Activity">
+        <activity android:name=".view.SignUp2Activity">
         </activity>
 
-        <activity android:name=".view.Signup3Activity">
+        <activity android:name=".view.SignUp3Activity">
         </activity>
 
 

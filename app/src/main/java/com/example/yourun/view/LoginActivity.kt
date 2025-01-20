@@ -1,6 +1,5 @@
 package com.example.yourun.view
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +16,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding.signupText.setOnClickListener{
 
-            val intent= Intent(this, Signup1Activity::class.java)
+            val intent= Intent(this, SignUp1Activity::class.java)
             startActivity(intent)
         }
     }
