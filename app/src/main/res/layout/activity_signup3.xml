@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fontFamily="@font/roboto_regular">
+
+
+    <ImageView
+        android:id="@+id/signup_title_iv"
+        android:layout_width="match_parent"
+        android:layout_height="103dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bar_signup"
+        android:scaleType="fitXY"
+        />
+
+
+    <ImageButton
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="344dp"
+        android:background="@drawable/ic_back"
+        android:importantForAccessibility="no"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="60dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/image_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16sp"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="245dp"
+        android:text="안녕하세요!"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="204dp"
+        android:layout_marginEnd="145dp"
+        android:text="유런에 오신 걸 환영해요"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@color/black"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/image_logo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="244dp"
+        android:layout_marginEnd="125dp"
+        android:text="처음 오셨나요? 필요한 정보를 입력해주세요."
+        android:textColor="@color/gray"
+        android:textSize="14sp"
+        android:fontFamily="@font/roboto_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/image_logo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/id_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:text="닉네임"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="328dp"
+        android:text="띄어쓰기 없이 한글 2~4자만 입력 가능해요"
+        android:textColor="@color/gray"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@+id/image_logo"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_text_id"
+        android:layout_width="340dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="358dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/edittext_rounded_corner"
+        android:importantForAccessibility="no"
+        android:padding="10dp"
+        android:textColorHint="@color/gray"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.41"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tag_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="440dp"
+        android:text="성향태그"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="462dp"
+        android:text="내 러닝 스타일을 나타내는 태그 2개를 선택해주세요"
+        android:textColor="@color/gray"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/img_success"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="360dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="496dp"
+        android:padding="0dp"
+        app:layout_constraintStart_toStartOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <CheckBox
+            android:id="@+id/checkbox1"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:background="@drawable/tag_checkbox_selector"
+            android:button="@null"
+            android:padding="7dp"
+            android:gravity="center"
+            android:text="#느긋하게"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <CheckBox
+            android:id="@+id/checkbox2"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="7dp"
+            android:background="@drawable/tag_checkbox_selector"
+            android:button="@null"
+            android:padding="7dp"
+            android:text="#음악과"
+            android:textSize="16sp"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/checkbox1"
+            app:layout_constraintTop_toTopOf="@id/checkbox1" />
+
+        <CheckBox
+            android:id="@+id/checkbox3"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="7dp"
+            android:background="@drawable/tag_checkbox_selector"
+            android:button="@null"
+            android:padding="7dp"
+            android:text="#열정적"
+            android:textSize="16sp"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/checkbox2"
+            app:layout_constraintTop_toTopOf="@id/checkbox1" />
+
+        <CheckBox
+            android:id="@+id/checkbox4"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/tag_checkbox_selector"
+            android:button="@null"
+            android:padding="7dp"
+            android:text="#자기계발"
+            android:textSize="16sp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/checkbox1" />
+
+        <CheckBox
+            android:id="@+id/checkbox5"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="7dp"
+            android:background="@drawable/tag_checkbox_selector"
+            android:button="@null"
+            android:padding="7dp"
+            android:text="#에너자이저"
+            android:textSize="16sp"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/checkbox4"
+            app:layout_constraintTop_toTopOf="@id/checkbox4" />
+
+        <CheckBox
+            android:id="@+id/checkbox6"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="7dp"
+            android:background="@drawable/tag_checkbox_selector"
+            android:button="@null"
+            android:padding="7dp"
+            android:text="#왕초보"
+            android:textSize="16sp"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/checkbox5"
+            app:layout_constraintTop_toTopOf="@id/checkbox4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,7 +13,7 @@
         android:theme="@style/Theme.YouRun"
         tools:targetApi="34" >
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.YouRun" >
             <intent-filter>
@@ -22,6 +22,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".view.Signup1Activity">
+        </activity>
+
+        <activity android:name=".view.Signup2Activity">
+        </activity>
+
+        <activity android:name=".view.Signup3Activity">
+        </activity>
+
+
     </application>
 
 </manifest>
