@@ -35,12 +35,16 @@ android {
     }
     buildFeatures {
         buildConfig = true
+        dataBinding = true
         viewBinding = true
     }
 }
 
 dependencies {
 
+    implementation ("androidx.recyclerview:recyclerview:1.3.1")
+    implementation("androidx.viewpager2:viewpager2:1.1.0-beta01")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.core:core:1.12.0")
     implementation(libs.androidx.lifecycle.runtime.ktx.v262)
     implementation(libs.androidx.appcompat)

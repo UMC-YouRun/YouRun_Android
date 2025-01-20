@@ -9,6 +9,7 @@ appcompat = "1.7.0"
 lifecycleRuntimeKtxVersion = "2.6.2"
 constraintlayout = "2.2.0"
 
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-runtime-ktx-v262 = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtxVersion" }
