@@ -1,4 +1,4 @@
-package com.example.yourun.view
+package com.example.yourun.view.activities
 
 import android.app.Activity
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.example.yourun.view
+package com.example.yourun.view.fragments
 
 import android.os.Bundle
 import android.text.SpannableString
@@ -15,20 +15,24 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.yourun.R
 
-class AppExpFragment5 : Fragment() {
+class AppExpFragment2 : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_app_exp5, container, false)
+        return inflater.inflate(R.layout.fragment_app_exp2, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.next_btn).setOnClickListener {
-            // 성향 테스트 activity로 이동
+            val nextFragment = AppExpFragment3()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.app_exp_fragment_container, nextFragment)
+                .addToBackStack(null)
+                .commit()
         }
 
         view.findViewById<ImageButton>(R.id.back_button).setOnClickListener {
@@ -44,10 +48,10 @@ class AppExpFragment5 : Fragment() {
             }
         }
 
-        val txt_how_run = view.findViewById<TextView>(R.id.txt_app_exp_how_run)
+        val txt_what_character = view.findViewById<TextView>(R.id.txt_app_exp_what_character)
 
-        val fullText = txt_how_run.text.toString()
-        val targetText = "얼마나 러닝"
+        val fullText = txt_what_character.text.toString()
+        val targetText = "캐릭터"
         val spannableString = SpannableString(fullText)
         val startIndex = fullText.indexOf(targetText)
         val endIndex = startIndex + targetText.length
@@ -60,7 +64,7 @@ class AppExpFragment5 : Fragment() {
                 SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
-        txt_how_run.text = spannableString
-    }
+        txt_what_character.text = spannableString
 
+    }
 }

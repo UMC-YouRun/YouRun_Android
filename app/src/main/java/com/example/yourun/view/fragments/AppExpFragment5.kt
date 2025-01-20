@@ -1,4 +1,4 @@
-package com.example.yourun.view
+package com.example.yourun.view.fragments
 
 import android.os.Bundle
 import android.text.SpannableString
@@ -15,24 +15,20 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.yourun.R
 
-class AppExpFragment3 : Fragment() {
+class AppExpFragment5 : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_app_exp3, container, false)
+        return inflater.inflate(R.layout.fragment_app_exp5, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.next_btn).setOnClickListener {
-            val nextFragment = AppExpFragment4()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.app_exp_fragment_container, nextFragment)
-                .addToBackStack(null)
-                .commit()
+            // 성향 테스트 activity로 이동
         }
 
         view.findViewById<ImageButton>(R.id.back_button).setOnClickListener {
@@ -48,10 +44,10 @@ class AppExpFragment3 : Fragment() {
             }
         }
 
-        val txt_mate_win = view.findViewById<TextView>(R.id.txt_app_exp_mate_win)
+        val txt_how_run = view.findViewById<TextView>(R.id.txt_app_exp_how_run)
 
-        val fullText = txt_mate_win.text.toString()
-        val targetText = "러닝 메이트,"
+        val fullText = txt_how_run.text.toString()
+        val targetText = "얼마나 러닝"
         val spannableString = SpannableString(fullText)
         val startIndex = fullText.indexOf(targetText)
         val endIndex = startIndex + targetText.length
@@ -64,7 +60,7 @@ class AppExpFragment3 : Fragment() {
                 SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
-        txt_mate_win.text = spannableString
-
+        txt_how_run.text = spannableString
     }
+
 }
