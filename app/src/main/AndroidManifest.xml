@@ -14,7 +14,7 @@
         tools:targetApi="34"
         android:enableOnBackInvokedCallback="true">
         <activity
-            android:name=".view.activities.MainActivity"
+            android:name=".view.activities.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.YouRun" >
             <intent-filter>
@@ -23,6 +23,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".view.activities.SignUp1Activity">
+        </activity>
+
+        <activity android:name=".view.activities.SignUp2Activity">
+        </activity>
+
+        <activity android:name=".view.activities.SignUp3Activity">
+        </activity>
+
         <activity
             android:name=".view.activities.AppExpActivity"
             android:exported="true"
