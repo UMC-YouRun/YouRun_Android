@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/gray"/> <!-- 색 변경 -->
+    <solid android:color="@color/gray"/>
     <size android:width="48dp" android:height="48dp"/>
-    <corners android:radius="24dp"/> <!-- 동그란 모양 -->
+    <corners android:radius="24dp"/>
 </shape>
 

@@ -1,4 +1,4 @@
-package com.example.yourun.view
+package com.example.yourun.view.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,7 +14,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        binding.signupText.setOnClickListener{
+        binding.signupTextBtn.setOnClickListener{
 
             val intent= Intent(this, SignUp1Activity::class.java)
             startActivity(intent)

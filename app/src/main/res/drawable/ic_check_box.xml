@@ -17,8 +17,8 @@
       android:strokeLineCap="round"/>
   <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 선택되지 않은 상태 -->
-    <item android:drawable="@drawable/checkbox_unselected" android:state_checked="false"/>
+    <item android:drawable="@drawable/bg_checkbox_unselected" android:state_checked="false"/>
     <!-- 선택된 상태 -->
-    <item android:drawable="@drawable/checkbox_selected" android:state_checked="true"/>
+    <item android:drawable="@drawable/bg_checkbox_selected" android:state_checked="true"/>
   </selector>
 </vector>

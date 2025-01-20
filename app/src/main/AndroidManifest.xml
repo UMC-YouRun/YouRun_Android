@@ -13,7 +13,7 @@
         android:theme="@style/Theme.YouRun"
         tools:targetApi="34" >
         <activity
-            android:name=".view.LoginActivity"
+            android:name=".view.activities.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.YouRun" >
             <intent-filter>
@@ -23,13 +23,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.SignUp1Activity">
+        <activity android:name=".view.activities.SignUp1Activity">
         </activity>
 
-        <activity android:name=".view.SignUp2Activity">
+        <activity android:name=".view.activities.SignUp2Activity">
         </activity>
 
-        <activity android:name=".view.SignUp3Activity">
+        <activity android:name=".view.activities.SignUp3Activity">
         </activity>
 
 

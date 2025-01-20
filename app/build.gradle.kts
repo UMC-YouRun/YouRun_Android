@@ -42,7 +42,6 @@ android {
 dependencies {
 
     implementation("androidx.core:core:1.12.0")
-    implementation(libs.androidx.core.ktx)
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)

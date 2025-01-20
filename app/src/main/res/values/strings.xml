@@ -12,6 +12,7 @@
     <string name="signup_tv3">처음 오셨나요? 필요한 정보를 입력해주세요.</string>
     <string name="tv_id">아이디</string>
     <string name="tv_password">비밀번호</string>
+    <string name="tv_password_check">비밀번호 확인</string>
     <string name="tv_agree">약관동의</string>
     <string name="tv_agree1">(필수)</string>
     <string name="tv_custom_agree1">개인정보 수집/ 이용 동의</string>
