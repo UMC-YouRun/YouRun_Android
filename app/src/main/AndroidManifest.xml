@@ -11,9 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.YouRun"
-        tools:targetApi="34" >
+        tools:targetApi="34"
+        android:enableOnBackInvokedCallback="true">
         <activity
-            android:name=".view.MainActivity"
+            android:name=".view.activities.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.YouRun" >
 <!--            <intent-filter>-->
@@ -22,17 +23,30 @@
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--            </intent-filter>-->
         </activity>
-<activity android:name=".view.activities.QuestionActivity"
-    android:exported="true">
-    <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
 
-        <category android:name="android.intent.category.LAUNCHER" />
-    </intent-filter>
-</activity>
+       <activity 
+                android:name=".view.activities.QuestionActivity"
+                android:exported="true">
+       </activity>
 
-    <activity android:name=".view.activities.ResultActivity"
-        android:exported="true"/>
+        <activity 
+                android:name=".view.activities.ResultActivity"
+                android:exported="true"/>
+
+        <activity android:name=".view.activities.SignUp1Activity">
+        </activity>
+
+        <activity android:name=".view.activities.SignUp2Activity">
+        </activity>
+
+        <activity android:name=".view.activities.SignUp3Activity">
+        </activity>
+
+        <activity
+            android:name=".view.activities.AppExpActivity"
+            android:exported="true"
+            android:theme="@style/Theme.YouRun" />
+
     </application>
 
 </manifest>
