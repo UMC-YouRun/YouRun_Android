@@ -47,18 +47,18 @@
             android:text="러닝 성향 테스트 결과"
             android:textColor="@color/black"
             android:textSize="24dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/resultSubTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="2dp"
             android:gravity="center"
             android:text="디폴트"
             android:textColor="@color/text_color"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="24dp"
+            android:textStyle="bold"/>
 
         <ImageView
             android:id="@+id/resultCharacter"
