@@ -22,7 +22,6 @@
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
 
-
     <!-- 배경 이미지 -->
     <ImageView
         android:layout_width="400dp"
