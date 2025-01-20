@@ -151,7 +151,8 @@
             android:layout_gravity="center"
             android:background="@drawable/rounded_button"
             android:text="@string/next"
-            android:textStyle="normal"
+            android:textStyle="bold"
+            android:gravity="center"
             android:layout_marginTop="33dp" />
 
     </LinearLayout>
