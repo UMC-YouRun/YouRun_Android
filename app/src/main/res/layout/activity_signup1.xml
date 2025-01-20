@@ -40,8 +40,8 @@
         android:layout_marginEnd="232dp"
         android:layout_marginTop="170dp"
         android:layout_marginStart="16sp"
-        android:text="안녕하세요!"
-        android:textSize="24dp"
+        android:text="@string/signup_tv1"
+        android:textSize="24sp"
         android:fontFamily="@font/roboto_bold"
         android:textColor="@color/black"
         android:textStyle="bold"
@@ -55,11 +55,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
-        android:text="유런에 오신 걸 환영해요"
+        android:text="@string/signup_tv2"
         android:textColor="@color/black"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/tv_1"
+        app:layout_constraintStart_toStartOf="@id/tv_1"
         app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -68,10 +68,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="240dp"
-        android:text="처음 오셨나요? 필요한 정보를 입력해주세요."
+        android:text="@string/signup_tv3"
         android:textColor="@color/gray"
         android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_1"
+        app:layout_constraintStart_toStartOf="@id/tv_1"
         app:layout_constraintTop_toTopOf="parent"
         />
 
@@ -81,7 +81,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
         android:layout_marginTop="316dp"
-        android:text="아이디"
+        android:text="@string/tv_id"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -96,7 +96,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/bg_edittext_rounded_corner"
         android:drawableEnd="@drawable/img_againcheck"
-        android:hint="이메일"
+        android:hint="@string/et_emil"
         android:padding="10dp"
         android:textColorHint="@color/gray"
         android:textSize="13sp"
@@ -110,7 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
         android:layout_marginTop="420dp"
-        android:text="비밀번호"
+        android:text="@string/tv_password"
         android:textColor="@color/black"
         android:fontFamily="@font/roboto_regular"
         app:layout_constraintStart_toStartOf="parent"
@@ -139,7 +139,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="42dp"
         android:layout_marginTop="516dp"
-        android:text="비밀번호 확인"
+        android:text="@string/tv_password_check"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -167,9 +167,9 @@
         android:background="@drawable/img_next_btn"
         android:importantForAccessibility="no"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/edit_text_password_check"
+        app:layout_constraintEnd_toEndOf="@id/edit_text_password_check"
         app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="@+id/edit_text_password_check" />
+        app:layout_constraintStart_toStartOf="@id/edit_text_password_check" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
