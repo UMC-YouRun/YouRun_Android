@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fontFamily="@font/roboto_regular">
+    >
 
 
     <ImageView
@@ -15,7 +15,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_signups_bar"
+        app:srcCompat="@drawable/img_signup_bar"
         android:scaleType="fitXY"
         />
 
@@ -42,9 +42,8 @@
         android:layout_marginTop="170dp"
         android:layout_marginEnd="245dp"
         android:text="@string/signup_tv1"
-        android:fontFamily="@font/roboto_bold"
         android:textColor="@color/black"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +57,6 @@
         android:layout_marginTop="204dp"
         android:layout_marginEnd="145dp"
         android:text="@string/signup_tv2"
-        android:fontFamily="@font/roboto_bold"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -77,7 +75,6 @@
         android:text="@string/signup_tv3"
         android:textColor="@color/gray"
         android:textSize="14sp"
-        android:fontFamily="@font/roboto_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/tv_1"

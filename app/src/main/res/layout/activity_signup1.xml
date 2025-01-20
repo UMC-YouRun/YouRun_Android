@@ -14,7 +14,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_signups_bar"
+        app:srcCompat="@drawable/img_signup_bar"
         android:scaleType="fitXY"/>
 
 
@@ -42,7 +42,6 @@
         android:layout_marginStart="16sp"
         android:text="@string/signup_tv1"
         android:textSize="24sp"
-        android:fontFamily="@font/roboto_bold"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -111,7 +110,6 @@
         android:layout_marginTop="420dp"
         android:text="@string/tv_password"
         android:textColor="@color/black"
-        android:fontFamily="@font/roboto_regular"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textStyle="bold"/>

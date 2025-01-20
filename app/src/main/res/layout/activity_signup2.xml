@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -14,7 +13,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_signups_bar"
+        app:srcCompat="@drawable/img_signup_bar"
         android:scaleType="fitXY"
         />
 
@@ -42,7 +41,6 @@
         android:layout_marginTop="170dp"
         android:layout_marginEnd="245dp"
         android:text="@string/signup_tv1"
-        android:fontFamily="@font/roboto_regular"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -58,7 +56,6 @@
         android:layout_marginTop="204dp"
         android:layout_marginEnd="145dp"
         android:text="@string/signup_tv2"
-        android:fontFamily="@font/roboto_regular"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -108,7 +105,6 @@
             android:id="@+id/tv_4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_regular"
             android:text="@string/tv_agree1"
             android:textColor="@color/purple"
             android:textSize="16sp"
