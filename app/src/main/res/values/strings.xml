@@ -48,4 +48,10 @@
     <string name="characters">characters</string>
     <string name="next">다음</string>
     <string name="back_button">back_button</string>
+    <string name="home">홈</string>
+    <string name="mate">메이트</string>
+    <string name="running">러닝</string>
+    <string name="challenge">챌린지</string>
+    <string name="myRun">마이런</string>
+    <string name="fab_running">fab_running\n</string>
 </resources>

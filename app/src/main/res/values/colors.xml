@@ -14,4 +14,8 @@
     <color name="circle_background">#9285f6</color>
     <color name="yellow">#FFD45C</color>
     <color name="text_purple">#5945D9</color>
+    <color name="selected_color">#FFD45C</color>
+    <color name="unselected_color">#A7A7A7</color>
+    <color name="round_button">#D9D9D9</color>
+    <color name="round_button_background">#9685FF</color>
 </resources>
