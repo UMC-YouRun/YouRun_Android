@@ -59,7 +59,7 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_profile_character" />
+        app:layout_constraintTop_toBottomOf="@id/iv_profile_character" />
 
     <ImageView
         android:id="@+id/iv_profile_character"
@@ -70,7 +70,7 @@
         android:layout_marginTop="46dp"
         android:src="@drawable/img_face01"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+        app:layout_constraintTop_toBottomOf="@id/top_bar" />
 
     <LinearLayout
         android:id="@+id/btn_color_picker"
@@ -80,8 +80,8 @@
         android:layout_marginTop="38dp"
         android:orientation="horizontal"
         android:padding="16dp"
-        app:layout_constraintStart_toStartOf="@+id/tv_myrun01"
-        app:layout_constraintTop_toTopOf="@+id/tv_myrun01">
+        app:layout_constraintStart_toStartOf="@id/tv_myrun01"
+        app:layout_constraintTop_toTopOf="@id/tv_myrun01">
 
         <Button
             android:layout_width="wrap_content"
@@ -134,7 +134,7 @@
         android:textColor="@color/gray"
         android:textSize="11sp"
         app:layout_constraintStart_toStartOf="@id/id_tv"
-        app:layout_constraintTop_toTopOf="@+id/id_tv" />
+        app:layout_constraintTop_toTopOf="@id/id_tv" />
 
     <EditText
         android:id="@+id/edit_text_nickname"
@@ -147,8 +147,8 @@
         android:textColor="@color/black"
         android:textColorHint="@color/gray"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/id_tv"
-        app:layout_constraintTop_toTopOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@id/id_tv"
+        app:layout_constraintTop_toTopOf="@id/textView3"
         />
 
     <TextView
@@ -160,8 +160,8 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/id_tv"
-        app:layout_constraintTop_toTopOf="@+id/id_tv" />
+        app:layout_constraintStart_toStartOf="@id/id_tv"
+        app:layout_constraintTop_toTopOf="@id/id_tv" />
 
     <TextView
         android:id="@+id/textView4"
@@ -172,7 +172,7 @@
         android:textColor="@color/gray"
         android:textSize="11sp"
         app:layout_constraintStart_toStartOf="@id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/tv_tag"
+        app:layout_constraintTop_toTopOf="@id/tv_tag"
         android:drawableStart="@drawable/ic_myrun"
         android:drawablePadding="2dp"/>
 
@@ -185,10 +185,10 @@
         android:background="@drawable/img_change_myrun_btn"
         android:importantForAccessibility="no"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="@id/constraintLayout"
         app:layout_constraintHorizontal_bias="0.281"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+        app:layout_constraintStart_toStartOf="@id/constraintLayout"
+        app:layout_constraintTop_toTopOf="@id/constraintLayout"
         app:layout_constraintVertical_bias="0.537" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -198,7 +198,7 @@
         android:layout_marginTop="70dp"
         android:padding="0dp"
         app:layout_constraintStart_toStartOf="@id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/tv_tag">
+        app:layout_constraintTop_toTopOf="@id/tv_tag">
 
 
         <CheckBox

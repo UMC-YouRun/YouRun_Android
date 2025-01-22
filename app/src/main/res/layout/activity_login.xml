@@ -93,9 +93,9 @@
         android:layout_marginTop="90dp"
         android:background="@drawable/img_login_btn"
         android:importantForAccessibility="no"
-        app:layout_constraintEnd_toEndOf="@+id/edit_text_password"
-        app:layout_constraintStart_toStartOf="@+id/edit_text_password"
-        app:layout_constraintTop_toTopOf="@+id/edit_text_password" />
+        app:layout_constraintEnd_toEndOf="@id/edit_text_password"
+        app:layout_constraintStart_toStartOf="@id/edit_text_password"
+        app:layout_constraintTop_toTopOf="@id/edit_text_password" />
 
     <ImageButton
         android:id="@+id/img_btn_signup"
@@ -104,10 +104,10 @@
         android:layout_marginTop="158dp"
         android:background="@drawable/img_btn_signup"
         android:importantForAccessibility="no"
-        app:layout_constraintEnd_toEndOf="@+id/edit_text_password"
+        app:layout_constraintEnd_toEndOf="@id/edit_text_password"
         app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="@+id/edit_text_password"
-        app:layout_constraintTop_toTopOf="@+id/edit_text_password" />
+        app:layout_constraintStart_toStartOf="@id/edit_text_password"
+        app:layout_constraintTop_toTopOf="@id/edit_text_password" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -127,8 +127,8 @@
         android:layout_marginTop="100dp"
         android:text="@string/tv_sns"
         android:textColor="@color/gray"
-        app:layout_constraintStart_toStartOf="@+id/img_btn_signup"
-        app:layout_constraintTop_toTopOf="@+id/img_btn_signup" />
+        app:layout_constraintStart_toStartOf="@id/img_btn_signup"
+        app:layout_constraintTop_toTopOf="@id/img_btn_signup" />
 
     <ImageButton
         android:id="@+id/img_btn_kakao"
@@ -137,8 +137,8 @@
         android:layout_marginTop="664dp"
         android:background="@drawable/img_kakao_login1"
         android:importantForAccessibility="no"
-        app:layout_constraintEnd_toEndOf="@+id/img_btn_next"
-        app:layout_constraintStart_toStartOf="@+id/img_btn_next"
+        app:layout_constraintEnd_toEndOf="@id/img_btn_next"
+        app:layout_constraintStart_toStartOf="@id/img_btn_next"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
