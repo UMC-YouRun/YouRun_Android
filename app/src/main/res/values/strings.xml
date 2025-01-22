@@ -54,4 +54,7 @@
     <string name="challenge">챌린지</string>
     <string name="myRun">마이런</string>
     <string name="fab_running">fab_running\n</string>
+    <string name="main_run_together">님이 유런과 함께 뛴 지</string>
+    <string name="main_run_day">일째!</string>
+    <string name="badge_count">개</string>
 </resources>
