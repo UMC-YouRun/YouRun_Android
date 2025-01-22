@@ -57,4 +57,11 @@
     <string name="main_run_together">님이 유런과 함께 뛴 지</string>
     <string name="main_run_day">일째!</string>
     <string name="badge_count">개</string>
+    <string name="main_logo">main_logo</string>
+    <string name="main_calendar">main_calendar</string>
+    <string name="main_background_view">main_background_view</string>
+    <string name="main_bgd_gradient">main_bgd_gradient</string>
+    <string name="img_crew_badge">img_crew_badge</string>
+    <string name="img_solo_badge">img_solo_badge</string>
+    <string name="img_home_character">img_home_character</string>
 </resources>

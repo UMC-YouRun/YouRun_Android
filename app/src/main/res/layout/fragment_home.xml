@@ -15,6 +15,7 @@
         <ImageView
             android:layout_width="110dp"
             android:layout_height="16dp"
+            android:contentDescription="@string/main_logo"
             android:src="@drawable/img_logo"
             android:layout_marginTop="42dp"
             android:layout_marginStart="14dp" />
@@ -28,6 +29,7 @@
             android:id="@+id/btn_calendar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/main_calendar"
             android:src="@drawable/ic_calendar"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="15dp"
@@ -44,6 +46,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/main_background_view"
             android:src="@drawable/img_home_background"
             android:layout_marginTop="76dp"
             android:layout_marginStart="20dp" />
@@ -73,6 +76,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/main_bgd_gradient"
             android:src="@drawable/img_home_bgd_gradient"
             android:layout_marginTop="154dp"
             android:layout_marginStart="20dp" />
@@ -80,6 +84,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/img_crew_badge"
             android:src="@drawable/ic_crew_badge"
             android:layout_marginTop="160dp"
             android:layout_marginStart="40dp" />
@@ -95,6 +100,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/img_solo_badge"
             android:src="@drawable/ic_solo_badge"
             android:layout_marginTop="160dp"
             android:layout_marginStart="86dp" />
@@ -111,6 +117,7 @@
             android:id="@+id/img_home_character"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/img_home_character"
             android:src="@drawable/img_home_character"
             android:layout_marginTop="35dp"
             android:layout_marginEnd="8dp"
