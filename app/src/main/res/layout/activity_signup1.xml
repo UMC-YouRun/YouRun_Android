@@ -124,6 +124,7 @@
         android:background="@drawable/bg_edittext_rounded_corner"
         android:drawableEnd="@drawable/ic_visibilityoff"
         android:padding="10dp"
+        android:hint="@string/tv_password_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
