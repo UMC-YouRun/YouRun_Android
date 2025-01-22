@@ -1,6 +1,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layout_myrun"
@@ -52,54 +53,46 @@
         android:id="@+id/tv_myrun01"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="10dp"
         android:text="@string/tv_myrun_color"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_profile_character" />
 
     <ImageView
         android:id="@+id/iv_profile_character"
         android:layout_width="133dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="46dp"
         android:src="@drawable/img_face01"
-        app:layout_constraintStart_toStartOf="@+id/tv_myrun01"
-        app:layout_constraintTop_toTopOf="@+id/tv_myrun01" />
+        app:layout_constraintTop_toBottomOf="@+id/top_bar"
+        tools:layout_editor_absoluteX="120dp" />
 
     <LinearLayout
         android:id="@+id/btn_color_picker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="310dp"
+        android:layout_height="101dp"
         android:layout_gravity="center"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginTop="38dp"
         android:orientation="horizontal"
         android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="@id/iv_profile_character"
-        app:layout_constraintHorizontal_bias="0.448"
-        app:layout_constraintStart_toStartOf="@+id/iv_profile_character"
-        app:layout_constraintTop_toBottomOf="@id/iv_profile_character"
-        >
+        app:layout_constraintStart_toStartOf="@+id/tv_myrun01"
+        app:layout_constraintTop_toTopOf="@+id/tv_myrun01">
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:background="@drawable/bg_small_circle"
-            />
+            android:background="@drawable/bg_small_circle" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:background="@drawable/bg_small_circle"
-            />
+            android:background="@drawable/bg_small_circle" />
 
         <Button
             android:layout_width="wrap_content"
@@ -133,20 +126,19 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="25dp"
         android:drawableStart="@drawable/ic_myrun"
         android:drawablePadding="2dp"
         android:text="@string/tv_nickname1"
         android:textColor="@color/gray"
         android:textSize="11sp"
         app:layout_constraintStart_toStartOf="@id/id_tv"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/id_tv" />
 
     <EditText
         android:id="@+id/edit_text_id"
         android:layout_width="339dp"
         android:layout_height="53dp"
-        android:layout_marginTop="30dp"
         android:background="@drawable/bg_edittext_rounded_corner"
         android:importantForAccessibility="no"
         android:padding="10dp"
@@ -154,7 +146,7 @@
         android:textColorHint="@color/gray"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/id_tv"
-        app:layout_constraintTop_toTopOf="@+id/textView3" />
+        tools:layout_editor_absoluteY="518dp" />
 
     <TextView
         android:id="@+id/tv_tag"
