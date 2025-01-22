@@ -66,10 +66,11 @@
         android:layout_width="133dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginStart="130dp"
         android:layout_marginTop="46dp"
         android:src="@drawable/img_face01"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar"
-        tools:layout_editor_absoluteX="120dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_bar" />
 
     <LinearLayout
         android:id="@+id/btn_color_picker"
@@ -136,9 +137,10 @@
         app:layout_constraintTop_toTopOf="@+id/id_tv" />
 
     <EditText
-        android:id="@+id/edit_text_id"
+        android:id="@+id/edit_text_nickname"
         android:layout_width="339dp"
         android:layout_height="53dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/bg_edittext_rounded_corner"
         android:importantForAccessibility="no"
         android:padding="10dp"
@@ -146,7 +148,8 @@
         android:textColorHint="@color/gray"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/id_tv"
-        tools:layout_editor_absoluteY="518dp" />
+        app:layout_constraintTop_toTopOf="@+id/textView3"
+        />
 
     <TextView
         android:id="@+id/tv_tag"

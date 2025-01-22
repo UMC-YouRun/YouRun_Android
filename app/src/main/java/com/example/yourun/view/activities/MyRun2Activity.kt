@@ -12,5 +12,8 @@ class MyRun2Activity : AppCompatActivity () {
         binding = ActivityMyrun2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
+
     }
 }
