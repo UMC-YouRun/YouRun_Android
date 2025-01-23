@@ -13,6 +13,17 @@
         android:theme="@style/Theme.YouRun"
         tools:targetApi="34"
         android:enableOnBackInvokedCallback="true">
+
+        <activity
+            android:name=".view.activities.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.YouRun" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".view.activities.LoginActivity"
             android:exported="true"
