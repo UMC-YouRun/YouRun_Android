@@ -79,4 +79,10 @@
     <string name="similar_mate">님과 비슷한 러닝 메이트</string>
     <string name="women_running">women_running</string>
     <string name="redirect">redirect</string>
+    <string name="ex_index">1</string>
+    <string name="user_profile">user_profile</string>
+    <string name="ex_user_name">루시</string>
+    <string name="user_day">27일째!</string>
+    <string name="ex_tag">#열정적 #에너자이저</string>
+    <string name="mate_heart">mate_heart</string>
 </resources>
