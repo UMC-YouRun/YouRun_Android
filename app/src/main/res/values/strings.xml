@@ -12,6 +12,7 @@
     <string name="signup_tv3">처음 오셨나요? 필요한 정보를 입력해주세요.</string>
     <string name="tv_id">아이디</string>
     <string name="tv_password">비밀번호</string>
+    <string name="tv_password_hint">영문 + 숫자 포함 8~10자</string>
     <string name="tv_password_check">비밀번호 확인</string>
     <string name="tv_agree">약관동의</string>
     <string name="tv_agree1">(필수)</string>
@@ -85,4 +86,17 @@
     <string name="user_day">27일째!</string>
     <string name="ex_tag">#열정적 #에너자이저</string>
     <string name="mate_heart">mate_heart</string>
+    <string name="tv_myrun_tag">2개까지 선택 가능해요</string>
+    <string name="tv_myrun_color">프로필 색상</string>
+    <string name="tv_myrun">마이런</string>
+    <string name="tv_myrun_name">제제</string>
+    <string name="tv_myrun_profile">페이스메이커</string>
+    <string name="tv_reward1">크루 리워드</string>
+    <string name="tv_reward2">개인 리워드</string>
+    <string name="tv_mvp">MVP</string>
+    <string name="txt_reward1">4</string>
+    <string name="txt_reward2">3</string>
+    <string name="txt_mvp">3</string>
+    <string name="profile_edit">내 정보 수정</string>
+    <string name="test_btn">성향 테스트 다시 하기</string>
 </resources>
