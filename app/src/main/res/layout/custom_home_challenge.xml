@@ -28,6 +28,26 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="normal"
+        android:textSize="11sp"
+        android:letterSpacing="-0.05"
+        android:layout_marginTop="68dp"
+        android:layout_marginStart="18dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:fontFamily="@font/roboto_semibold"
+        android:textSize="11sp"
+        android:letterSpacing="-0.05"
+        android:layout_marginTop="68dp"
+        android:layout_marginStart="78dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/max_running"
         android:textStyle="bold"
         android:textSize="18sp"
