@@ -17,4 +17,8 @@
     <color name="gray_600">#696969</color>
     <color name="purple_400">#9984FF</color>
     <color name="yellow_900">#F9A138</color>
+    <color name="selected_color">#FFD45C</color>
+    <color name="unselected_color">#A7A7A7</color>
+    <color name="round_button">#D9D9D9</color>
+    <color name="round_button_background">#9685FF</color>
 </resources>

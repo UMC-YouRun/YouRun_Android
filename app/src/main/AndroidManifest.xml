@@ -22,30 +22,34 @@
 
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--           </intent-filter>-->
+
         </activity>
+
+        <activity
+            android:name=".view.activities.MainActivity"
+            android:exported="true" />
 
        <activity 
                 android:name=".view.activities.QuestionActivity"
-                android:exported="true">
-       </activity>
+                android:exported="true" />
 
         <activity 
                 android:name=".view.activities.ResultActivity"
                 android:exported="true"/>
 
-        <activity android:name=".view.activities.SignUp1Activity">
-        </activity>
+        <activity
+            android:name=".view.activities.SignUp1Activity" />
 
-        <activity android:name=".view.activities.SignUp2Activity">
-        </activity>
+        <activity
+            android:name=".view.activities.SignUp2Activity" />
 
-        <activity android:name=".view.activities.SignUp3Activity">
-        </activity>
+        <activity
+            android:name=".view.activities.SignUp3Activity" />
+
 
         <activity
             android:name=".view.activities.AppExpActivity"
-            android:exported="true"
-            android:theme="@style/Theme.YouRun" />
+            android:exported="true" />
 
         <activity android:name=".view.activities.CalendarActivity"
             android:exported="true">
