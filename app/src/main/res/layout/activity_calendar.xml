@@ -33,13 +33,38 @@
                     android:textSize="16sp"
                     android:textColor="#FF9900" />
 
-<!--                <TextView-->
-<!--                    android:id="@+id/streak"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="유런과 3일째!"-->
-<!--                    android:textSize="14sp"-->
-<!--                    android:textColor="#FF9900" />-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/chatIcon"
+                        android:layout_width="120dp"
+                        android:layout_height="34dp"
+                        android:src="@drawable/ic_chat"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                    <TextView
+                        android:id="@+id/streak"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-10dp"
+                        android:layout_marginLeft="-16dp"
+                        android:gravity="start"
+                        android:text="@string/date_check"
+                        android:textColor="@color/black"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="@id/chatIcon"
+                        app:layout_constraintEnd_toEndOf="@id/chatIcon"
+                        app:layout_constraintHorizontal_bias="0.666"
+                        app:layout_constraintStart_toStartOf="@id/chatIcon"
+                        app:layout_constraintTop_toTopOf="@id/chatIcon"
+                        app:layout_constraintVertical_bias="0.384" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
             </LinearLayout>
 
             <TextView
@@ -50,6 +75,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:paddingTop="8dp"
+                android:layout_marginTop="-10dp"
                 android:paddingBottom="16dp"
                 android:textColor="#000000" />
 
@@ -63,7 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:background="#FFDB78"
+                    android:background="@drawable/box_distance"
                     android:padding="16dp"
                     android:layout_marginBottom="8dp"
                     android:elevation="2dp"
@@ -109,7 +135,7 @@
                         android:layout_height="182dp"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
-                        android:background="#EEEEEE"
+                        android:background="@drawable/box_time"
                         android:elevation="2dp"
                         android:padding="16dp">
 
@@ -154,7 +180,7 @@
                         android:layout_width="0dp"
                         android:layout_height="182dp"
                         android:layout_weight="1"
-                        android:background="#D1C4E9"
+                        android:background="@drawable/box_pace"
                         android:padding="16dp"
                         android:elevation="2dp">
 
@@ -215,12 +241,12 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
+            android:background="@drawable/bgd_calendar"
             app:cardBackgroundColor="@android:color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:padding="4dp">
 
@@ -237,10 +263,9 @@
                         android:id="@+id/prevMonthButton"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/img_calendar_left"
                         android:contentDescription="Previous month"
                         android:padding="8dp"
-                         />
+                        android:src="@drawable/img_calendar_left" />
 
                     <!-- 현재 년/월 -->
                     <TextView
@@ -250,18 +275,17 @@
                         android:gravity="center"
                         android:padding="16dp"
                         android:text="2025년 1월"
+                        android:textColor="@color/yellow_900"
                         android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/yellow_900"/>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/nextMonthButton"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/img_calendar_right"
                         android:contentDescription="Next month"
                         android:padding="8dp"
-                         />
+                        android:src="@drawable/img_calendar_right" />
                 </LinearLayout>
 
                 <!-- 요일 -->
@@ -272,69 +296,6 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:padding="8dp">
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="일"
-                        android:textColor="@color/gray_600"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="월"
-                        android:textColor="@color/gray_600"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="화"
-                        android:textColor="@color/gray_600"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="수"
-                        android:textColor="@color/gray_600"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="목"
-                        android:textColor="@color/gray_600"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="금"
-                        android:textColor="@color/gray_600"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="토"
-                        android:textColor="@color/gray_600"
-                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!-- 주간/전체 달력 -->
@@ -342,11 +303,11 @@
                     android:id="@+id/dragBarContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:padding="0dp"
                     android:layout_marginLeft="-6dp"
-                    android:layout_marginTop="0dp">
+                    android:layout_marginTop="0dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="0dp">
 
                     <!-- 주간 달력 -->
                     <GridLayout
@@ -354,8 +315,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:columnCount="7"
-                        android:padding="8dp"
-                        />
+                        android:padding="8dp" />
 
                     <!-- 전체 달력 -->
                     <GridLayout
@@ -371,10 +331,10 @@
                         android:id="@+id/dragBar"
                         android:layout_width="80dp"
                         android:layout_height="8dp"
-                        android:background="@drawable/ic_drag_bar"
-                        android:elevation="10dp"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="8dp" />
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/ic_drag_bar"
+                        android:elevation="10dp" />
 
                 </LinearLayout>
             </LinearLayout>

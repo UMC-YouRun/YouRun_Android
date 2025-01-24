@@ -1,6 +1,7 @@
 package com.example.yourun.view.activities
 
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.yourun.R
 import java.time.LocalDate
 import java.time.YearMonth
@@ -22,9 +24,30 @@ class CalendarActivity : AppCompatActivity() {
     private var selectedDate: LocalDate = LocalDate.now()
     private var isFullCalendarVisible = false // 전체 달력 표시 여부
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
+
+        val days = listOf("일", "월", "화", "수", "목", "금", "토")
+        val textColor = ContextCompat.getColor(this, R.color.gray_600)
+        val weekdayLayout = findViewById<LinearLayout>(R.id.weekdayLayout)
+
+        days.forEach { day ->
+            val textView = TextView(this).apply {
+                layoutParams = LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+                gravity = Gravity.CENTER
+                text = day
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 14f)
+                setTextColor(textColor)
+            }
+            weekdayLayout.addView(textView)
+        }
+
 
         // View 초기화
         weekCalendarGrid = findViewById(R.id.weekCalendarGrid)

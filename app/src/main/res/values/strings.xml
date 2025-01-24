@@ -71,5 +71,6 @@
     <string name="pace">페이스</string>
     <string name="calendar_text">얼마나 뛰었을까요?</string>
     <string name="defalut_date">nnnn년 n월 n일</string>
+    <string name="date_check"> 유런과 3일째! </string>
 
 </resources>
