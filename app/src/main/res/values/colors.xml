@@ -14,4 +14,7 @@
     <color name="circle_background">#9285f6</color>
     <color name="yellow">#FFD45C</color>
     <color name="text_purple">#5945D9</color>
+    <color name="gray_600">#696969</color>
+    <color name="purple_400">#9984FF</color>
+    <color name="yellow_900">#F9A138</color>
 </resources>
