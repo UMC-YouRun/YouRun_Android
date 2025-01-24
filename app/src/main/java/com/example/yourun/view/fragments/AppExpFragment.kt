@@ -12,7 +12,8 @@ import com.example.yourun.R
 class AppExpFragment : Fragment(R.layout.fragment_app_exp) {
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_app_exp, container, false)

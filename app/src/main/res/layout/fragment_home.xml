@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <LinearLayout
+            android:id="@+id/main_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/main_color">
+
+            <ImageView
+                android:layout_width="110dp"
+                android:layout_height="16dp"
+                android:contentDescription="@string/main_logo"
+                android:src="@drawable/img_logo"
+                android:layout_marginTop="42dp"
+                android:layout_marginStart="14dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/btn_calendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/main_calendar"
+                android:src="@drawable/ic_calendar"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="15dp"
+                android:backgroundTint="@android:color/transparent" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/main_up_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/main_color"
+            app:layout_constraintTop_toBottomOf="@id/main_header">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/main_background_view"
+                android:src="@drawable/img_home_background"
+                android:layout_marginTop="76dp"
+                android:layout_marginStart="20dp" />
+
+            <TextView
+                android:id="@+id/txt_main_run_together"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/main_run_together"
+                android:fontFamily="@font/roboto_medium"
+                android:textSize="13sp"
+                android:letterSpacing="-0.07"
+                android:layout_marginTop="91dp"
+                android:layout_marginStart="34dp" />
+
+            <TextView
+                android:id="@+id/txt_main_run_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/main_run_day"
+                android:textSize="32sp"
+                android:letterSpacing="0.03"
+                android:fontFamily="@font/roboto_semibold"
+                android:layout_marginTop="106dp"
+                android:layout_marginStart="34dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/main_bgd_gradient"
+                android:src="@drawable/img_home_bgd_gradient"
+                android:layout_marginTop="154dp"
+                android:layout_marginStart="20dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/img_crew_badge"
+                android:src="@drawable/ic_crew_badge"
+                android:layout_marginTop="160dp"
+                android:layout_marginStart="40dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/badge_count"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_marginTop="156dp"
+                android:layout_marginStart="58dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/img_solo_badge"
+                android:src="@drawable/ic_solo_badge"
+                android:layout_marginTop="160dp"
+                android:layout_marginStart="86dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/badge_count"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_marginTop="156dp"
+                android:layout_marginStart="104dp" />
+
+            <ImageView
+                android:id="@+id/img_home_character"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/img_home_character"
+                android:src="@drawable/img_home_character"
+                android:layout_marginTop="35dp"
+                android:layout_marginEnd="8dp"
+                android:layout_gravity="end" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/main_challenge_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/main_up_frame"
+            android:background="@color/main_color">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="322dp"
+                android:background="@drawable/rounded_top_corners" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/challenge_now"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_medium"
+                android:layout_marginTop="38dp"
+                android:layout_marginStart="16dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/progressing"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:letterSpacing="-0.03"
+                android:layout_marginTop="58dp"
+                android:layout_marginStart="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/italic_challenge"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/roboto_bolditalic"
+                android:letterSpacing="-0.03"
+                android:layout_marginTop="59dp"
+                android:layout_marginStart="81dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/fire"
+                android:src="@drawable/img_fire"
+                android:layout_marginTop="60dp"
+                android:layout_marginStart="172dp" />
+
+            <ImageButton
+                android:id="@+id/btn_crew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/crew_btn"
+                android:src="@drawable/img_crew_btn_unselected"
+                android:background="@null"
+                android:layout_marginTop="100dp"
+                android:layout_marginStart="16dp" />
+
+            <ImageButton
+                android:id="@+id/btn_solo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/solo_btn"
+                android:src="@drawable/img_solo_btn_unselected"
+                android:background="@null"
+                android:layout_marginTop="100dp"
+                android:layout_marginStart="74dp" />
+
+            <ImageButton
+                android:id="@+id/btn_add_challenge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/add_challenge"
+                android:src="@drawable/ic_add_challenge"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="140dp"
+                android:layout_gravity="center_horizontal"/>
+
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/img_main_banner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/home_banner"
+            android:src="@drawable/img_home_banner"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toBottomOf="@id/main_challenge_frame" />
+
+        <LinearLayout
+            android:id="@+id/view_home_mate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/img_main_banner"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/similar_mate"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:letterSpacing="-0.03"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/women_running"
+                android:src="@drawable/img_women_running"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="8dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/btn_redirect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/redirect"
+                android:src="@drawable/ic_redirect"
+                android:background="@android:color/transparent"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+

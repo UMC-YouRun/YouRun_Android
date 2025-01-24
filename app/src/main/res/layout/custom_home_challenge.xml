@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <View
+        android:layout_width="328dp"
+        android:layout_height="150dp"
+        android:background="@drawable/bgd_home_challenge" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/crew"
+        android:fontFamily="@font/roboto_semibold"
+        android:textSize="18sp"
+        android:letterSpacing="-0.05"
+        android:layout_marginTop="26dp"
+        android:layout_marginStart="16dp" />
+
+    <View
+        android:layout_width="88dp"
+        android:layout_height="23dp"
+        android:background="@drawable/bgd_home_challenge_day"
+        android:layout_marginTop="65dp"
+        android:layout_marginStart="15dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textStyle="normal"
+        android:textSize="11sp"
+        android:letterSpacing="-0.05"
+        android:layout_marginTop="68dp"
+        android:layout_marginStart="18dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:fontFamily="@font/roboto_semibold"
+        android:textSize="11sp"
+        android:letterSpacing="-0.05"
+        android:layout_marginTop="68dp"
+        android:layout_marginStart="78dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/max_running"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="4sp"
+        android:layout_marginTop="113dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="13dp" />
+    
+    <View
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:background="@drawable/bgd_home_challenge_char"
+        android:layout_marginTop="26dp"
+        android:layout_marginStart="245dp"/>
+
+    <ImageView
+        android:id="@+id/img_user1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/img_user"
+        android:src="@drawable/img_character_face"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="250dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/img_user2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/img_user"
+        android:src="@drawable/img_character_face"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="280dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/img_user3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/img_user"
+        android:src="@drawable/img_character_face"
+        android:layout_marginTop="62dp"
+        android:layout_marginStart="250dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/img_user4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/img_user"
+        android:src="@drawable/img_character_face"
+        android:layout_marginTop="62dp"
+        android:layout_marginStart="280dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/ic_challenge_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/challenge_state"
+        android:src="@drawable/ic_waiting_matching"
+        android:layout_marginTop="106dp"
+        android:layout_marginStart="196dp" />
+
+</FrameLayout>
