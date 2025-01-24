@@ -17,11 +17,6 @@
             android:name=".view.activities.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.YouRun" >
-           <intent-filter>
-               <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
         </activity>
 
        <activity 
@@ -46,6 +41,21 @@
             android:name=".view.activities.AppExpActivity"
             android:exported="true"
             android:theme="@style/Theme.YouRun" />
+
+        <activity
+            android:name=".view.activities.ChallengeListActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".view.activities.ChallengeDetailActivity"
+            android:exported="true"
+            android:theme="@style/Theme.YouRun" >
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
 
     </application>
 
