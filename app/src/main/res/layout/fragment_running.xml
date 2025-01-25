@@ -57,42 +57,83 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp" />
 
-        <ImageButton
-            android:id="@+id/btn_mate_select"
+        <View
+            android:id="@+id/bgd_mate_select"
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:background="@drawable/bgd_mate_unselected"
+            android:layout_marginTop="280dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:clickable="true" />
+
+        <ImageView
+            android:id="@+id/img_mate_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/select_mate"
-            android:src="@drawable/ic_mate_select"
-            android:background="@android:color/transparent"
-            android:layout_marginTop="282dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp" />
+            android:contentDescription="@string/mate_profile"
+            android:src="@drawable/bgd_mate_profile"
+            android:layout_marginTop="288dp"
+            android:layout_marginStart="36dp" />
+
+        <ImageView
+            android:id="@+id/img_question_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/question_mark"
+            android:src="@drawable/img_question_mark"
+            android:layout_marginTop="302dp"
+            android:layout_marginStart="58dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/running_mate_select"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="307dp"
+            android:layout_marginStart="118dp"/>
 
     </FrameLayout>
 
-    <ImageButton
-        android:id="@+id/btn_set_running_time"
+    <FrameLayout
+        android:id="@+id/running_time_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/running_time"
         app:layout_constraintTop_toBottomOf="@id/running_map_frame"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="37dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_running_time"
-        android:background="@android:color/transparent" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <View
+            android:layout_width="328dp"
+            android:layout_height="48dp"
+            android:background="@drawable/custom_rounded_button"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="37dp"
+            android:layout_marginBottom="25dp" />
+
+        <TextView
+            android:id="@+id/txt_running_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/running_time_set"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/grey_font"
+            android:layout_marginTop="6dp"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
 
     <ImageButton
         android:id="@+id/btn_running_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/running_start"
-        app:layout_constraintTop_toBottomOf="@id/btn_set_running_time"
+        app:layout_constraintTop_toBottomOf="@id/running_time_frame"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="25dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="37dp"

@@ -119,4 +119,8 @@
     <string name="boundary_line">boundary_line</string>
     <string name="run_together">함께 뛰어보세요!</string>
     <string name="mate_recommend">러닝 메이트 추천</string>
+    <string name="mate_profile">mate_profile</string>
+    <string name="question_mark">question_mark</string>
+    <string name="running_mate_select">러닝 메이트를 선택해주세요!</string>
+    <string name="running_time_set">러닝 시간 설정</string>
 </resources>
