@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/running_fragment_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </androidx.fragment.app.FragmentContainerView>
+
+    <FrameLayout
+        android:id="@+id/running_top_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include
+            android:id="@+id/running_top_bar"
+            layout="@layout/top_bar"/>
+
+        <ImageButton
+            android:id="@id/btn_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:contentDescription="@string/main_calendar"
+            android:src="@drawable/ic_calendar"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="17dp"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_gravity="end"/>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/today_run"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/running_top_frame"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/today_run"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="17dp" />
+
+    <FrameLayout
+        android:id="@+id/running_map_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/today_run"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="268dp"
+            android:background="@drawable/rounded_top_corners_map"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
+
+        <ImageButton
+            android:id="@+id/btn_mate_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/select_mate"
+            android:src="@drawable/ic_mate_select"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="282dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
+
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/btn_set_running_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/running_time"
+        app:layout_constraintTop_toBottomOf="@id/running_map_frame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="37dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_running_time"
+        android:background="@android:color/transparent" />
+
+    <ImageButton
+        android:id="@+id/btn_running_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/running_start"
+        app:layout_constraintTop_toBottomOf="@id/btn_set_running_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="37dp"
+        android:src="@drawable/ic_running_start"
+        android:background="@android:color/transparent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
