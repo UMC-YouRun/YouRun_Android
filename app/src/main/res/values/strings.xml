@@ -99,4 +99,14 @@
     <string name="txt_mvp">3</string>
     <string name="profile_edit">내 정보 수정</string>
     <string name="test_btn">성향 테스트 다시 하기</string>
+    <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="default_distance">0km</string>
+    <string name="distance">거리</string>
+    <string name="defalut_time">0분</string>
+    <string name="time">시간</string>
+    <string name="defalut_pace">00\0km</string>
+    <string name="pace">페이스</string>
+    <string name="calendar_text">얼마나 뛰었을까요?</string>
+    <string name="defalut_date">nnnn년 n월 n일</string>
+    <string name="date_check"> 유런과 3일째! </string>
 </resources>
