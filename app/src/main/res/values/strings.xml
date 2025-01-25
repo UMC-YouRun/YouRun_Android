@@ -113,4 +113,10 @@
     <string name="select_mate">select_mate</string>
     <string name="running_time">running_time</string>
     <string name="running_start">running_start</string>
+    <string name="btn_calendar">calendar</string>
+    <string name="my_mate">나의 러닝 메이트</string>
+    <string name="my_mate_list">my_mate_list</string>
+    <string name="boundary_line">boundary_line</string>
+    <string name="run_together">함께 뛰어보세요!</string>
+    <string name="mate_recommend">러닝 메이트 추천</string>
 </resources>

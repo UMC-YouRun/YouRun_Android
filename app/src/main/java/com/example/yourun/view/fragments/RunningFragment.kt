@@ -28,7 +28,7 @@ class RunningFragment : Fragment() {
 
         view.findViewById<ImageButton>(R.id.btn_mate_select).setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.running_fragment_container, RunningMateSelectFragment())
+                .replace(R.id.main_fragment_container, RunningMateSelectFragment())
                 .addToBackStack(null)
                 .commit()
         }
