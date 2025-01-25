@@ -105,13 +105,15 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <View
+            android:id="@+id/running_time_set"
             android:layout_width="328dp"
             android:layout_height="48dp"
             android:background="@drawable/custom_rounded_button"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginTop="37dp"
-            android:layout_marginBottom="25dp" />
+            android:layout_marginBottom="25dp"
+            android:clickable="true"/>
 
         <TextView
             android:id="@+id/txt_running_time"

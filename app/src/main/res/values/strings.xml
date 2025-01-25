@@ -123,4 +123,12 @@
     <string name="question_mark">question_mark</string>
     <string name="running_mate_select">러닝 메이트를 선택해주세요!</string>
     <string name="running_time_set">러닝 시간 설정</string>
+    <string name="today_how_run">오늘은 얼마나 뛰어볼까요?</string>
+    <string name="mate_run_time">러닝 메이트 루시는 30분을 뛰었어요.</string>
+    <string name="more_run">더 달려 볼까요?:)</string>
+    <string name="time_15">time_15</string>
+    <string name="time_30">time_30</string>
+    <string name="time_45">time_45</string>
+    <string name="time_60">time_60</string>
+    <string name="select_time">select_time</string>
 </resources>

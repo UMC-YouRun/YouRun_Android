@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.yourun.R
@@ -29,6 +28,13 @@ class RunningFragment : Fragment() {
         view.findViewById<View>(R.id.bgd_mate_select).setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.main_fragment_container, RunningMateSelectFragment())
+                .addToBackStack(null)
+                .commit()
+        }
+
+        view.findViewById<View>(R.id.running_time_set).setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.main_fragment_container, RunningTimeFragment())
                 .addToBackStack(null)
                 .commit()
         }
