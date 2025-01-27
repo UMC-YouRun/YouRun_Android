@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:id="@+id/top_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/rounded_bottom_background"
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:background="@drawable/rounded_bottom_background"
+            tools:layout_editor_absoluteX="206dp"
+            tools:layout_editor_absoluteY="153dp" />
+
+        <TextView
+            android:id="@+id/txt_top_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:letterSpacing="0.03"
+            android:lineSpacingExtra="14sp"
+            android:text="@string/tv_challenge_title"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="45dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/ic_calendar" />
+
+
+
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_create_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="123dp"
+        android:text="@string/tv_challenge1"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_bar" />
+
+
+    <TextView
+        android:id="@+id/tv_create_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/tv_challenge2"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/tv_create_1"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_1" />
+
+    <CheckBox
+        android:id="@+id/img_btn_create_3"
+        android:layout_width="360dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_tag_checkbox_selector"
+        android:button="@null"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/tv_challenge3"
+        android:textSize="26sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="@id/tv_create_2"
+        app:layout_constraintTop_toTopOf="@+id/tv_create_2" />
+
+    <TextView
+        android:id="@+id/tv_create_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/tv_challenge4"
+        app:layout_constraintStart_toStartOf="@+id/tv_create_2"
+        app:layout_constraintTop_toTopOf="@+id/img_btn_create_3" />
+
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="360dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_tag_checkbox_selector"
+        android:button="@null"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="@string/tv_challenge5"
+        android:textSize="26sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="@+id/img_btn_create_3"
+        app:layout_constraintStart_toStartOf="@id/tv_create_4"
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_4" />
+
+
+    <Button
+        android:id="@id/next_btn"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/rounded_button"
+        android:gravity="center"
+        android:text="@string/btn_choice"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/checkBox"
+        app:layout_constraintTop_toTopOf="@id/checkBox" />
+
+    <include
+        layout="@layout/bottom_navigation" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

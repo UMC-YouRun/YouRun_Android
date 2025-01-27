@@ -18,7 +18,7 @@
         android:title="@string/challenge" />
     <item
         android:id="@+id/nav_my"
-        android:icon="@drawable/ic_menu_myrun"
+        android:icon="@drawable/ic_myrun"
         android:title="@string/myRun" />
 
 </menu>
