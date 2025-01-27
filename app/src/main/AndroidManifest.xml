@@ -51,6 +51,23 @@
             android:name=".view.activities.AppExpActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".view.activities.CreateChallengeActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".view.activities.CreateSolo1Activity"
+            android:exported="true" />
+        <activity
+            android:name=".view.activities.CreateSolo2Activity"
+            android:exported="true" />
+        <activity
+            android:name=".view.activities.CreateCrew1Activity"
+            android:exported="true" />
+        <activity
+            android:name=".view.activities.CreateCrew2Activity"
+            android:exported="true" />
+
         <activity android:name=".view.activities.CalendarActivity"
             android:exported="true">
             <intent-filter>
