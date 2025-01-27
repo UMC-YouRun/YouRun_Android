@@ -21,7 +21,7 @@ class RunningFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val topBarView = view.findViewById<View>(R.id.running_top_bar)
+        val topBarView = view.findViewById<View>(R.id.before_running_top_bar)
         val titleTextView = topBarView.findViewById<TextView>(R.id.txt_top_bar)
         titleTextView.text = "러닝 시작하기"
 

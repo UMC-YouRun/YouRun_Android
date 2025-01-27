@@ -131,4 +131,11 @@
     <string name="time_45">time_45</string>
     <string name="time_60">time_60</string>
     <string name="select_time">select_time</string>
+    <string name="speech_bubble">speech_bubble</string>
+    <string name="time_to_run">00분 러닝하기!</string>
+    <string name="running_character">running_character</string>
+    <string name="rotating_circle">bgd_rotating_circle</string>
+    <string name="clock">clock</string>
+    <string name="running_play_pause">running_play_pause</string>
+    <string name="fighting_more">조금만 더 힘내세요!</string>
 </resources>

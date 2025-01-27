@@ -5,15 +5,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
-        android:id="@+id/running_top_frame"
+        android:id="@+id/before_running_top_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <include
-            android:id="@+id/running_top_bar"
-            layout="@layout/top_bar"/>
+            android:id="@+id/before_running_top_bar"
+            layout="@layout/top_bar" />
 
         <ImageButton
             android:id="@id/btn_calendar"
@@ -24,7 +24,7 @@
             android:layout_marginTop="36dp"
             android:layout_marginEnd="17dp"
             android:backgroundTint="@android:color/transparent"
-            android:layout_gravity="end"/>
+            android:layout_gravity="end" />
 
     </FrameLayout>
 
@@ -32,7 +32,7 @@
         android:id="@+id/today_run"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/running_top_frame"
+        app:layout_constraintTop_toBottomOf="@id/before_running_top_frame"
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/today_run"
         android:textStyle="bold"
@@ -116,7 +116,7 @@
             android:clickable="true"/>
 
         <TextView
-            android:id="@+id/txt_running_time"
+            android:id="@+id/txt_set_running_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/running_time_set"

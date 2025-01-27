@@ -23,4 +23,6 @@
     <color name="round_button_background">#9685FF</color>
     <color name="grey_font">#484848</color>
     <color name="grey_border">#D4D4D4</color>"
+    <color name="running_bottom_background">#9685FF</color>
+    <color name="txt_running_color">#010101</color>
 </resources>

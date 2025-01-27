@@ -60,6 +60,10 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".view.activities.RunningActivity"
+            android:exported="true" />
+
     </application>
 
 </manifest>
