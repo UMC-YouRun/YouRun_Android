@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_create_1" />
 
     <CheckBox
-        android:id="@+id/img_btn_create_3"
+        android:id="@+id/checkbox_crew"
         android:layout_width="360dp"
         android:layout_height="85dp"
         android:layout_marginTop="30dp"
@@ -97,11 +97,11 @@
         android:layout_marginTop="100dp"
         android:text="@string/tv_challenge4"
         app:layout_constraintStart_toStartOf="@+id/tv_create_2"
-        app:layout_constraintTop_toTopOf="@+id/img_btn_create_3" />
+        app:layout_constraintTop_toTopOf="@+id/checkbox_crew" />
 
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkbox_solo"
         android:layout_width="360dp"
         android:layout_height="85dp"
         android:layout_marginTop="20dp"
@@ -112,7 +112,7 @@
         android:text="@string/tv_challenge5"
         android:textSize="26sp"
         android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="@+id/img_btn_create_3"
+        app:layout_constraintEnd_toEndOf="@+id/checkbox_crew"
         app:layout_constraintStart_toStartOf="@id/tv_create_4"
         app:layout_constraintTop_toBottomOf="@+id/tv_create_4" />
 
@@ -124,12 +124,12 @@
         android:layout_gravity="center"
         android:layout_marginStart="0dp"
         android:layout_marginTop="300dp"
-        android:background="@drawable/rounded_button"
+        android:background="@drawable/rounded_btn"
         android:gravity="center"
         android:text="@string/btn_choice"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/checkBox"
-        app:layout_constraintTop_toTopOf="@id/checkBox" />
+        app:layout_constraintStart_toStartOf="@id/checkbox_solo"
+        app:layout_constraintTop_toTopOf="@id/checkbox_solo" />
 
     <include
         layout="@layout/bottom_navigation" />

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MotionEvent
+import android.widget.CheckBox
 import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -22,10 +23,39 @@ class CreateSolo1Activity : AppCompatActivity() {
     private var selectedEndDate: LocalDate? = null
     private var selectedDate: LocalDate = LocalDate.now()
 
+    private lateinit var checkBox1km: CheckBox
+    private lateinit var checkBox3km: CheckBox
+    private lateinit var checkBox5km: CheckBox
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateSolo1Binding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        checkBox1km = findViewById(R.id.checkbox_1km)
+        checkBox3km = findViewById(R.id.checkbox_3km)
+        checkBox5km = findViewById(R.id.checkbox_5km)
+
+        checkBox1km.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                checkBox3km.isChecked = false
+                checkBox5km.isChecked = false
+            }
+        }
+        checkBox3km.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                checkBox1km.isChecked = false
+                checkBox5km.isChecked = false
+            }
+        }
+        checkBox5km.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                checkBox1km.isChecked = false
+                checkBox3km.isChecked = false
+            }
+        }
+
+
 
         // View 초기화
         weekCalendarGrid = findViewById(R.id.weekCalendarGrid)

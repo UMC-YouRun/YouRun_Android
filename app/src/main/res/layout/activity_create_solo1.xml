@@ -82,8 +82,8 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/tv_crew1"
         app:layout_constraintTop_toTopOf="@id/tv_crew1" />
-    
-    
+
+
     <LinearLayout
         android:id="@+id/create_checkbox"
         android:layout_width="360dp"
@@ -93,38 +93,41 @@
         app:layout_constraintTop_toTopOf="@id/tv_distance"
         android:layout_marginTop="30dp"
         >
+
         <CheckBox
+            android:id="@+id/checkbox_1km"
             android:layout_width="101dp"
             android:layout_height="60dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/bg_tag_checkbox_selector"
             android:button="@null"
-            android:textStyle="bold|italic"
+            android:gravity="center"
             android:text="@string/tv_solo_challenge4"
-            android:gravity="center"
             android:textSize="20sp"
-            android:layout_marginEnd="20dp"/>
+            android:textStyle="bold|italic" />
 
         <CheckBox
+            android:id="@+id/checkbox_3km"
             android:layout_width="101dp"
             android:layout_height="60dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/bg_tag_checkbox_selector"
             android:button="@null"
-            android:textStyle="bold|italic"
+            android:gravity="center"
             android:text="@string/tv_solo_challenge4_2"
-            android:gravity="center"
             android:textSize="20sp"
-            android:layout_marginEnd="20dp"/>
+            android:textStyle="bold|italic" />
 
         <CheckBox
+            android:id="@+id/checkbox_5km"
             android:layout_width="101dp"
             android:layout_height="60dp"
             android:background="@drawable/bg_tag_checkbox_selector"
             android:button="@null"
-            android:textStyle="bold|italic"
-            android:textSize="20sp"
             android:gravity="center"
             android:text="@string/tv_solo_challenge4_3"
-            />
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
 
     </LinearLayout>
 
