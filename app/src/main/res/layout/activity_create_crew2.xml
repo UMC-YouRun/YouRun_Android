@@ -121,7 +121,7 @@
 
 
 
-        <ImageButton
+        <Button
             android:id="@+id/startRunningButton"
             android:layout_width="328dp"
             android:layout_height="48dp"
@@ -129,7 +129,7 @@
             android:layout_marginTop="80dp"
             android:background="@drawable/btn_next"
             android:text="@string/btn_check"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="16sp" />
     </LinearLayout>
 
