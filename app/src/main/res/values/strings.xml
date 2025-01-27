@@ -122,8 +122,15 @@
     <string name="tv_crew_challenge3">크루명</string>
     <string name="tv_crew_challenge4">띄어쓰기 없이 한글 2~5자만 입력 가능해요</string>
     <string name="tv_crew_challenge5">동작구사슴 크루와 \n1월 13일 ~ 1월 15일(3일 동안) \n최대 러닝하기!</string>
-
-
-
-
+    <string name="test_btn">성향 테스트 다시 하기</string>
+    <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="default_distance">0km</string>
+    <string name="distance">거리</string>
+    <string name="defalut_time">0분</string>
+    <string name="time">시간</string>
+    <string name="defalut_pace">00\0km</string>
+    <string name="pace">페이스</string>
+    <string name="calendar_text">얼마나 뛰었을까요?</string>
+    <string name="defalut_date">nnnn년 n월 n일</string>
+    <string name="date_check"> 유런과 3일째! </string>
 </resources>
