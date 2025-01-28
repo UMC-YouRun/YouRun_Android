@@ -4,9 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.yourun.R
 
-class ChallengeDetailActivity : AppCompatActivity() {
+class ChallengeDetailPersonalActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_challenge_detail)
+        setContentView(R.layout.activity_challenge_detail_personal)
     }
 }

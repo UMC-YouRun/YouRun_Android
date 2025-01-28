@@ -72,4 +72,10 @@
     <string name="tv_period">기간</string>
     <string name="tv_period_detail">2025. 1. 3 ~ 2025. 1. 15</string>
     <string name="tv_subtitle">관악산사슴 크루와 함께!</string>
+    <string name="tv_personal_character">TRAIL RUNNER</string>
+    <string name="tv_username">루시</string>
+    <string name="tv_nickname2">유어러너</string>
+    <string name="tv_hashtag1">#열정적</string>
+    <string name="tv_hashtag2">#갓생러</string>
+    <string name="appbar_scrolling_view_behavior">androidx.coordinatorlayout.widget.AppBarLayout$ScrollingViewBehavior</string>
 </resources>

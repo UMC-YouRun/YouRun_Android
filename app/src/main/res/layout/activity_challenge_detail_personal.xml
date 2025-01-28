@@ -47,6 +47,19 @@
             android:textSize="18sp"
             android:textStyle="bold" />
 
+        <ImageButton
+            android:id="@+id/calender_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="29dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:cropToPadding="false"
+            android:padding="0dp"
+            app:srcCompat="@drawable/ic_calendar" />
+
     </FrameLayout>
 
     <ScrollView
@@ -74,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:layout_marginVertical="82sp"
+                        android:layout_marginVertical="82dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/bg_user_profile" />
@@ -84,60 +97,32 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:layout_marginVertical="76sp"
+                        android:layout_marginVertical="76dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@drawable/img_facemaker_challenge" />
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/user_character"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4sp"
-                        android:text="@string/tv_crew_slogan"
+                        android:layout_marginBottom="4dp"
+                        android:text="@string/tv_personal_character"
                         android:textColor="#F4AA3A"
                         android:textSize="20sp"
-                        android:textStyle="bold"
+                        android:textStyle="bold|italic"
                         app:layout_constraintBottom_toTopOf="@+id/back_card"
                         app:layout_constraintStart_toStartOf="@+id/back_card" />
 
-                    <ImageView
-                        android:id="@+id/mini_pacemaker"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="16sp"
-                        android:layout_marginBottom="10sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/back_card"
-                        app:layout_constraintStart_toStartOf="@+id/back_card"
-                        app:srcCompat="@drawable/img_mini_pacemaker" />
 
-                    <ImageView
-                        android:id="@+id/mini_sprinter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4sp"
-                        android:layout_marginBottom="10sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/back_card"
-                        app:layout_constraintStart_toEndOf="@+id/mini_pacemaker"
-                        app:srcCompat="@drawable/img_mini_sprinter" />
-
-                    <ImageView
-                        android:id="@+id/mini_trailrunner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4sp"
-                        android:layout_marginBottom="10sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/back_card"
-                        app:layout_constraintStart_toEndOf="@+id/mini_sprinter"
-                        app:srcCompat="@drawable/img_mini_trailrunner" />
 
                     <TextView
                         android:id="@+id/team_slogan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16sp"
-                        android:layout_marginTop="10sp"
-                        android:text="@string/tv_crew_name"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="18dp"
+                        android:text="@string/tv_username"
                         android:textColor="@color/black"
                         android:textSize="24sp"
                         android:textStyle="bold"
@@ -145,11 +130,11 @@
                         app:layout_constraintTop_toTopOf="@+id/back_card" />
 
                     <TextView
-                        android:id="@+id/challenge_subtitle"
+                        android:id="@+id/challenge_personal_subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="24sp"
-                        android:layout_marginTop="68sp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="68dp"
                         android:text="@string/tv_subtitle"
                         android:textColor="@color/gray"
                         android:textSize="13sp"
@@ -167,15 +152,15 @@
                         app:srcCompat="@drawable/bg_headcount" />
 
                     <TextView
-                        android:id="@+id/challenge_title"
+                        android:id="@+id/challenge_personal_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="24sp"
+                        android:layout_marginLeft="24dp"
                         android:text="@string/tv_crew_goal"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/challenge_subtitle" />
+                        app:layout_constraintTop_toBottomOf="@+id/challenge_personal_subtitle" />
 
                     <TextView
                         android:id="@+id/headcount"
@@ -188,6 +173,36 @@
                         app:layout_constraintEnd_toEndOf="@+id/bg_headcount"
                         app:layout_constraintStart_toStartOf="@+id/bg_headcount"
                         app:layout_constraintTop_toTopOf="@+id/bg_headcount" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_nickname2"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="@+id/team_slogan"
+                        app:layout_constraintTop_toBottomOf="@+id/team_slogan" />
+
+                    <TextView
+                        android:id="@+id/hashtag1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="13dp"
+                        android:text="@string/tv_hashtag1"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/back_card"
+                        app:layout_constraintStart_toStartOf="@+id/textView" />
+
+                    <TextView
+                        android:id="@+id/hashtag2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/tv_hashtag2"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/hashtag1"
+                        app:layout_constraintStart_toEndOf="@+id/hashtag1" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -205,7 +220,7 @@
                     android:id="@+id/line"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="16sp"
+                    android:layout_marginVertical="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -215,8 +230,8 @@
                     android:id="@+id/challenge_reward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="24sp"
-                    android:layout_marginTop="32sp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="32dp"
                     android:text="@string/tv_reward"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -237,8 +252,8 @@
                     android:id="@+id/tv_reward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4sp"
-                    android:layout_marginTop="8sp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/tv_crew_rewards"
                     android:textColor="@color/gray"
                     android:textSize="13sp"
@@ -249,8 +264,8 @@
                     android:id="@+id/period"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24sp"
-                    android:layout_marginTop="28sp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="28dp"
                     android:text="@string/tv_period"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -261,8 +276,8 @@
                     android:id="@+id/tv_peroid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="24sp"
-                    android:layout_marginTop="8sp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/tv_period_detail"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -282,7 +297,7 @@
         android:id="@+id/imageButton4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32sp"
+        android:layout_marginTop="32dp"
         android:cropToPadding="false"
         android:background="@null"
         android:padding="0dp"
