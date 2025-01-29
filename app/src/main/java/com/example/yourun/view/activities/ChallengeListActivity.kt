@@ -12,50 +12,73 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.yourun.view.adapters.ChallengeAdapter
 import com.example.yourun.model.data.ChallengeItem
+import android.util.Log
 
 class ChallengeListActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var refreshHint: TextView
+    private lateinit var challengeAdapter: ChallengeAdapter
+    private var isLoading = false // 로딩 상태 확인 변수
+    private val refreshThreshold = 200 // 추가 스크롤 감지 기준(px)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_challenge_list)
 
         recyclerView = findViewById(R.id.recycler_view)
-        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout)
-        refreshHint = findViewById(R.id.refresh_hint)
+        challengeAdapter = ChallengeAdapter(getSampleData().toMutableList())
 
-        // RecyclerView 설정
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = ChallengeAdapter(getSampleData())
+        recyclerView.adapter = challengeAdapter
 
-        // 새로고침 동작 설정
-        swipeRefreshLayout.setOnRefreshListener {
-            // 데이터를 갱신하는 로직 추가
-            refreshData()
-        }
-
-        // 스크롤 상태 감지
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            private var isLoading = false
+            private var isInitialized = false  // 🚀 초기 상태 여부 추가
+
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (!recyclerView.canScrollVertically(-1)) {
-                    // 스크롤이 맨 위일 때 새로고침 힌트를 표시
-                    refreshHint.visibility = View.VISIBLE
-                } else {
-                    // 스크롤이 진행 중이면 새로고침 힌트를 숨김
-                    refreshHint.visibility = View.GONE
+
+                Log.d("SCROLL_EVENT", "dx: $dx, dy: $dy")
+
+                // 🚀 처음 실행될 때는 바로 체크하지 않음
+                if (!isInitialized) {
+                    isInitialized = true
+                    return
+                }
+
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+
+                // ✅ 사용자가 스크롤해서 리스트의 끝에 도달한 경우에만 새로고침 실행
+                if (!recyclerView.canScrollVertically(1) && dy >= 0) { // 🚀 dy >= 0 추가
+                    Log.d("SCROLL_EVENT", "RecyclerView 끝에 도달!")
+
+                    if (!isLoading) {
+                        isLoading = true
+                        showFooter(true)
+                        refreshData()
+                    }
+                }
+            }
+
+            private fun refreshData() {
+                Log.d("SCROLL_EVENT", "새로고침 시작!")
+                recyclerView.postDelayed({
+                    showFooter(false)
+                    isLoading = false
+                    Log.d("SCROLL_EVENT", "새로고침 완료 후 푸터 숨김")
+                }, 2000) // 2초 후 새로고침 완료
+            }
+
+            private fun showFooter(visible: Boolean) {
+                (recyclerView.adapter as ChallengeAdapter).let {
+                    if (visible) {
+                        it.notifyItemInserted(it.itemCount - 1)
+                    } else {
+                        it.notifyItemRemoved(it.itemCount - 1)
+                    }
                 }
             }
         })
-    }
-
-    private fun refreshData() {
-        // 예제: 데이터를 다시 불러온 뒤 RecyclerView 갱신
-        (recyclerView.adapter as ChallengeAdapter).updateData(getSampleData())
-        swipeRefreshLayout.isRefreshing = false // 새로고침 완료
     }
 
     private fun getSampleData(): List<ChallengeItem> {
@@ -71,7 +94,6 @@ class ChallengeListActivity : AppCompatActivity() {
                 ),
                 remaining = "남은 1명!"
             )
-            // 추가 데이터...
         )
     }
 }

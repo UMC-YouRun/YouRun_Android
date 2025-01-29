@@ -24,11 +24,11 @@
         android:layout_marginBottom="2dp"
         android:text="관악산사슴 크루와 함께!"
         android:textSize="11sp"
-        app:layout_constraintBottom_toTopOf="@+id/titleText"
-        app:layout_constraintStart_toStartOf="@+id/titleText" />
+        app:layout_constraintBottom_toTopOf="@+id/title_text"
+        app:layout_constraintStart_toStartOf="@+id/title_text" />
 
     <TextView
-        android:id="@+id/titleText"
+        android:id="@+id/title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -44,8 +44,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="@+id/titleText"
-        app:layout_constraintTop_toBottomOf="@+id/titleText"
+        app:layout_constraintStart_toStartOf="@+id/title_text"
+        app:layout_constraintTop_toBottomOf="@+id/title_text"
         app:srcCompat="@drawable/img_mini2_pacemaker" />
 
     <ImageView
