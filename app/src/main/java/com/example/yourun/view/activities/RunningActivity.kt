@@ -18,6 +18,7 @@ class RunningActivity : AppCompatActivity() {
         val titleTextView = findViewById<TextView>(R.id.txt_top_bar_with_back_button)
         titleTextView.text = "러닝"
 
+        // 글자 크기 바꾸는 함수 따로 만들기 (재사용)
         val runningDistanceTextView = findViewById<TextView>(R.id.txt_running_distance)
 
         val spannable1 = SpannableString("3.26 km") // 거리 데이터 받아오기

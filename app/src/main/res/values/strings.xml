@@ -139,4 +139,7 @@
     <string name="running_play_pause">running_play_pause</string>
     <string name="fighting_more">조금만 더 힘내세요!</string>
     <string name="running_complete">5.2km 러닝 완료!</string>
+    <string name="txt_to_mate">루시 보다</string>
+    <string name="txt_to_distance">0.5km 더 뛰었어요!</string>
+    <string name="btn_ok">btn_ok</string>
 </resources>
