@@ -49,9 +49,9 @@ class AppExpFragment3 : Fragment() {
             }
         }
 
-        val txt_mate_win = view.findViewById<TextView>(R.id.txt_app_exp_mate_win)
+        val txtMateWin = view.findViewById<TextView>(R.id.txt_app_exp_mate_win)
 
-        val fullText = txt_mate_win.text.toString()
+        val fullText = txtMateWin.text.toString()
         val targetText = "러닝 메이트,"
         val spannableString = SpannableString(fullText)
         val startIndex = fullText.indexOf(targetText)
@@ -65,7 +65,7 @@ class AppExpFragment3 : Fragment() {
                 SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
-        txt_mate_win.text = spannableString
+        txtMateWin.text = spannableString
 
     }
 }

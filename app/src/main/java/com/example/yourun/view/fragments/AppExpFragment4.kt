@@ -49,9 +49,9 @@ class AppExpFragment4: Fragment() {
             }
         }
 
-        val txt_who_run = view.findViewById<TextView>(R.id.txt_app_exp_who_run)
+        val txtWhoRun = view.findViewById<TextView>(R.id.txt_app_exp_who_run)
 
-        val fullText = txt_who_run.text.toString()
+        val fullText = txtWhoRun.text.toString()
         val targetText = "더 많이, 더 꾸준히"
         val spannableString = SpannableString(fullText)
         val startIndex = fullText.indexOf(targetText)
@@ -65,7 +65,7 @@ class AppExpFragment4: Fragment() {
                 SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
-        txt_who_run.text = spannableString
+        txtWhoRun.text = spannableString
 
     }
 }
