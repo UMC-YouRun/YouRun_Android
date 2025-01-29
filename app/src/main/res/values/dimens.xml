@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="calendar_cell_margin_horizontal">-8dp</dimen>
+    <dimen name="calendar_cell_margin_vertical">-8dp</dimen>
+    <dimen name="dragbar_margin_expanded">4dp</dimen>
+    <dimen name="dragbar_margin_collapsed">4dp</dimen>
+
+</resources>

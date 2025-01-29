@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -19,18 +20,18 @@
 
 
     <ImageButton
+        android:id="@+id/btn_back"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:layout_marginTop="120dp"
-        android:layout_marginEnd="344dp"
+        android:layout_marginTop="18dp"
         android:background="@drawable/ic_back"
         android:importantForAccessibility="no"
         android:minWidth="0dp"
         android:minHeight="0dp"
         android:padding="60dp"
         android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/tv_1"
+        app:layout_constraintTop_toBottomOf="@+id/signup_title_iv" />
 
 
     <TextView
@@ -87,7 +88,8 @@
         android:layout_marginTop="46dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView2">
+        app:layout_constraintTop_toBottomOf="@id/textView2"
+        android:clickable="true">
 
         <TextView
             android:id="@+id/tv_3"
@@ -115,22 +117,25 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="180dp"
-            android:background="@drawable/ic_check_box"
-            android:button="@null"
+            android:background="@drawable/bg_checkbox"
+            android:button = "@android:color/transparent"
+            android:clickable="true"
             />
+        <!-- xml에는 selector을 배경으로 적용해야한다.-->
 
     </LinearLayout>
 
 
     <RelativeLayout
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/signup2_Linear"
+        android:id="@+id/relativeLayout"
         android:layout_width="348dp"
         android:layout_height="143dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp">
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/signup2_Linear">
 
         <View
             android:id="@+id/agree_box"
@@ -141,45 +146,40 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_centerInParent="true"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
-        <TextView
-            android:id="@+id/tv_customText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_custom_agree1"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
+            <TextView
+                android:id="@+id/tv_customText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_custom_agree1"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_custom_agree2"
-            android:textColor="@color/gray"
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"/>
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/tv_custom_agree2"
+                android:textColor="@color/gray"
+                android:textSize="14sp" />
+        </LinearLayout>
 
-</RelativeLayout>
+    </RelativeLayout>
 
     <ImageButton
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="150dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="60dp"
         android:background="@drawable/img_next_btn"
         android:importantForAccessibility="no"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.45"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="@+id/relativeLayout"
+        app:layout_constraintStart_toStartOf="@+id/relativeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
