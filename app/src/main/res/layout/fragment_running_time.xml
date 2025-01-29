@@ -67,13 +67,14 @@
         android:id="@+id/btn_time_15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
         android:contentDescription="@string/time_15"
-        app:layout_constraintTop_toBottomOf="@id/txt_more_run"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/ic_15_minute"
-        android:layout_marginTop="25dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_more_run" />
 
     <ImageButton
         android:id="@+id/btn_time_30"
