@@ -3,7 +3,6 @@ package com.example.yourun.view.activities
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.Spanned
 import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan

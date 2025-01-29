@@ -83,7 +83,7 @@
     <string name="ex_index">1</string>
     <string name="user_profile">user_profile</string>
     <string name="ex_user_name">루시</string>
-    <string name="user_day">27일째!</string>
+    <string name="user_day">27일째</string>
     <string name="ex_tag">#열정적 #에너자이저</string>
     <string name="mate_heart">mate_heart</string>
     <string name="tv_myrun_tag">2개까지 선택 가능해요</string>
@@ -142,4 +142,5 @@
     <string name="txt_to_mate">루시 보다</string>
     <string name="txt_to_distance">0.5km 더 뛰었어요!</string>
     <string name="btn_ok">btn_ok</string>
+    <string name="user_distance">20km</string>
 </resources>
