@@ -14,6 +14,7 @@
     <color name="circle_background">#9285f6</color>
     <color name="yellow">#FFD45C</color>
     <color name="text_purple">#5945D9</color>
+    <color name="text_purple_900">#3A28B0</color>
     <color name="gray_600">#696969</color>
     <color name="purple_400">#9984FF</color>
     <color name="yellow_900">#F9A138</color>
@@ -26,4 +27,6 @@
     <color name="running_bottom_background">#9685FF</color>
     <color name="txt_running_color">#010101</color>
     <color name="btn_selected">#FFF1CD</color>
+    <color name="brown">#B86300</color>
+
 </resources>

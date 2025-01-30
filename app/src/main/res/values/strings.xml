@@ -168,4 +168,9 @@
     <string name="txt_to_distance">0.5km 더 뛰었어요!</string>
     <string name="btn_ok">btn_ok</string>
     <string name="user_distance">20km</string>
+    <string name="default_runnerInfo">default_runnerInfo</string>
+    <string name="default_tag">#tag1 #tag2</string>
+    <string name="default_name">name</string>
+    <string name="default_day">default_day</string>
+    <string name="default_daylog">n일 연속 nkm 러닝!</string>
 </resources>
