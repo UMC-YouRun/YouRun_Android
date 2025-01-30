@@ -72,7 +72,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="4dp"/>
 
-        <!-- ✅ 크루원 기여도 카드 -->
         <androidx.cardview.widget.CardView
             android:id="@+id/card_crew_contribution"
             android:layout_width="match_parent"
@@ -194,17 +193,29 @@
                 </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/rounded_button"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="16dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="@string/btn_check"
+            app:layout_constraintTop_toBottomOf="@id/card_crew_contribution"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/btn_confirm_text"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="@string/btn_check"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:background="@drawable/rounded_confirm_button"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="16dp"
+            android:textColor="@color/black"
+            android:gravity="center"
             app:layout_constraintTop_toBottomOf="@id/card_crew_contribution"
             app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

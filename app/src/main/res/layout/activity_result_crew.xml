@@ -2,6 +2,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
@@ -9,8 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"> <!-- ✅ height를 wrap_content로 변경 -->
-
+        android:layout_height="wrap_content">
         <include
             android:id="@+id/top_bar"
             layout="@layout/top_bar_with_back_button" />
@@ -116,20 +116,33 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- 확인 버튼 -->
-        <Button
+        <ImageButton
             android:id="@+id/btn_confirm"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_button"
+            android:contentDescription="@string/btn_check"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_runner"
+            app:layout_constraintVertical_bias="0.021"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <TextView
+            android:id="@+id/btn_yellow_confirm_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
             android:text="@string/btn_check"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:backgroundTint="@color/yellow"
-            android:background="@drawable/rounded_button"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_runner"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
+            app:layout_constraintVertical_bias="0.048"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
