@@ -14,11 +14,20 @@ import com.example.yourun.view.fragments.MateFragment
 import com.example.yourun.view.fragments.MyRunFragment
 import com.example.yourun.view.fragments.RunningFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.content.Intent
+import android.content.SharedPreferences
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // 온보딩 완료 여부 확인 후, 처음 실행이면 온보딩 화면으로 이동
+        if (!isOnboardingCompleted()) {
+            startActivity(Intent(this, OnboardingActivity::class.java))
+            finish() // MainActivity 종료
+            return
+        }
         setContentView(R.layout.activity_main)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -89,5 +98,11 @@ class MainActivity : AppCompatActivity() {
             fabTitle.setTextColor(ContextCompat.getColor(this, R.color.round_button))
         }
     }
-}
 
+    // 온보딩 완료 여부를 SharedPreferences에서 확인
+    private fun isOnboardingCompleted(): Boolean {
+        val sharedPreferences: SharedPreferences =
+            getSharedPreferences("AppPrefs", MODE_PRIVATE)
+        return sharedPreferences.getBoolean("isOnboardingCompleted", false)
+    }
+}

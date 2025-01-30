@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">YouRun</string>
+    <string name="animation_file">onboarding_animation.json</string>
     <string name="login_tv1">만나지 않아도 함께 뛰어요!</string>
     <string name="login_tv2">이메일과 카카오톡으로 로그인 가능해요.</string>
     <string name="et_emil">이메일</string>
