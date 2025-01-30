@@ -17,14 +17,14 @@
 
     <ImageButton
         android:id="@+id/back_button"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/back_button"
         android:src="@drawable/img_arrow_left"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="28dp"
-        android:layout_marginStart="29dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="8dp"/>
 
     <TextView

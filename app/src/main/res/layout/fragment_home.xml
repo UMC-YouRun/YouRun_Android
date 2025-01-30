@@ -33,10 +33,10 @@
             <ImageButton
                 android:id="@+id/btn_calendar"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:contentDescription="@string/main_calendar"
                 android:src="@drawable/ic_calendar"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="22dp"
                 android:layout_marginEnd="15dp"
                 android:backgroundTint="@android:color/transparent" />
 
@@ -186,21 +186,21 @@
             <ImageButton
                 android:id="@+id/btn_crew"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:contentDescription="@string/crew_btn"
                 android:src="@drawable/img_crew_btn_unselected"
                 android:background="@null"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="86dp"
                 android:layout_marginStart="16dp" />
 
             <ImageButton
                 android:id="@+id/btn_solo"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:contentDescription="@string/solo_btn"
                 android:src="@drawable/img_solo_btn_unselected"
                 android:background="@null"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="86dp"
                 android:layout_marginStart="74dp" />
 
             <ImageButton
@@ -259,13 +259,13 @@
 
             <ImageButton
                 android:id="@+id/btn_redirect"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:contentDescription="@string/redirect"
                 android:src="@drawable/ic_redirect"
                 android:background="@android:color/transparent"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"/>
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"/>
 
         </LinearLayout>
 

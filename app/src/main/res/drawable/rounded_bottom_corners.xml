@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 바깥쪽 배경 색상 -->
+    <item>
+        <shape>
+            <solid android:color="@color/running_bottom_background" />
+        </shape>
+    </item>
+
+    <!-- 안쪽 모양 -->
+    <item>
+        <shape>
+            <solid android:color="@color/main_color" />
+            <corners
+                android:bottomLeftRadius="70dp"
+                android:bottomRightRadius="70dp" />
+        </shape>
+    </item>
+</layer-list>

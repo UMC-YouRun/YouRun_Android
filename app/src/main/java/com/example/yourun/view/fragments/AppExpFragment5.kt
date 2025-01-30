@@ -45,9 +45,9 @@ class AppExpFragment5 : Fragment() {
             }
         }
 
-        val txt_how_run = view.findViewById<TextView>(R.id.txt_app_exp_how_run)
+        val txtHowRun = view.findViewById<TextView>(R.id.txt_app_exp_how_run)
 
-        val fullText = txt_how_run.text.toString()
+        val fullText = txtHowRun.text.toString()
         val targetText = "얼마나 러닝"
         val spannableString = SpannableString(fullText)
         val startIndex = fullText.indexOf(targetText)
@@ -61,7 +61,7 @@ class AppExpFragment5 : Fragment() {
                 SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
-        txt_how_run.text = spannableString
+        txtHowRun.text = spannableString
     }
 
 }
