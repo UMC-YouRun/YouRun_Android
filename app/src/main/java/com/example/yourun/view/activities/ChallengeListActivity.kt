@@ -33,14 +33,14 @@ class ChallengeListActivity : AppCompatActivity() {
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             private var isLoading = false
-            private var isInitialized = false  // 🚀 초기 상태 여부 추가
+            private var isInitialized = false  // 초기 상태 여부 추가
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
 
                 Log.d("SCROLL_EVENT", "dx: $dx, dy: $dy")
 
-                // 🚀 처음 실행될 때는 바로 체크하지 않음
+                // 처음 실행될 때는 바로 체크하지 않음
                 if (!isInitialized) {
                     isInitialized = true
                     return
@@ -48,8 +48,8 @@ class ChallengeListActivity : AppCompatActivity() {
 
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
 
-                // ✅ 사용자가 스크롤해서 리스트의 끝에 도달한 경우에만 새로고침 실행
-                if (!recyclerView.canScrollVertically(1) && dy >= 0) { // 🚀 dy >= 0 추가
+                // 사용자가 스크롤해서 리스트의 끝에 도달한 경우에만 새로고침 실행
+                if (!recyclerView.canScrollVertically(1) && dy >= 0) { // dy >= 0 추가
                     Log.d("SCROLL_EVENT", "RecyclerView 끝에 도달!")
 
                     if (!isLoading) {
