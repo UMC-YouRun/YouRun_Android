@@ -177,5 +177,5 @@
     <string name="default_success">name와의 러닝 챌린지\n n일째 성공!</string>
     <string name="default_crew_success">관악구 사슴 크루\n총 18km 러닝!</string>
     <string name="challenge_fail">챌린지 실패</string>
-
+    <string name="crew_contribution">크루원 기여도</string>
 </resources>

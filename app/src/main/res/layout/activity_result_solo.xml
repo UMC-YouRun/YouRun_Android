@@ -173,7 +173,7 @@
             android:id="@+id/btn_confirm"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="확인"
+            android:text="@string/btn_check"
             android:textSize="18sp"
             android:textStyle="bold"
             android:backgroundTint="@color/yellow"
