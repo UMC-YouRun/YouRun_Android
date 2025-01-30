@@ -23,11 +23,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // 온보딩 완료 여부 확인 후, 처음 실행이면 온보딩 화면으로 이동
-//        if (!isOnboardingCompleted()) {
-//            startActivity(Intent(this, OnboardingActivity::class.java))
-//            finish() // MainActivity 종료
-//            return
-//        }
+        if (!isOnboardingCompleted()) {
+            startActivity(Intent(this, OnboardingActivity::class.java))
+            finish() // MainActivity 종료
+            return
+        }
         setContentView(R.layout.activity_main)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
