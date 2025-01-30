@@ -13,6 +13,19 @@
         android:theme="@style/Theme.YouRun"
         tools:targetApi="34"
         android:enableOnBackInvokedCallback="true">
+
+        <activity
+            android:name=".view.activities.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.YouRun" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".view.activities.OnboardingActivity"/>
+
         <activity
             android:name=".view.activities.LoginActivity"
             android:exported="true"
@@ -25,11 +38,7 @@
 
         </activity>
 
-        <activity
-            android:name=".view.activities.MainActivity"
-            android:exported="true" />
-
-       <activity 
+       <activity
                 android:name=".view.activities.QuestionActivity"
                 android:exported="true" />
 
@@ -49,6 +58,23 @@
 
         <activity
             android:name=".view.activities.AppExpActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".view.activities.CreateChallengeActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".view.activities.CreateSolo1Activity"
+            android:exported="true" />
+        <activity
+            android:name=".view.activities.CreateSolo2Activity"
+            android:exported="true" />
+        <activity
+            android:name=".view.activities.CreateCrew1Activity"
+            android:exported="true" />
+        <activity
+            android:name=".view.activities.CreateCrew2Activity"
             android:exported="true" />
 
         <activity android:name=".view.activities.CalendarActivity"
