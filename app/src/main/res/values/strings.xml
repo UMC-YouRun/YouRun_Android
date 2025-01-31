@@ -133,4 +133,7 @@
     <string name="calendar_text">얼마나 뛰었을까요?</string>
     <string name="defalut_date">nnnn년 n월 n일</string>
     <string name="date_check"> 유런과 3일째! </string>
+    <string name="date"> 2025년 1월 </string>
+    <string name="crew_name2">크루구호</string>
+    <string name="crew_name3">띄어쓰기 포함 한글 3~12자만 입력 가능해요</string>
 </resources>
