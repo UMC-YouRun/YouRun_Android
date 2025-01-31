@@ -1,7 +1,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layout_myrun"
@@ -26,102 +25,54 @@
             android:id="@+id/txt_top_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:letterSpacing="0.03"
+            android:lineSpacingExtra="14sp"
             android:text="@string/tv_myrun"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:letterSpacing="0.03"
-            android:lineSpacingExtra="14sp"
-            android:gravity="center"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="8dp"/>
+            android:textStyle="bold" />
 
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="30dp"
-            android:background="@drawable/ic_calendar"
             android:layout_marginTop="28dp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_calendar" />
     </FrameLayout>
 
-
-    <TextView
-        android:id="@+id/tv_myrun01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/tv_myrun_color"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_profile_character" />
 
     <ImageView
         android:id="@+id/iv_profile_character"
         android:layout_width="133dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:layout_marginStart="130dp"
         android:layout_marginTop="46dp"
         android:src="@drawable/img_face01"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/top_bar"
+        app:layout_constraintStart_toStartOf="@+id/top_bar"
         app:layout_constraintTop_toBottomOf="@id/top_bar" />
-
-    <LinearLayout
-        android:id="@+id/btn_color_picker"
-        android:layout_width="310dp"
-        android:layout_height="101dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="38dp"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintStart_toStartOf="@id/tv_myrun01"
-        app:layout_constraintTop_toTopOf="@id/tv_myrun01">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/bg_small_circle" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/bg_small_circle" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/bg_small_circle" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:background="@drawable/bg_small_circle" />
-
-
-    </LinearLayout>
 
     <TextView
         android:id="@+id/id_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32sp"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="280dp"
         android:text="@string/tv_nickname"
-        android:textSize="16sp"
         android:textColor="@color/black"
+        android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_color_picker" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_profile_character" />
 
     <TextView
         android:id="@+id/textView3"
@@ -193,8 +144,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="360dp"
-        android:layout_height="120dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         android:padding="0dp"
         app:layout_constraintStart_toStartOf="@id/textView4"
@@ -289,3 +240,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">YouRun</string>
     <string name="animation_file">onboarding_animation.json</string>
+    <string name="app_name">YouRun</string>
     <string name="login_tv1">만나지 않아도 함께 뛰어요!</string>
     <string name="login_tv2">이메일과 카카오톡으로 로그인 가능해요.</string>
     <string name="et_emil">이메일</string>
@@ -124,7 +124,24 @@
     <string name="tv_crew_challenge4">띄어쓰기 없이 한글 2~5자만 입력 가능해요</string>
     <string name="tv_crew_challenge5">동작구사슴 크루와 \n1월 13일 ~ 1월 15일(3일 동안) \n최대 러닝하기!</string>
     <string name="test_btn">성향 테스트 다시 하기</string>
+    <string name="tv_challenge">챌린지</string>
+    <string name="tv_crew_slogan">어차피 승리는 우리 것</string>
+    <string name="tv_crew_name">관악구\n사슴 크루</string>
+    <string name="tv_crew_goal">3일 동안 최대 거리 러닝</string>
+    <string name="tv_crew_headcount">3/4명</string>
+    <string name="tv_reward">리워드</string>
+    <string name="tv_crew_rewards">내가 더 잘 나가 1개 / MVP 달성 시 2개</string>
+    <string name="tv_personal_rewards">미룬이 말고 꾸준히 1개 / MVP 달성 시 2개</string>
+    <string name="tv_period">기간</string>
+    <string name="tv_period_detail">2025. 1. 3 ~ 2025. 1. 15</string>
+    <string name="tv_subtitle">관악산사슴 크루와 함께!</string>
+    <string name="tv_personal_character">TRAIL RUNNER</string>
+    <string name="tv_username">루시</string>
+    <string name="tv_nickname2">유어러너</string>
+    <string name="tv_hashtag1">#열정적</string>
+    <string name="tv_hashtag2">#갓생러</string>
     <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="appbar_scrolling_view_behavior2">androidx.coordinatorlayout.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="default_distance">0km</string>
     <string name="distance">거리</string>
     <string name="defalut_time">0분</string>
@@ -134,6 +151,7 @@
     <string name="calendar_text">얼마나 뛰었을까요?</string>
     <string name="defalut_date">nnnn년 n월 n일</string>
     <string name="date_check"> 유런과 3일째! </string>
+    <string name="tv_mate">메이트</string>
     <string name="today_run">오늘은 어떻게 뛰어볼까요?</string>
     <string name="select_mate">select_mate</string>
     <string name="running_time">running_time</string>
@@ -178,4 +196,9 @@
     <string name="default_crew_success">관악구 사슴 크루\n총 18km 러닝!</string>
     <string name="challenge_fail">챌린지 실패</string>
     <string name="crew_contribution">크루원 기여도</string>
+    <string name="date"> 2025년 1월 </string>
+    <string name="crew_name2">크루구호</string>
+    <string name="crew_name3">띄어쓰기 포함 한글 3~12자만 입력 가능해요</string>
+
+
 </resources>
