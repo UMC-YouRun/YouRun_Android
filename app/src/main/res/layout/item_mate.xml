@@ -17,7 +17,6 @@
         android:text="@string/ex_index"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/img_user_profile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -27,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:contentDescription="@string/user_profile"
-        android:src="@drawable/img_user_profile"
+        android:src="@drawable/img_profile_trailrunner_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/idx_challenge_item"
         app:layout_constraintTop_toTopOf="parent" />

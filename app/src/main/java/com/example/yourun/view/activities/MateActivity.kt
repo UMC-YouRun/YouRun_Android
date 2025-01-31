@@ -33,11 +33,10 @@ class MateActivity : AppCompatActivity() {
 
     private fun loadMates() {
         // 여기서 API 요청해서 데이터 불러오기
-        /*
-        mateList.add(Mate("청정원", 1, 20, "#열정적"))
-        mateList.add(Mate("루시", 2, 18, "#에너자이저"))
-        mateList.add(Mate("루나", 3, 15, "#스프린터"))
-        */
+
+        mateList.add(Mate(1, R.drawable.img_profile_sprinter_purple, "청정원", 12, 20, +1))
+        mateList.add(Mate(2, R.drawable.img_profile_trailrunner_red, "루시", 27, 18, -1))
+        mateList.add(Mate(3, R.drawable.img_profile_sprinter_yellow, "루나", 28, 15, +2))
 
         // 어댑터에 변경 사항 반영
         mateAdapter.notifyDataSetChanged()
