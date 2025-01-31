@@ -49,9 +49,9 @@ class AppExpFragment2 : Fragment() {
             }
         }
 
-        val txt_what_character = view.findViewById<TextView>(R.id.txt_app_exp_what_character)
+        val txtWhatCharacter = view.findViewById<TextView>(R.id.txt_app_exp_what_character)
 
-        val fullText = txt_what_character.text.toString()
+        val fullText = txtWhatCharacter.text.toString()
         val targetText = "캐릭터"
         val spannableString = SpannableString(fullText)
         val startIndex = fullText.indexOf(targetText)
@@ -65,7 +65,7 @@ class AppExpFragment2 : Fragment() {
                 SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
-        txt_what_character.text = spannableString
+        txtWhatCharacter.text = spannableString
 
     }
 }

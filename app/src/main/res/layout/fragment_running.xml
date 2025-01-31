@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/before_running_top_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include
+            android:id="@+id/before_running_top_bar"
+            layout="@layout/top_bar" />
+
+        <ImageButton
+            android:id="@id/btn_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:contentDescription="@string/btn_calendar"
+            android:src="@drawable/ic_calendar"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="17dp"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_gravity="end" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/today_run"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/before_running_top_frame"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/today_run"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="17dp" />
+
+    <FrameLayout
+        android:id="@+id/running_map_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/today_run"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        >
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="268dp"
+            android:background="@drawable/rounded_top_corners_map"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
+
+        <View
+            android:id="@+id/bgd_mate_select"
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:background="@drawable/bgd_mate_unselected"
+            android:layout_marginTop="280dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:clickable="true" />
+
+        <ImageView
+            android:id="@+id/img_mate_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/mate_profile"
+            android:src="@drawable/bgd_mate_profile"
+            android:layout_marginTop="288dp"
+            android:layout_marginStart="36dp" />
+
+        <ImageView
+            android:id="@+id/img_question_mark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/question_mark"
+            android:src="@drawable/img_question_mark"
+            android:layout_marginTop="302dp"
+            android:layout_marginStart="58dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/running_mate_select"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="307dp"
+            android:layout_marginStart="118dp"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/running_time_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/running_map_frame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <View
+            android:id="@+id/running_time_set"
+            android:layout_width="328dp"
+            android:layout_height="48dp"
+            android:background="@drawable/custom_rounded_button"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="37dp"
+            android:layout_marginBottom="25dp"
+            android:clickable="true"/>
+
+        <TextView
+            android:id="@+id/txt_set_running_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/running_time_set"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="@color/grey_font"
+            android:layout_marginTop="6dp"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/btn_running_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/running_start"
+        app:layout_constraintTop_toBottomOf="@id/running_time_frame"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="37dp"
+        android:src="@drawable/ic_running_start"
+        android:background="@android:color/transparent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
