@@ -13,6 +13,19 @@
         android:theme="@style/Theme.YouRun"
         tools:targetApi="34"
         android:enableOnBackInvokedCallback="true">
+
+        <activity
+            android:name=".view.activities.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.YouRun" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".view.activities.OnboardingActivity"/>
+
         <activity
             android:name=".view.activities.LoginActivity"
             android:exported="true"
@@ -27,7 +40,8 @@
         <activity
             android:name=".view.activities.MainActivity"
             android:exported="true" />
-        <activity
+
+       <activity
                 android:name=".view.activities.QuestionActivity"
                 android:exported="true">
        </activity>
@@ -68,11 +82,26 @@
 
         <activity android:name=".view.activities.CalendarActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        </activity>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity
+            android:name=".view.activities.RunningActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".view.activities.RunningResultActivity"
+            android:exported="true" />
+
+        <activity android:name=".view.activities.ResultSoloActivity"
+            android:exported="true">
+        </activity>
+
+        <activity android:name=".view.activities.ResultCrewActivity"
+            android:exported="true">
+        </activity>
+
+        <activity android:name=".view.activities.ResultContributionActivity"
+            android:exported="true">
         </activity>
 
         <activity

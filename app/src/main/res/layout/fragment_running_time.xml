@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <FrameLayout
+        android:id="@+id/running_time_set_top_frame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include
+            android:id="@+id/running_time_set_top_bar"
+            layout="@layout/top_bar_with_back_button" />
+
+        <ImageButton
+            android:id="@id/btn_calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:contentDescription="@string/btn_calendar"
+            android:src="@drawable/ic_calendar"
+            android:layout_marginTop="36dp"
+            android:layout_marginEnd="17dp"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_gravity="end" />
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/running_time_set_top_frame"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/today_how_run"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="17dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/running_time_set_top_frame"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/mate_run_time"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:layout_marginTop="87dp"
+        android:layout_marginStart="17dp" />
+
+    <TextView
+        android:id="@+id/txt_more_run"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/running_time_set_top_frame"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/more_run"
+        android:textSize="14sp"
+        android:textStyle="normal"
+        android:textColor="@color/text_purple"
+        android:layout_marginTop="107dp"
+        android:layout_marginStart="17dp" />
+
+    <ImageButton
+        android:id="@+id/btn_time_15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/time_15"
+        android:src="@drawable/ic_15_minute"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_more_run" />
+
+    <ImageButton
+        android:id="@+id/btn_time_30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/time_30"
+        app:layout_constraintTop_toBottomOf="@id/btn_time_15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_30_minute"
+        android:layout_marginTop="18dp" />
+
+    <ImageButton
+        android:id="@+id/btn_time_45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/time_45"
+        app:layout_constraintTop_toBottomOf="@id/btn_time_30"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_45_minute"
+        android:layout_marginTop="18dp" />
+
+    <ImageButton
+        android:id="@+id/btn_time_60"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/time_60"
+        app:layout_constraintTop_toBottomOf="@id/btn_time_45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_60_minute"
+        android:layout_marginTop="18dp" />
+
+    <ImageButton
+        android:id="@+id/btn_select_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/select_time"
+        android:src="@drawable/ic_select"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/btn_time_60"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="46dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
