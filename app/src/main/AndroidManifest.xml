@@ -35,7 +35,6 @@
 
 <!--                <category android:name="android.intent.category.LAUNCHER" />-->
 <!--           </intent-filter>-->
-
         </activity>
 
        <activity
@@ -79,11 +78,6 @@
 
         <activity android:name=".view.activities.CalendarActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
@@ -93,6 +87,18 @@
         <activity
             android:name=".view.activities.RunningResultActivity"
             android:exported="true" />
+
+        <activity android:name=".view.activities.ResultSoloActivity"
+            android:exported="true">
+        </activity>
+
+        <activity android:name=".view.activities.ResultCrewActivity"
+            android:exported="true">
+        </activity>
+
+        <activity android:name=".view.activities.ResultContributionActivity"
+            android:exported="true">
+        </activity>
 
     </application>
 
