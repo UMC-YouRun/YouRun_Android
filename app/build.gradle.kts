@@ -52,8 +52,10 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
     implementation("com.google.android.material:material:1.9.0")
+    implementation("com.airbnb.android:lottie:6.0.0")
+    implementation ("com.kakao.sdk:v2-all:2.20.6")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.airbnb.android:lottie:6.0.0")
+
 }
