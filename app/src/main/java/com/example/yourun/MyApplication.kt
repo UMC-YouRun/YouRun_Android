@@ -9,6 +9,6 @@ class MyApplication : Application() {
 
         // 카카오 SDK 초기화
         val kakaoAppKey: String = BuildConfig.KAKAO_NATIVE_APP_KEY
-        KakaoSdk.init(this, "{NATIVE_APP_KEY}")
+        KakaoSdk.init(this, kakaoAppKey)
     }
 }

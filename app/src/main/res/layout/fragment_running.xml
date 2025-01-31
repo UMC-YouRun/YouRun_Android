@@ -57,6 +57,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp" />
 
+        <com.kakao.vectormap.MapView
+            android:id="@+id/kakao_map"
+            android:layout_width="wrap_content"
+            android:layout_height="266dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
+
         <View
             android:id="@+id/bgd_mate_select"
             android:layout_width="match_parent"
