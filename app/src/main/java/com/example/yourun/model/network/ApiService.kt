@@ -1,8 +1,10 @@
 package com.example.yourun.model.network
 
 import com.example.yourun.model.data.*
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface ApiService {
     @POST("users/login")
@@ -15,6 +17,9 @@ interface ApiService {
     // 회원가입 - Step 3 (닉네임 & 성향 태그)
     @POST("users")
     suspend fun signUp3(@Body request: SignUpRequest3): ApiResponse<SignUpResponse>
+
+    @POST("users/duplicate")  // POST 방식으로 이메일 중복 확인
+    fun checkEmailDuplicate(@Query("email") email: String): Call<EmailduplicateResponse>
 }
 
 data class ApiResponse<T>(

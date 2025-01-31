@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.Log
 
 import android.view.MotionEvent
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.yourun.R
@@ -25,8 +27,6 @@ class SignUp1Activity : AppCompatActivity() {
 
         setupPasswordVisibilityToggle()
         setupPasswordCheck()
-
-
 
         binding.btnNext.setOnClickListener {
             val email = binding.etId.text.toString().trim()
@@ -48,14 +48,24 @@ class SignUp1Activity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-
             val intent = Intent(this, SignUp2Activity::class.java)
             startActivity(intent)
         }
 
-
         binding.btnBack.setOnClickListener {
             onBackPressed()
+        }
+
+        binding.btnDuplicate.setOnClickListener {
+            val email = binding.etId.text.toString().trim()
+
+            if (!isEmailValid(email)) {
+                Toast.makeText(this, "유효한 이메일을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // 이메일 중복 확인 API 호출
+            checkEmailDuplicate(email)
         }
     }
 
@@ -70,7 +80,6 @@ class SignUp1Activity : AppCompatActivity() {
         val regex = Pattern.compile(pattern)
         return regex.matcher(password).matches()
     }
-
 
     private fun setupPasswordVisibilityToggle() {
         binding.etPassword.setOnTouchListener { _, event ->
@@ -103,7 +112,6 @@ class SignUp1Activity : AppCompatActivity() {
             false
         }
     }
-
 
     private fun togglePasswordVisibility(
         editText: EditText,
@@ -173,6 +181,22 @@ class SignUp1Activity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
+    }
+
+    private fun checkEmailDuplicate(email: String) {
+        val isEmailDuplicate = email == "test@example.com"
+
+        if (isEmailDuplicate) {
+            binding.tvEmailDuplicate.apply {
+                text = "이미 사용 중인 이메일입니다."
+                setTextColor(ContextCompat.getColor(this@SignUp1Activity, R.color.red))
+            }
+        } else {
+            binding.tvEmailDuplicate.apply {
+                text = "사용 가능한 이메일입니다."
+                setTextColor(ContextCompat.getColor(this@SignUp1Activity, R.color.purple))
+            }
+        }
     }
 
 }
