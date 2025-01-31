@@ -104,7 +104,7 @@ class SignUp1Activity : AppCompatActivity() {
         }
     }
 
-    // Toggle password visibility
+
     private fun togglePasswordVisibility(
         editText: EditText,
         visibilityOnDrawable: Int,
@@ -114,14 +114,12 @@ class SignUp1Activity : AppCompatActivity() {
             editText.inputType == InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
 
         if (isVisible) {
-            // Hide password
             editText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             editText.setCompoundDrawablesRelativeWithIntrinsicBounds(
                 null, null,
                 ContextCompat.getDrawable(this, visibilityOffDrawable), null
             )
         } else {
-            // Show password
             editText.inputType =
                 InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
             editText.setCompoundDrawablesRelativeWithIntrinsicBounds(
@@ -130,10 +128,8 @@ class SignUp1Activity : AppCompatActivity() {
             )
         }
 
-
         editText.setSelection(editText.text?.length ?: 0)
     }
-
 
     private fun setupPasswordCheck() {
         binding.etPassword.addTextChangedListener(object : TextWatcher {
@@ -156,9 +152,27 @@ class SignUp1Activity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
 
+        binding.editTextPasswordCheck.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val password = binding.etPassword.text.toString().trim()
+                val passwordCheck = s.toString().trim()
 
+                if (password == passwordCheck) {
+                    binding.passwordCheckContent.apply {
+                        text = "비밀번호 확인 완료"
+                        setTextColor(ContextCompat.getColor(this@SignUp1Activity, R.color.purple))
+                    }
+                } else {
+                    binding.passwordCheckContent.apply {
+                        text = "비밀번호가 일치하지 않습니다."
+                        setTextColor(ContextCompat.getColor(this@SignUp1Activity, R.color.red))
+                    }
+                }
+            }
 
-
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
     }
 
 }
