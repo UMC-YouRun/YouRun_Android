@@ -21,4 +21,5 @@
     <color name="unselected_color">#A7A7A7</color>
     <color name="round_button">#D9D9D9</color>
     <color name="round_button_background">#9685FF</color>
+    <color name="red">#E75050</color>
 </resources>

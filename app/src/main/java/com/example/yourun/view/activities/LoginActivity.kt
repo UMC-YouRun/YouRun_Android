@@ -9,6 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityLoginBinding
+import com.example.yourun.model.data.LoginRequest
+import com.example.yourun.model.data.LoginResponse
+import com.example.yourun.model.network.ApiClient
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity() {
 
@@ -59,7 +66,6 @@ class LoginActivity : AppCompatActivity() {
             )
         }
 
-        // 커서 위치 유지
         binding.editTextPassword.setSelection(binding.editTextPassword.text?.length ?: 0)
     }
 
@@ -71,11 +77,39 @@ class LoginActivity : AppCompatActivity() {
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
             } else {
-                // 로그인 API 호출, 온보딩 화면 전환 등 실제 로그인 처리
-                // 예시: 로그인 성공 시 홈화면으로 전환(홈페이지 받으면 수정해야됨)
-                startActivity(Intent(this, MainActivity::class.java))
+                login(email, password)
             }
         }
+    }
+
+    private fun login(email: String, password: String) {
+        val loginRequest = LoginRequest(email, password)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = ApiClient.instance.login(loginRequest)
+                withContext(Dispatchers.Main) {
+                    if (response.status == 200 && response.data != null) { // 수정된 부분
+                        handleLoginSuccess(response.data) // response.body() 대신 response.data 사용
+                    } else {
+                        Toast.makeText(this@LoginActivity, "로그인 실패: ${response.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@LoginActivity, "로그인 실패: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun handleLoginSuccess(response: LoginResponse?) {
+        // 로그인 성공 후, 홈 화면으로 이동
+        Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, SignUp3Activity::class.java)
+        startActivity(intent)
+        finish()
+
     }
 
     private fun setupSignupButton() {

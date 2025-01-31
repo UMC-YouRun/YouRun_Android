@@ -112,6 +112,14 @@
         app:layout_constraintStart_toStartOf="@+id/id_tv"
         app:layout_constraintTop_toBottomOf="@+id/et_id" />
 
+    <TextView
+        android:id="@+id/password_content"
+        text="dfd"
+        android:layout_width="20dp"
+        android:layout_height="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/et_password"
+        app:layout_constraintEnd_toEndOf="@id/et_password" />
+
     <EditText
         android:id="@+id/et_password"
         android:layout_width="328sp"
