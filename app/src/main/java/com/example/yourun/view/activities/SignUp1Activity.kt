@@ -15,6 +15,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivitySignup1Binding
+import com.example.yourun.model.network.ApiClient
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.regex.Pattern
 
 class SignUp1Activity : AppCompatActivity() {
@@ -184,19 +189,36 @@ class SignUp1Activity : AppCompatActivity() {
     }
 
     private fun checkEmailDuplicate(email: String) {
-        val isEmailDuplicate = email == "test@example.com"
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val response = ApiClient.getApiService(this@SignUp1Activity).checkEmailDuplicate(email)
 
-        if (isEmailDuplicate) {
-            binding.tvEmailDuplicate.apply {
-                text = "이미 사용 중인 이메일입니다."
-                setTextColor(ContextCompat.getColor(this@SignUp1Activity, R.color.red))
-            }
-        } else {
-            binding.tvEmailDuplicate.apply {
-                text = "사용 가능한 이메일입니다."
-                setTextColor(ContextCompat.getColor(this@SignUp1Activity, R.color.purple))
+                // 응답 확인 로그 추가
+                Log.d("API Response", "Response: $response")
+
+                withContext(Dispatchers.Main) {
+                    if (response != null && response.status == 200 && response.data) {
+                        // 중복되지 않은 이메일인 경우
+                        binding.tvEmailDuplicate.apply {
+                            text = "사용 가능한 이메일입니다."
+                            setTextColor(ContextCompat.getColor(this@SignUp1Activity, R.color.purple))
+                        }
+                    } else {
+                        // 이미 존재하는 이메일인 경우
+                        binding.tvEmailDuplicate.apply {
+                            text = "이미 사용 중인 이메일입니다."
+                            setTextColor(ContextCompat.getColor(this@SignUp1Activity, R.color.red))
+                        }
+                    }
+                }
+            } catch (e: Exception) {
+                // 예외 처리
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@SignUp1Activity, "에러가 발생했습니다: ${e.message}", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
 
 }
+

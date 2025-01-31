@@ -19,7 +19,7 @@ interface ApiService {
     suspend fun signUp3(@Body request: SignUpRequest3): ApiResponse<SignUpResponse>
 
     @POST("users/duplicate")  // POST 방식으로 이메일 중복 확인
-    fun checkEmailDuplicate(@Query("email") email: String): Call<EmailduplicateResponse>
+    suspend fun checkEmailDuplicate(@Query("email") email: String): EmailduplicateResponse
 }
 
 data class ApiResponse<T>(
