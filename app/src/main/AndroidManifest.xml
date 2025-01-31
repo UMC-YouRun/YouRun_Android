@@ -30,16 +30,21 @@
             android:name=".view.activities.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.YouRun" >
-<!--           <intent-filter>-->
-<!--               <action android:name="android.intent.action.MAIN" />-->
+           <!--<intent-filter>
+               <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--           </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+           </intent-filter>-->
         </activity>
+
+        <activity
+            android:name=".view.activities.MainActivity"
+            android:exported="true" />
 
        <activity
                 android:name=".view.activities.QuestionActivity"
-                android:exported="true" />
+                android:exported="true">
+       </activity>
 
         <activity 
                 android:name=".view.activities.ResultActivity"
@@ -53,7 +58,6 @@
 
         <activity
             android:name=".view.activities.SignUp3Activity" />
-
 
         <activity
             android:name=".view.activities.AppExpActivity"
@@ -105,6 +109,22 @@
 
         <activity android:name=".view.activities.ResultContributionActivity"
             android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".view.activities.ChallengeListActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".view.activities.ChallengeDetailTeamActivity"
+            android:exported="true"
+            android:theme="@style/Theme.YouRun" >
         </activity>
 
     </application>
