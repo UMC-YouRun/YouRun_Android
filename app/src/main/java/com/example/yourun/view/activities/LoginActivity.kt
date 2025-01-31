@@ -1,8 +1,10 @@
 package com.example.yourun.view.activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.MotionEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -49,7 +51,8 @@ class LoginActivity : AppCompatActivity() {
         isPasswordVisible = !isPasswordVisible
 
         if (isPasswordVisible) {
-            binding.editTextPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            binding.editTextPassword.inputType =
+                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
             binding.editTextPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(
                 null,
                 null,
@@ -57,7 +60,8 @@ class LoginActivity : AppCompatActivity() {
                 null
             )
         } else {
-            binding.editTextPassword.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            binding.editTextPassword.inputType =
+                InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
             binding.editTextPassword.setCompoundDrawablesRelativeWithIntrinsicBounds(
                 null,
                 null,
@@ -87,29 +91,64 @@ class LoginActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = ApiClient.instance.login(loginRequest)
+                val response = ApiClient.getApiService(this@LoginActivity).login(loginRequest)
                 withContext(Dispatchers.Main) {
-                    if (response.status == 200 && response.data != null) { // 수정된 부분
-                        handleLoginSuccess(response.data) // response.body() 대신 response.data 사용
+                    if (response.status == 200 && response.data != null) {
+                        // 로그인 성공 시 처리
+                        handleLoginSuccess(response.data)
                     } else {
-                        Toast.makeText(this@LoginActivity, "로그인 실패: ${response.message}", Toast.LENGTH_SHORT).show()
+                        // 로그인 실패 시 상세한 로그 출력
+                        val errorMessage = response.message ?: "알 수 없는 오류가 발생했습니다."
+                        Log.e(
+                            "LoginError",
+                            "로그인 실패 - Status: ${response.status}, Message: $errorMessage"
+                        )
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "로그인 실패: $errorMessage",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             } catch (e: Exception) {
+                // 예외 발생 시 처리
+                Log.e("LoginError", "로그인 실패 - 예외: ${e.message}", e)
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(this@LoginActivity, "로그인 실패: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "로그인 실패: ${e.message}", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
     }
 
     private fun handleLoginSuccess(response: LoginResponse?) {
-        // 로그인 성공 후, 홈 화면으로 이동
-        Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
-        val intent = Intent(this, SignUp3Activity::class.java)
-        startActivity(intent)
-        finish()
+        if (response?.data != null) {
+            val accessToken = response.data.accessToken
+            if (accessToken.isNotEmpty()) {
+                saveTokensToSharedPreferences(accessToken)
 
+                // 로그인 성공 메시지 및 화면 전환
+                Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, SignUp3Activity::class.java)
+                startActivity(intent)
+                finish()
+            } else {
+                // accessToken이 없을 경우 처리
+                Log.e("LoginError", "로그인 실패 - Access Token이 누락되었습니다.")
+                Toast.makeText(this, "로그인 실패: 토큰이 누락되었습니다.", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            // response.data가 null일 경우 처리
+            Log.e("LoginError", "로그인 실패 - 응답 데이터가 없습니다.")
+            Toast.makeText(this, "로그인 실패: 응답 데이터가 없습니다.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun saveTokensToSharedPreferences(accessToken: String) {
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("access_token", accessToken)
+        editor.apply()
     }
 
     private fun setupSignupButton() {
@@ -118,5 +157,4 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
-    // 카카오 로그인 기능 구현은 후순위
 }
