@@ -1,4 +1,3 @@
-import com.android.build.api.dsl.Packaging
 import java.util.Properties
 
 plugins {
@@ -53,6 +52,9 @@ android {
         viewBinding = true
     }
     packaging.resources.excludes.add("META-INF/INDEX.LIST")
+    packaging.resources.excludes.add("META-INF/DEPENDENCIES")
+    packaging.resources.excludes.add("META-INF/NOTICE")
+    packaging.resources.excludes.add("META-INF/LICENSE")
 }
 
 dependencies {
@@ -68,6 +70,8 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.airbnb.android:lottie:6.0.0")
     implementation("com.kakao.sdk:v2-all:2.20.6")
+    implementation ("com.kakao.maps.open:android:2.12.8")
+    implementation ("com.google.android.gms:play-services-location:21.0.1") // FusedLocationProviderClient를 위한 의존성
     implementation("com.kakao.maps.open:android:2.12.8")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")

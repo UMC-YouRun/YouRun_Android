@@ -59,7 +59,7 @@
 
         <com.kakao.vectormap.MapView
             android:id="@+id/kakao_map"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="266dp"
             android:layout_marginTop="28dp"
             android:layout_marginStart="16dp"
