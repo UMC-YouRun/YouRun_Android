@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- 빨간 핀 -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M12,2 C8,2 4,6 4,10 C4,15 12,22 12,22 C12,22 20,15 20,10 C20,6 16,2 12,2 Z"/>
+
+    <!-- 흰색 원 (외곽) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M12,10 m-4,0 a4,4 0 1,0 8,0 a4,4 0 1,0 -8,0"/>
+
+    <!-- 중간 짙은 원 (어두운 회색) -->
+    <path
+        android:fillColor="#555555"
+        android:pathData="M12,10 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0"/>
+</vector>
+
+

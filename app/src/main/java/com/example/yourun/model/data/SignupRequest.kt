@@ -1,6 +1,5 @@
 package com.example.yourun.model.data
 
-
 // 회원가입 Step 1 요청 (이메일 & 비밀번호)
 data class SignUpRequest1(
     val email: String,
@@ -26,4 +25,3 @@ data class ApiResponse<T>(
     val status: Int,
     val message: String,
     val data: T? = null
-)
