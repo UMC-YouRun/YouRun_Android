@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,7 @@ class RunningFragment : Fragment() {
 
         mapView = view.findViewById(R.id.kakao_map)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        setupMapView()
 
         val topBarView = view.findViewById<View>(R.id.before_running_top_bar)
         val titleTextView = topBarView.findViewById<TextView>(R.id.txt_top_bar)
@@ -65,8 +67,6 @@ class RunningFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
-
-        setupMapView()
         /* 메이트 데이터를 받으면 메이트 선택 뷰 이미지 변경
            러닝 시간 설정 버튼 활성화
            시작하기 버튼은 모든 데이터가 받아졌을 때 동작
@@ -77,16 +77,24 @@ class RunningFragment : Fragment() {
     }
 
     private fun setupMapView() {
+        Log.d("KakaoMap", "setupMapView() 호출됨")
         mapView.start(
             object : MapLifeCycleCallback() {
-                override fun onMapResumed() {}
-                override fun onMapDestroy() {}
+                override fun onMapResumed() {
+                    Log.d("KakaoMap", "onMapResumed() 호출됨")
+                    super.onMapResumed()
+                }
+                override fun onMapDestroy() {
+                    Log.d("KakaoMap", "onMapDestroy() 호출됨")
+                }
                 override fun onMapError(error: Exception?) {
                     error?.printStackTrace()
+                    Log.e("KakaoMap", "맵 로딩 오류 발생: ${error?.message}")
                 }
             },
             object : KakaoMapReadyCallback() {
                 override fun onMapReady(kakaoMap: KakaoMap) {
+                    Log.d("KakaoMap", "onMapReady() 호출됨")
                     showCurrentLocation(kakaoMap)
                 }
             }
@@ -165,7 +173,11 @@ class RunningFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        mapView.resume()
+        if (::mapView.isInitialized) {
+            mapView.resume()
+        } else {
+            Log.e("KakaoMap", "mapView가 초기화되지 않았습니다.")
+        }
     }
 
     override fun onPause() {

@@ -15,7 +15,6 @@ import com.example.yourun.view.fragments.MateFragment
 import com.example.yourun.view.fragments.MyRunFragment
 import com.example.yourun.view.fragments.RunningFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.widget.Toast

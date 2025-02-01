@@ -10,7 +10,6 @@ val localProperties = Properties().apply {
     load(rootProject.file("local.properties").inputStream())
 }
 val kakaoAppKey = localProperties.getProperty("KAKAO_NATIVE_APP_KEY") ?: ""
-
 val baseUrl = localProperties.getProperty("BASE_URL") ?: ""
 
 android {
@@ -28,6 +27,7 @@ android {
 
         buildConfigField("String", "KAKAO_NATIVE_APP_KEY", "\"$kakaoAppKey\"")
         buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
+        manifestPlaceholders["KAKAO_NATIVE_APP_KEY"] = kakaoAppKey
     }
 
     buildTypes {
