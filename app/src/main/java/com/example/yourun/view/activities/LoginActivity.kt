@@ -11,6 +11,7 @@ import android.view.MotionEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityLoginBinding
 import com.example.yourun.model.data.LoginRequest
@@ -150,3 +151,4 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
+
