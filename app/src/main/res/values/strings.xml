@@ -105,7 +105,6 @@
     <string name="tv_challenge3">CREW</string>
     <string name="tv_challenge4">누가 누가 더 꾸준히 달리나 도전!</string>
     <string name="tv_challenge5">SOLO</string>
-    <string name="btn_choice">선택하기</string>
     <string name="tv_solo_challenge1">SOLO CHALLENGE!</string>
     <string name="tv_solo_challenge2">매일 꾸준히 러닝</string>
     <string name="tv_challenge3_distance">거리 설정</string>
@@ -123,7 +122,6 @@
     <string name="tv_crew_challenge3">크루명</string>
     <string name="tv_crew_challenge4">띄어쓰기 없이 한글 2~5자만 입력 가능해요</string>
     <string name="tv_crew_challenge5">동작구사슴 크루와 \n1월 13일 ~ 1월 15일(3일 동안) \n최대 러닝하기!</string>
-    <string name="test_btn">성향 테스트 다시 하기</string>
     <string name="tv_challenge">챌린지</string>
     <string name="tv_crew_slogan">어차피 승리는 우리 것</string>
     <string name="tv_crew_name">관악구\n사슴 크루</string>

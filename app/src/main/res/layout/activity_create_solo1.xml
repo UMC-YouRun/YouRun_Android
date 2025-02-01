@@ -218,8 +218,7 @@
         android:layout_width="360dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="504dp"
+        android:layout_marginTop="452dp"
         android:background="@drawable/btn_create"
         app:layout_constraintStart_toStartOf="@id/create_checkbox"
         app:layout_constraintTop_toTopOf="@id/create_checkbox" />

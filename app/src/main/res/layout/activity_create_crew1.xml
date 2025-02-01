@@ -40,11 +40,11 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="28dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="45dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/ic_calendar" />
-
 
 
 
@@ -230,10 +230,13 @@
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="450dp"
+        android:layout_marginTop="280dp"
         android:background="@drawable/btn_create"
         app:layout_constraintStart_toStartOf="@id/tv_date"
         app:layout_constraintTop_toTopOf="@id/tv_date" />
+
+
+
 
     <include
         layout="@layout/bottom_navigation" />

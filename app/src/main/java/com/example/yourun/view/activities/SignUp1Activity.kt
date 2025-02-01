@@ -203,12 +203,14 @@ class SignUp1Activity : AppCompatActivity() {
                             text = "사용 가능한 이메일입니다."
                             setTextColor(ContextCompat.getColor(this@SignUp1Activity, R.color.purple))
                         }
+                        binding.btnNext.isEnabled = true
                     } else {
                         // 이미 존재하는 이메일인 경우
                         binding.tvEmailDuplicate.apply {
                             text = "이미 사용 중인 이메일입니다."
                             setTextColor(ContextCompat.getColor(this@SignUp1Activity, R.color.red))
                         }
+                        binding.btnNext.isEnabled = false
                     }
                 }
             } catch (e: Exception) {
