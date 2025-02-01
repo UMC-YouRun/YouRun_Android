@@ -1,13 +1,11 @@
 package com.example.yourun.view.activities
 
 import android.os.Bundle
-import android.text.Spannable
 import android.text.SpannableString
 import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
 import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -17,7 +15,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityRunningResultBinding
 import com.example.yourun.model.data.RunningResultRequest
-import com.example.yourun.model.network.ApiClient
 import com.example.yourun.viewmodel.RunningViewModel
 import com.example.yourun.viewmodel.RunningViewModelFactory
 import kotlinx.coroutines.launch
