@@ -1,3 +1,4 @@
+import com.android.build.api.dsl.Packaging
 import java.util.Properties
 
 plugins {
@@ -10,6 +11,8 @@ val localProperties = Properties().apply {
     load(rootProject.file("local.properties").inputStream())
 }
 val kakaoAppKey = localProperties.getProperty("KAKAO_NATIVE_APP_KEY") ?: ""
+
+val baseUrl = localProperties.getProperty("BASE_URL") ?: ""
 
 android {
     namespace = "com.example.yourun"
@@ -25,6 +28,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "KAKAO_NATIVE_APP_KEY", "\"$kakaoAppKey\"")
+        buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
     }
 
     buildTypes {
@@ -48,6 +52,7 @@ android {
         dataBinding = true
         viewBinding = true
     }
+    packaging.resources.excludes.add("META-INF/INDEX.LIST")
 }
 
 dependencies {
@@ -62,8 +67,13 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation("com.google.android.material:material:1.9.0")
     implementation("com.airbnb.android:lottie:6.0.0")
-    implementation ("com.kakao.sdk:v2-all:2.20.6")
-    implementation ("com.kakao.maps.open:android:2.12.8")
+    implementation("com.kakao.sdk:v2-all:2.20.6")
+    implementation("com.kakao.maps.open:android:2.12.8")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    implementation(libs.firebase.appdistribution.gradle)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
