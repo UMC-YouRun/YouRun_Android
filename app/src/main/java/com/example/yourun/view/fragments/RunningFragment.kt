@@ -1,7 +1,10 @@
 package com.example.yourun.view.fragments
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
@@ -101,6 +104,15 @@ class RunningFragment : Fragment() {
         )
     }
 
+    private fun vectorToBitmap(context: Context, drawableId: Int): Bitmap {
+        val drawable = ContextCompat.getDrawable(context, drawableId) ?: return Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+        val bitmap = Bitmap.createBitmap(drawable.intrinsicWidth, drawable.intrinsicHeight, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.width, canvas.height)
+        drawable.draw(canvas)
+        return bitmap
+    }
+
     private fun showCurrentLocation(kakaoMap: KakaoMap) {
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
@@ -121,7 +133,8 @@ class RunningFragment : Fragment() {
                             kakaoMap.moveCamera(cameraUpdate)
 
                             // 1. LabelStyles 생성하기 - Icon 이미지 하나만 있는 스타일
-                            val labelStyle = LabelStyle.from(R.drawable.ic_map_label)
+                            val bitmap = vectorToBitmap(requireContext(), R.drawable.ic_map_label)
+                            val labelStyle = LabelStyle.from(bitmap)
                             val labelStyles = LabelStyles.from(labelStyle)
 
                             // 2. LabelOptions 생성하기
