@@ -30,10 +30,7 @@ class CreateCrew1Activity : AppCompatActivity () {
         setContentView(binding.root)
 
 
-        binding.nextBtn.setOnClickListener{
-            val intent= Intent(this, CreateCrew2Activity::class.java)
-            startActivity(intent)
-        }
+
 
 
         weekCalendarGrid = findViewById(R.id.weekCalendarGrid)
@@ -235,5 +232,10 @@ class CreateCrew1Activity : AppCompatActivity () {
                 }
             }
         }
+        binding.nextBtn.setOnClickListener{
+            val intent= Intent(this, CreateCrew2Activity::class.java)
+            startActivity(intent)
+        }
     }
+
 }

@@ -229,8 +229,7 @@
         android:layout_width="360dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="280dp"
+        android:layout_marginTop="235dp"
         android:background="@drawable/btn_create"
         app:layout_constraintStart_toStartOf="@id/tv_date"
         app:layout_constraintTop_toTopOf="@id/tv_date" />
