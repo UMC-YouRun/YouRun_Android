@@ -38,6 +38,13 @@
 
         <activity
             android:name=".view.activities.LoginActivity"
+            android:exported="true"
+            android:theme="@style/Theme.YouRun" >
+
+        </activity>
+
+        <activity
+            android:name=".view.activities.QuestionActivity"
             android:exported="true" >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -95,11 +102,9 @@
             android:name=".view.activities.CreateCrew2Activity"
             android:exported="true" />
 
-        <activity 
+        <activity
             android:name=".view.activities.CalendarActivity"
-            android:exported="true">
-          
-        </activity>
+            android:exported="true"/>
       
         <activity
             android:name=".view.activities.MyRun1Activity"

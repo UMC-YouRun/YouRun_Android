@@ -84,25 +84,30 @@ class LoginActivity : AppCompatActivity() {
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
             } else {
-                login(email, password)
+                //login(email, password)
             }
         }
     }
 
-    private fun login(email: String, password: String) {
+    /*private fun login(email: String, password: String) {
         val loginRequest = LoginRequest(email, password)
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = ApiClient.getApiService(this@LoginActivity).login(loginRequest)
+
                 withContext(Dispatchers.Main) {
-                    if (response.status == 200 && response.data != null) {
-                        // 로그인 성공 시 처리
-                        handleLoginSuccess(response.data)
+                    if (response.isSuccessful) {
+                        val body = response.body()
+                        if (body?.status == 200 && body.data != null) {
+                            handleLoginSuccess(body.data) // 로그인 성공 처리
+                        } else {
+                            val errorMessage = body?.message ?: "알 수 없는 오류 발생"
+                            Toast.makeText(this@LoginActivity, "로그인 실패: $errorMessage", Toast.LENGTH_SHORT).show()
+                        }
                     } else {
-                        // 로그인 실패 시
-                        val errorMessage = response.message ?: "알 수 없는 오류가 발생했습니다."
-                        Toast.makeText(this@LoginActivity, "로그인 실패: $errorMessage", Toast.LENGTH_SHORT).show()
+                        val errorBody = response.errorBody()?.string() ?: "서버 오류 발생"
+                        Toast.makeText(this@LoginActivity, "로그인 실패: $errorBody", Toast.LENGTH_SHORT).show()
                     }
                 }
             } catch (e: Exception) {
@@ -113,7 +118,7 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         }
-    }
+    }*/
 
     private fun handleLoginSuccess(responseData: LoginResponse?) {
         // 로그인 응답 데이터에서 액세스 토큰 가져오기

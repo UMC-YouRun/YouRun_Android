@@ -9,9 +9,9 @@
         android:background="@drawable/bgd_home_challenge" />
 
     <TextView
+        android:id="@+id/crewAndMateTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/crew"
         android:fontFamily="@font/roboto_semibold"
         android:textSize="18sp"
         android:letterSpacing="-0.05"
@@ -26,9 +26,9 @@
         android:layout_marginStart="15dp" />
 
     <TextView
+        android:id="@+id/startDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:textStyle="normal"
         android:textSize="11sp"
         android:letterSpacing="-0.05"
@@ -36,9 +36,9 @@
         android:layout_marginStart="18dp" />
 
     <TextView
+        android:id="@+id/dayCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:fontFamily="@font/roboto_semibold"
         android:textSize="11sp"
         android:letterSpacing="-0.05"
@@ -46,6 +46,18 @@
         android:layout_marginStart="78dp" />
 
     <TextView
+        android:id="@+id/challengePeriod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="4sp"
+        android:layout_marginTop="90dp"
+        android:layout_marginStart="15dp" />
+
+    <TextView
+        android:id="@+id/challengeDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/max_running"
@@ -58,18 +70,19 @@
         android:layout_marginBottom="13dp" />
     
     <View
+        android:id="@+id/bgd_user_profile"
         android:layout_width="66dp"
         android:layout_height="66dp"
         android:background="@drawable/bgd_home_challenge_char"
         android:layout_marginTop="26dp"
-        android:layout_marginStart="245dp"/>
+        android:layout_marginStart="245dp" />
 
     <ImageView
         android:id="@+id/img_user1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/img_user"
-        android:src="@drawable/img_character_face"
+        android:src="@drawable/img_circle_profile_facemaker"
         android:layout_marginTop="32dp"
         android:layout_marginStart="250dp"
         android:visibility="gone" />
@@ -79,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/img_user"
-        android:src="@drawable/img_character_face"
+        android:src="@drawable/img_circle_profile_facemaker"
         android:layout_marginTop="32dp"
         android:layout_marginStart="280dp"
         android:visibility="gone" />
@@ -89,7 +102,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/img_user"
-        android:src="@drawable/img_character_face"
+        android:src="@drawable/img_circle_profile_facemaker"
         android:layout_marginTop="62dp"
         android:layout_marginStart="250dp"
         android:visibility="gone" />
@@ -99,7 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/img_user"
-        android:src="@drawable/img_character_face"
+        android:src="@drawable/img_circle_profile_facemaker"
         android:layout_marginTop="62dp"
         android:layout_marginStart="280dp"
         android:visibility="gone" />
