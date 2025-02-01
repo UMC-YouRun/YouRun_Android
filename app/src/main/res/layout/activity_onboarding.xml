@@ -6,5 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="false"
+        app:lottie_fileName="@string/animation_file"
+        android:scaleType="centerCrop"/>
+
 
 </LinearLayout>

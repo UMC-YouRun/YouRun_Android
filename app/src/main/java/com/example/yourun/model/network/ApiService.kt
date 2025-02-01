@@ -26,6 +26,7 @@ interface ApiService {
     suspend fun checkEmailDuplicate(@Query("email") email: String): EmailduplicateResponse
 }
 
+
 data class ApiResponse<T>(
     val status: Int,
     val message: String,
