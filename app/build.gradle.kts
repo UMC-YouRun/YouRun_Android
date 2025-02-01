@@ -83,6 +83,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.9.1")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
     implementation(libs.firebase.appdistribution.gradle)
+    implementation("androidx.fragment:fragment-ktx:1.8.5")
     implementation(libs.places)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
