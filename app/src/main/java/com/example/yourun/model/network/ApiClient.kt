@@ -12,8 +12,6 @@ import java.util.concurrent.TimeUnit
 const val BASE_URL = BuildConfig.BASE_URL
 
 object ApiClient {
-
-    // Context를 매개변수로 받아 사용
     fun getApiService(context: Context): ApiService {
         val client = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
@@ -22,12 +20,12 @@ object ApiClient {
             .apply {
                 val logging = HttpLoggingInterceptor()
                 logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-                addInterceptor(logging)  // 로그 인터셉터 추가
+                addInterceptor(logging)
             }
             .addInterceptor { chain ->
-                val token = getAccessTokenFromSharedPreferences(context) // SharedPreferences에서 토큰 가져오기
+                val token = getAccessTokenFromSharedPreferences(context)
                 val request = chain.request().newBuilder()
-                    .addHeader("Authorization", "Bearer $token") // Authorization 헤더에 토큰 추가
+                    .addHeader("Authorization", "Bearer $token")
                     .build()
                 chain.proceed(request)
             }

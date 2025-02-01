@@ -40,11 +40,11 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginTop="28dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="45dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/ic_calendar" />
-
 
 
 
@@ -89,10 +89,10 @@
         android:id="@+id/tv_crew2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="95dp"
+        android:text="@string/tv_crew_challenge4"
         android:textColor="@color/gray"
         android:textSize="11sp"
-        android:text="@string/tv_crew_challenge4"
         app:layout_constraintStart_toStartOf="@id/tv_crew1"
         app:layout_constraintTop_toTopOf="@id/tv_crew1" />
 
@@ -100,7 +100,7 @@
         android:id="@+id/et_crew_name"
         android:layout_width="340dp"
         android:layout_height="49dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/bg_edittext_rounded_corner"
         android:padding="10dp"
         android:textColor="@color/black"
@@ -108,114 +108,135 @@
         app:layout_constraintStart_toStartOf="@id/tv_crew2"
         app:layout_constraintTop_toBottomOf="@id/tv_crew2" />
 
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/crew_name2"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/et_crew_name"
+        app:layout_constraintTop_toBottomOf="@+id/et_crew_name" />
+
+
+    <TextView
+        android:id="@+id/tv_crew3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/crew_name3"
+        android:textColor="@color/gray"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@id/et_crew_name"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <EditText
+        android:id="@+id/et_crew"
+        android:layout_width="340dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_edittext_rounded_corner"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/tv_crew3"
+        app:layout_constraintTop_toBottomOf="@id/tv_crew3" />
+
+
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="40dp"
         android:text="@string/tv_challenge5_date"
-        android:textStyle="bold"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/tv_crew2"
-        app:layout_constraintTop_toBottomOf="@id/tv_crew2"/>
+        app:layout_constraintTop_toBottomOf="@+id/et_crew" />
 
 
     <LinearLayout
         android:id="@+id/calender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="340dp"
         android:orientation="vertical"
         android:padding="4dp"
+        android:useDefaultMargins="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:useDefaultMargins="false">
+        app:layout_constraintTop_toBottomOf="@+id/tv_date">
 
-    <!-- 상단 년/월 표시 리니어레이아웃 -->
-    <LinearLayout
-        android:id="@+id/monthYearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp">
-
-        <!-- 현재 년/월 표시 -->
-        <TextView
-            android:id="@+id/monthYearText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="2024년 1월"
-            android:textColor="@color/main_color"
-            android:textSize="14sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <!-- 요일 표시 (날짜 앞에 나오는 일, 월, 화 등) -->
-    <LinearLayout
-        android:id="@+id/weekdayLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="8dp"
-        android:useDefaultMargins="false">
-        <!-- 요일이 들어갈 TextView들을 동적으로 추가할 예정 -->
-    </LinearLayout>
-
-    <!-- 주간 달력 -->
-    <LinearLayout
-        android:id="@+id/dragBarContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="0dp"
-        android:useDefaultMargins="false">
-
-        <!-- 주간 달력 그리드 -->
-        <GridLayout
-            android:id="@+id/weekCalendarGrid"
+        <!-- 상단 년/월 표시 리니어레이아웃 -->
+        <LinearLayout
+            android:id="@+id/monthYearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:columnCount="7"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <!-- 현재 년/월 표시 -->
+            <TextView
+                android:id="@+id/monthYearText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@string/date"
+                android:textColor="@color/main_color"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- 요일 표시 (날짜 앞에 나오는 일, 월, 화 등) -->
+        <LinearLayout
+            android:id="@+id/weekdayLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="horizontal"
             android:padding="8dp"
             android:useDefaultMargins="false">
-        </GridLayout>
+            <!-- 요일이 들어갈 TextView들을 동적으로 추가할 예정 -->
+        </LinearLayout>
 
-</LinearLayout>
+        <!-- 주간 달력 -->
+        <LinearLayout
+            android:id="@+id/dragBarContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="0dp"
+            android:useDefaultMargins="false">
+
+            <!-- 주간 달력 그리드 -->
+            <GridLayout
+                android:id="@+id/weekCalendarGrid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="7"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:useDefaultMargins="false"></GridLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tv_selected_dates"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="330dp"
-        android:gravity="center"
-        android:text="@string/tv_crew_challenge5"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/tv_date"
-        app:layout_constraintTop_toBottomOf="@id/tv_date" />
-
-
-    <Button
+    <ImageButton
         android:id="@id/next_btn"
         android:layout_width="360dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="450dp"
-        android:background="@drawable/rounded_button"
-        android:gravity="center"
-        android:text="@string/btn_create"
-        android:textStyle="bold"
+        android:layout_marginTop="280dp"
+        android:background="@drawable/btn_create"
         app:layout_constraintStart_toStartOf="@id/tv_date"
         app:layout_constraintTop_toTopOf="@id/tv_date" />
+
+
+
 
     <include
         layout="@layout/bottom_navigation" />
@@ -229,3 +250,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

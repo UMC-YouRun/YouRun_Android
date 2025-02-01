@@ -30,5 +30,6 @@
     <color name="txt_running_color">#010101</color>
     <color name="btn_selected">#FFF1CD</color>
     <color name="brown">#B86300</color>
+    <color name="red">#E75050</color>
 
 </resources>
