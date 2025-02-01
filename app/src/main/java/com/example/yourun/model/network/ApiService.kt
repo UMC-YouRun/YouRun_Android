@@ -1,7 +1,11 @@
 package com.example.yourun.model.network
 
-import retrofit2.Call
-import retrofit2.Response
+import com.example.yourun.model.data.EmailduplicateResponse
+import com.example.yourun.model.data.LoginRequest
+import com.example.yourun.model.data.LoginResponse
+import com.example.yourun.model.data.SignUpRequest1
+import com.example.yourun.model.data.SignUpRequest3
+import com.example.yourun.model.data.SignUpResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
 import retrofit2.http.Query

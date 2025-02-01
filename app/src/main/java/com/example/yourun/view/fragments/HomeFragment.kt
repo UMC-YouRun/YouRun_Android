@@ -4,134 +4,166 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageButton
-import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.yourun.R
+import com.example.yourun.databinding.FragmentHomeBinding
+import com.example.yourun.model.data.UserCrewChallengeInfo
+import com.example.yourun.model.data.UserSoloChallengeInfo
+import com.example.yourun.model.network.ApiClient
+import com.example.yourun.model.repository.HomeChallengeRepository
+import com.example.yourun.view.custom.CustomHomeChallenge
+import com.example.yourun.viewmodel.HomeViewModel
+import com.example.yourun.viewmodel.HomeViewModelFactory
 
 class HomeFragment : Fragment() {
+
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel: HomeViewModel by viewModels {
+        HomeViewModelFactory(HomeChallengeRepository(ApiClient.getHomeApiService(requireContext())),
+            requireActivity().application)
+    }
+
+    private var isCrewSelected = true // 초기값 : 크루 챌린지가 선택된 상태
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_home, container, false)
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this  // LiveData 연동
+        binding.viewModel = viewModel  // XML에서 ViewModel 사용 가능
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val crewButton = view.findViewById<ImageButton>(R.id.btn_crew)
-        val soloButton = view.findViewById<ImageButton>(R.id.btn_solo)
-        var isPressed_crew = false
-        var isPressed_solo = false
+        // 서버에서 챌린지 데이터 가져오기, 처음 한 번 호출
+        viewModel.fetchHomeChallengeData()
 
-        crewButton.setOnClickListener {
-            if (isPressed_crew) {
-                crewButton.setImageResource(R.drawable.img_crew_btn_selected)
-                soloButton.setImageResource(R.drawable.img_solo_btn_unselected)
-            }
-            isPressed_crew = !isPressed_crew
+        viewModel.isPressedCrew.observe(viewLifecycleOwner) { isPressed ->
+            binding.btnCrew.setImageResource(
+                if (isPressed) R.drawable.img_crew_btn_selected else R.drawable.img_crew_btn_unselected
+            )
         }
 
-        soloButton.setOnClickListener {
-            if (isPressed_solo) {
-                soloButton.setImageResource(R.drawable.img_solo_btn_selected)
-                crewButton.setImageResource(R.drawable.img_crew_btn_unselected)
-            }
-            isPressed_solo = !isPressed_solo
+        viewModel.isPressedSolo.observe(viewLifecycleOwner) { isPressed ->
+            binding.btnSolo.setImageResource(
+                if (isPressed) R.drawable.img_solo_btn_selected else R.drawable.img_solo_btn_unselected
+            )
         }
 
-        val addChallengeButton = view.findViewById<ImageButton>(R.id.btn_add_challenge)
-        val challengeView = view.findViewById<FrameLayout>(R.id.main_challenge_frame)
-
-        addChallengeButton.setOnClickListener {
-            /* 서버 데이터 가져오기
-            fetchDataFromServer { data ->
-                // 커스텀 뷰 생성
-                val customView = CustomDataView(this).apply {
-                    setData(data) // 서버 데이터 설정
-                }
-                val customChallengeView = findViewById<CustomChallengeView>(R.id.customChallengeView)
-                customChallengeView.updateUsers(userImages)
-                // 추가적인 텍스트나 상태 업데이트 (예시)
-                customChallengeView.updateTexts("Team Alpha", "Max Running: 15km")
-                customChallengeView.updateChallengeState(R.drawable.ic_running)
-
-                // FrameLayout에 커스텀 뷰 추가
-                challengeView.removeView(addChallengeButton) // 기존 버튼 제거
-                challenge.addView(customView) // 커스텀 뷰 추가
-            } */
+        binding.btnCrew.setOnClickListener {
+            viewModel.toggleCrewButton()
+            isCrewSelected = true
+            updateChallengeView()
+        }
+        binding.btnSolo.setOnClickListener {
+            viewModel.toggleSoloButton()
+            isCrewSelected = false
+            updateChallengeView()
         }
 
+        // ViewModel의 챌린지 데이터 옵저빙
+        viewModel.challengeData.observe(viewLifecycleOwner) {
+            updateChallengeView() // 데이터 변경될 때 UI 업데이트
+        }
 
-        val userImages = listOf(
-            view.findViewById<ImageView>(R.id.img_user1),
-            view.findViewById<ImageView>(R.id.img_user2),
-            view.findViewById<ImageView>(R.id.img_user3),
-            view.findViewById<ImageView>(R.id.img_user4)
-        )
-
-        /* 서버 데이터 가져오기
-        fetchUserDataFromServer { users ->
-            // 유저 데이터에 따라 이미지 업데이트
-            userImages.forEachIndexed { index, imageView ->
-                if (index < users.size && users[index].isAvailable) {
-                    imageView.setImageResource(users[index].imageRes) // 유저 이미지 설정
-                    imageView.visibility = View.VISIBLE // 이미지 표시
-                } else {
-                    imageView.visibility = View.GONE // 유저가 없으면 숨김
-                }
-            }
-        } */
-
-        val mainConstraintLayout = view.findViewById<ConstraintLayout>(R.id.main_constraint_layout)
-        /* viewModel로 데이터 받아와서 item 추가하기
-        // ViewModel 데이터 관찰
-        viewModel.items.observe(viewLifecycleOwner, Observer { items ->
-            addItemsToBottom(constraintLayout, items.take(5)) // 최대 5개의 아이템 추가
-        })
-
-        // 서버 데이터 로드
-        viewModel.fetchDataFromServer() */
-
+        binding.btnAddChallenge.setOnClickListener {
+            // 챌린지 추가 화면 이동
+        }
     }
 
-    /* 메이트 아이템 추가하는 함수
-    private fun addItemsToBottom(constraintLayout: ConstraintLayout, items: List<UserData>) {
-        val inflater = LayoutInflater.from(requireContext())
-        var lastViewId = R.id.view_home_mate // 마지막 뷰의 ID
+    // 버튼 상태에 따라 챌린지 UI 업데이트
+    private fun updateChallengeView() {
+        val challengeData = viewModel.challengeData.value
+        if (isCrewSelected) {
+            challengeData?.crewChallenge?.let { replaceButtonWithCustomView(null, it) }
+        } else {
+            challengeData?.soloChallenge?.let { replaceButtonWithCustomView(it, null) }
+        }
+    }
 
-        items.forEach { user ->
-            // 아이템 레이아웃 Inflate
-            val itemView = inflater.inflate(R.layout.item_layout, constraintLayout, false)
-            itemView.id = View.generateViewId() // 고유 ID 설정
+    // ImageButton을 CustomHomeChallenge로 교체하는 함수
+    private fun replaceButtonWithCustomView(
+        soloChallenge: UserSoloChallengeInfo?,
+        crewChallenge: UserCrewChallengeInfo?
+    ) {
+        val parentLayout = binding.mainChallengeFrame
+        val btnAddChallenge = parentLayout.findViewById<ImageButton>(R.id.btnAddChallenge)
 
-            // 데이터 설정
-            itemView.findViewById<TextView>(R.id.idx_challenge_item).text = user.index
-            itemView.findViewById<TextView>(R.id.user_name).text = user.name
-            itemView.findViewById<TextView>(R.id.user_run_day).text = user.runDays
-            itemView.findViewById<TextView>(R.id.user_tag).text = user.tag
-            itemView.findViewById<ImageView>(R.id.img_user_profile).setImageResource(user.profileImage)
+        btnAddChallenge?.let {
+            parentLayout.removeView(it)
+        } // 기존 뷰 제거
 
-            // ConstraintLayout에 추가
-            constraintLayout.addView(itemView)
+        val customView = CustomHomeChallenge(requireContext())
 
-            // ConstraintSet으로 레이아웃 배치
-            val constraintSet = ConstraintSet()
-            constraintSet.clone(constraintLayout)
+        if (soloChallenge != null) {
+            customView.updateSoloTitle(soloChallenge.challengeMateNickName)
+            // Solo 챌린지 데이터 적용
+            customView.updateDates(
+                startDate = soloChallenge.soloStartDate,
+                dayCount = soloChallenge.soloDayCount
+            )
+            customView.updatePeriodSolo(soloChallenge.challengePeriod)
+            customView.updateDistance(soloChallenge.challengeDistance)
+            customView.updateSoloImage(soloChallenge.challengeMateTendency)
+        }
 
-            // 이전 뷰 아래에 배치
-            constraintSet.connect(itemView.id, ConstraintSet.TOP, lastViewId, ConstraintSet.BOTTOM, 16)
-            constraintSet.connect(itemView.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 16)
-            constraintSet.connect(itemView.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 16)
+        if (crewChallenge != null) {
+            // 크루 이름 색상 변경 및 "크루" 추가
+            customView.updateCrewTitle(crewChallenge.crewName)
+            // Crew 챌린지 데이터 적용
+            customView.updateDates(
+                startDate = crewChallenge.crewStartDate,
+                dayCount = crewChallenge.crewDayCount
+            )
+            customView.updatePeriodCrew(crewChallenge.challengePeriod)
 
-            constraintSet.applyTo(constraintLayout)
+            // 크루원 성향에 따라 이미지 설정
+            val crewTendencies = crewChallenge.myParticipantIdsInfo.map { it.memberTendency }
+            customView.updateCrewImages(crewTendencies)
+        }
 
-            // 마지막 뷰 ID 업데이트
-            lastViewId = itemView.id
-        } */
+        // Solo 챌린지 상태 아이콘 설정
+        val soloChallengeLevel = when (soloChallenge?.status) {
+            "PENDING" -> 0
+            "IN_PROGRESS" -> 1
+            "COMPLETED" -> 2
+            else -> 0
+        }
+
+        // Crew 챌린지 상태 아이콘 설정
+        val crewChallengeLevel = when (crewChallenge?.challengeStatus) {
+            "PENDING" -> 0
+            "IN_PROGRESS" -> 1
+            "COMPLETED" -> 2
+            else -> 0
+        }
+
+        // 선택된 챌린지에 따라 적절한 아이콘 적용
+        if (soloChallenge != null) {
+            customView.updateChallengeState(soloChallengeLevel) // Solo 챌린지 아이콘 적용
+        } else if (crewChallenge != null) {
+            customView.updateChallengeState(crewChallengeLevel) // Crew 챌린지 아이콘 적용
+        }
+
+        parentLayout.addView(customView) // 새로운 커스텀 뷰 추가
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.fetchHomeChallengeData() // 다른 화면에서 돌아올 때 다시 요청
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
