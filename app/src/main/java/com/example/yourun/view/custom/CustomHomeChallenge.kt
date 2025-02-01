@@ -130,7 +130,7 @@ class CustomHomeChallenge @JvmOverloads constructor(
         imgUser1.isVisible = true
 
         // 크기 변경 (더 크게 표시)
-        val layoutParams = imgUser1.layoutParams as FrameLayout.LayoutParams
+        val layoutParams = imgUser1.layoutParams as LayoutParams
         layoutParams.width = 56.dpToPx(context)  // 기존보다 크게 조정
         layoutParams.height = 56.dpToPx(context)
 
