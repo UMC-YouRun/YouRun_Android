@@ -2,14 +2,15 @@ package com.example.yourun.model.network
 
 import android.content.Context
 import com.example.yourun.BuildConfig
-import com.google.firebase.appdistribution.gradle.ApiService
 import okhttp3.OkHttpClient
+import com.example.yourun.model.network.ApiService
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 const val BASE_URL = BuildConfig.BASE_URL
+
 
 object ApiClient {
     fun getApiService(context: Context): ApiService {

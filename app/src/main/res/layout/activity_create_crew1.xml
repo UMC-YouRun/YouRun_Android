@@ -225,7 +225,7 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@id/next_btn"
+        android:id="@+id/next_btn"
         android:layout_width="360dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
