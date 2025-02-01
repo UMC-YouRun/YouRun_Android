@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">YouRun</string>
     <string name="animation_file">onboarding_animation.json</string>
+    <string name="app_name">YouRun</string>
     <string name="login_tv1">만나지 않아도 함께 뛰어요!</string>
     <string name="login_tv2">이메일과 카카오톡으로 로그인 가능해요.</string>
     <string name="et_emil">이메일</string>
@@ -105,7 +105,6 @@
     <string name="tv_challenge3">CREW</string>
     <string name="tv_challenge4">누가 누가 더 꾸준히 달리나 도전!</string>
     <string name="tv_challenge5">SOLO</string>
-    <string name="btn_choice">선택하기</string>
     <string name="tv_solo_challenge1">SOLO CHALLENGE!</string>
     <string name="tv_solo_challenge2">매일 꾸준히 러닝</string>
     <string name="tv_challenge3_distance">거리 설정</string>
@@ -151,6 +150,7 @@
     <string name="calendar_text">얼마나 뛰었을까요?</string>
     <string name="defalut_date">nnnn년 n월 n일</string>
     <string name="date_check"> 유런과 3일째! </string>
+    <string name="tv_mate">메이트</string>
     <string name="today_run">오늘은 어떻게 뛰어볼까요?</string>
     <string name="select_mate">select_mate</string>
     <string name="running_time">running_time</string>
@@ -195,4 +195,8 @@
     <string name="default_crew_success">관악구 사슴 크루\n총 18km 러닝!</string>
     <string name="challenge_fail">챌린지 실패</string>
     <string name="crew_contribution">크루원 기여도</string>
+    <string name="date"> 2025년 1월 </string>
+    <string name="crew_name2">크루구호</string>
+    <string name="crew_name3">띄어쓰기 포함 한글 3~12자만 입력 가능해요</string>
+
 </resources>

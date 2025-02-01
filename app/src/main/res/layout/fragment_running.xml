@@ -42,20 +42,30 @@
 
     <FrameLayout
         android:id="@+id/running_map_frame"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/today_run"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        android:clipChildren="true"
+        android:clipToOutline="true">
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="268dp"
-            android:background="@drawable/rounded_top_corners_map"
-            android:layout_marginTop="25dp"
+        <FrameLayout
+            android:id="@+id/map_container"
+            android:layout_width="match_parent"
+            android:layout_height="264dp"
+            android:layout_marginTop="26dp"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp" />
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/rounded_top_corners_map"
+            android:clipToOutline="true">
+
+            <com.kakao.vectormap.MapView
+                android:id="@+id/kakao_map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
 
         <View
             android:id="@+id/bgd_mate_select"
@@ -74,7 +84,7 @@
             android:contentDescription="@string/mate_profile"
             android:src="@drawable/bgd_mate_profile"
             android:layout_marginTop="288dp"
-            android:layout_marginStart="36dp" />
+            android:layout_marginStart="32dp" />
 
         <ImageView
             android:id="@+id/img_question_mark"
@@ -83,7 +93,7 @@
             android:contentDescription="@string/question_mark"
             android:src="@drawable/img_question_mark"
             android:layout_marginTop="302dp"
-            android:layout_marginStart="58dp" />
+            android:layout_marginStart="52dp" />
 
         <TextView
             android:layout_width="wrap_content"
