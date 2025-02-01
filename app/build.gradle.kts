@@ -28,6 +28,10 @@ android {
         buildConfigField("String", "KAKAO_NATIVE_APP_KEY", "\"$kakaoAppKey\"")
         buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
         manifestPlaceholders["KAKAO_NATIVE_APP_KEY"] = kakaoAppKey
+
+        ndk {
+            abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64") // 카카오맵 SDK를 위한 네이티브 라이브러리
+        }
     }
 
     buildTypes {
