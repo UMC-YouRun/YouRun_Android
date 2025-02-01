@@ -11,7 +11,6 @@ import java.util.concurrent.TimeUnit
 
 const val BASE_URL = BuildConfig.BASE_URL
 
-
 object ApiClient {
 
     private var retrofit: Retrofit? = null
@@ -51,6 +50,10 @@ object ApiClient {
 
     fun getHomeApiService(context: Context): HomeApiService {
         return getRetrofit(context).create(HomeApiService::class.java)
+    }
+
+    fun getRunningApiService(context: Context): RunningApiService {
+        return getRetrofit(context).create(RunningApiService::class.java)
     }
 
     fun getAccessTokenFromSharedPreferences(context: Context): String? {

@@ -53,11 +53,6 @@
         </intent-filter>
         </activity>
 
-       <activity
-                android:name=".view.activities.QuestionActivity"
-                android:exported="true">
-       </activity>
-
         <activity
             android:name=".view.activities.ResultActivity"
             android:exported="true"/>

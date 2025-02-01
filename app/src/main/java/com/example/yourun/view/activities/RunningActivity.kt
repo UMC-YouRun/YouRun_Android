@@ -74,5 +74,14 @@ class RunningActivity : AppCompatActivity() {
             playPauseButton.isSelected = !playPauseButton.isSelected
         }
 
+        /* val intent = Intent(this, RunningResultActivity::class.java).apply {
+            putExtra("startTime", startTime)
+            putExtra("endTime", endTime)
+            putExtra("totalDistance", totalDistance)
+            putExtra("totalTime", totalTime)
+            putExtra("mateName", mateName)
+        }
+        startActivity(intent) */
+
     }
 }
