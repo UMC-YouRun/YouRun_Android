@@ -122,6 +122,7 @@
     <string name="tv_crew_challenge3">크루명</string>
     <string name="tv_crew_challenge4">띄어쓰기 없이 한글 2~5자만 입력 가능해요</string>
     <string name="tv_crew_challenge5">동작구사슴 크루와 \n1월 13일 ~ 1월 15일(3일 동안) \n최대 러닝하기!</string>
+    <string name="test_btn">성향 테스트 다시 하기</string>
     <string name="tv_challenge">챌린지</string>
     <string name="tv_crew_slogan">어차피 승리는 우리 것</string>
     <string name="tv_crew_name">관악구\n사슴 크루</string>
@@ -197,6 +198,5 @@
     <string name="date"> 2025년 1월 </string>
     <string name="crew_name2">크루구호</string>
     <string name="crew_name3">띄어쓰기 포함 한글 3~12자만 입력 가능해요</string>
-
 
 </resources>
