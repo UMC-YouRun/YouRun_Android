@@ -1,8 +1,15 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
 }
+
+val localProperties = Properties().apply {
+    load(rootProject.file("local.properties").inputStream())
+}
+val baseUrl = localProperties.getProperty("BASE_URL", "")
 
 android {
     namespace = "com.example.yourun"
@@ -16,6 +23,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+
+        buildConfigField("String", "BASE_URL", "\"$baseUrl\"")
     }
 
     buildTypes {
@@ -27,6 +37,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -42,11 +53,10 @@ android {
 }
 
 dependencies {
-
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
-    implementation ("androidx.recyclerview:recyclerview:1.3.1")
+    implementation("androidx.recyclerview:recyclerview:1.3.1")
     implementation("androidx.viewpager2:viewpager2:1.1.0-beta01")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("androidx.core:core:1.12.0")
     implementation(libs.androidx.lifecycle.runtime.ktx.v262)
     implementation(libs.androidx.appcompat)
@@ -55,5 +65,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.airbnb.android:lottie:6.0.0")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
 }
+

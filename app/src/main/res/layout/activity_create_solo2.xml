@@ -128,8 +128,7 @@
             android:layout_height="48dp"
             android:layout_margin="16dp"
             android:layout_marginTop="80dp"
-            android:background="@drawable/btn_next"
-            android:text="@string/btn_check"
+            android:background="@drawable/btn_check"
             android:textColor="@color/black"
             android:textSize="16sp" />
     </LinearLayout>
@@ -142,3 +141,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

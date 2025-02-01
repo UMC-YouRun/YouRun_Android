@@ -122,25 +122,12 @@
             android:layout_width="330dp"
             android:layout_height="47dp"
             android:layout_marginTop="200dp"
-            android:background="@drawable/bg_gray_box"
+            android:background="@drawable/btn_test_again"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imageView"
-            android:importantForAccessibility="no"/>
-
-        <TextView
-            android:id="@+id/tv_myrun_test_again"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="test_btn"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/imageButton"
-            app:layout_constraintStart_toStartOf="@+id/imageButton"
-            app:layout_constraintTop_toTopOf="@+id/imageButton" />
+            />
 
 
         <ImageView
@@ -259,5 +246,8 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include
+        layout="@layout/bottom_navigation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
