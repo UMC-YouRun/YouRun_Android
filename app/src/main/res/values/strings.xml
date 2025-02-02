@@ -198,5 +198,9 @@
     <string name="date"> 2025년 1월 </string>
     <string name="crew_name2">크루구호</string>
     <string name="crew_name3">띄어쓰기 포함 한글 3~12자만 입력 가능해요</string>
+    <string name="minute_15">15분</string>
+    <string name="minute_30">30분</string>
+    <string name="minute_45">45분</string>
+    <string name="minute_60">60분</string>
 
 </resources>

@@ -3,14 +3,12 @@ package com.example.yourun.model.network
 import android.content.Context
 import com.example.yourun.BuildConfig
 import okhttp3.OkHttpClient
-import com.example.yourun.model.network.ApiService
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 const val BASE_URL = BuildConfig.BASE_URL
-
 
 object ApiClient {
 
@@ -51,6 +49,10 @@ object ApiClient {
 
     fun getHomeApiService(context: Context): HomeApiService {
         return getRetrofit(context).create(HomeApiService::class.java)
+    }
+
+    fun getRunningApiService(context: Context): RunningApiService {
+        return getRetrofit(context).create(RunningApiService::class.java)
     }
 
     fun getAccessTokenFromSharedPreferences(context: Context): String? {
