@@ -29,7 +29,13 @@
         <activity
             android:name=".view.activities.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.YouRun" />
+            android:theme="@style/Theme.YouRun">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
 
         <activity
@@ -133,13 +139,8 @@
             android:theme="@style/Theme.YouRun">
         </activity>
 
-        <activity android:name=".view.activities.MateActivity"
+        <activity android:name=".view.fragments.MateActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

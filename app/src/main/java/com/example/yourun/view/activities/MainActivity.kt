@@ -1,6 +1,7 @@
 package com.example.yourun.view.activities
 
 import android.Manifest
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.ImageView
@@ -27,12 +28,22 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 온보딩 완료 여부 확인 후, 처음 실행이면 온보딩 화면으로 이동
-        /*if (!isOnboardingCompleted()) {
+        /*
+        // 온보딩 체크
+        if (!isOnboardingCompleted()) {
             startActivity(Intent(this, OnboardingActivity::class.java))
-            finish() // MainActivity 종료
+            finish()
             return
-        }*/
+        }
+
+        // 로그인 상태 체크
+        if (!isLoggedIn()) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
+         */
+
         setContentView(R.layout.activity_main)
 
         checkLocationPermission()
@@ -109,8 +120,14 @@ class MainActivity : AppCompatActivity() {
     // 온보딩 완료 여부를 SharedPreferences에서 확인
     private fun isOnboardingCompleted(): Boolean {
         val sharedPreferences: SharedPreferences =
-            getSharedPreferences("AppPrefs", MODE_PRIVATE)
+            getSharedPreferences("user_prefs", MODE_PRIVATE)
         return sharedPreferences.getBoolean("isOnboardingCompleted", false)
+    }
+
+    private fun isLoggedIn(): Boolean {
+        val sharedPreferences: SharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val token = sharedPreferences.getString("access_token", null)
+        return !token.isNullOrEmpty()
     }
 
     private fun checkLocationPermission() {
