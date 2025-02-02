@@ -18,13 +18,17 @@ class ResultActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.title = "러닝 성향 테스트 결과"
 
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        toolbar.navigationIcon = resources.getDrawable(R.drawable.ic_left, null)
-//        toolbar.setNavigationOnClickListener {
-//            finish()
-//        }
+        // FINAL_SCORE 받아오기
+        val finalScore = intent.getIntExtra("FINAL_SCORE", 0)
 
-        val resultType = "페이스 메이커" // 성향테스트 로직 반영해서 받아와야 함
+        // 점수에 따라 성향 결정
+        val resultType = when (finalScore) {
+            in 3..4 -> "스프린터"
+            in 5..6 -> "페이스 메이커"
+            in 7..8 -> "마라토너"
+            else -> "알 수 없음" // 예외 처리
+        }
+
         val resultData = ResultRepository.getResultByType(resultType)
 
         if (resultData != null) {
@@ -34,10 +38,9 @@ class ResultActivity : AppCompatActivity() {
             val resultCharacter: ImageView = findViewById(R.id.resultCharacter)
             val resultDescription: TextView = findViewById(R.id.resultDescription)
             val startRunningButton: Button = findViewById(R.id.startRunningButton)
-
-            // 데이터로 UI 업데이트
+            
             resultTitle.text = "러닝 성향 테스트 결과"
-            resultSubTitle.text = "${resultData.userName}은 ${resultData.userType}!"
+            resultSubTitle.text = "당신은 ${resultData.userType}!"
             resultCharacter.setImageResource(resultData.characterImageRes)
             resultDescription.text = resultData.description
 

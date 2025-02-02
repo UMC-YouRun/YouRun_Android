@@ -58,8 +58,8 @@ class SignUp1Activity : AppCompatActivity() {
 
             signUpViewModel.setSignUpData(email, password, passwordCheck)
 
-//            val intent = Intent(this, SignUp2Activity::class.java)
-//            startActivity(intent)
+            val intent = Intent(this, SignUp2Activity::class.java)
+            startActivity(intent)
         }
 
         binding.btnBack.setOnClickListener {
