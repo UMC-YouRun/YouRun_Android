@@ -7,10 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
-import com.example.yourun.model.data.Mate
+import com.example.yourun.model.data.MateData
 
 
-class MateAdapter(private val mateList: List<Mate>) :
+class MateAdapter(private val mateDataList: List<MateData>) :
     RecyclerView.Adapter<MateAdapter.MateViewHolder>() {
 
     class MateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -29,7 +29,7 @@ class MateAdapter(private val mateList: List<Mate>) :
     }
 
     override fun onBindViewHolder(holder: MateViewHolder, position: Int) {
-        val mate = mateList[position]
+        val mate = mateDataList[position]
         holder.rank.text = mate.rank.toString()
         holder.profileImage.setImageResource(mate.profileImageResId)
         holder.name.text = mate.name
@@ -39,6 +39,6 @@ class MateAdapter(private val mateList: List<Mate>) :
     }
 
     override fun getItemCount(): Int {
-        return mateList.size
+        return mateDataList.size
     }
 }

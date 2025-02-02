@@ -2,17 +2,25 @@ package com.example.yourun.view.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
 import com.example.yourun.view.adapters.MateAdapter
-import com.example.yourun.model.data.Mate
+import com.example.yourun.model.data.MateData
+import com.example.yourun.model.repository.MateRepository
+import com.example.yourun.model.network.ApiClient
+import com.example.yourun.model.network.ApiClient.getAccessTokenFromSharedPreferences
+import kotlinx.coroutines.launch
 
 class MateActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var mateAdapter: MateAdapter  // 어댑터 선언
-    private val mateList = mutableListOf<Mate>()  // 데이터 리스트
+    private lateinit var mateAdapter: MateAdapter
+    private val mateDataList = mutableListOf<MateData>()
+
+    // MateRepository 인스턴스 생성
+    private val mateRepository by lazy { MateRepository(ApiClient.getApiService(this)) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,25 +28,29 @@ class MateActivity : AppCompatActivity() {
 
         // RecyclerView 설정
         recyclerView = findViewById(R.id.recycler_view)
-        mateAdapter = MateAdapter(mateList)
-
+        mateAdapter = MateAdapter(mateDataList)
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this@MateActivity)
             adapter = mateAdapter
         }
 
-        // 데이터 로드 (샘플 데이터 추가)
+        // 데이터 로드 (API 요청)
         loadMates()
     }
 
     private fun loadMates() {
-        // 여기서 API 요청해서 데이터 불러오기
+        val token = getAccessTokenFromSharedPreferences(this)
 
-        mateList.add(Mate(1, R.drawable.img_profile_sprinter_purple, "청정원", 12, 20, +1))
-        mateList.add(Mate(2, R.drawable.img_profile_trailrunner_red, "루시", 27, 18, -1))
-        mateList.add(Mate(3, R.drawable.img_profile_sprinter_yellow, "루나", 28, 15, +2))
-
-        // 어댑터에 변경 사항 반영
-        mateAdapter.notifyDataSetChanged()
+        // 코루틴을 사용한 비동기 API 호출
+        lifecycleScope.launch {
+            try {
+                val mates = mateRepository.getMates(token!!)
+                mateDataList.addAll(mates)
+                mateAdapter.notifyDataSetChanged()  // 데이터 변경 사항 어댑터에 반영
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // 예외 발생 시 로그 출력 또는 사용자에게 에러 메시지 표시
+            }
+        }
     }
 }
