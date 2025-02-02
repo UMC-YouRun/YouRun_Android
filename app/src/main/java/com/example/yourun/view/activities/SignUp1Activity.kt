@@ -10,12 +10,14 @@ import android.util.Log
 import android.view.MotionEvent
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivitySignup1Binding
 import com.example.yourun.model.network.ApiClient
+import com.example.yourun.viewmodel.SignUpViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,6 +26,7 @@ import java.util.regex.Pattern
 
 class SignUp1Activity : AppCompatActivity() {
     private lateinit var binding: ActivitySignup1Binding
+    private val signUpViewModel: SignUpViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,8 +56,10 @@ class SignUp1Activity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            val intent = Intent(this, SignUp2Activity::class.java)
-            startActivity(intent)
+            signUpViewModel.setSignUpData(email, password, passwordCheck)
+
+//            val intent = Intent(this, SignUp2Activity::class.java)
+//            startActivity(intent)
         }
 
         binding.btnBack.setOnClickListener {

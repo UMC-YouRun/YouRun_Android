@@ -5,7 +5,6 @@ import com.example.yourun.model.data.ResultData
 
 object ResultRepository {
 
-    // 결과 데이터 목록
     val results = listOf(
         ResultData(
             userName = "제제님", // 나중에 실제 회원으로 할당받아야 하는 부분
@@ -27,7 +26,6 @@ object ResultRepository {
         )
     )
 
-    // 선택에 따라 타입 변경되게 수정
     fun getResultByType(type: String): ResultData? {
         return results.find { it.userType == type }
     }

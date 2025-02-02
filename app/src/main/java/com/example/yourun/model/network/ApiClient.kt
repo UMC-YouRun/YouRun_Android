@@ -2,7 +2,7 @@ package com.example.yourun.model.network
 
 import android.content.Context
 import com.example.yourun.BuildConfig
-import com.google.firebase.appdistribution.gradle.ApiService
+//import com.google.firebase.appdistribution.gradle.ApiService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
