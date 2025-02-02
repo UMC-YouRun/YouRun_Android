@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.drawable.GradientDrawable
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
@@ -32,6 +33,7 @@ import com.kakao.vectormap.camera.CameraUpdateFactory
 import com.kakao.vectormap.label.LabelOptions
 import com.kakao.vectormap.label.LabelStyle
 import com.kakao.vectormap.label.LabelStyles
+import org.w3c.dom.Text
 
 class RunningFragment : Fragment() {
 
@@ -48,6 +50,19 @@ class RunningFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        parentFragmentManager.setFragmentResultListener("requestKey", this) { _, bundle ->
+            val data = bundle.getString("target_time")
+
+            val timeTextView = view.findViewById<TextView>(R.id.txt_set_running_time)
+            timeTextView.text = data
+            val runningTimeSetView = view.findViewById<View>(R.id.running_time_set)
+            val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.custom_rounded_button)?.mutate()
+            drawable?.let {
+                (it as GradientDrawable).setColor(ContextCompat.getColor(requireContext(), R.color.btn_selected))
+                runningTimeSetView.background = it
+            }
+        }
 
         mapView = view.findViewById(R.id.kakao_map)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
