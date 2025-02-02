@@ -80,7 +80,6 @@ class RunningFragment : Fragment() {
     }
 
     private fun setupMapView() {
-        Log.d("KakaoMap", "setupMapView() 호출됨")
         mapView.start(
             object : MapLifeCycleCallback() {
                 override fun onMapResumed() {
@@ -92,12 +91,10 @@ class RunningFragment : Fragment() {
                 }
                 override fun onMapError(error: Exception?) {
                     error?.printStackTrace()
-                    Log.e("KakaoMap", "맵 로딩 오류 발생: ${error?.message}")
                 }
             },
             object : KakaoMapReadyCallback() {
                 override fun onMapReady(kakaoMap: KakaoMap) {
-                    Log.d("KakaoMap", "onMapReady() 호출됨")
                     showCurrentLocation(kakaoMap)
                 }
             }
@@ -186,11 +183,7 @@ class RunningFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (::mapView.isInitialized) {
-            mapView.resume()
-        } else {
-            Log.e("KakaoMap", "mapView가 초기화되지 않았습니다.")
-        }
+        mapView.resume()
     }
 
     override fun onPause() {

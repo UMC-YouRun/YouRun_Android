@@ -63,23 +63,31 @@
 
         </FrameLayout>
 
-        <View
-            android:id="@+id/map_view"
+        <FrameLayout
+            android:id="@id/map_container"
             android:layout_width="match_parent"
-            android:layout_height="277dp"
-            android:background="@drawable/rounded_corners_map"
+            android:layout_height="276dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             app:layout_constraintTop_toBottomOf="@id/speech_bubble_frame"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="22dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp" />
+            android:background="@drawable/rounded_corners_map"
+            android:clipToOutline="true">
+
+            <com.kakao.vectormap.MapView
+                android:id="@id/kakao_map"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/running_result_middle_frame"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/map_view"
+            app:layout_constraintTop_toBottomOf="@id/map_container"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp">
@@ -167,8 +175,7 @@
             app:layout_constraintTop_toBottomOf="@id/txt_result_distance_mate"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="25dp"
-            android:onClick="@{() -> viewModel.sendRunningResult()}" />
+            android:layout_marginTop="25dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

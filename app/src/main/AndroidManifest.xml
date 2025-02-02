@@ -31,7 +31,6 @@
             android:exported="true"
             android:theme="@style/Theme.YouRun" />
 
-
         <activity
             android:name=".view.activities.OnboardingActivity"
             android:exported="true" />
@@ -138,6 +137,10 @@
             android:theme="@style/Theme.YouRun">
           
         </activity>
+
+        <activity
+            android:name=".view.activities.RunningResultActivity"
+            android:exported="true" />
 
     </application>
 
