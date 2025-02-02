@@ -33,7 +33,6 @@ import com.kakao.vectormap.camera.CameraUpdateFactory
 import com.kakao.vectormap.label.LabelOptions
 import com.kakao.vectormap.label.LabelStyle
 import com.kakao.vectormap.label.LabelStyles
-import org.w3c.dom.Text
 
 class RunningFragment : Fragment() {
 
