@@ -15,6 +15,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.Response
 import java.time.Instant
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 class RunningViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -27,7 +28,6 @@ class RunningViewModel(application: Application) : AndroidViewModel(application)
     val mateName = MutableLiveData<String>()
     val totalTimeFormatted = MutableLiveData("0.00")  // 총 러닝 시간 (분)
     val averageSpeed = MutableLiveData("0.00 /km")  // 평균 속도
-
     val isRunning = MutableLiveData(false)  // 러닝 중 여부
     val isStopped = MutableLiveData(false) // 러닝 종료 여부
 
@@ -78,7 +78,6 @@ class RunningViewModel(application: Application) : AndroidViewModel(application)
 
         // 러닝 시작 시간 설정 (ISO 8601 형식)
         startTime.value = Instant.ofEpochMilli(startTimeMillis).toString()
-
         handler.post(updateTimeRunnable)
     }
 
@@ -94,19 +93,26 @@ class RunningViewModel(application: Application) : AndroidViewModel(application)
         handler.removeCallbacks(updateTimeRunnable)
 
         // 러닝 종료 시간 설정 (ISO 8601 형식)
-        endTime.value = Instant.now().toString()
+        endTime.value = System.currentTimeMillis().toString()
     }
 
     fun updateLocationData(location: Location) {
         if (lastLocation != null) {
             val distance = lastLocation!!.distanceTo(location).toInt()
-            totalDistance.value = (totalDistance.value ?: 0) + distance
+
+            // GPS 오차 방지: 1m 이하 변화는 무시
+            if (distance > 1) {
+                totalDistance.value = (totalDistance.value ?: 0) + distance
+            }
         }
-        lastLocation = location
+        lastLocation = location // 현재 위치 저장 (다음 비교를 위해)
     }
 
     private fun updateTotalTime() {
-        val elapsedTimeMinutes = elapsedTimeMillis / 60000.0 + (elapsedTimeMillis % 60000) / 100000.0
+        val elapsedMillis = System.currentTimeMillis() - startTimeMillis
+        val elapsedTimeMinutes = TimeUnit.MILLISECONDS.toMinutes(elapsedMillis).toDouble() +
+                (TimeUnit.MILLISECONDS.toSeconds(elapsedMillis) % 60) / 100.0
+
         totalTimeFormatted.value = String.format(Locale.US, "%.1f", elapsedTimeMinutes)
     }
 

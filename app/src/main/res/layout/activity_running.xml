@@ -115,7 +115,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/txt_running_color"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="304dp" />
+                android:layout_marginTop="300dp" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -132,23 +132,23 @@
                 android:textStyle="bold"
                 android:textColor="@color/txt_running_color"
                 android:layout_marginTop="346dp"
-                android:layout_marginStart="52dp"
+                android:layout_marginStart="58dp"
                 />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:contentDescription="@string/distance"
                 android:src="@drawable/img_distance"
-                android:layout_marginTop="310dp"
-                android:layout_marginStart="326dp"
+                android:layout_marginTop="308dp"
+                android:layout_marginStart="292dp"
                 android:layout_marginEnd="34dp"/>
 
             <TextView
                 android:id="@+id/txtAverageSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="314dp"
+                android:layout_marginStart="288dp"
                 android:layout_marginTop="346dp"
                 android:textColor="@color/txt_running_color"
                 android:textStyle="bold" />

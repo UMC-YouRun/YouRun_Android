@@ -142,6 +142,10 @@
             android:name=".view.activities.RunningResultActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".view.activities.RunningActivity"
+            android:exported="true" />
+
     </application>
 
 </manifest>

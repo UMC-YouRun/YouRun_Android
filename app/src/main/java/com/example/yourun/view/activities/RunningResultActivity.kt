@@ -2,7 +2,6 @@ package com.example.yourun.view.activities
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -19,14 +18,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityRunningResultBinding
 import com.example.yourun.model.data.RunningResultRequest
 import com.example.yourun.model.data.RunningResultResponse
 import com.example.yourun.viewmodel.RunningViewModel
-import com.example.yourun.viewmodel.RunningViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
