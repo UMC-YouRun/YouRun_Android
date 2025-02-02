@@ -25,16 +25,12 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="${KAKAO_NATIVE_APP_KEY}" />
-
+      
         <activity
             android:name=".view.activities.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.YouRun" >
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
+            android:theme="@style/Theme.YouRun" />
+
 
         <activity
             android:name=".view.activities.OnboardingActivity"
@@ -45,16 +41,22 @@
             android:exported="true"
             android:theme="@style/Theme.YouRun" >
 
-
         </activity>
 
         <activity
-            android:name=".view.activities.MainActivity"
-            android:exported="true" />
-
-        <activity
             android:name=".view.activities.QuestionActivity"
-            android:exported="true" />
+            android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+
+       <activity
+                android:name=".view.activities.QuestionActivity"
+                android:exported="true">
+       </activity>
 
         <activity
             android:name=".view.activities.ResultActivity"
@@ -72,41 +74,43 @@
             android:name=".view.activities.SignUp3Activity"
             android:exported="true" />
 
-
         <activity
             android:name=".view.activities.AppExpActivity"
             android:exported="true" />
 
         <activity
             android:name=".view.activities.CreateChallengeActivity"
-            android:exported="true" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:exported="true">
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-
+        </activity>
 
         <activity
             android:name=".view.activities.CreateSolo1Activity"
-            android:exported="true" />
+            android:exported="true">
+
+        </activity>
+
         <activity
             android:name=".view.activities.CreateSolo2Activity"
-            android:exported="true" />
+            android:exported="true"/>
+
         <activity
             android:name=".view.activities.CreateCrew1Activity"
             android:exported="true" />
+      
         <activity
             android:name=".view.activities.CreateCrew2Activity"
             android:exported="true" />
 
-        <activity android:name=".view.activities.CalendarActivity"
-            android:exported="true">
-        </activity>
+        <activity
+            android:name=".view.activities.CalendarActivity"
+            android:exported="true"/>
+      
         <activity
             android:name=".view.activities.MyRun1Activity"
-            android:exported="true"/>
+            android:exported="true">
+
+        </activity>
 
         <activity
             android:name=".view.activities.MyRun2Activity"
@@ -128,15 +132,18 @@
         </activity>
 
         <activity
-            android:name=".view.activities.MyRun1Activity"
+            android:name=".view.activities.ChallengeListActivity"
             android:exported="true">
+        
         </activity>
 
         <activity
-            android:name=".view.activities.MyRun2Activity"
-            android:exported="true">
+            android:name=".view.activities.ChallengeDetailTeamActivity"
+            android:exported="true"
+            android:theme="@style/Theme.YouRun">
+          
         </activity>
-  
+
     </application>
 
 </manifest>
