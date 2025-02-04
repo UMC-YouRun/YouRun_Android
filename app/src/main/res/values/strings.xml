@@ -31,7 +31,7 @@
     <string name="tv_check_tag6">#왕초보</string>
     <string name="img_up_background">img_up_background</string>
     <string name="app_exp_up_you_run">YOU+RUN?</string>
-    <string name="app_exp_1">님 반가워요 ! \n지금부터 유런에 대해 \n알려드릴게요</string>
+    <string name="app_exp_1">             님 반가워요 ! \n지금부터 유런에 대해 \n알려드릴게요</string>
     <string name="app_exp_1_1">만나지 않아도 함께 뛰어요, YOU+RUN!</string>
     <string name="app_exp_1_2">유런은 비대면 러닝 메이트와 함께 뛰는 러닝 앱이에요</string>
     <string name="app_exp_2">나는 어떤 캐릭터와 \n어울릴까?</string>
@@ -202,5 +202,9 @@
     <string name="minute_30">30분</string>
     <string name="minute_45">45분</string>
     <string name="minute_60">60분</string>
+    <string name="app_exp_6">유런과 함께 러닝 할\n준비 되었나요?</string>
+    <string name="app_exp_6_1">지금 바로 유런에서</string>
+    <string name="app_exp_6_2">다양한 사람들과 함께 러닝을 시작해 보아요!</string>
+    <string name="start_yourun">유런 시작하기</string>
 
 </resources>

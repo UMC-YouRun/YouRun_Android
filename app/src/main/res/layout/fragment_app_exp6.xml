@@ -21,10 +21,10 @@
         app:layout_constraintTop_toBottomOf="@id/app_exp_top_bar_with_back_button">
 
         <TextView
-            android:id="@+id/txt_app_exp_how_run"
+            android:id="@+id/txt_app_exp_run_together"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_exp_5"
+            android:text="@string/app_exp_6"
             android:textSize="24sp"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -48,11 +48,10 @@
                 android:backgroundTint="@android:color/transparent"/>
 
             <ImageView
-                android:id="@+id/img_characters"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/characters"
-                android:src="@drawable/img_characters3" />
+                android:src="@drawable/img_characters" />
 
         </FrameLayout>
 
@@ -90,20 +89,20 @@
                 android:layout_width="10dp"
                 android:layout_height="10dp"
                 android:background="@drawable/img_circle_indicator"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="@color/circle_background" />
+                android:layout_marginEnd="8dp" />
 
             <View
                 android:layout_width="10dp"
                 android:layout_height="10dp"
-                android:background="@drawable/img_circle_indicator" />
+                android:background="@drawable/img_circle_indicator"
+                android:backgroundTint="@color/circle_background" />
 
         </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_exp_5_1"
+            android:text="@string/app_exp_6_1"
             android:textSize="15sp"
             android:textColor="@color/black"
             android:textStyle="normal"
@@ -115,7 +114,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_exp_5_2"
+            android:text="@string/app_exp_6_2"
             android:textSize="15sp"
             android:textColor="@color/black"
             android:textStyle="normal"
@@ -125,12 +124,12 @@
             android:layout_marginTop="2dp" />
 
         <Button
-            android:id="@id/next_btn"
+            android:id="@+id/btn_start_yourun"
             android:layout_width="328dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
             android:background="@drawable/rounded_button"
-            android:text="@string/next"
+            android:text="@string/start_yourun"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:gravity="center"
