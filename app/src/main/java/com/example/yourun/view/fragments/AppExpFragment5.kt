@@ -1,5 +1,8 @@
 package com.example.yourun.view.fragments
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
@@ -9,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
@@ -28,8 +32,16 @@ class AppExpFragment5 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val imgCharactersView = view.findViewById<ImageView>(R.id.img_characters)
+
         view.findViewById<Button>(R.id.next_btn).setOnClickListener {
-            // 성향 테스트 activity로 이동
+            slideImage(R.drawable.img_characters, imgCharactersView) {
+                val nextFragment = AppExpFragment6()
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.app_exp_fragment_container, nextFragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
 
         view.findViewById<ImageButton>(R.id.back_button).setOnClickListener {
@@ -62,6 +74,29 @@ class AppExpFragment5 : Fragment() {
             )
         }
         txtHowRun.text = spannableString
+    }
+
+    // 이미지 변경 + 애니메이션 (왼쪽으로 슬라이드)
+    private fun slideImage(newImageRes: Int, imageView: ImageView, onAnimationEnd: () -> Unit) {
+        val animOut = ObjectAnimator.ofFloat(imageView, "translationX", 0f, -imageView.width.toFloat())
+        animOut.duration = 300
+
+        val animIn = ObjectAnimator.ofFloat(imageView, "translationX", imageView.width.toFloat(), 0f)
+        animIn.duration = 300
+
+        animOut.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                imageView.setImageResource(newImageRes) // 이미지 변경
+                animIn.start()
+                animIn.addListener(object : AnimatorListenerAdapter() {
+                    override fun onAnimationEnd(animation: Animator) {
+                        onAnimationEnd() // 애니메이션 끝나면 Fragment 변경
+                    }
+                })
+            }
+        })
+
+        animOut.start()
     }
 
 }
