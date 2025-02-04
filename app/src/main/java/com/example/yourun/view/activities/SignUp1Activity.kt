@@ -1,16 +1,13 @@
 package com.example.yourun.view.activities
-
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
-
 import android.view.MotionEvent
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.yourun.R
@@ -70,7 +67,7 @@ class SignUp1Activity : AppCompatActivity() {
             }
 
             // 이메일 중복 확인 API 호출
-            //checkEmailDuplicate(email)
+            checkEmailDuplicate(email)
         }
     }
 
@@ -188,7 +185,7 @@ class SignUp1Activity : AppCompatActivity() {
         })
     }
 
-    /*private fun checkEmailDuplicate(email: String) {
+    private fun checkEmailDuplicate(email: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = ApiClient.getApiService(this@SignUp1Activity).checkEmailDuplicate(email)
@@ -220,6 +217,6 @@ class SignUp1Activity : AppCompatActivity() {
                 }
             }
         }
-    }*/
+    }
 
 }

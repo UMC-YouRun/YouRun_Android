@@ -5,13 +5,3 @@ data class LoginRequest(
     val password: String
 )
 
-data class LoginResponse(
-    val status: Int,
-    val code : String,
-    val message: String,
-    val data: LoginData?
-)
-
-data class LoginData(
-    val access_token: String?
-)

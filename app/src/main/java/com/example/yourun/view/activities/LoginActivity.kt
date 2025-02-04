@@ -1,8 +1,6 @@
 package com.example.yourun.view.activities
 
 
-
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
@@ -16,21 +14,27 @@ import com.example.yourun.R
 import com.example.yourun.databinding.ActivityLoginBinding
 import com.example.yourun.model.data.LoginRequest
 import com.example.yourun.model.data.LoginResponse
-import com.example.yourun.model.network.ApiClient
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.example.yourun.model.network.ApiService
+import com.example.yourun.model.network.RetrofitClient
+import com.example.yourun.model.network.TokenManager
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import retrofit2.Call
+
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var tokenManager: TokenManager
+    private lateinit var apiService: ApiService
     private var isPasswordVisible = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        tokenManager = TokenManager.getInstance(this)
+        apiService = RetrofitClient.create(this)
 
         setupPasswordVisibilityToggle()
         setupLoginButton()
@@ -76,6 +80,13 @@ class LoginActivity : AppCompatActivity() {
         binding.editTextPassword.setSelection(binding.editTextPassword.text?.length ?: 0)
     }
 
+    private fun setupSignupButton() {
+        binding.imgBtnSignup.setOnClickListener {
+            val intent = Intent(this, SignUp1Activity::class.java)
+            startActivity(intent)
+        }
+    }
+
     private fun setupLoginButton() {
         binding.imgBtnNext.setOnClickListener {
             val email = binding.editTextNickname.text.toString().trim()
@@ -83,77 +94,48 @@ class LoginActivity : AppCompatActivity() {
 
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            lifecycleScope.launch {
+                login(email, password)
+            }
+        }
+    }
+
+    private suspend fun login(email: String, password: String) {
+        try {
+            val request = LoginRequest(email, password)
+            val response = apiService.login(request) // suspend 함수 호출
+
+            if (response.isSuccessful) {
+                val body = response.body()
+                if (body?.status == 200 && body.data?.access_token != null) {
+                    val token = body.data.access_token
+                    tokenManager.saveToken(token)
+                    Log.d("LoginActivity", "토큰 저장됨: $token")
+
+                    Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
+
+                    val intent = Intent(this@LoginActivity, AppExpActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(
+                        this@LoginActivity,
+                        "로그인 실패: ${body?.message ?: "알 수 없는 오류"}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             } else {
-                //login(email, password)
+                Toast.makeText(
+                    this@LoginActivity,
+                    "로그인 실패: 서버 오류(${response.code()})",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-        }
-    }
-
-    /*private fun login(email: String, password: String) {
-        val loginRequest = LoginRequest(email, password)
-
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val response = ApiClient.getApiService(this@LoginActivity).login(loginRequest)
-
-                withContext(Dispatchers.Main) {
-                    if (response.isSuccessful) {
-                        val body = response.body()
-                        if (body?.status == 200 && body.data != null) {
-                            handleLoginSuccess(body.data) // 로그인 성공 처리
-                        } else {
-                            val errorMessage = body?.message ?: "알 수 없는 오류 발생"
-                            Toast.makeText(this@LoginActivity, "로그인 실패: $errorMessage", Toast.LENGTH_SHORT).show()
-                        }
-                    } else {
-                        val errorBody = response.errorBody()?.string() ?: "서버 오류 발생"
-                        Toast.makeText(this@LoginActivity, "로그인 실패: $errorBody", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            } catch (e: Exception) {
-                // 예외 발생 시 처리
-                Log.e("LoginError", "로그인 실패 - 예외: ${e.message}", e)
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(this@LoginActivity, "로그인 실패: ${e.message}", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-    }*/
-
-    private fun handleLoginSuccess(responseData: LoginResponse?) {
-        // 로그인 응답 데이터에서 액세스 토큰 가져오기
-        val accessToken = responseData?.data?.access_token
-        if (accessToken?.isNotEmpty() == true) {
-            // 액세스 토큰 저장
-            saveTokensToSharedPreferences(accessToken)
-            Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
-
-            // 성공 후 화면 전환
-            val intent = Intent(this, SignUp3Activity::class.java)
-            startActivity(intent)
-            finish()
-        } else {
-            // 액세스 토큰이 없을 경우
-            Log.e("LoginError", "로그인 실패 - Access Token이 누락되었습니다.")
-            Toast.makeText(this, "로그인 실패: 토큰이 누락되었습니다.", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun saveTokensToSharedPreferences(accessToken: String) {
-        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("access_token", accessToken)
-        editor.apply()
-
-        val savedToken = sharedPreferences.getString("access_token", null)
-        Log.d("LoginDebug", "Saved Token: $savedToken")
-    }
-
-    private fun setupSignupButton() {
-        binding.imgBtnSignup.setOnClickListener {
-            val intent = Intent(this, SignUp1Activity::class.java)
-            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(this@LoginActivity, "네트워크 오류 발생: ${e.message}", Toast.LENGTH_SHORT).show()
         }
     }
 }
-

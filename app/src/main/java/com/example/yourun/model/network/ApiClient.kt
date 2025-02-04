@@ -1,6 +1,7 @@
 package com.example.yourun.model.network
 
 import android.content.Context
+import android.util.Log
 import com.example.yourun.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -27,6 +28,9 @@ object ApiClient {
                 }
                 .addInterceptor { chain ->
                     val token = getAccessTokenFromSharedPreferences(context)
+                    if (token.isNullOrEmpty()) {
+                        Log.e("AuthError", "Access Token is missing or empty")
+                    }
                     val request = chain.request().newBuilder()
                         .addHeader("Authorization", "Bearer $token")
                         .build()
@@ -39,9 +43,14 @@ object ApiClient {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
+
+
         }
         return retrofit!!
+
+
     }
+
 
     fun getApiService(context: Context): ApiService {
         return getRetrofit(context).create(ApiService::class.java)
@@ -57,6 +66,7 @@ object ApiClient {
 
     fun getAccessTokenFromSharedPreferences(context: Context): String? {
         val sharedPreferences = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        return sharedPreferences.getString("access_token", null)
+        return sharedPreferences.getString("access_token",null)
+
     }
 }
