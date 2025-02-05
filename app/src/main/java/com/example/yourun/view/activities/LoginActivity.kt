@@ -105,7 +105,6 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             } catch (e: Exception) {
-                // 예외 발생 시 처리
                 Log.e("LoginError", "로그인 실패 - 예외: ${e.message}", e)
                 withContext(Dispatchers.Main) {
                     Toast.makeText(this@LoginActivity, "로그인 실패: ${e.message}", Toast.LENGTH_SHORT).show()
@@ -115,7 +114,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleLoginSuccess(responseData: LoginResponse?) {
-        // 로그인 응답 데이터에서 액세스 토큰 가져오기
         val accessToken = responseData?.data?.access_token
         if (accessToken?.isNotEmpty() == true) {
             // 액세스 토큰 저장
@@ -123,9 +121,10 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
 
             // 성공 후 화면 전환
-            val intent = Intent(this, SignUp3Activity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             finish()
+
         } else {
             // 액세스 토큰이 없을 경우
             Log.e("LoginError", "로그인 실패 - Access Token이 누락되었습니다.")
@@ -145,7 +144,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupSignupButton() {
         binding.imgBtnSignup.setOnClickListener {
-            val intent = Intent(this, SignUp1Activity::class.java)
+            val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
     }

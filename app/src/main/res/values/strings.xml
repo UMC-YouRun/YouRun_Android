@@ -197,6 +197,7 @@
     <string name="date"> 2025년 1월 </string>
     <string name="crew_name2">크루구호</string>
     <string name="crew_name3">띄어쓰기 포함 한글 3~12자만 입력 가능해요</string>
+    <string name="character_dis">캐릭터 설명</string>
 
 
 </resources>

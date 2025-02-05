@@ -65,6 +65,9 @@ android {
         exclude("META-INF/INDEX.LIST")
         exclude("META-INF/DEPENDENCIES")
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -100,6 +103,8 @@ dependencies {
 
     // Fragment KTX
     implementation("androidx.fragment:fragment-ktx:1.8.5")
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
     // 테스트 종속성
     testImplementation(libs.junit)

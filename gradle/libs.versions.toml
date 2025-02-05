@@ -12,6 +12,8 @@ junitJunit = "4.12"
 monitor = "1.7.2"
 junitKtx = "1.2.1"
 firebaseAppdistributionGradle = "5.1.0"
+navigationFragmentKtx = "2.8.6"
+navigationUiKtx = "2.8.6"
 
 
 [libraries]
@@ -26,6 +28,8 @@ junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
 androidx-monitor = { group = "androidx.test", name = "monitor", version.ref = "monitor" }
 androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
 firebase-appdistribution-gradle = { group = "com.google.firebase", name = "firebase-appdistribution-gradle", version.ref = "firebaseAppdistributionGradle" }
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

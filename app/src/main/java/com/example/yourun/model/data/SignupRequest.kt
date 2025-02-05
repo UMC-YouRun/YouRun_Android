@@ -3,7 +3,7 @@ package com.example.yourun.model.data
 data class SignUpRequest(
     val email: String,
     val password: String,
-    val passwordCheck: String,
+    val passwordcheck: String,
     val nickname: String,
     val tendency: String,
     val tag1: String,

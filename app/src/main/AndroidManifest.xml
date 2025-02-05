@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -28,29 +31,14 @@
             android:name=".view.activities.LoginActivity"
             android:theme="@style/Theme.YouRun"
             android:exported="true">
-           <intent-filter>
-               <action android:name="android.intent.action.MAIN" />
-               <category android:name="android.intent.category.LAUNCHER" />
-           </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
-       <activity
-                android:name=".view.activities.QuestionActivity"
-                android:exported="true">
-       </activity>
-
-        <activity 
-                android:name=".view.activities.ResultActivity"
-                android:exported="true"/>
-
         <activity
-            android:name=".view.activities.SignUp1Activity" />
-
-        <activity
-            android:name=".view.activities.SignUp2Activity" />
-
-        <activity
-            android:name=".view.activities.SignUp3Activity" />
+            android:name=".view.activities.SignUpActivity" />
 
         <activity
             android:name=".view.activities.AppExpActivity"
@@ -103,11 +91,6 @@
         <activity
             android:name=".view.activities.ChallengeListActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity

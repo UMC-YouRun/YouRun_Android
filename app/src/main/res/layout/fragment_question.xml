@@ -4,26 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bgd_toolbar"
-        android:paddingTop="8dp"
-        android:paddingBottom="0dp">
-
-
-    <TextView
-        android:id="@+id/toolbarTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="러닝 성향 테스트"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-</androidx.appcompat.widget.Toolbar>
-
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/top_bar_with_back_button" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
