@@ -88,6 +88,7 @@ class MainActivity : AppCompatActivity() {
             val menu = bottomNavigationView.menu
             menu.getItem(2).isChecked = true
         }
+
     }
 
     private fun loadFragment(fragment: Fragment) {

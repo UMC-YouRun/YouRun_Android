@@ -139,9 +139,6 @@
             android:theme="@style/Theme.YouRun">
         </activity>
 
-        <activity android:name=".view.fragments.MateActivity"
-            android:exported="true">
-        </activity>
     </application>
 
 </manifest>
