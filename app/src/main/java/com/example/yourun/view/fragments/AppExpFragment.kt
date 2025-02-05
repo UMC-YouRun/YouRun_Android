@@ -31,12 +31,12 @@ class AppExpFragment : Fragment(R.layout.fragment_app_exp) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val receivedData = arguments?.getString("nickname", "")?: ""
-
+        val nickname = arguments?.getString("nickname", "") ?: ""
+     
         val welcomeTextView = view.findViewById<TextView>(R.id.txt_app_exp_welcome)
 
-        if (receivedData.isNotEmpty()) {
-        val spannable = SpannableStringBuilder(receivedData).apply {
+        if (nickname.isNotEmpty()) {
+        val spannable = SpannableStringBuilder(nickname).apply {
             setSpan(
                 ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.text_purple)),
                 0, length,
@@ -45,7 +45,7 @@ class AppExpFragment : Fragment(R.layout.fragment_app_exp) {
         }
         spannable.append(welcomeTextView.text) // 기존 텍스트 추가
         welcomeTextView.text = spannable
-            }
+        }
 
         val imgCharactersView = view.findViewById<ImageView>(R.id.img_characters)
 
@@ -58,6 +58,7 @@ class AppExpFragment : Fragment(R.layout.fragment_app_exp) {
                     .commit()
             }
         }
+
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (parentFragmentManager.backStackEntryCount > 0) {
