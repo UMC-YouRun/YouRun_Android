@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.drawable.GradientDrawable
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
@@ -49,6 +50,19 @@ class RunningFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        parentFragmentManager.setFragmentResultListener("requestKey", this) { _, bundle ->
+            val data = bundle.getString("target_time")
+
+            val timeTextView = view.findViewById<TextView>(R.id.txt_set_running_time)
+            timeTextView.text = data
+            val runningTimeSetView = view.findViewById<View>(R.id.running_time_set)
+            val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.custom_rounded_button)?.mutate()
+            drawable?.let {
+                (it as GradientDrawable).setColor(ContextCompat.getColor(requireContext(), R.color.btn_selected))
+                runningTimeSetView.background = it
+            }
+        }
+
         mapView = view.findViewById(R.id.kakao_map)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         setupMapView()
@@ -80,7 +94,6 @@ class RunningFragment : Fragment() {
     }
 
     private fun setupMapView() {
-        Log.d("KakaoMap", "setupMapView() 호출됨")
         mapView.start(
             object : MapLifeCycleCallback() {
                 override fun onMapResumed() {
@@ -92,12 +105,10 @@ class RunningFragment : Fragment() {
                 }
                 override fun onMapError(error: Exception?) {
                     error?.printStackTrace()
-                    Log.e("KakaoMap", "맵 로딩 오류 발생: ${error?.message}")
                 }
             },
             object : KakaoMapReadyCallback() {
                 override fun onMapReady(kakaoMap: KakaoMap) {
-                    Log.d("KakaoMap", "onMapReady() 호출됨")
                     showCurrentLocation(kakaoMap)
                 }
             }
@@ -186,11 +197,7 @@ class RunningFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (::mapView.isInitialized) {
-            mapView.resume()
-        } else {
-            Log.e("KakaoMap", "mapView가 초기화되지 않았습니다.")
-        }
+        mapView.resume()
     }
 
     override fun onPause() {

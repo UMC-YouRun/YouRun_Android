@@ -1,5 +1,6 @@
 package com.example.yourun.view.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.Gravity
@@ -32,9 +33,15 @@ class CreateSolo1Activity : AppCompatActivity() {
         binding = ActivityCreateSolo1Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.createBtn.setOnClickListener{
+            val intent= Intent(this, CreateSolo2Activity::class.java)
+            startActivity(intent)
+        }
+
         checkBox1km = findViewById(R.id.checkbox_1km)
         checkBox3km = findViewById(R.id.checkbox_3km)
         checkBox5km = findViewById(R.id.checkbox_5km)
+
 
         checkBox1km.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {

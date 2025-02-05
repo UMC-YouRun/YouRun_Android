@@ -98,10 +98,10 @@
 
     <ImageButton
         android:id="@+id/btn_mate_heart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:contentDescription="@string/mate_heart"
-        android:src="@drawable/ic_heart_selected"
+        android:src="@drawable/ic_heart_selector"
         android:background="@android:color/transparent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"

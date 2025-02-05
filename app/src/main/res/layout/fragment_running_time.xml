@@ -63,54 +63,149 @@
         android:layout_marginTop="107dp"
         android:layout_marginStart="17dp" />
 
-    <ImageButton
-        android:id="@+id/btn_time_15"
+    <FrameLayout
+        android:id="@+id/time_15_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_marginTop="20dp"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/time_15"
-        android:src="@drawable/ic_15_minute"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_more_run" />
+        app:layout_constraintTop_toBottomOf="@id/txt_more_run"
+        app:layout_constraintBottom_toTopOf="@id/time_30_frame">
 
-    <ImageButton
-        android:id="@+id/btn_time_30"
+        <View
+            android:id="@+id/bgd_time_15"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/bgd_time_button"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/txt_time_15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/minute_15"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="60dp"
+            android:layout_gravity="center_vertical" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/time_30_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/time_30"
-        app:layout_constraintTop_toBottomOf="@id/btn_time_15"
-        app:layout_constraintStart_toStartOf="parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_30_minute"
-        android:layout_marginTop="18dp" />
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/time_15_frame"
+        app:layout_constraintBottom_toTopOf="@id/time_45_frame">
 
-    <ImageButton
-        android:id="@+id/btn_time_45"
+        <View
+            android:id="@+id/bgd_time_30"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/bgd_time_button"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/txt_time_30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/minute_30"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="60dp"
+            android:layout_gravity="center_vertical" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/time_45_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/time_45"
-        app:layout_constraintTop_toBottomOf="@id/btn_time_30"
-        app:layout_constraintStart_toStartOf="parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_45_minute"
-        android:layout_marginTop="18dp" />
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/time_30_frame"
+        app:layout_constraintBottom_toTopOf="@id/time_60_frame">
 
-    <ImageButton
-        android:id="@+id/btn_time_60"
+        <View
+            android:id="@+id/bgd_time_45"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/bgd_time_button"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/txt_time_45"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/minute_45"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="60dp"
+            android:layout_gravity="center_vertical" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/time_60_frame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/time_60"
-        app:layout_constraintTop_toBottomOf="@id/btn_time_45"
-        app:layout_constraintStart_toStartOf="parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_60_minute"
-        android:layout_marginTop="18dp" />
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/time_45_frame"
+        app:layout_constraintBottom_toTopOf="@id/btn_select_time">
+
+        <View
+            android:id="@+id/bgd_time_60"
+            android:layout_width="match_parent"
+            android:layout_height="69dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:background="@drawable/bgd_time_button"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/txt_time_60"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/minute_60"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="60dp"
+            android:layout_gravity="center_vertical" />
+
+    </FrameLayout>
 
     <ImageButton
         android:id="@+id/btn_select_time"
@@ -119,7 +214,7 @@
         android:contentDescription="@string/select_time"
         android:src="@drawable/ic_select"
         android:background="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@id/btn_time_60"
+        app:layout_constraintTop_toBottomOf="@id/time_60_frame"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="46dp" />
