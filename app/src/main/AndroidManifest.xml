@@ -30,13 +30,12 @@
             android:name=".view.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.YouRun">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
-
 
         <activity
             android:name=".view.activities.OnboardingActivity"
@@ -103,7 +102,7 @@
             android:exported="true"/>
       
         <activity
-            android:name=".view.activities.MyRun1Activity"
+            android:name=".view.activities.MyRunActivity"
             android:exported="true">
 
         </activity>
@@ -137,7 +136,16 @@
             android:name=".view.activities.ChallengeDetailTeamActivity"
             android:exported="true"
             android:theme="@style/Theme.YouRun">
+          
         </activity>
+
+        <activity
+            android:name=".view.activities.RunningResultActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".view.activities.RunningActivity"
+            android:exported="true" />
 
     </application>
 

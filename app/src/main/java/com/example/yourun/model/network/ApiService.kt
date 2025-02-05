@@ -7,6 +7,8 @@ import com.example.yourun.model.data.MateResponse
 import com.example.yourun.model.data.SignUpRequest1
 import com.example.yourun.model.data.SignUpRequest3
 import com.example.yourun.model.data.SignUpResponse
+import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -15,7 +17,7 @@ import retrofit2.http.Query
 
 interface ApiService {
     @POST("users/login")
-    suspend fun login(@Body request: LoginRequest): ApiResponse<LoginResponse>
+    suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
 
     // 회원가입 - Step 1 (이메일 & 비밀번호)
     @POST("users")

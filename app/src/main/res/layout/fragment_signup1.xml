@@ -5,40 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-
-    <ImageView
-        android:id="@+id/signup_title_iv"
-        android:layout_width="match_parent"
-        android:layout_height="103dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_signup_bar"
-        android:scaleType="fitXY"/>
-
-
-    <ImageButton
-        android:id="@+id/btn_back"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/ic_back"
-        android:importantForAccessibility="no"
-        android:minWidth="0dp"
-        android:minHeight="0dp"
-        android:padding="60dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="@+id/tv_1"
-        app:layout_constraintTop_toBottomOf="@+id/signup_title_iv" />
-
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/top_bar_with_back_button" />
 
     <TextView
         android:id="@+id/tv_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="232dp"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="140dp"
         android:layout_marginStart="16sp"
         android:text="@string/signup_tv1"
         android:textSize="24sp"
@@ -53,7 +29,7 @@
         android:id="@+id/tv_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="170dp"
         android:text="@string/signup_tv2"
         android:textColor="@color/black"
         android:textSize="24sp"
@@ -66,7 +42,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
+        android:layout_marginTop="210dp"
         android:text="@string/signup_tv3"
         android:textColor="@color/gray"
         android:textSize="14sp"
@@ -190,7 +166,7 @@
         android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="120dp"
         android:background="@drawable/img_next_btn"
         android:importantForAccessibility="no"
         app:layout_constraintStart_toStartOf="@id/edit_text_password_check"

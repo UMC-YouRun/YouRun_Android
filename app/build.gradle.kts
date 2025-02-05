@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id("kotlin-kapt")
+    id ("kotlin-parcelize")
 }
 
 val localProperties = Properties().apply {
@@ -80,10 +81,10 @@ dependencies {
     implementation ("com.kakao.maps.open:android:2.12.8")
     implementation ("com.google.android.gms:play-services-location:21.0.1") // FusedLocationProviderClient를 위한 의존성
     implementation("com.kakao.maps.open:android:2.12.8")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:okhttp:4.9.1")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation(libs.firebase.appdistribution.gradle)
     implementation("androidx.fragment:fragment-ktx:1.8.5")
     implementation(libs.places)

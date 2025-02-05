@@ -1,16 +1,15 @@
 package com.example.yourun.model.network
 
 import android.content.Context
+import android.util.Log
 import com.example.yourun.BuildConfig
 import okhttp3.OkHttpClient
-import com.example.yourun.model.network.ApiService
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 const val BASE_URL = BuildConfig.BASE_URL
-
 
 object ApiClient {
 
@@ -29,6 +28,9 @@ object ApiClient {
                 }
                 .addInterceptor { chain ->
                     val token = getAccessTokenFromSharedPreferences(context)
+                    if (token.isNullOrEmpty()) {
+                        Log.e("AuthError", "Access Token is missing or empty")
+                    }
                     val request = chain.request().newBuilder()
                         .addHeader("Authorization", "Bearer $token")
                         .build()
@@ -41,9 +43,14 @@ object ApiClient {
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
+
+
         }
         return retrofit!!
+
+
     }
+
 
     fun getApiService(context: Context): ApiService {
         return getRetrofit(context).create(ApiService::class.java)
@@ -53,8 +60,13 @@ object ApiClient {
         return getRetrofit(context).create(HomeApiService::class.java)
     }
 
+    fun getRunningApiService(context: Context): RunningApiService {
+        return getRetrofit(context).create(RunningApiService::class.java)
+    }
+
     fun getAccessTokenFromSharedPreferences(context: Context): String? {
         val sharedPreferences = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        return sharedPreferences.getString("access_token", null)
+        return sharedPreferences.getString("access_token",null)
+
     }
 }
