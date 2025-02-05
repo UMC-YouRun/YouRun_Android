@@ -1,4 +1,4 @@
-package com.example.yourun.model.network
+package com.example.yourun.utils
 
 import android.content.Context
 import android.content.SharedPreferences

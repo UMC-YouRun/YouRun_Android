@@ -2,6 +2,7 @@ package com.example.yourun.model.network
 
 import android.content.Context
 import com.example.yourun.BuildConfig
+import com.example.yourun.utils.TokenManager
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
