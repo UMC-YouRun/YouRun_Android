@@ -33,7 +33,7 @@
             android:layout_marginTop="80dp"
             android:layout_marginBottom="32dp"
             android:layout_marginStart="30dp"
-            android:layout_marginEnd="121dp"/>
+            android:layout_marginEnd="121dp" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -48,15 +48,17 @@
                 android:backgroundTint="@android:color/transparent"/>
 
             <ImageView
+                android:id="@+id/img_characters"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/characters"
-                android:src="@drawable/img_characters" />
+                android:src="@drawable/img_characters2"
+                android:scaleType="fitCenter" />
 
         </FrameLayout>
 
         <LinearLayout
-            android:layout_width="82dp"
+            android:layout_width="102dp"
             android:layout_height="10dp"
             android:orientation="horizontal"
             android:layout_gravity="center">
@@ -67,6 +69,12 @@
                 android:background="@drawable/img_circle_indicator"
                 android:layout_marginEnd="8dp"
                 android:backgroundTint="@color/circle_background" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/img_circle_indicator"
+                android:layout_marginEnd="8dp" />
 
             <View
                 android:layout_width="10dp"
@@ -125,6 +133,7 @@
             android:background="@drawable/rounded_button"
             android:text="@string/next"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:gravity="center"
             android:layout_marginTop="33dp" />
 
