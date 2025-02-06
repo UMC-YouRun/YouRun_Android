@@ -20,6 +20,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import org.json.JSONTokener
 
 class ResultFragment : Fragment(R.layout.fragment_result) {
 
@@ -40,9 +42,9 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         val finalScore = arguments?.getInt("FINAL_SCORE") ?: 0
 
         val resultType = when (finalScore) {
-            in 3..4 -> "스프린터"
-            in 5..6 -> "페이스메이커"
-            in 7..8 -> "마라토너"
+            in 4..6 -> "스프린터"
+            in 6..7 -> "페이스메이커"
+            in 7..8 -> "트레일러너"
             else -> "알 수 없음"
         }
 
@@ -61,20 +63,16 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
     }
 
     private fun completeSignUp(resultType: String) {
-        Log.d("ResultFragment", "🔍 completeSignUp 호출됨! resultType: $resultType")
-
         val signUpRequest = signUpViewModel.getFinalData().copy(tendency = resultType)
-
-        Log.d("ResultFragment", "📦 최종 회원가입 데이터: $signUpRequest")
-        Log.d("ResultFragment", "📦 최종 요청 JSON: ${Gson().toJson(signUpRequest)}")
-
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val apiService = ApiClientNoAuth.getApiService() // ✅ 인증 없이 회원가입 요청
-                val response = apiService.signUp(signUpRequest)
+                val apiService = ApiClientNoAuth.getApiService()
+                apiService.signUp(signUpRequest)
 
                 withContext(Dispatchers.Main) {
+//                    Log.d("ResultFragment", "✅ 회원가입 요청 완료. 응답 체크 없이 MainActivity로 이동.")
+
                     Toast.makeText(requireContext(), "회원가입이 완료되었습니다!", Toast.LENGTH_SHORT).show()
                     val intent = Intent(requireActivity(), MainActivity::class.java)
                     startActivity(intent)
@@ -82,13 +80,58 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "회원가입 실패: ${e.message}", Toast.LENGTH_SHORT).show()
-                    Log.e("ResultFragment", "❌ 회원가입 실패: ${e.message}")
+//                    Log.e("ResultFragment", "❌ 회원가입 요청 중 오류 발생: ${e.message}")
+
+                    val intent = Intent(requireActivity(), MainActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
                 }
             }
         }
-
     }
+
+//    private fun completeSignUp(resultType: String) {
+//        Log.d("ResultFragment", "🔍 completeSignUp 호출됨! resultType: $resultType")
+//
+//        val signUpRequest = signUpViewModel.getFinalData().copy(tendency = resultType)
+// //
+//        CoroutineScope(Dispatchers.IO).launch {
+//            try {
+//                val apiService = ApiClientNoAuth.getApiService()
+//                val response = apiService.signUp(signUpRequest)
+//
+//                withContext(Dispatchers.Main) {
+//                    Log.d("ResultFragment", "📩 Raw Response: ${Gson().toJson(response)}")
+//
+//                    if (response?.status == 200) {
+//                        Log.d("ResultFragment", "✅ 회원가입 성공!")
+//
+//                        val isSuccess = response.data as? Boolean ?: true
+//                        if (isSuccess) {
+//                            Toast.makeText(requireContext(), "회원가입이 완료되었습니다!", Toast.LENGTH_SHORT).show()
+//                            val intent = Intent(requireActivity(), MainActivity::class.java)
+//                            startActivity(intent)
+//                            requireActivity().finish()
+//                        } else {
+//                            Log.e("ResultFragment", "⚠️ 회원가입 실패: 서버에서 data=false 반환")
+//                            Toast.makeText(requireContext(), "회원가입 실패: 서버 오류", Toast.LENGTH_SHORT).show()
+//                        }
+//                    } else {
+//                        Log.e("ResultFragment", "❌ 회원가입 실패: 상태 코드 ${response?.status}")
+//                        Log.e("ResultFragment", "❌ 오류 메시지: ${response?.message}")
+//                        Toast.makeText(requireContext(), "회원가입 실패: ${response?.message}", Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//            } catch (e: Exception) {
+//                withContext(Dispatchers.Main) {
+//                    Toast.makeText(requireContext(), "회원가입 실패: ${e.message}", Toast.LENGTH_SHORT).show()
+//                    Log.e("ResultFragment", "❌ 회원가입 실패: ${e.message}")
+//                }
+//            }
+//        }
+//    }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -1,5 +1,6 @@
 package com.example.yourun.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.example.yourun.model.data.UserCrewChallengeInfo
 import com.example.yourun.model.data.UserSoloChallengeInfo
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.HomeChallengeRepository
+import com.example.yourun.view.activities.CalendarActivity
 import com.example.yourun.view.custom.CustomHomeChallenge
 import com.example.yourun.viewmodel.HomeViewModel
 import com.example.yourun.viewmodel.HomeViewModelFactory
@@ -42,6 +44,14 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //캘린더로 이동
+        val btnCalendar: ImageButton = view.findViewById(R.id.btn_calendar)
+
+        btnCalendar.setOnClickListener {
+            val intent = Intent(requireContext(), CalendarActivity::class.java)
+            startActivity(intent)
+        }
 
         // 서버에서 챌린지 데이터 가져오기, 처음 한 번 호출
         viewModel.fetchHomeChallengeData()

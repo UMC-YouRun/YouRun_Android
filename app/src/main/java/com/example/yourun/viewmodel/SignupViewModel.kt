@@ -30,12 +30,10 @@ class SignUpViewModel : ViewModel() {
 
     fun setNickname(nickname: String) {
         _signUpData.value = _signUpData.value?.copy(nickname = nickname)
-//        Log.d("SignUpViewModel", "✅ 닉네임 저장됨: $nickname")
     }
 
     fun setTags(tag1: String, tag2: String) {
         _signUpData.value = _signUpData.value?.copy(tag1 = tag1, tag2 = tag2)
-//        Log.d("SignUpViewModel", "✅ 태그 저장됨: tag1=$tag1, tag2=$tag2")
     }
 
     fun setTendency(tendency: String) {
@@ -44,8 +42,6 @@ class SignUpViewModel : ViewModel() {
 
     fun getFinalData(): SignUpRequest {
         val data = _signUpData.value ?: SignUpData()
-
-        Log.d("SignUpViewModel", "📢 최종 회원가입 데이터 확인: $data")
 
         return SignUpRequest(
             email = data.email ?: "",

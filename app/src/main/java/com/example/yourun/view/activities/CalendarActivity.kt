@@ -161,13 +161,13 @@ class CalendarActivity : AppCompatActivity() {
         val textView = TextView(this)
         val layoutParams = GridLayout.LayoutParams()
 
-        // 날짜 셀 크기 계산
-        val cellSize = (resources.displayMetrics.widthPixels / 7)
+        val totalWidth = resources.displayMetrics.widthPixels
+        val margin = 0
+        val cellSize = (totalWidth - margin * 14) / 8
+
         layoutParams.width = cellSize
         layoutParams.height = cellSize
-
-        // 날짜 셀 외부 간격 설정
-        layoutParams.setMargins(2, 2, 2, 2)
+        layoutParams.setMargins(margin, margin, margin, margin)
 
         textView.layoutParams = layoutParams
         textView.text = day.toString()
@@ -191,12 +191,17 @@ class CalendarActivity : AppCompatActivity() {
     }
 
 
+
     private fun createEmptyView(): TextView {
         val textView = TextView(this)
         val layoutParams = GridLayout.LayoutParams()
 
-        layoutParams.width = resources.displayMetrics.widthPixels / 7
-        layoutParams.height = layoutParams.width
+        // 빈 셀 크기 계산 (날짜 셀과 동일)
+        val cellSize = resources.displayMetrics.widthPixels / 8
+        layoutParams.width = cellSize
+        layoutParams.height = cellSize
+
+        layoutParams.setMargins(0, 0, 0, 0) // 마진 제거
         textView.layoutParams = layoutParams
         textView.text = ""
         textView.gravity = Gravity.CENTER

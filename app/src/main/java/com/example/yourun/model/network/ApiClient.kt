@@ -51,7 +51,6 @@ object ApiClient {
 
     }
 
-
     fun getApiService(context: Context): ApiService {
         return getRetrofit(context).create(ApiService::class.java)
     }
