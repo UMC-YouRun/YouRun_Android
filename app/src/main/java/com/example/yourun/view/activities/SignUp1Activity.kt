@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
-import android.util.Log
 import android.view.MotionEvent
 import android.widget.EditText
 import android.widget.Toast
@@ -12,11 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivitySignup1Binding
-import com.example.yourun.model.network.ApiClient
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.regex.Pattern
 
 class SignUp1Activity : AppCompatActivity() {

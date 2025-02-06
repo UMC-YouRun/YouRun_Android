@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityLoginBinding
 import com.example.yourun.model.network.ApiClient
@@ -20,7 +19,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory(LoginRepository(ApiClient.getApiService(), ApiClient.TokenManager))
+        LoginViewModelFactory(LoginRepository(ApiClient.getApiService()))
     }
     private var isPasswordVisible = false
 
@@ -34,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
         setupSignupButton()
 
         // 로그인 결과 관찰
-        viewModel.loginResult.observe(this, Observer { result ->
+        viewModel.loginResult.observe(this) { result ->
             result.onSuccess { token ->
                 Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, AppExpActivity::class.java))
@@ -43,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
             result.onFailure { exception ->
                 Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
             }
-        })
+        }
     }
 
     private fun setupPasswordVisibilityToggle() {
