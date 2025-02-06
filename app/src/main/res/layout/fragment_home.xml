@@ -66,7 +66,7 @@
                     android:layout_marginStart="20dp" />
 
                 <TextView
-                    android:id="@+id/txt_main_run_together"
+                    android:id="@+id/txtMainRunTogether"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/main_run_together"
@@ -77,10 +77,10 @@
                     android:layout_marginStart="34dp" />
 
                 <TextView
-                    android:id="@+id/txt_main_run_day"
+                    android:id="@+id/txtMainRunDay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/main_run_day"
+                    android:text=""
                     android:textSize="32sp"
                     android:letterSpacing="0.03"
                     android:fontFamily="@font/roboto_semibold"

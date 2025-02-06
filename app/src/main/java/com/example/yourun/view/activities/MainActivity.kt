@@ -1,6 +1,7 @@
 package com.example.yourun.view.activities
 
 import android.Manifest
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.ImageView
@@ -28,18 +29,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // 온보딩 완료 여부 확인 후, 처음 실행이면 온보딩 화면으로 이동
-        /*if (!isOnboardingCompleted()) {
+        /* if (!isOnboardingCompleted()) {
             startActivity(Intent(this, OnboardingActivity::class.java))
             finish() // MainActivity 종료
             return
-        }*/
+        } */
         setContentView(R.layout.activity_main)
 
         checkLocationPermission()
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val fabRunning = findViewById<ImageView>(R.id.fab_running)
-        val fabTitle = findViewById<TextView>(R.id.fab_title)
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_fragment_container, HomeFragment())
@@ -118,8 +118,13 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
+            // 권한이 이미 허용된 경우 실행할 코드
         } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionRequestCode)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                locationPermissionRequestCode
+            )
         }
     }
 

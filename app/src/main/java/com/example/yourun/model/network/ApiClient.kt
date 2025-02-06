@@ -24,9 +24,18 @@ object ApiClient {
                 level = HttpLoggingInterceptor.Level.BODY
             })
             .addInterceptor { chain ->
-                val request = chain.request().newBuilder()
-                    .addHeader("Authorization", "Bearer ${TokenManager.getToken()}")
-                    .build()
+                val originalRequest = chain.request()
+                val requestBuilder = originalRequest.newBuilder()
+
+                // 로그인 요청에는 Authorization 헤더를 추가하지 않음
+                if (!originalRequest.url.toString().contains("/login")) {
+                    val token = TokenManager.getToken()
+                    if (token.isNotEmpty()) {
+                        requestBuilder.addHeader("Authorization", "Bearer $token")
+                    }
+                }
+
+                val request = requestBuilder.build()
                 chain.proceed(request)
             }
             .build()

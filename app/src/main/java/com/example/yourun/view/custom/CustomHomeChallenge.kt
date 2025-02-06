@@ -5,6 +5,7 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
@@ -80,13 +81,21 @@ class CustomHomeChallenge @JvmOverloads constructor(
 
     // 날짜 업데이트
     fun updateDates(startDate: String, dayCount: Int) {
-        val parts = startDate.split("-") // "2025-01-22" -> ["2025", "01", "22"]
-        if (parts.size == 3) {
-            val month = parts[1].toInt() // "01" -> 1
-            val day = parts[2] // "22"
+        try {
+            val parts = startDate.split("-")
+            if (parts.size == 3) {
+                val month = parts[1].toIntOrNull() ?: 0
+                val day = parts[2].toIntOrNull() ?: 0
 
-            startDateTextView.text = "${month}월 ${day}일부터"
+                startDateTextView.text = "${month}월 ${day}일부터"
+            } else {
+                startDateTextView.text = "날짜 오류"
+            }
+        } catch (e: Exception) {
+            Log.e("CustomHomeChallenge", "날짜 변환 오류: ${e.message}")
+            startDateTextView.text = "날짜 오류"
         }
+
         dayCountTextView.text = "${dayCount}일째"
     }
 
@@ -124,24 +133,21 @@ class CustomHomeChallenge @JvmOverloads constructor(
     }
 
     fun updateSoloImage(tendency: String) {
-        // Solo 챌린지 → 메이트의 성향에 맞는 단일 이미지 적용
         val userImage = getTendencyImage(tendency)
-        imgUser1.setImageResource(userImage) // 첫 번째 프로필 이미지에만 적용
+        imgUser1.setImageResource(userImage)
         imgUser1.isVisible = true
 
-        // 크기 변경 (더 크게 표시)
-        val layoutParams = imgUser1.layoutParams as LayoutParams
-        layoutParams.width = 56.dpToPx(context)  // 기존보다 크게 조정
-        layoutParams.height = 56.dpToPx(context)
+        // 크기 및 위치 수정
+        imgUser1.layoutParams = imgUser1.layoutParams.apply {
+            width = 56.dpToPx(context)
+            height = 56.dpToPx(context)
+        }
 
-        // 위치 조정
-        layoutParams.topMargin = 40.dpToPx(context)  // 기존보다 아래로 이동
-        layoutParams.marginStart = 260.dpToPx(context)  // 기존보다 오른쪽으로 이동
+        // 강제로 레이아웃 업데이트
+        imgUser1.requestLayout()
 
-        imgUser1.layoutParams = layoutParams // 변경된 값 적용
-
-        // 기존 배경이 있으면 제거
-        findViewById<View>(R.id.bgd_user_profile)?.let { removeView(it) }
+        // 기존 배경이 있으면 숨김 처리
+        findViewById<View>(R.id.bgd_user_profile)?.isVisible = false
     }
 
     /**
@@ -154,10 +160,8 @@ class CustomHomeChallenge @JvmOverloads constructor(
     fun updateCrewImages(tendencies: List<String>) {
         val imageViews = listOf(imgUser1, imgUser2, imgUser3, imgUser4)
 
-        // 성향을 이미지 리소스로 변환
-        val userImages = tendencies
-            .take(4) // 최대 4명까지 표시
-            .map { getTendencyImage(it) } // 성향별 이미지 매핑
+        // 최대 4명까지만 표시
+        val userImages = tendencies.map { getTendencyImage(it) }
 
         // UI에 적용
         imageViews.forEachIndexed { index, imageView ->
@@ -165,7 +169,7 @@ class CustomHomeChallenge @JvmOverloads constructor(
                 imageView.setImageResource(userImages[index])
                 imageView.isVisible = true
             } else {
-                imageView.isVisible = false // 멤버 수가 적으면 숨김 처리
+                imageView.isVisible = false
             }
         }
     }

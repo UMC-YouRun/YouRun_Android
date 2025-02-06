@@ -1,11 +1,14 @@
 package com.example.yourun.model.data
 
+import com.google.gson.annotations.SerializedName
+
 data class UserCrewChallengeInfo(
-    val challengeId: Long,
-    val crewName: String,
-    val challengeStatus: String,
-    val challengePeriod: Int,
-    val myParticipantIdsInfo: List<MemberTendencyInfo>,
-    val crewDayCount: Int,
-    val crewStartDate: String
+    @SerializedName("challengeId") val challengeId: Long,
+    @SerializedName("crewName") val crewName: String,
+    @SerializedName("challengeStatus") val challengeStatus: String,
+    @SerializedName("challengePeriod") val challengePeriod: Int,
+    @SerializedName("myParticipantIdsInfo") val myParticipantIdsInfo: List<MemberTendencyInfo>,
+    @SerializedName("crewDayCount") val crewDayCount: Int,
+    @SerializedName("crewStartDate") val crewStartDate: String
 )
+
