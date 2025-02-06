@@ -11,18 +11,13 @@ import retrofit2.http.Path
 
 interface HomeApiService {
     @GET("users/home/challenges")
-    suspend fun getHomeChallengesInfo(
-        @Header("Authorization") token: String
-    ): Response<HomeChallengeResponse>
+    suspend fun getHomeChallengesInfo(): Response<HomeChallengeResponse>
 
-    @GET("user/mates/recommend")
-    suspend fun getRecommendMate(
-        @Header("Authorization") token: String
-    ): Response<RecommendMateResponse>
+    @GET("users/mates/recommend")
+    suspend fun getRecommendMate(): Response<RecommendMateResponse>
 
-    @POST("user/mates/{mateId}")
+    @POST("users/mates/{mateId}")
     suspend fun addMate(
-        @Header("Authorization") token: String,
         @Path("mateId") mateId: Long
     ): Response<ApiResponseBoolean>
 }

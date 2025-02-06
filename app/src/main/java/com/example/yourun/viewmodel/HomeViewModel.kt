@@ -46,47 +46,52 @@ class HomeViewModel(
     fun fetchHomeChallengeData() {
         viewModelScope.launch {
             try {
-                val token = "Bearer " + ApiClient.TokenManager.getToken()
-                Log.d("HomeViewModel", "전송할 토큰: $token") // 토큰 로그 추가
+                Log.d("HomeViewModel", "홈 챌린지 데이터 요청 시작")
 
-                val response = repository.getHomeChallengeData(token)
+                val response = repository.getHomeChallengeData() // 토큰을 넘기지 않음 (Interceptor 처리)
+
                 if (response == null) {
                     Log.e("HomeViewModel", "서버에서 유효한 챌린지 데이터를 반환하지 않았습니다.")
-                    return@launch // 서버 응답이 null이면 UI 업데이트를 하지 않음
+                    _challengeData.value = null // UI가 반응할 수 있도록 명확히 null 설정
+                    return@launch
                 }
 
                 Log.d("HomeViewModel", "서버 응답 성공: $response")
-
                 _challengeData.value = response // ChallengeData 업데이트
+
             } catch (e: Exception) {
                 Log.e("HomeViewModel", "서버 요청 중 오류 발생", e)
+                _challengeData.value = null // 오류 발생 시에도 UI가 반응할 수 있도록 null 설정
             }
         }
     }
 
+
     fun fetchRecommendMates() {
         viewModelScope.launch {
             try {
-                val token = "Bearer " + ApiClient.TokenManager.getToken()
-                Log.d("HomeViewModel", "전송할 토큰: $token")
+                Log.d("HomeViewModel", "추천 메이트 요청 시작")
 
-                val response = repository.getRecommendMates(token)
+                val response = repository.getRecommendMates() // 토큰을 넘기지 않음 (Interceptor 처리)
 
-                response?.data?.let { mateList ->  // response가 null이 아닐 때만 실행
-                    if (mateList.isEmpty()) {
-                        Log.e("HomeViewModel", "mateList : 추천 메이트 데이터 없음")
-                        _recommendMates.value = emptyList()
-                    } else {
-                        _recommendMates.value = mateList.take(5) // 최대 5명만 표시
-                    }
+                if (response == null) {
+                    Log.e("HomeViewModel", "response가 null입니다. 빈 리스트 반환")
+                    _recommendMates.value = emptyList()
                     return@launch
                 }
 
-                // response 자체가 null이면 빈 리스트 할당
-                Log.e("HomeViewModel", "response : 추천 메이트 데이터 없음")
-                _recommendMates.value = emptyList()
+                response.data.let { mateList ->
+                    _recommendMates.value = if (mateList.isEmpty()) {
+                        Log.e("HomeViewModel", "추천 메이트 데이터 없음")
+                        emptyList()
+                    } else {
+                        Log.d("HomeViewModel", "추천 메이트 목록 가져오기 성공: ${mateList.size}명")
+                        mateList.take(5) // 최대 5명만 표시
+                    }
+                }
             } catch (e: Exception) {
                 Log.e("HomeViewModel", "추천 메이트 가져오는 중 오류 발생", e)
+                _recommendMates.value = emptyList() // 네트워크 오류 발생 시 빈 리스트 할당
             }
         }
     }
@@ -94,11 +99,12 @@ class HomeViewModel(
     fun addMate(mateId: Long) {
         viewModelScope.launch {
             try {
-                val token = "Bearer " + ApiClient.TokenManager.getToken()
-                val success = repository.addMate(token, mateId)
+                Log.d("HomeViewModel", "메이트 추가 요청 시작 (mateId: $mateId)")
+
+                val success = repository.addMate(mateId) // 토큰을 넘기지 않음 (Interceptor 처리)
 
                 if (success) {
-                    _likedMates.value = _likedMates.value?.plus(mateId) ?: setOf(mateId)
+                    _likedMates.value = (_likedMates.value ?: emptySet()) + mateId // Set 업데이트 개선
                     Log.d("HomeViewModel", "메이트 추가 성공: $mateId")
                 } else {
                     Log.e("HomeViewModel", "메이트 추가 실패: $mateId")
@@ -108,4 +114,5 @@ class HomeViewModel(
             }
         }
     }
+
 }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.text.InputType
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -34,13 +35,12 @@ class LoginActivity : AppCompatActivity() {
 
         // 로그인 결과 관찰
         viewModel.loginResult.observe(this) { result ->
-            result.onSuccess { token ->
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+            result.onSuccess { response ->
+                Log.d("LoginFragment", "로그인 성공!")
                 startActivity(Intent(this, AppExpActivity::class.java))
                 finish()
-            }
-            result.onFailure { exception ->
-                Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
+            }.onFailure { error ->
+                Log.e("LoginFragment", "🚨 로그인 실패: ${error.message}")
             }
         }
     }

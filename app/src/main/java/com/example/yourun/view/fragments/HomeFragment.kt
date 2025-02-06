@@ -89,7 +89,11 @@ class HomeFragment : Fragment() {
 
         // ViewModel의 챌린지 데이터 옵저빙
         viewModel.challengeData.observe(viewLifecycleOwner) { challengeData ->
-            updateChallengeView(challengeData) // 데이터 변경될 때 UI 업데이트
+            if (challengeData == null) {
+                Log.d("HomeFragment","홈 챌린지 데이터를 불러오지 못했습니다.")
+            } else {
+                updateChallengeView(challengeData)
+            }
         }
 
         binding.btnAddChallenge.setOnClickListener {
@@ -110,10 +114,17 @@ class HomeFragment : Fragment() {
 
     // 버튼 상태에 따라 챌린지 UI 업데이트
     private fun updateChallengeView(challengeData: ChallengeData? = viewModel.challengeData.value) {
+        Log.d("HomeFragment", "UI 업데이트 호출됨, challengeData: $challengeData")
         if (isCrewSelected) {
-            challengeData?.crewChallenge?.let { replaceButtonWithCustomView(null, it) }
+            challengeData?.crewChallenge?.let {
+                Log.d("HomeFragment", "Crew 챌린지 UI 업데이트")
+                replaceButtonWithCustomView(null, it)
+            }
         } else {
-            challengeData?.soloChallenge?.let { replaceButtonWithCustomView(it, null) }
+            challengeData?.soloChallenge?.let {
+                Log.d("HomeFragment", "Solo 챌린지 UI 업데이트")
+                replaceButtonWithCustomView(it, null)
+            }
         }
     }
 

@@ -13,8 +13,8 @@ import retrofit2.Response
 
 class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
 
-    private val _loginResult = MutableLiveData<Result<String>>() // 로그인 결과를 관리
-    val loginResult: LiveData<Result<String>> get() = _loginResult
+    private val _loginResult = MutableLiveData<Result<LoginResponse>>() // 로그인 결과 관리
+    val loginResult: LiveData<Result<LoginResponse>> get() = _loginResult
 
     fun login(email: String, password: String) {
         viewModelScope.launch {
@@ -23,11 +23,11 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
 
                 if (response.isSuccessful) {
                     val body = response.body()
-                    if (body?.status == 200 && body.data?.accessToken != null) { // 변경된 필드명 적용
-                        val token = body.data.accessToken
-                        ApiClient.TokenManager.saveToken(token) // repository가 아니라 ApiClient에서 직접 저장
-                        Log.d("LoginViewModel", "토큰 저장됨: $token")
-                        _loginResult.value = Result.success(token)
+                    if (body?.status == 200 && body.data != null) {
+                        ApiClient.TokenManager.saveToken(body.data.accessToken) // JWT 저장
+                        Log.d("LoginViewModel", "로그인 성공: ${body.data.accessToken}")
+
+                        _loginResult.value = Result.success(body) // 전체 응답 저장
                     } else {
                         _loginResult.value = Result.failure(Exception(body?.message ?: "로그인 실패"))
                     }
