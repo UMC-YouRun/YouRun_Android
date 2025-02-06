@@ -7,16 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentHomeBinding
 import com.example.yourun.model.data.ChallengeData
 import com.example.yourun.model.data.UserCrewChallengeInfo
+import com.example.yourun.model.data.UserMateInfo
 import com.example.yourun.model.data.UserSoloChallengeInfo
 import com.example.yourun.model.network.ApiClient
-import com.example.yourun.model.repository.HomeChallengeRepository
+import com.example.yourun.model.repository.HomeRepository
 import com.example.yourun.view.custom.CustomHomeChallenge
+import com.example.yourun.view.custom.CustomMateView
 import com.example.yourun.viewmodel.HomeViewModel
 import com.example.yourun.viewmodel.HomeViewModelFactory
 import java.text.ParseException
@@ -32,7 +35,7 @@ class HomeFragment : Fragment() {
 
     private val viewModel: HomeViewModel by viewModels {
         HomeViewModelFactory(
-            HomeChallengeRepository(ApiClient.getHomeApiService()),
+            HomeRepository(ApiClient.getHomeApiService()),
             requireActivity().application
         )
     }
@@ -58,6 +61,7 @@ class HomeFragment : Fragment() {
 
         // 서버에서 챌린지 데이터 가져오기, 처음 한 번 호출
         viewModel.fetchHomeChallengeData()
+        viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
 
         viewModel.isPressedCrew.observe(viewLifecycleOwner) { isPressed ->
             binding.btnCrew.setImageResource(
@@ -90,6 +94,17 @@ class HomeFragment : Fragment() {
 
         binding.btnAddChallenge.setOnClickListener {
             // 챌린지 추가 화면 이동
+        }
+
+        // 추천 메이트 UI 업데이트
+        viewModel.recommendMates.observe(viewLifecycleOwner) { mates ->
+            updateRecommendMatesUI(mates)
+        }
+
+        // btn_redirect 클릭 시 최신 메이트 데이터 다시 불러오기
+        binding.btnRedirect.setOnClickListener {
+            Log.d("HomeFragment", "btn_redirect 클릭됨 - 추천 메이트 갱신")
+            viewModel.fetchRecommendMates()
         }
     }
 
@@ -158,6 +173,23 @@ class HomeFragment : Fragment() {
         parentLayout.addView(customView) // 새로운 커스텀 뷰 추가
     }
 
+    // 추천 메이트 UI 추가
+    private fun updateRecommendMatesUI(mates: List<UserMateInfo>) {
+        val parentLayout = binding.mainLinearLayout // 부모 레이아웃
+
+        // 기존 추가된 뷰 삭제 (새로운 데이터 반영)
+        parentLayout.children.filter { it is CustomMateView }.forEach { parentLayout.removeView(it) }
+
+        // 추천 메이트 목록 추가 (최대 5개)
+        mates.take(5).forEachIndexed { index, mate ->
+            val customMateView = CustomMateView(requireContext()).apply {
+                setViewModel(viewModel) // ViewModel 연결
+                updateMateInfo(mate, index + 1)
+            }
+            parentLayout.addView(customMateView)
+        }
+    }
+
     private fun updateRunTogetherText() {
         val sharedPref = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val userNickname = sharedPref.getString("nickname", "") ?: ""
@@ -193,7 +225,6 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
 
     override fun onResume() {
         super.onResume()

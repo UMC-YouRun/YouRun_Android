@@ -1,7 +1,6 @@
 package com.example.yourun.view.activities
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityAppExpBinding

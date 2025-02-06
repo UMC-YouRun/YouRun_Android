@@ -1,7 +1,6 @@
 package com.example.yourun.view.activities
 
 import android.Manifest
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.ImageView
