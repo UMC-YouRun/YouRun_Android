@@ -34,6 +34,15 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         return binding.root
     }
 
+    //가입날짜
+    private fun saveSignUpDate() {
+        val sharedPref = requireActivity().getSharedPreferences("UserData", android.content.Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        val currentDate = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(java.util.Date())
+        editor.putString("signup_date", currentDate) // 가입 날짜 저장
+        editor.apply()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -71,8 +80,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 apiService.signUp(signUpRequest)
 
                 withContext(Dispatchers.Main) {
-//                    Log.d("ResultFragment", "✅ 회원가입 요청 완료. 응답 체크 없이 MainActivity로 이동.")
-
+                    saveSignUpDate()
                     Toast.makeText(requireContext(), "회원가입이 완료되었습니다!", Toast.LENGTH_SHORT).show()
                     val intent = Intent(requireActivity(), MainActivity::class.java)
                     startActivity(intent)
@@ -80,8 +88,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-//                    Log.e("ResultFragment", "❌ 회원가입 요청 중 오류 발생: ${e.message}")
-
+                    saveSignUpDate()
                     val intent = Intent(requireActivity(), MainActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()
@@ -89,49 +96,6 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
             }
         }
     }
-
-//    private fun completeSignUp(resultType: String) {
-//        Log.d("ResultFragment", "🔍 completeSignUp 호출됨! resultType: $resultType")
-//
-//        val signUpRequest = signUpViewModel.getFinalData().copy(tendency = resultType)
-// //
-//        CoroutineScope(Dispatchers.IO).launch {
-//            try {
-//                val apiService = ApiClientNoAuth.getApiService()
-//                val response = apiService.signUp(signUpRequest)
-//
-//                withContext(Dispatchers.Main) {
-//                    Log.d("ResultFragment", "📩 Raw Response: ${Gson().toJson(response)}")
-//
-//                    if (response?.status == 200) {
-//                        Log.d("ResultFragment", "✅ 회원가입 성공!")
-//
-//                        val isSuccess = response.data as? Boolean ?: true
-//                        if (isSuccess) {
-//                            Toast.makeText(requireContext(), "회원가입이 완료되었습니다!", Toast.LENGTH_SHORT).show()
-//                            val intent = Intent(requireActivity(), MainActivity::class.java)
-//                            startActivity(intent)
-//                            requireActivity().finish()
-//                        } else {
-//                            Log.e("ResultFragment", "⚠️ 회원가입 실패: 서버에서 data=false 반환")
-//                            Toast.makeText(requireContext(), "회원가입 실패: 서버 오류", Toast.LENGTH_SHORT).show()
-//                        }
-//                    } else {
-//                        Log.e("ResultFragment", "❌ 회원가입 실패: 상태 코드 ${response?.status}")
-//                        Log.e("ResultFragment", "❌ 오류 메시지: ${response?.message}")
-//                        Toast.makeText(requireContext(), "회원가입 실패: ${response?.message}", Toast.LENGTH_SHORT).show()
-//                    }
-//                }
-//            } catch (e: Exception) {
-//                withContext(Dispatchers.Main) {
-//                    Toast.makeText(requireContext(), "회원가입 실패: ${e.message}", Toast.LENGTH_SHORT).show()
-//                    Log.e("ResultFragment", "❌ 회원가입 실패: ${e.message}")
-//                }
-//            }
-//        }
-//    }
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()
