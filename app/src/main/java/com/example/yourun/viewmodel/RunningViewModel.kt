@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
 
 class RunningViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val runningApiService = ApiClient.getRunningApiService(application.applicationContext)
+    private val runningApiService = ApiClient.getRunningApiService()
 
     val targetTime = MutableLiveData<Int>()  // 목표 시간 (분)
     val startTime = MutableLiveData<String>()  // 러닝 시작 시간
@@ -40,7 +40,7 @@ class RunningViewModel(application: Application) : AndroidViewModel(application)
     suspend fun sendRunningResult(request: RunningResultRequest): Response<RunningResultResponse> {
         return withContext(Dispatchers.IO) {
             try {
-                val token = "Bearer " + (ApiClient.getAccessTokenFromSharedPreferences(getApplication()) ?: "")
+                val token = "Bearer " + (ApiClient.TokenManager.getToken())
                 runningApiService.sendRunningResult(token, request)
             } catch (e: Exception) {
                 Log.e("RunningViewModel", "API 요청 실패", e)

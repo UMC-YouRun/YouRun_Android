@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.yourun.model.repository.LoginRepository
 import com.example.yourun.model.data.LoginResponse
+import com.example.yourun.model.network.ApiClient
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -22,9 +23,9 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
 
                 if (response.isSuccessful) {
                     val body = response.body()
-                    if (body?.status == 200 && body.data?.access_token != null) {
-                        val token = body.data.access_token
-                        repository.saveToken(token)
+                    if (body?.status == 200 && body.data?.accessToken != null) { // 변경된 필드명 적용
+                        val token = body.data.accessToken
+                        ApiClient.TokenManager.saveToken(token) // repository가 아니라 ApiClient에서 직접 저장
                         Log.d("LoginViewModel", "토큰 저장됨: $token")
                         _loginResult.value = Result.success(token)
                     } else {

@@ -67,7 +67,7 @@ class SignUp1Activity : AppCompatActivity() {
             }
 
             // 이메일 중복 확인 API 호출
-            checkEmailDuplicate(email)
+            //checkEmailDuplicate(email)
         }
     }
 
@@ -185,7 +185,7 @@ class SignUp1Activity : AppCompatActivity() {
         })
     }
 
-    private fun checkEmailDuplicate(email: String) {
+    /*private fun checkEmailDuplicate(email: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val response = ApiClient.getApiService(this@SignUp1Activity).checkEmailDuplicate(email)
@@ -217,6 +217,6 @@ class SignUp1Activity : AppCompatActivity() {
                 }
             }
         }
-    }
+    }*/
 
 }

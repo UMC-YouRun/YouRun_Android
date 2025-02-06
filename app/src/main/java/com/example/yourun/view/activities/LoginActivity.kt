@@ -11,17 +11,16 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityLoginBinding
+import com.example.yourun.model.network.ApiClient
 import com.example.yourun.viewmodel.LoginViewModel
 import com.example.yourun.model.repository.LoginRepository
-import com.example.yourun.utils.TokenManager
-import com.example.yourun.model.network.RetrofitClient
 import com.example.yourun.viewmodel.LoginViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory(LoginRepository(RetrofitClient.create(this), TokenManager.getInstance(this)))
+        LoginViewModelFactory(LoginRepository(ApiClient.getApiService(), ApiClient.TokenManager))
     }
     private var isPasswordVisible = false
 
@@ -94,40 +93,3 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
-
-/*private suspend fun login(email: String, password: String) {
-    try {
-        val request = LoginRequest(email, password)
-        val response = apiService.login(request) // suspend 함수 호출
-
-        if (response.isSuccessful) {
-            val body = response.body()
-            if (body?.status == 200 && body.data?.access_token != null) {
-                val token = body.data.access_token
-                tokenManager.saveToken(token)
-                Log.d("LoginActivity", "토큰 저장됨: $token")
-
-                Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
-
-                val intent = Intent(this@LoginActivity, AppExpActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Toast.makeText(
-                    this@LoginActivity,
-                    "로그인 실패: ${body?.message ?: "알 수 없는 오류"}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        } else {
-            Toast.makeText(
-                this@LoginActivity,
-                "로그인 실패: 서버 오류(${response.code()})",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    } catch (e: Exception) {
-        Toast.makeText(this@LoginActivity, "네트워크 오류 발생: ${e.message}", Toast.LENGTH_SHORT).show()
-    }
-}
-}*/

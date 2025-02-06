@@ -1,8 +1,10 @@
 package com.example.yourun.model.network
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import com.example.yourun.BuildConfig
+import com.example.yourun.MyApplication
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -13,60 +15,56 @@ const val BASE_URL = BuildConfig.BASE_URL
 
 object ApiClient {
 
-    private var retrofit: Retrofit? = null
+    private val client by lazy {
+        OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+            .addInterceptor { chain ->
+                val request = chain.request().newBuilder()
+                    .addHeader("Authorization", "Bearer ${TokenManager.getToken()}")
+                    .build()
+                chain.proceed(request)
+            }
+            .build()
+    }
 
-    private fun getRetrofit(context: Context): Retrofit {
-        if (retrofit == null) {
-            val client = OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .apply {
-                    val logging = HttpLoggingInterceptor()
-                    logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-                    addInterceptor(logging)
-                }
-                .addInterceptor { chain ->
-                    val token = getAccessTokenFromSharedPreferences(context)
-                    if (token.isNullOrEmpty()) {
-                        Log.e("AuthError", "Access Token is missing or empty")
-                    }
-                    val request = chain.request().newBuilder()
-                        .addHeader("Authorization", "Bearer $token")
-                        .build()
-                    chain.proceed(request)
-                }
-                .build()
+    private val retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 
-            retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+    fun getApiService(): ApiService = retrofit.create(ApiService::class.java)
+    fun getHomeApiService(): HomeApiService = retrofit.create(HomeApiService::class.java)
+    fun getRunningApiService(): RunningApiService = retrofit.create(RunningApiService::class.java)
 
+    object TokenManager {
+        private val context: Context
+            get() = MyApplication.instance.applicationContext
 
+        private val prefs: SharedPreferences
+            get() = context.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
+
+        fun saveToken(token: String) {
+            prefs.edit().putString("access_token", token).apply()
+            Log.d("TOKEN_MANAGER", "토큰 저장: $token") // 로그 추가
         }
-        return retrofit!!
 
+        fun getToken(): String {
+            val token = prefs.getString("access_token", "") ?: ""
+            Log.d("TOKEN_MANAGER", "토큰 가져오기: $token") // 로그 추가
+            return token
+        }
 
-    }
-
-
-    fun getApiService(context: Context): ApiService {
-        return getRetrofit(context).create(ApiService::class.java)
-    }
-
-    fun getHomeApiService(context: Context): HomeApiService {
-        return getRetrofit(context).create(HomeApiService::class.java)
-    }
-
-    fun getRunningApiService(context: Context): RunningApiService {
-        return getRetrofit(context).create(RunningApiService::class.java)
-    }
-
-    fun getAccessTokenFromSharedPreferences(context: Context): String? {
-        val sharedPreferences = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        return sharedPreferences.getString("access_token",null)
-
+        fun clearToken() {
+            prefs.edit().remove("access_token").apply()
+            Log.d("TOKEN_MANAGER", "토큰 삭제됨")
+        }
     }
 }
