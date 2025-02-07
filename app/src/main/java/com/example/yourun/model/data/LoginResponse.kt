@@ -1,5 +1,7 @@
 package com.example.yourun.model.data
 
+import com.google.gson.annotations.SerializedName
+
 data class LoginResponse(
     val status: Int,
     val code: String?,
@@ -8,5 +10,6 @@ data class LoginResponse(
 )
 
 data class TokenData(
-    val access_token: String
+    @SerializedName("access_token")
+    val accessToken: String
 )

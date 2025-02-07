@@ -6,7 +6,6 @@ import com.example.yourun.model.data.LoginResponse
 import com.example.yourun.model.data.RunningStatsResponse
 import com.example.yourun.model.data.SignUpRequest
 import com.example.yourun.model.data.SignUpResponse
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
