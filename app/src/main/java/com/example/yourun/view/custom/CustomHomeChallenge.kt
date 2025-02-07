@@ -116,8 +116,9 @@ class CustomHomeChallenge @JvmOverloads constructor(
     // 챌린지 상태 아이콘 업데이트
     fun updateChallengeState(challengeLevel: Int) {
         val drawableRes = when (challengeLevel) {
-            1 -> R.drawable.ic_waiting_matching
-            2 -> R.drawable.ic_progressing_matching
+            0 -> R.drawable.ic_waiting_matching
+            1 -> R.drawable.ic_progressing_matching
+            2 -> R.drawable.ic_complete
             else -> R.drawable.ic_waiting_matching // 기본값
         }
         challengeStateIcon.setImageResource(drawableRes)

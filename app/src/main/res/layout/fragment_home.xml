@@ -8,9 +8,12 @@
     </data>
 
     <ScrollView
+        android:id="@+id/mainScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:layout_marginBottom="60dp"
+        android:clipToPadding="false">
         
         <LinearLayout
             android:id="@+id/mainLinearLayout"
@@ -39,7 +42,7 @@
                     android:layout_weight="1" />
 
                 <ImageButton
-                    android:id="@+id/btn_calendar"
+                    android:id="@+id/btnCalendar"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:contentDescription="@string/main_calendar"
@@ -209,15 +212,22 @@
                     android:layout_marginTop="86dp"
                     android:layout_marginStart="74dp" />
 
-                <ImageButton
-                    android:id="@+id/btnAddChallenge"
+                <FrameLayout
+                    android:id="@+id/challengeButtonContainer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/add_challenge"
-                    android:src="@drawable/ic_add_challenge"
-                    android:background="@android:color/transparent"
                     android:layout_marginTop="140dp"
-                    android:layout_gravity="center_horizontal"/>
+                    android:layout_gravity="center_horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btnAddChallenge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/add_challenge"
+                        android:src="@drawable/ic_add_challenge"
+                        android:background="@android:color/transparent"/>
+
+                </FrameLayout>
 
             </FrameLayout>
 
@@ -235,9 +245,10 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="60dp">
+                android:layout_marginBottom="10dp">
 
                 <TextView
+                    android:id="@+id/txtMainUserSimilarMate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/similar_mate"

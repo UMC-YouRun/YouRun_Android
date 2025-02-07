@@ -53,8 +53,8 @@ class CustomMateView @JvmOverloads constructor(
         userIndex.text = index.toString()
         userName.text = mate.nickname
         userRunDay.text = "${mate.countDay}일째"
-        userRunDistance.text = "${mate.totalDistance}km"
-        userTag.text = mate.tags.joinToString(", ") // 태그 리스트를 문자열로 변환
+        userRunDistance.text = "${(mate.totalDistance / 1000)}km"
+        userTag.text = mate.tags.joinToString(" ") { "#$it" }
 
         // 유저 성향에 따라 이미지 변경
         val profileImageRes = when (mate.tendency) {
@@ -66,6 +66,8 @@ class CustomMateView @JvmOverloads constructor(
         userProfile.setImageResource(profileImageRes)
 
         heartButton.setOnClickListener {
+            isLiked = !isLiked // 좋아요 상태 변경
+            heartButton.isSelected = isLiked // Selector를 활용하여 이미지 변경
             viewModel?.addMate(mate.id)
         }
     }
