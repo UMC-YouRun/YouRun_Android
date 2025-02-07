@@ -8,7 +8,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.yourun.model.data.ChallengeData
 import com.example.yourun.model.data.UserMateInfo
-import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.HomeRepository
 import kotlinx.coroutines.launch
 
@@ -65,7 +64,6 @@ class HomeViewModel(
             }
         }
     }
-
 
     fun fetchRecommendMates() {
         viewModelScope.launch {
