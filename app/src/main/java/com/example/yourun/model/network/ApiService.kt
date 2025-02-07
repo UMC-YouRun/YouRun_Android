@@ -1,5 +1,6 @@
 package com.example.yourun.model.network
 
+import com.example.yourun.model.data.NicknameduplicateResponse
 import com.example.yourun.model.data.EmailduplicateResponse
 import com.example.yourun.model.data.LoginRequest
 import com.example.yourun.model.data.LoginResponse
@@ -23,8 +24,11 @@ interface ApiService {
     @POST("users")
     suspend fun signUp3(@Body request: SignUpRequest3): ApiResponse<SignUpResponse>
 
-    @POST("users/duplicate")  // POST 방식으로 이메일 중복 확인
+    @POST("users/duplicate")  // 이메일 중복 확인
     suspend fun checkEmailDuplicate(@Query("email") email: String): EmailduplicateResponse
+
+    @POST("users/check-nickname") //닉네임 중복 확인
+    suspend fun checkNicknameDuplicate(@Query("nickname") nickname : String) : NicknameduplicateResponse
 }
 
 
