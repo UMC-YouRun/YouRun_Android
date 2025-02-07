@@ -30,10 +30,10 @@
             android:name=".view.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.YouRun">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+<!--        <intent-filter>-->
+<!--            <action android:name="android.intent.action.MAIN" />-->
+<!--            <category android:name="android.intent.category.LAUNCHER" />-->
+<!--        </intent-filter>-->
         </activity>
 
         <activity
@@ -76,7 +76,12 @@
 
         <activity
             android:name=".view.activities.LoginActivity"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".view.activities.MateActivity"
@@ -94,13 +99,6 @@
             android:name=".view.activities.OnboardingActivity"
             android:exported="true" />
 
-        <activity
-            android:name=".view.activities.QuestionActivity"
-            android:exported="true" />
-
-        <activity
-            android:name=".view.activities.ResultActivity"
-            android:exported="true" />
 
         <activity
             android:name=".view.activities.ResultContributionActivity"
@@ -122,17 +120,6 @@
             android:name=".view.activities.RunningResultActivity"
             android:exported="true" />
 
-        <activity
-            android:name=".view.activities.SignUp1Activity"
-            android:exported="true" />
-
-        <activity
-            android:name=".view.activities.SignUp2Activity"
-            android:exported="true" />
-
-        <activity
-            android:name=".view.activities.SignUp3Activity"
-            android:exported="true" />
 
     </application>
 
