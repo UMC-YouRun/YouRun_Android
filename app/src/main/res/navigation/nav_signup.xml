@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/signUpFragment1">
+
+    <fragment
+        android:id="@+id/signUpFragment1"
+        android:name="com.example.yourun.view.fragments.SignUpFragment1"
+        android:label="회원가입 1">
+        <action
+            android:id="@+id/action_signUpFragment1_to_signUpFragment2"
+            app:destination="@id/signUpFragment2"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpFragment2"
+        android:name="com.example.yourun.view.fragments.SignUpFragment2"
+        android:label="회원가입 2">
+        <action
+            android:id="@+id/action_signUpFragment2_to_signUpFragment3"
+            app:destination="@id/signUpFragment3"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpFragment3"
+        android:name="com.example.yourun.view.fragments.SignUpFragment3"
+        android:label="회원가입 3">
+        <action
+            android:id="@+id/action_signUpFragment3_to_questionFragment"
+            app:destination="@id/questionFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/questionFragment"
+        android:name="com.example.yourun.view.fragments.QuestionFragment"
+        android:label="질문 화면">
+        <action
+            android:id="@+id/action_questionFragment_to_resultFragment"
+            app:destination="@id/resultFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.yourun.view.fragments.ResultFragment"
+        android:label="결과 화면"/>
+</navigation>

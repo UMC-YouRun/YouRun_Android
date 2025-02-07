@@ -31,7 +31,7 @@
     <string name="tv_check_tag6">#왕초보</string>
     <string name="img_up_background">img_up_background</string>
     <string name="app_exp_up_you_run">YOU+RUN?</string>
-    <string name="app_exp_1">             님 반가워요 ! \n지금부터 유런에 대해 \n알려드릴게요</string>
+    <string name="app_exp_1">님 반가워요 ! \n지금부터 유런에 대해 \n알려드릴게요</string>
     <string name="app_exp_1_1">만나지 않아도 함께 뛰어요, YOU+RUN!</string>
     <string name="app_exp_1_2">유런은 비대면 러닝 메이트와 함께 뛰는 러닝 앱이에요</string>
     <string name="app_exp_2">나는 어떤 캐릭터와 \n어울릴까?</string>
@@ -198,6 +198,8 @@
     <string name="date"> 2025년 1월 </string>
     <string name="crew_name2">크루구호</string>
     <string name="crew_name3">띄어쓰기 포함 한글 3~12자만 입력 가능해요</string>
+    <string name="character_dis">캐릭터 설명</string>
+
     <string name="minute_15">15분</string>
     <string name="minute_30">30분</string>
     <string name="minute_45">45분</string>
