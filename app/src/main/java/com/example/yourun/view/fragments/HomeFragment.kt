@@ -23,7 +23,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: HomeViewModel by viewModels {
-        HomeViewModelFactory(HomeChallengeRepository(ApiClient.getHomeApiService(requireContext())),
+        HomeViewModelFactory(HomeChallengeRepository(ApiClient.getHomeApiService()),
             requireActivity().application)
     }
 

@@ -1,5 +1,6 @@
 package com.example.yourun.view.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import com.example.yourun.R
 import com.example.yourun.model.data.MateData
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.MateRepository
+import com.example.yourun.utils.TokenManager
 import com.example.yourun.view.adapters.MateAdapter
 import kotlinx.coroutines.launch
 
@@ -22,7 +24,7 @@ class MateFragment : Fragment() {
     private val mateDataList = mutableListOf<MateData>()
 
     // MateRepository 인스턴스 생성
-    private val mateRepository by lazy { MateRepository(ApiClient.getApiService(requireContext())) }
+    private val mateRepository by lazy { MateRepository(ApiClient.getApiService()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -44,7 +46,7 @@ class MateFragment : Fragment() {
     }
 
     private fun loadMates() {
-        val token = ApiClient.getAccessTokenFromSharedPreferences(requireContext())
+        val token = TokenManager.getInstance(requireContext()).getToken()
         Log.d("MateFragment", "불러온 토큰: $token")
 
         if (token.isNullOrEmpty()) {
@@ -54,7 +56,7 @@ class MateFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                val mates = mateRepository.getMates(token)
+                val mates = mateRepository.getMates("Bearer $token") // Authorization 헤더 적용
                 if (mates.isEmpty()) {
                     Log.d("MateFragment", "메이트 데이터가 없습니다.")
                 } else {
@@ -69,4 +71,5 @@ class MateFragment : Fragment() {
             }
         }
     }
+
 }

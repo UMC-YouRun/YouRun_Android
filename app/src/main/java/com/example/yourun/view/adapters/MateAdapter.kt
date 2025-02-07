@@ -16,8 +16,9 @@ class MateAdapter(private val mateDataList: List<MateData>) :
     class MateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val rank: TextView = itemView.findViewById((R.id.idx_challenge_item))
         val profileImage: ImageView = itemView.findViewById(R.id.img_user_profile)
-        val name: TextView = itemView.findViewById(R.id.user_name)
-        val runday: TextView = itemView.findViewById(R.id.user_runday)
+        val nickname: TextView = itemView.findViewById(R.id.user_name)
+        val tags: TextView = itemView.findViewById(R.id.user_tag)
+        val countDay: TextView = itemView.findViewById(R.id.user_runday)
         val change: TextView = itemView.findViewById(R.id.mate_change)
         val distance: TextView = itemView.findViewById(R.id.user_km)
     }
@@ -32,9 +33,10 @@ class MateAdapter(private val mateDataList: List<MateData>) :
         val mate = mateDataList[position]
         holder.rank.text = mate.rank.toString()
         holder.profileImage.setImageResource(mate.profileImageResId)
-        holder.name.text = mate.name
-        holder.runday.text = "${mate.runday}일째"
-        holder.distance.text = "${mate.distance}km"
+        holder.nickname.text = mate.nickname
+        holder.tags.text
+        holder.countDay.text = "${mate.countDay}일째"
+        holder.distance.text = "${mate.totalDistance}km"
         holder.change.text = "${mate.change}위"
     }
 

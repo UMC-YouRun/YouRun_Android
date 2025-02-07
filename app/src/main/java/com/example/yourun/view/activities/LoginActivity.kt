@@ -77,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupSignupButton() {
         binding.imgBtnSignup.setOnClickListener {
-            startActivity(Intent(this, SignUp1Activity::class.java))
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
     }
 

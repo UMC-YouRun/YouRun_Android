@@ -39,7 +39,7 @@ class HomeViewModel(
         viewModelScope.launch {
             try {
                 // Application Context를 사용하여 SharedPreferences 접근
-                val token = "Bearer " + (ApiClient.getAccessTokenFromSharedPreferences(getApplication()) ?: "")
+                val token = "Bearer " + (ApiClient.getApiService() ?: "")
                 _challengeData.value = repository.getHomeChallengeData(token)
             } catch (e: Exception) {
                 Log.e("HomeViewModel", "Error fetching home challenge data", e)

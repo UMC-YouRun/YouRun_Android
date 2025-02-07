@@ -1,70 +1,61 @@
 package com.example.yourun.model.repository
 
-import android.widget.Toast
+import android.util.Log
 import com.example.yourun.R
 import com.example.yourun.model.data.MateApiData
 import com.example.yourun.model.data.MateData
 import com.example.yourun.model.data.MateResponse
-import com.example.yourun.model.network.ApiResponse
 import com.example.yourun.model.network.ApiService
+import com.example.yourun.utils.TokenManager
 
 class MateRepository(private val apiService: ApiService) {
 
     suspend fun getMates(token: String): List<MateData> {
-        val response: MateResponse = apiService.getMates(token)
+        return try {
+            Log.d("MateRepository", "API 요청 시작: Authorization 헤더 포함")
 
+            val response: MateResponse = apiService.getMates(token)
 
-        // API 응답 데이터를 로컬 데이터로 변환
-        return response.data?.mapIndexed { index, apiData: MateApiData ->
-            MateData(
-                rank = index + 1,
-                profileImageResId = getRandomProfileImage(),
-                name = apiData.nickname,
-                tendency = apiData.tendency,
-                tags = apiData.tags,
-                runday = (5..30).random(),   // 임시 랜덤 값 (나중에 API 연동 시 수정)
-                distance = (10..50).random(),// 임시 랜덤 값 (나중에 API 연동 시 수정)
-                change = (-2..2).random()    // 임시 순위 변동 값
-            )
-        } ?: emptyList()  // data가 null일 경우 빈 리스트 반환
-    }
+            // 응답 데이터 로그 출력 (디버깅용)
+            Log.d("MateRepository", "API 응답 데이터: $response")
 
-        /* return if (response.status == 200) {
+            // API 응답이 null이면 빈 리스트 반환
             response.data?.mapIndexed { index, apiData: MateApiData ->
-            MateData(
-                rank = index + 1,
-                profileImageResId = getRandomProfileImage(),
-                name = apiData.nickname,
-                tendency = apiData.tendency,
-                tags = apiData.tags,
-                runday = (5..30).random(),   // 임시 랜덤 값 (나중에 API 연동 시 수정)
-                distance = (10..50).random(),// 임시 랜덤 값 (나중에 API 연동 시 수정)
-                change = (-2..2).random()    // 임시 순위 변동 값
-            )
-        } ?: emptyList()  // data가 null일 경우 빈 리스트 반환
-        } else {
-            // 예외 상황 처리
-            when (response.code) {
-                "S001" -> throw Exception("잘못된 입력값입니다.")
-                "S002" -> throw Exception("서버 에러가 발생했습니다.")
-                "U001" -> throw Exception("존재하지 않는 사용자입니다.")
-            }
+                MateData(
+                    rank = index + 1,
+                    profileImageResId = getProfileImageByTendency(apiData.tendency),
+                    nickname = apiData.nickname ?: "이름 없음", // null 방지
+                    tags = apiData.tags ?: emptyList(),
+                    countDay = apiData.countDay ?: (5..30).random(),   // API에서 totalDistance 활용
+                    totalDistance = apiData.totalDistance ?: (10..50).random(),// 기존 임시 랜덤값에서 API 값 사용
+                    change = apiData.countDay ?: (-2..2).random()  // 로컬에서 계산 필요
+                )
+            } ?: emptyList() // data가 null이면 빈 리스트 반환
+
+        } catch (e: Exception) {
+            Log.e("MateRepository", "API 호출 오류: ${e.message}", e)
             emptyList()
         }
-    } */
+    }
 
+    /*
     private fun getRandomProfileImage(): Int {
         val images = listOf(
-            R.drawable.img_mate_pacemaker,
-            R.drawable.img_mate_trailrunner,
-            R.drawable.img_mate_sprinter
+            R.drawable.img_profile_pacemaker_purple,
+            R.drawable.img_profile_trailrunner_red,
+            R.drawable.img_profile_sprinter_yellow
         )
         return images.random()
     }
+    */
 
-    /* private fun showToast(message: String) {
-        // Toast 메시지로 사용자에게 오류 알림 (Activity/Fragment에서 호출 시)
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    } */
+    private fun getProfileImageByTendency(tendency: String?): Int {
+        return when (tendency) {
+            "페이스메이커" -> R.drawable.img_profile_pacemaker_purple
+            "트레일러너" -> R.drawable.img_profile_trailrunner_red
+            "스프린터" -> R.drawable.img_profile_sprinter_yellow
+            else -> R.drawable.img_profile_pacemaker_purple  // 경향 없을시 기본 이미지 불러오기
+        }
+    }
 
 }

@@ -69,6 +69,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         Log.d("ResultFragment", "📦 최종 요청 JSON: ${Gson().toJson(signUpRequest)}")
 
 
+        /*
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val apiService = ApiClientNoAuth.getApiService() // ✅ 인증 없이 회원가입 요청
@@ -87,6 +88,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 }
             }
         }
+         */
 
     }
 

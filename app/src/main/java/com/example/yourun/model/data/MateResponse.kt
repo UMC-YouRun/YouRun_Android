@@ -9,7 +9,9 @@ data class MateResponse(
 
 data class MateApiData(
     val id: Int,
-    val nickname: String,
-    val tendency: String,
-    val tags: List<String>
+    val nickname: String?,
+    val tendency: String?,
+    val tags: List<String>?,
+    val totalDistance: Int?,
+    val countDay: Int?
 )

@@ -207,7 +207,7 @@ class SignUpFragment1 : Fragment(R.layout.fragment_signup1) {
     private fun checkEmailDuplicate(email: String) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = ApiClient.getApiService(requireContext()).checkEmailDuplicate(email)
+                val response = ApiClient.getApiService().checkEmailDuplicate(email)
 
                 withContext(Dispatchers.Main) {
                     if (response != null && response.status == 200 && response.data) {

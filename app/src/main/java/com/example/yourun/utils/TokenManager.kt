@@ -20,12 +20,12 @@ class TokenManager private constructor(context: Context) {
 
     fun saveToken(token: String) {
         prefs.edit().putString("access_token", token).apply()
-        Log.d("TOKEN_MANAGER", "토큰 저장: $token") // 로그 추가
+        Log.d("TOKEN_MANAGER", "토큰 저장: [$token]") // 로그 추가
     }
 
     fun getToken(): String {
         val token = prefs.getString("access_token", "") ?: ""
-        Log.d("TOKEN_MANAGER", "토큰 가져오기: $token") // 로그 추가
+        Log.d("TOKEN_MANAGER", "토큰 가져오기: [$token]") // 로그 추가
         return token
     }
 
