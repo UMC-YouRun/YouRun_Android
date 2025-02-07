@@ -12,6 +12,7 @@ data class SignUpRequest(
 
 data class SignUpResponse(
     val status: Int,
+    val code: String?,
     val message: String,
-    val data: Any?
+    val data: Boolean?
 )

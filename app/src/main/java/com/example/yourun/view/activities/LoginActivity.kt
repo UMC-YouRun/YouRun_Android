@@ -75,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupSignupButton() {
         binding.imgBtnSignup.setOnClickListener {
-            startActivity(Intent(this, SignUp1Activity::class.java))
+            startActivity(Intent(this, SignUpActivity::class.java))
         }
     }
 
@@ -87,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
             } else {
-                viewModel.login(email, password) // ViewModel을 통해 로그인 요청
+                viewModel.login(email, password)
             }
         }
     }

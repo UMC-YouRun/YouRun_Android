@@ -32,7 +32,6 @@
             android:theme="@style/Theme.YouRun">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
-
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         </activity>
@@ -64,6 +63,8 @@
         <activity
             android:name=".view.activities.CreateCrew2Activity"
             android:exported="true" />
+
+        <activity android:name=".view.activities.SignUpActivity"/>
 
         <activity
             android:name=".view.activities.CreateSolo1Activity"

@@ -20,6 +20,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
+import org.json.JSONTokener
 
 class ResultFragment : Fragment(R.layout.fragment_result) {
 
@@ -32,6 +34,15 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         return binding.root
     }
 
+    //가입날짜
+    private fun saveSignUpDate() {
+        val sharedPref = requireActivity().getSharedPreferences("UserData", android.content.Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        val currentDate = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault()).format(java.util.Date())
+        editor.putString("signup_date", currentDate) // 가입 날짜 저장
+        editor.apply()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -40,9 +51,9 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         val finalScore = arguments?.getInt("FINAL_SCORE") ?: 0
 
         val resultType = when (finalScore) {
-            in 3..4 -> "스프린터"
-            in 5..6 -> "페이스메이커"
-            in 7..8 -> "마라토너"
+            in 4..6 -> "스프린터"
+            in 6..7 -> "페이스메이커"
+            in 7..8 -> "트레일러너"
             else -> "알 수 없음"
         }
 
@@ -61,20 +72,15 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
     }
 
     private fun completeSignUp(resultType: String) {
-        Log.d("ResultFragment", "🔍 completeSignUp 호출됨! resultType: $resultType")
-
         val signUpRequest = signUpViewModel.getFinalData().copy(tendency = resultType)
-
-        Log.d("ResultFragment", "📦 최종 회원가입 데이터: $signUpRequest")
-        Log.d("ResultFragment", "📦 최종 요청 JSON: ${Gson().toJson(signUpRequest)}")
-
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val apiService = ApiClientNoAuth.getApiService() // ✅ 인증 없이 회원가입 요청
-                val response = apiService.signUp(signUpRequest)
+                val apiService = ApiClientNoAuth.getApiService()
+                apiService.signUp(signUpRequest)
 
                 withContext(Dispatchers.Main) {
+                    saveSignUpDate()
                     Toast.makeText(requireContext(), "회원가입이 완료되었습니다!", Toast.LENGTH_SHORT).show()
                     val intent = Intent(requireActivity(), MainActivity::class.java)
                     startActivity(intent)
@@ -82,12 +88,13 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "회원가입 실패: ${e.message}", Toast.LENGTH_SHORT).show()
-                    Log.e("ResultFragment", "❌ 회원가입 실패: ${e.message}")
+                    saveSignUpDate()
+                    val intent = Intent(requireActivity(), MainActivity::class.java)
+                    startActivity(intent)
+                    requireActivity().finish()
                 }
             }
         }
-
     }
 
     override fun onDestroyView() {
