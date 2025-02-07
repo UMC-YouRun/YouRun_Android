@@ -31,7 +31,7 @@ class AppExpFragment : Fragment(R.layout.fragment_app_exp) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val nickname = arguments?.getString("nickname", "") ?: ""
+        val nickname = arguments?.getString("nickname", null) ?: ""
      
         val welcomeTextView = view.findViewById<TextView>(R.id.txt_app_exp_welcome)
 

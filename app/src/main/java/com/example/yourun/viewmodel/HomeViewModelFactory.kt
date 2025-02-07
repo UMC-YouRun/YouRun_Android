@@ -3,10 +3,10 @@ package com.example.yourun.viewmodel
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.yourun.model.repository.HomeChallengeRepository
+import com.example.yourun.model.repository.HomeRepository
 
 class HomeViewModelFactory(
-    private val repository: HomeChallengeRepository,
+    private val repository: HomeRepository,
     private val application: Application
 ) : ViewModelProvider.AndroidViewModelFactory(application) {
 

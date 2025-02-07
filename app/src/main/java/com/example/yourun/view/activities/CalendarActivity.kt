@@ -1,6 +1,7 @@
 package com.example.yourun.view.activities
 
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.MotionEvent
@@ -11,7 +12,13 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.yourun.R
+import com.example.yourun.model.data.RunningStatsResponse
+import com.example.yourun.model.network.ApiClient
+import com.example.yourun.model.network.ApiResponse
+import com.google.android.gms.common.api.Response
+import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.YearMonth
 
@@ -21,13 +28,21 @@ class CalendarActivity : AppCompatActivity() {
     private lateinit var fullCalendarGrid: GridLayout
     private lateinit var dragBar: View
 
+    private lateinit var distanceTextView: TextView
+    private lateinit var timeTextView: TextView
+    private lateinit var paceTextView: TextView
+    private lateinit var dateTextView: TextView
+    private lateinit var statsDate: TextView
+
     private var selectedDate: LocalDate = LocalDate.now()
-    private var isFullCalendarVisible = false // 전체 달력 표시 여부
+    private var isFullCalendarVisible = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
+
+        statsDate = findViewById(R.id.statsDate)
 
         val days = listOf("일", "월", "화", "수", "목", "금", "토")
         val textColor = ContextCompat.getColor(this, R.color.gray_600)
@@ -48,6 +63,12 @@ class CalendarActivity : AppCompatActivity() {
             weekdayLayout.addView(textView)
         }
 
+        distanceTextView = findViewById(R.id.distance)
+        timeTextView = findViewById(R.id.time)
+        paceTextView = findViewById(R.id.pace)
+        dateTextView = findViewById(R.id.statsDate)
+
+        fetchRunningStats(selectedDate.year, selectedDate.monthValue)
 
         // View 초기화
         weekCalendarGrid = findViewById(R.id.weekCalendarGrid)
@@ -67,6 +88,7 @@ class CalendarActivity : AppCompatActivity() {
             updateMonthYearText(monthYearText) // 월 텍스트 업데이트
             setupWeekCalendar() // 주간 달력 업데이트
             setupFullCalendar() // 전체 달력 업데이트
+            fetchRunningStats(selectedDate.year, selectedDate.monthValue)
         }
 
         // 다음 달 버튼 클릭 이벤트
@@ -75,6 +97,7 @@ class CalendarActivity : AppCompatActivity() {
             updateMonthYearText(monthYearText) // 월 텍스트 업데이트
             setupWeekCalendar() // 주간 달력 업데이트
             setupFullCalendar() // 전체 달력 업데이트
+            fetchRunningStats(selectedDate.year, selectedDate.monthValue)
         }
 
         // 드래그바 클릭/드래그 동작 설정
@@ -92,6 +115,66 @@ class CalendarActivity : AppCompatActivity() {
         // 초기 드래그바 위치 설정
         updateDragBarPosition()
     }
+
+    private fun fetchRunningStats(year: Int, month: Int) {
+        lifecycleScope.launch {
+            try {
+                val response = ApiClient.getApiService().getRunningStats(year, month)
+
+                if (response.isSuccessful) {
+                    val runningStats = response.body()?.data ?: emptyList()
+                    updateUI(runningStats)
+                } else {
+                    Log.e("RunningStats", "Error: ${response.code()} - ${response.message()}")
+                }
+            } catch (e: Exception) {
+                Log.e("RunningStats", "Exception: ${e.message}")
+            }
+        }
+    }
+
+
+    private fun updateUI(stats: List<RunningStatsResponse>) {
+        if (stats.isNotEmpty()) {
+            // ✅ 선택된 날짜에 해당하는 데이터 찾기 (날짜 부분만 비교)
+            val selectedStats = stats.find { it.createdAt.substring(0, 10) == selectedDate.toString() }
+
+            runOnUiThread {
+                if (selectedStats != null) {
+                    val distanceInKm = selectedStats.totalDistance / 1000
+                    val totalTimeInMinutes = selectedStats.totalTime / 60000
+
+                    statsDate.text = formatDate(selectedDate) // ✅ 선택한 날짜 표시
+
+                    // ✅ 데이터 업데이트
+                    distanceTextView.text = "${distanceInKm}km"
+                    timeTextView.text = "${totalTimeInMinutes}분"
+                    paceTextView.text = "${calculatePace(selectedStats.totalDistance, selectedStats.totalTime)}"
+                } else {
+                    // ✅ 선택한 날짜에 데이터가 없을 경우
+                    statsDate.text = formatDate(selectedDate)
+                    distanceTextView.text = "0km"
+                    timeTextView.text = "0분"
+                    paceTextView.text = "0'00km"
+                }
+            }
+        }
+    }
+
+    private fun formatDate(date: LocalDate): String {
+        return String.format("%04d년 %02d월 %02d일", date.year, date.monthValue, date.dayOfMonth)
+    }
+
+
+    // 페이스(분/km) 계산 함수
+    private fun calculatePace(distance: Int, time: Int): String {
+        if (distance == 0 || time == 0) return "0'00km"
+        val pace = (time.toDouble() / 60000) / (distance.toDouble() / 1000)
+        val minutes = pace.toInt()
+        val seconds = ((pace - minutes) * 60).toInt()
+        return String.format("%d:%02d 분/km", minutes, seconds)
+    }
+
 
     private fun updateMonthYearText(monthYearText: TextView) {
         val year = selectedDate.year
@@ -161,13 +244,13 @@ class CalendarActivity : AppCompatActivity() {
         val textView = TextView(this)
         val layoutParams = GridLayout.LayoutParams()
 
-        // 날짜 셀 크기 계산
-        val cellSize = (resources.displayMetrics.widthPixels / 7)
+        val totalWidth = resources.displayMetrics.widthPixels
+        val margin = 0
+        val cellSize = (totalWidth - margin * 14) / 8
+
         layoutParams.width = cellSize
         layoutParams.height = cellSize
-
-        // 날짜 셀 외부 간격 설정
-        layoutParams.setMargins(2, 2, 2, 2)
+        layoutParams.setMargins(margin, margin, margin, margin)
 
         textView.layoutParams = layoutParams
         textView.text = day.toString()
@@ -185,18 +268,24 @@ class CalendarActivity : AppCompatActivity() {
             selectedDate = currentDate
             setupWeekCalendar()
             setupFullCalendar()
+            fetchRunningStats(selectedDate.year, selectedDate.monthValue)
         }
 
         return textView
     }
 
 
+
     private fun createEmptyView(): TextView {
         val textView = TextView(this)
         val layoutParams = GridLayout.LayoutParams()
 
-        layoutParams.width = resources.displayMetrics.widthPixels / 7
-        layoutParams.height = layoutParams.width
+        // 빈 셀 크기 계산 (날짜 셀과 동일)
+        val cellSize = resources.displayMetrics.widthPixels / 8
+        layoutParams.width = cellSize
+        layoutParams.height = cellSize
+
+        layoutParams.setMargins(0, 0, 0, 0) // 마진 제거
         textView.layoutParams = layoutParams
         textView.text = ""
         textView.gravity = Gravity.CENTER

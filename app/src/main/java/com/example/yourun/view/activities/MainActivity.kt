@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.yourun.R
-import com.example.yourun.view.fragments.ChallengeFragment
 import com.example.yourun.view.fragments.HomeFragment
 import com.example.yourun.view.fragments.MateFragment
 import com.example.yourun.view.fragments.MyRunFragment
@@ -19,6 +18,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import com.example.yourun.view.fragments.ChallengeFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,18 +28,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // 온보딩 완료 여부 확인 후, 처음 실행이면 온보딩 화면으로 이동
-        /*if (!isOnboardingCompleted()) {
+        /* if (!isOnboardingCompleted()) {
             startActivity(Intent(this, OnboardingActivity::class.java))
             finish() // MainActivity 종료
             return
-        }*/
+        } */
         setContentView(R.layout.activity_main)
 
         checkLocationPermission()
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val fabRunning = findViewById<ImageView>(R.id.fab_running)
-        val fabTitle = findViewById<TextView>(R.id.fab_title)
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_fragment_container, HomeFragment())
@@ -118,8 +117,13 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
+            // 권한이 이미 허용된 경우 실행할 코드
         } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionRequestCode)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                locationPermissionRequestCode
+            )
         }
     }
 

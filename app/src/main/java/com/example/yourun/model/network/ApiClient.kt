@@ -1,8 +1,10 @@
 package com.example.yourun.model.network
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import com.example.yourun.BuildConfig
+import com.example.yourun.MyApplication
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -13,60 +15,90 @@ const val BASE_URL = BuildConfig.BASE_URL
 
 object ApiClient {
 
-    private var retrofit: Retrofit? = null
+    private val client by lazy {
+        OkHttpClient.Builder()
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+            .addInterceptor { chain ->
+                val originalRequest = chain.request()
+                val requestUrl = originalRequest.url.toString()
 
-    private fun getRetrofit(context: Context): Retrofit {
-        if (retrofit == null) {
-            val client = OkHttpClient.Builder()
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .apply {
-                    val logging = HttpLoggingInterceptor()
-                    logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-                    addInterceptor(logging)
+                if (requestUrl.contains("/api/v1/users/login")) {
+                    Log.d("Interceptor", "로그인 요청이므로 Authorization 헤더를 추가하지 않음")
+                    return@addInterceptor chain.proceed(originalRequest)
                 }
-                .addInterceptor { chain ->
-                    val token = getAccessTokenFromSharedPreferences(context)
-                    if (token.isNullOrEmpty()) {
-                        Log.e("AuthError", "Access Token is missing or empty")
-                    }
-                    val request = chain.request().newBuilder()
-                        .addHeader("Authorization", "Bearer $token")
+
+                // 로그인 이외의 요청에만 토큰 추가
+                val token = TokenManager.getToken()
+                if (token.isNotEmpty()) {
+                    val requestWithAuth = originalRequest.newBuilder()
+                        .addHeader("Authorization", "Bearer $token") // 올바른 형식으로 추가
                         .build()
-                    chain.proceed(request)
+                    Log.d("Interceptor", "Authorization 헤더 추가됨: Bearer $token")
+                    return@addInterceptor chain.proceed(requestWithAuth)
                 }
-                .build()
 
-            retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
+                return@addInterceptor chain.proceed(originalRequest)
+            }
+            .build()
+    }
 
+    private val retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
 
+    fun getApiService(): ApiService = retrofit.create(ApiService::class.java)
+    fun getHomeApiService(): HomeApiService = retrofit.create(HomeApiService::class.java)
+    fun getRunningApiService(): RunningApiService = retrofit.create(RunningApiService::class.java)
+
+    object TokenManager {
+        private val context: Context
+            get() = MyApplication.instance.applicationContext
+
+        private val prefs: SharedPreferences
+            get() = context.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
+
+        fun saveToken(token: String) {
+            val cleanedToken = token.trim()
+            val editor = prefs.edit()
+            editor.putString("access_token", cleanedToken)
+            val success = editor.commit() // 즉시 저장
+
+            if (success) {
+                Log.d("TOKEN_MANAGER", "새로운 토큰 저장 완료: $cleanedToken")
+            } else {
+                Log.e("TOKEN_MANAGER", "토큰 저장 실패")
+            }
+
+            // 저장 후 즉시 불러와서 확인
+            val savedToken = getToken()
+            Log.d("TOKEN_MANAGER", "저장된 JWT 확인: $savedToken")
+
+            if (cleanedToken == savedToken) {
+                Log.d("TOKEN_MANAGER", "저장된 토큰이 서버에서 받은 토큰과 동일함")
+            } else {
+                Log.e("TOKEN_MANAGER", "저장된 토큰이 서버에서 받은 토큰과 다름! 저장 과정에서 변형됨!")
+            }
         }
-        return retrofit!!
 
+        fun getToken(): String {
+            val token = prefs.getString("access_token", "") ?: ""
 
-    }
+            Log.d("TOKEN_MANAGER", "SharedPreferences에서 불러온 최신 JWT: $token")
+            return token
+        }
 
-
-    fun getApiService(context: Context): ApiService {
-        return getRetrofit(context).create(ApiService::class.java)
-    }
-
-    fun getHomeApiService(context: Context): HomeApiService {
-        return getRetrofit(context).create(HomeApiService::class.java)
-    }
-
-    fun getRunningApiService(context: Context): RunningApiService {
-        return getRetrofit(context).create(RunningApiService::class.java)
-    }
-
-    fun getAccessTokenFromSharedPreferences(context: Context): String? {
-        val sharedPreferences = context.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        return sharedPreferences.getString("access_token",null)
-
+        fun clearToken() {
+            prefs.edit().remove("access_token").apply()
+            Log.d("TOKEN_MANAGER", "토큰 삭제됨")
+        }
     }
 }

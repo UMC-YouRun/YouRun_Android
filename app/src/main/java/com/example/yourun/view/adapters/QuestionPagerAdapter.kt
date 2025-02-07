@@ -4,7 +4,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -14,15 +13,13 @@ import com.example.yourun.model.data.Question
 import com.example.yourun.model.repository.QuestionRepository.questions
 import com.example.yourun.utils.DimensionUtils
 
-
 class QuestionPagerAdapter(
     private val questions: List<Question>,
-    private val onAnswerSelected: (Int, String) -> Unit
+    private val onAnswerSelected: (Int, Int) -> Unit // 선택된 점수를 전달
 ) : RecyclerView.Adapter<QuestionPagerAdapter.QuestionViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_question, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_question, parent, false)
         return QuestionViewHolder(view)
     }
 
@@ -40,25 +37,23 @@ class QuestionPagerAdapter(
         private val questionNumberCircle: TextView = itemView.findViewById(R.id.questionNumberCircle)
         private val questionTotalText: TextView = itemView.findViewById(R.id.questionTotalText)
 
-        fun bind(question: Question, onAnswerSelected: (Int, String) -> Unit) {
-
+        fun bind(question: Question, onAnswerSelected: (Int, Int) -> Unit) {
             questionText.text = question.text
             questionDetail.text = question.detail
             questionNumberCircle.text = question.id.toString()
             questionTotalText.text = "/${questions.size}"
 
-            // 기존 버튼 초기화
             answersContainer.removeAllViews()
 
             var selectedButton: LinearLayout? = null
-            var selectedImage: ImageView? = null //체크 이미지
+            var selectedImage: ImageView? = null // 체크 이미지
 
-            question.answers.forEach { answer ->
+            question.answers.forEachIndexed { index, answer ->
                 val container = LinearLayout(itemView.context).apply {
                     orientation = LinearLayout.HORIZONTAL
                     layoutParams = LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
-                        DimensionUtils.dpToPx(context, 69) // 답변 박스 고정
+                        DimensionUtils.dpToPx(context, 69) // 답변 박스 높이 고정
                     ).apply {
                         setMargins(
                             0,
@@ -68,12 +63,11 @@ class QuestionPagerAdapter(
                         )
                     }
                     background = context.getDrawable(R.drawable.btn_question_background)
-                    setPadding(0, 0, 0, 0) // 내부 패딩은 텍스트와 이미지에서 개별적으로 설정
+                    setPadding(0, 0, 0, 0)
                     isClickable = true
                     isFocusable = true
                 }
 
-                // 텍스트 추가
                 val answerText = TextView(itemView.context).apply {
                     text = answer
                     textSize = 16f
@@ -106,30 +100,27 @@ class QuestionPagerAdapter(
                             DimensionUtils.dpToPx(context, 22)
                         )
                     }
-                    setImageResource(R.drawable.img_check) // Vector Drawable 참조
-                    visibility = View.GONE // 초기에는 숨김
+                    setImageResource(R.drawable.img_check)
+                    visibility = View.GONE
                 }
 
-
-                // 클릭 이벤트
                 container.setOnClickListener {
                     selectedButton?.isSelected = false
-                    selectedImage?.visibility = View.GONE // 이전 선택 이미지 숨기기
+                    selectedImage?.visibility = View.GONE
                     selectedButton = container
                     selectedImage = checkImage
 
                     container.isSelected = true
-                    checkImage.visibility = View.VISIBLE // 현재 선택 이미지 표시
+                    checkImage.visibility = View.VISIBLE
 
-                    onAnswerSelected(question.id, answer)
+                    val score = if (index == 0) 1 else 2  // 1번 선택 시 +1, 2번 선택 시 +2
+                    onAnswerSelected(question.id, score)
                 }
 
-                // 뷰 추가
                 container.addView(answerText)
                 container.addView(checkImage)
                 answersContainer.addView(container)
             }
         }
     }
-
 }
