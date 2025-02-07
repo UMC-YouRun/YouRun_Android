@@ -24,7 +24,7 @@ object ApiClient {
             })
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
-                    .addHeader("Authorization", "Bearer ${TokenManager.getToken()}")
+                    //.addHeader("Authorization", "Bearer ${TokenManager.getToken()}")
                     .build()
                 chain.proceed(request)
             }

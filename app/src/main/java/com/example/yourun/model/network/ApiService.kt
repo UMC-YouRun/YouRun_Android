@@ -33,10 +33,14 @@ interface ApiService {
     suspend fun checkEmailDuplicate(@Query("email") email: String): EmailduplicateResponse
 
     // 러닝 메이트 (리스트) 조회
+    /*
     @GET("users/mates")
     suspend fun getMates(
         @Header("Authorization") token: String
     ): MateResponse
+     */
+    @GET("users/mates")
+    suspend fun getMates(@Header("Authorization") token: String): MateResponse
 
     // 러닝 메이트 삭제
     /* @DELETE("mates/{id}")
