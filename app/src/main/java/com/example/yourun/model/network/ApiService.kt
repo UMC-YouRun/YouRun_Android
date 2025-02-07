@@ -1,5 +1,7 @@
 package com.example.yourun.model.network
 
+import com.example.yourun.model.data.ChallengeDataResponse
+import com.example.yourun.model.data.ChallengeResultResponse
 import com.example.yourun.model.data.EmailduplicateResponse
 import com.example.yourun.model.data.LoginRequest
 import com.example.yourun.model.data.LoginResponse
@@ -28,6 +30,12 @@ interface ApiService {
         @Path("year") year: Int,
         @Path("month") month: Int
     ): Response<ApiResponse<List<RunningStatsResponse>>>
+
+    @GET("/challenges/solo/matching")
+    suspend fun getChallengeData(): Response<ApiResponse<ChallengeDataResponse>>
+
+    @GET("/challenge/solo/running-result")
+    suspend fun getSoloChallengeResultData(): Response<ApiResponse<ChallengeResultResponse>>
 }
 
 

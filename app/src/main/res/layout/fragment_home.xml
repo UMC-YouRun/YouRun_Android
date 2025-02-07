@@ -42,7 +42,7 @@
                     android:layout_weight="1" />
 
                 <ImageButton
-                    android:id="@+id/btnCalendar"
+                    android:id="@+id/btn_calendar"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:contentDescription="@string/main_calendar"

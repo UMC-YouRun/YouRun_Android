@@ -35,12 +35,14 @@ class CalendarActivity : AppCompatActivity() {
     private lateinit var statsDate: TextView
 
     private var selectedDate: LocalDate = LocalDate.now()
-    private var isFullCalendarVisible = false // 전체 달력 표시 여부
+    private var isFullCalendarVisible = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
+
+        statsDate = findViewById(R.id.statsDate)
 
         val days = listOf("일", "월", "화", "수", "목", "금", "토")
         val textColor = ContextCompat.getColor(this, R.color.gray_600)
@@ -117,8 +119,7 @@ class CalendarActivity : AppCompatActivity() {
     private fun fetchRunningStats(year: Int, month: Int) {
         lifecycleScope.launch {
             try {
-                val response = ApiClient.getApiService(this@CalendarActivity)
-                    .getRunningStats(year, month)
+                val response = ApiClient.getApiService().getRunningStats(year, month)
 
                 if (response.isSuccessful) {
                     val runningStats = response.body()?.data ?: emptyList()
@@ -132,20 +133,46 @@ class CalendarActivity : AppCompatActivity() {
         }
     }
 
+
     private fun updateUI(stats: List<RunningStatsResponse>) {
         if (stats.isNotEmpty()) {
-            val latestStats = stats.first()
-            val formattedDate = latestStats.createdAt.substring(0, 10)
-
-            val statsText = stats.joinToString("\n") {
-                "${it.createdAt.substring(0, 10)} - 거리: ${it.totalDistance / 1000}km, 시간: ${it.totalTime / 60000}분"
-            }
+            // ✅ 선택된 날짜에 해당하는 데이터 찾기 (날짜 부분만 비교)
+            val selectedStats = stats.find { it.createdAt.substring(0, 10) == selectedDate.toString() }
 
             runOnUiThread {
-                distanceTextView.text = statsText
-                statsDate.text = formattedDate
+                if (selectedStats != null) {
+                    val distanceInKm = selectedStats.totalDistance / 1000
+                    val totalTimeInMinutes = selectedStats.totalTime / 60000
+
+                    statsDate.text = formatDate(selectedDate) // ✅ 선택한 날짜 표시
+
+                    // ✅ 데이터 업데이트
+                    distanceTextView.text = "${distanceInKm}km"
+                    timeTextView.text = "${totalTimeInMinutes}분"
+                    paceTextView.text = "${calculatePace(selectedStats.totalDistance, selectedStats.totalTime)}"
+                } else {
+                    // ✅ 선택한 날짜에 데이터가 없을 경우
+                    statsDate.text = formatDate(selectedDate)
+                    distanceTextView.text = "0km"
+                    timeTextView.text = "0분"
+                    paceTextView.text = "0'00km"
+                }
             }
         }
+    }
+
+    private fun formatDate(date: LocalDate): String {
+        return String.format("%04d년 %02d월 %02d일", date.year, date.monthValue, date.dayOfMonth)
+    }
+
+
+    // 페이스(분/km) 계산 함수
+    private fun calculatePace(distance: Int, time: Int): String {
+        if (distance == 0 || time == 0) return "0'00km"
+        val pace = (time.toDouble() / 60000) / (distance.toDouble() / 1000)
+        val minutes = pace.toInt()
+        val seconds = ((pace - minutes) * 60).toInt()
+        return String.format("%d:%02d 분/km", minutes, seconds)
     }
 
 
@@ -241,6 +268,7 @@ class CalendarActivity : AppCompatActivity() {
             selectedDate = currentDate
             setupWeekCalendar()
             setupFullCalendar()
+            fetchRunningStats(selectedDate.year, selectedDate.monthValue)
         }
 
         return textView
