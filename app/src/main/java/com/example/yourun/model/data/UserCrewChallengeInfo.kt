@@ -9,3 +9,4 @@ data class UserCrewChallengeInfo(
     val crewDayCount: Int,
     val crewStartDate: String
 )
+

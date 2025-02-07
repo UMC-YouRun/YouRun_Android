@@ -1,21 +1,35 @@
 package com.example.yourun.view.fragments
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import android.widget.LinearLayout
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentHomeBinding
+import com.example.yourun.model.data.ChallengeData
 import com.example.yourun.model.data.UserCrewChallengeInfo
+import com.example.yourun.model.data.UserMateInfo
 import com.example.yourun.model.data.UserSoloChallengeInfo
 import com.example.yourun.model.network.ApiClient
-import com.example.yourun.model.repository.HomeChallengeRepository
+import com.example.yourun.model.repository.HomeRepository
+import com.example.yourun.view.activities.CalendarActivity
 import com.example.yourun.view.custom.CustomHomeChallenge
+import com.example.yourun.view.custom.CustomMateView
 import com.example.yourun.viewmodel.HomeViewModel
 import com.example.yourun.viewmodel.HomeViewModelFactory
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 class HomeFragment : Fragment() {
 
@@ -23,11 +37,14 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: HomeViewModel by viewModels {
-        HomeViewModelFactory(HomeChallengeRepository(ApiClient.getHomeApiService(requireContext())),
-            requireActivity().application)
+        HomeViewModelFactory(
+            HomeRepository(ApiClient.getHomeApiService()),
+            requireActivity().application
+        )
     }
 
     private var isCrewSelected = true // 초기값 : 크루 챌린지가 선택된 상태
+    private var originalChallengeButton: View? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,8 +60,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        updateUserInfoText()
+
         // 서버에서 챌린지 데이터 가져오기, 처음 한 번 호출
         viewModel.fetchHomeChallengeData()
+        viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
 
         viewModel.isPressedCrew.observe(viewLifecycleOwner) { isPressed ->
             binding.btnCrew.setImageResource(
@@ -63,102 +83,180 @@ class HomeFragment : Fragment() {
             isCrewSelected = true
             updateChallengeView()
         }
+
         binding.btnSolo.setOnClickListener {
             viewModel.toggleSoloButton()
             isCrewSelected = false
             updateChallengeView()
         }
 
+        // challengeButtonContainer에 기본 btnAddChallenge 뷰를 저장
+        originalChallengeButton = binding.challengeButtonContainer.findViewById(R.id.btnAddChallenge)
+
         // ViewModel의 챌린지 데이터 옵저빙
-        viewModel.challengeData.observe(viewLifecycleOwner) {
-            updateChallengeView() // 데이터 변경될 때 UI 업데이트
+        viewModel.challengeData.observe(viewLifecycleOwner) { challengeData ->
+            if (challengeData == null) {
+                Log.d("HomeFragment","홈 챌린지 데이터를 불러오지 못했습니다.")
+            } else {
+                updateChallengeView(challengeData)
+            }
         }
 
         binding.btnAddChallenge.setOnClickListener {
             // 챌린지 추가 화면 이동
         }
+
+        binding.btnCalendar.setOnClickListener {
+            val intent = Intent(requireContext(), CalendarActivity::class.java)
+            startActivity(intent)
+        }
+
+        // 추천 메이트 UI 업데이트
+        viewModel.recommendMates.observe(viewLifecycleOwner) { mates ->
+            updateRecommendMatesUI(mates)
+        }
+
+        // btn_redirect 클릭 시 최신 메이트 데이터 다시 불러오기
+        binding.btnRedirect.setOnClickListener {
+            Log.d("HomeFragment", "btn_redirect 클릭됨 - 추천 메이트 갱신")
+            viewModel.fetchRecommendMates()
+        }
     }
 
     // 버튼 상태에 따라 챌린지 UI 업데이트
-    private fun updateChallengeView() {
-        val challengeData = viewModel.challengeData.value
+    private fun updateChallengeView(challengeData: ChallengeData? = viewModel.challengeData.value) {
+        val container = binding.challengeButtonContainer
+        container.removeAllViews()
+
         if (isCrewSelected) {
-            challengeData?.crewChallenge?.let { replaceButtonWithCustomView(null, it) }
+            // Crew 버튼 선택 시
+            if (challengeData?.crewChallenge != null) {
+                container.addView(createCustomHomeChallengeViewForCrew(challengeData.crewChallenge))
+            } else {
+                // crew 데이터가 없으면 기본 버튼 복원
+                originalChallengeButton?.let { container.addView(it) }
+            }
         } else {
-            challengeData?.soloChallenge?.let { replaceButtonWithCustomView(it, null) }
+            // Solo 버튼 선택 시
+            if (challengeData?.soloChallenge != null) {
+                container.addView(createCustomHomeChallengeViewForSolo(challengeData.soloChallenge))
+            } else {
+                // solo 데이터가 없으면 기본 버튼 복원
+                originalChallengeButton?.let { container.addView(it) }
+            }
         }
     }
 
-    // ImageButton을 CustomHomeChallenge로 교체하는 함수
-    private fun replaceButtonWithCustomView(
-        soloChallenge: UserSoloChallengeInfo?,
-        crewChallenge: UserCrewChallengeInfo?
-    ) {
-        val parentLayout = binding.mainChallengeFrame
-        val btnAddChallenge = parentLayout.findViewById<ImageButton>(R.id.btnAddChallenge)
-
-        btnAddChallenge?.let {
-            parentLayout.removeView(it)
-        } // 기존 뷰 제거
-
-        val customView = CustomHomeChallenge(requireContext())
-
-        if (soloChallenge != null) {
-            customView.updateSoloTitle(soloChallenge.challengeMateNickName)
-            // Solo 챌린지 데이터 적용
-            customView.updateDates(
-                startDate = soloChallenge.soloStartDate,
-                dayCount = soloChallenge.soloDayCount
-            )
-            customView.updatePeriodSolo(soloChallenge.challengePeriod)
-            customView.updateDistance(soloChallenge.challengeDistance)
-            customView.updateSoloImage(soloChallenge.challengeMateTendency)
+    private fun createCustomHomeChallengeViewForSolo(soloChallenge: UserSoloChallengeInfo): CustomHomeChallenge {
+        val customView = CustomHomeChallenge(requireContext()).apply {
+            id = R.id.custom_home_challenge_view
         }
-
-        if (crewChallenge != null) {
-            // 크루 이름 색상 변경 및 "크루" 추가
-            customView.updateCrewTitle(crewChallenge.crewName)
-            // Crew 챌린지 데이터 적용
-            customView.updateDates(
-                startDate = crewChallenge.crewStartDate,
-                dayCount = crewChallenge.crewDayCount
-            )
-            customView.updatePeriodCrew(crewChallenge.challengePeriod)
-
-            // 크루원 성향에 따라 이미지 설정
-            val crewTendencies = crewChallenge.myParticipantIdsInfo.map { it.memberTendency }
-            customView.updateCrewImages(crewTendencies)
-        }
-
-        // Solo 챌린지 상태 아이콘 설정
-        val soloChallengeLevel = when (soloChallenge?.status) {
+        customView.updateSoloTitle(soloChallenge.challengeMateNickName)
+        customView.updateDates(startDate = soloChallenge.soloStartDate, dayCount = soloChallenge.soloDayCount)
+        customView.updatePeriodSolo(soloChallenge.challengePeriod)
+        customView.updateDistance(soloChallenge.challengeDistance)
+        customView.updateSoloImage(soloChallenge.challengeMateTendency)
+        val soloChallengeLevel = when (soloChallenge.status) {
             "PENDING" -> 0
             "IN_PROGRESS" -> 1
             "COMPLETED" -> 2
             else -> 0
         }
+        customView.updateChallengeState(soloChallengeLevel)
+        return customView
+    }
 
-        // Crew 챌린지 상태 아이콘 설정
-        val crewChallengeLevel = when (crewChallenge?.challengeStatus) {
+    private fun createCustomHomeChallengeViewForCrew(crewChallenge: UserCrewChallengeInfo): CustomHomeChallenge {
+        val customView = CustomHomeChallenge(requireContext()).apply {
+            id = R.id.custom_home_challenge_view
+        }
+        customView.updateCrewTitle(crewChallenge.crewName)
+        customView.updateDates(startDate = crewChallenge.crewStartDate, dayCount = crewChallenge.crewDayCount)
+        customView.updatePeriodCrew(crewChallenge.challengePeriod)
+        val crewTendencies = crewChallenge.myParticipantIdsInfo.map { it.memberTendency }
+        customView.updateCrewImages(crewTendencies)
+        val crewChallengeLevel = when (crewChallenge.challengeStatus) {
             "PENDING" -> 0
             "IN_PROGRESS" -> 1
             "COMPLETED" -> 2
             else -> 0
         }
+        customView.updateChallengeState(crewChallengeLevel)
+        return customView
+    }
 
-        // 선택된 챌린지에 따라 적절한 아이콘 적용
-        if (soloChallenge != null) {
-            customView.updateChallengeState(soloChallengeLevel) // Solo 챌린지 아이콘 적용
-        } else if (crewChallenge != null) {
-            customView.updateChallengeState(crewChallengeLevel) // Crew 챌린지 아이콘 적용
+    // 추천 메이트 UI 추가
+    private fun updateRecommendMatesUI(mates: List<UserMateInfo>) {
+        val parentLayout = binding.mainLinearLayout
+        val referenceView = binding.viewHomeMate // 기존 view_home_mate 아래에 추가
+
+        // 기존의 CustomMateView 삭제 (이전 추천 메이트 삭제)
+        parentLayout.children.filter { it is CustomMateView }.forEach { parentLayout.removeView(it) }
+
+        // 추천 메이트 목록 추가 (최대 5개)
+        mates.take(5).forEachIndexed { index, mate ->
+            val mateView = CustomMateView(requireContext()).apply {
+                setViewModel(viewModel)
+                updateMateInfo(mate, index + 1)
+
+                // 상단 마진을 최소화하여 뷰를 더 위로 붙이기
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    gravity = Gravity.CENTER_HORIZONTAL
+                    setMargins(24.dpToPx(requireContext()), 0, 24.dpToPx(requireContext()), 20.dpToPx(requireContext()))
+                }
+            }
+
+            // view_home_mate 바로 아래에 추가
+            val referenceIndex = parentLayout.indexOfChild(referenceView)
+            parentLayout.addView(mateView, referenceIndex + 1)
+        }
+    }
+
+    // dp → px 변환 함수
+    private fun Int.dpToPx(context: Context): Int {
+        return (this * context.resources.displayMetrics.density).toInt()
+    }
+
+    private fun updateUserInfoText() {
+        val sharedPref = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val userNickname = sharedPref.getString("nickname", "") ?: ""
+        val signupDateStr = sharedPref.getString("signup_date", "") ?: ""
+
+        // 닉네임이 있으면 `txtMainRunTogether`, `txt_main_user_similar_mate`에 적용
+        if (userNickname.isNotEmpty()) {
+            // 기존 텍스트 가져오기
+            val originalRunText = getString(R.string.main_run_together) // "와 함께 러닝을 시작해요!"
+            val originalSimilarMateText = getString(R.string.similar_mate) // "님과 비슷한 러닝 메이트"
+
+            // 닉네임 추가한 텍스트 설정
+            binding.txtMainRunTogether.text = "$userNickname$originalRunText"
+            binding.txtMainUserSimilarMate.text = "$userNickname$originalSimilarMateText"
         }
 
-        parentLayout.addView(customView) // 새로운 커스텀 뷰 추가
+        // 가입 날짜가 있으면 `txtMainRunDay` 업데이트
+        if (signupDateStr.isNotEmpty()) {
+            try {
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val signupDate = dateFormat.parse(signupDateStr) ?: return
+                val currentDate = Date()
+
+                // 날짜 차이 계산
+                val diffInMillis = currentDate.time - signupDate.time
+                val daysUsed = TimeUnit.MILLISECONDS.toDays(diffInMillis).toInt()
+
+                // UI 업데이트
+                binding.txtMainRunDay.text = "$daysUsed 일째!"
+            } catch (e: ParseException) {
+                Log.e("HomeFragment", "날짜 파싱 오류", e)
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
-
         viewModel.fetchHomeChallengeData() // 다른 화면에서 돌아올 때 다시 요청
     }
 

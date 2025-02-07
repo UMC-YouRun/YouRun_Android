@@ -14,20 +14,8 @@ class AppExpActivity : AppCompatActivity() {
         binding = ActivityAppExpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         val sharedPref = getSharedPreferences("UserData", MODE_PRIVATE)
-        val savedNickname = sharedPref.getString("nickname", "닉네임")
-
-
-        // 이전 화면에서 받은 데이터
-        val receivedData = intent.getStringExtra("nickname")
-
-        // Fragment에 데이터 전달
-        val fragment = AppExpFragment().apply {
-            arguments = Bundle().apply {
-                putString("nickname", receivedData)
-            }
-        }
+        val savedNickname = sharedPref.getString("nickname", null)
 
         if (savedInstanceState == null) {
             val fragment = AppExpFragment().apply {
