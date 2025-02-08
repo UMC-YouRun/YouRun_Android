@@ -8,7 +8,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.yourun.R
-import com.example.yourun.model.data.UserMateInfo
+import com.example.yourun.model.data.response.UserMateInfo
 import com.example.yourun.viewmodel.HomeViewModel
 
 class CustomMateView @JvmOverloads constructor(

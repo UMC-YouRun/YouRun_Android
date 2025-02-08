@@ -6,8 +6,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.yourun.model.data.ChallengeData
-import com.example.yourun.model.data.UserMateInfo
+import com.example.yourun.model.data.response.ChallengeData
+import com.example.yourun.model.data.response.UserMateInfo
 import com.example.yourun.model.repository.HomeRepository
 import kotlinx.coroutines.launch
 

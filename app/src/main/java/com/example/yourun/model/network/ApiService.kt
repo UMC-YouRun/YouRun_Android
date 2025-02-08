@@ -1,13 +1,13 @@
 package com.example.yourun.model.network
 
-import com.example.yourun.model.data.ChallengeDataResponse
-import com.example.yourun.model.data.ChallengeResultResponse
-import com.example.yourun.model.data.EmailduplicateResponse
-import com.example.yourun.model.data.LoginRequest
-import com.example.yourun.model.data.LoginResponse
-import com.example.yourun.model.data.RunningStatsResponse
-import com.example.yourun.model.data.SignUpRequest
-import com.example.yourun.model.data.SignUpResponse
+import com.example.yourun.model.data.response.ChallengeDataResponse
+import com.example.yourun.model.data.response.ChallengeResultResponse
+import com.example.yourun.model.data.response.EmailduplicateResponse
+import com.example.yourun.model.data.request.LoginRequest
+import com.example.yourun.model.data.response.LoginResponse
+import com.example.yourun.model.data.response.RunningStatsResponse
+import com.example.yourun.model.data.request.SignUpRequest
+import com.example.yourun.model.data.request.SignUpResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET

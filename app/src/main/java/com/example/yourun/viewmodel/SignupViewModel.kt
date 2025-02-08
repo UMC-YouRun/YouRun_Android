@@ -1,10 +1,9 @@
 package com.example.yourun.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.yourun.model.data.SignUpRequest
+import com.example.yourun.model.data.request.SignUpRequest
 
 data class SignUpData(
     var email: String? = null,

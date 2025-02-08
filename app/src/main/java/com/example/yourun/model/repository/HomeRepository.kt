@@ -1,8 +1,8 @@
 package com.example.yourun.model.repository
 
 import android.util.Log
-import com.example.yourun.model.data.ChallengeData
-import com.example.yourun.model.data.RecommendMateResponse
+import com.example.yourun.model.data.response.ChallengeData
+import com.example.yourun.model.data.response.RecommendMateResponse
 import com.example.yourun.model.network.HomeApiService
 
 class HomeRepository(private val apiService: HomeApiService) {

@@ -7,8 +7,8 @@ import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.yourun.model.data.RunningResultRequest
-import com.example.yourun.model.data.RunningResultResponse
+import com.example.yourun.model.data.request.RunningResultRequest
+import com.example.yourun.model.data.response.RunningResultResponse
 import com.example.yourun.model.network.ApiClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

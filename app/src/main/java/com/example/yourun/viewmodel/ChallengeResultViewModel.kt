@@ -6,7 +6,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import com.example.yourun.model.network.ApiClient
-import com.example.yourun.model.data.ChallengeResultResponse
+import com.example.yourun.model.data.response.ChallengeResultResponse
 import android.util.Log
 
 class ChallengeResultViewModel : ViewModel() {

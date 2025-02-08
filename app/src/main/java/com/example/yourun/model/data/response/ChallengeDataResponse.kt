@@ -1,4 +1,4 @@
-package com.example.yourun.model.data
+package com.example.yourun.model.data.response
 
 data class ChallengeDataResponse(
     val period: Int,

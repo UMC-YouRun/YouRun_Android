@@ -1,8 +1,8 @@
 package com.example.yourun.model.network
 
-import com.example.yourun.model.data.ApiResponseBoolean
-import com.example.yourun.model.data.HomeChallengeResponse
-import com.example.yourun.model.data.RecommendMateResponse
+import com.example.yourun.model.data.response.ApiResponseBoolean
+import com.example.yourun.model.data.response.HomeChallengeResponse
+import com.example.yourun.model.data.response.RecommendMateResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.POST

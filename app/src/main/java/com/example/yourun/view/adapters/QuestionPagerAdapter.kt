@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
-import com.example.yourun.model.data.Question
+import com.example.yourun.model.data.response.Question
 import com.example.yourun.model.repository.QuestionRepository.questions
 import com.example.yourun.utils.DimensionUtils
 

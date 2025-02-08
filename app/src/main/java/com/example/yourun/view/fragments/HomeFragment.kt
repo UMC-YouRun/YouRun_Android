@@ -14,10 +14,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentHomeBinding
-import com.example.yourun.model.data.ChallengeData
-import com.example.yourun.model.data.UserCrewChallengeInfo
-import com.example.yourun.model.data.UserMateInfo
-import com.example.yourun.model.data.UserSoloChallengeInfo
+import com.example.yourun.model.data.response.ChallengeData
+import com.example.yourun.model.data.response.UserCrewChallengeInfo
+import com.example.yourun.model.data.response.UserMateInfo
+import com.example.yourun.model.data.response.UserSoloChallengeInfo
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.HomeRepository
 import com.example.yourun.view.activities.CalendarActivity
