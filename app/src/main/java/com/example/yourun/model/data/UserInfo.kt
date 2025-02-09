@@ -1,11 +1,11 @@
 package com.example.yourun.model.data
 
 data class UserInfo(
-    val id: Int,
+    val id: Long,
     val nickname: String,
     val tendency: String,
     val tags: List<String>,
-    val crewReward: Int,
-    val personalReward: Int,
-    val mvp: Int
+    val crewReward: Long,
+    val personalReward: Long,
+    val mvp: Long
 )
