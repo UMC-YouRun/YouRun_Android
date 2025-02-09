@@ -1,10 +1,12 @@
 package com.example.yourun.model.data
 
-data class MateResponse(
+import com.example.yourun.model.data.UserInfo
+
+data class MateResponse<T>(
     val status: Int,
-    val code: String,
-    val message: String,
-    val data: List<MateApiData>?
+    val code: String?,
+    val message: String?,
+    val data: T?
 )
 
 data class MateApiData(

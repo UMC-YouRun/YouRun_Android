@@ -3,10 +3,13 @@ package com.example.yourun.model.network
 import com.example.yourun.model.data.EmailduplicateResponse
 import com.example.yourun.model.data.LoginRequest
 import com.example.yourun.model.data.LoginResponse
+import com.example.yourun.model.data.MateApiData
 import com.example.yourun.model.data.MateResponse
+import com.example.yourun.model.data.MyPageResponse
 import com.example.yourun.model.data.SignUpRequest
 //import com.example.yourun.model.data.SignUpRequest3
 import com.example.yourun.model.data.SignUpResponse
+import com.example.yourun.model.data.UserInfo
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
@@ -32,15 +35,13 @@ interface ApiService {
     @POST("users/duplicate")  // POST 방식으로 이메일 중복 확인
     suspend fun checkEmailDuplicate(@Query("email") email: String): EmailduplicateResponse
 
+    // 내정보 조회
+    @GET("mypage")
+    suspend fun getMyPage(@Header("Authorization") token: String): MyPageResponse<UserInfo>
+
     // 러닝 메이트 (리스트) 조회
-    /*
     @GET("users/mates")
-    suspend fun getMates(
-        @Header("Authorization") token: String
-    ): MateResponse
-     */
-    @GET("users/mates")
-    suspend fun getMates(@Header("Authorization") token: String): MateResponse
+    suspend fun getMates(@Header("Authorization") token: String): MateResponse<List<MateApiData>>
 
     // 러닝 메이트 삭제
     /* @DELETE("mates/{id}")

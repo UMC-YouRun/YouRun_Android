@@ -8,9 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
 import com.example.yourun.model.data.MateData
+import android.graphics.Color
 
 
-class MateAdapter(private val mateDataList: List<MateData>) :
+class MateAdapter(private val mateDataList: List<MateData>, private val userNickname: String) :
     RecyclerView.Adapter<MateAdapter.MateViewHolder>() {
 
     class MateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -21,6 +22,7 @@ class MateAdapter(private val mateDataList: List<MateData>) :
         val countDay: TextView = itemView.findViewById(R.id.user_runday)
         val change: TextView = itemView.findViewById(R.id.mate_change)
         val distance: TextView = itemView.findViewById(R.id.user_km)
+        val itemLayout: View = itemView.findViewById(R.id.mate_item_layout) // 사용자는 배경색 변경
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MateViewHolder {
@@ -38,6 +40,12 @@ class MateAdapter(private val mateDataList: List<MateData>) :
         holder.countDay.text = "${mate.countDay}일째"
         holder.distance.text = "${mate.totalDistance}km"
         holder.change.text = "${mate.change}위"
+        // 🔹 현재 사용자의 닉네임과 리스트의 닉네임이 같다면 노란색 배경 적용
+        if (mate.nickname == userNickname) {
+            holder.itemLayout.setBackgroundColor(Color.parseColor("#FFF4C2")) // 연한 노란색
+        } else {
+            holder.itemLayout.setBackgroundColor(Color.WHITE) // 기본 흰색 배경
+        }
     }
 
     override fun getItemCount(): Int {
