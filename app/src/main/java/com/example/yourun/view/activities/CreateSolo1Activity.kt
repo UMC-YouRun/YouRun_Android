@@ -65,7 +65,7 @@ class CreateSolo1Activity : AppCompatActivity() {
 
 
         // View 초기화
-        weekCalendarGrid = findViewById(R.id.weekCalendarGrid)
+        weekCalendarGrid = findViewById(R.id.dateLayout)
 
         // 주간 달력 설정
         setupWeekCalendar()
