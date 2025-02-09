@@ -5,9 +5,11 @@ import com.example.yourun.model.data.response.ChallengeResultResponse
 import com.example.yourun.model.data.response.EmailduplicateResponse
 import com.example.yourun.model.data.request.LoginRequest
 import com.example.yourun.model.data.response.LoginResponse
+import com.example.yourun.model.data.NicknameduplicateResponse
 import com.example.yourun.model.data.response.RunningStatsResponse
 import com.example.yourun.model.data.request.SignUpRequest
 import com.example.yourun.model.data.request.SignUpResponse
+import com.example.yourun.model.data.UserInfo
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -25,6 +27,9 @@ interface ApiService {
     @POST("users/duplicate")
     suspend fun checkEmailDuplicate(@Query("email") email: String): EmailduplicateResponse
 
+    @POST("users/check-nickname") //닉네임 중복 확인
+    suspend fun checkNicknameDuplicate(@Query("nickname") nickname : String) : NicknameduplicateResponse
+
     @GET("users/runnings/{year}/{month}")
     suspend fun getRunningStats(
         @Path("year") year: Int,
@@ -36,6 +41,9 @@ interface ApiService {
 
     @GET("/challenge/solo/running-result")
     suspend fun getSoloChallengeResultData(): Response<ApiResponse<ChallengeResultResponse>>
+
+    @GET("mypage")
+    suspend fun getMyRunData() : Response<ApiResponse<UserInfo>>
 }
 
 
