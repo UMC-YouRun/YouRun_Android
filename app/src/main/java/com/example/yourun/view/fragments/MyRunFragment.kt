@@ -13,8 +13,6 @@ import com.example.yourun.model.repository.MyRunRepository
 import com.example.yourun.view.activities.MyRun2Activity
 import com.example.yourun.viewmodel.MyRunViewModel
 import com.example.yourun.viewmodel.MyRunViewModelFactory
-import com.google.firebase.appdistribution.gradle.ApiService
-
 
 class MyRunFragment : Fragment() {
     private var _binding: FragmentMyrunBinding? = null

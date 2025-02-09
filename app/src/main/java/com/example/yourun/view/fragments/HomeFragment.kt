@@ -21,6 +21,7 @@ import com.example.yourun.model.data.response.UserSoloChallengeInfo
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.HomeRepository
 import com.example.yourun.view.activities.CalendarActivity
+import com.example.yourun.view.activities.ChallengeListActivity
 import com.example.yourun.view.custom.CustomHomeChallenge
 import com.example.yourun.view.custom.CustomMateView
 import com.example.yourun.viewmodel.HomeViewModel
@@ -52,8 +53,8 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this  // LiveData 연동
-        binding.viewModel = viewModel  // XML에서 ViewModel 사용 가능
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
         return binding.root
     }
 
@@ -103,7 +104,9 @@ class HomeFragment : Fragment() {
         }
 
         binding.btnAddChallenge.setOnClickListener {
-            // 챌린지 추가 화면 이동
+            val intent = Intent(requireContext(), ChallengeListActivity::class.java)
+            startActivity(intent)
+            parentFragmentManager.popBackStack()
         }
 
         binding.btnCalendar.setOnClickListener {
