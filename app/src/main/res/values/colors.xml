@@ -31,5 +31,6 @@
     <color name="btn_selected">#FFF1CD</color>
     <color name="brown">#B86300</color>
     <color name="red">#E75050</color>
+    <color name="border">#E1E1E1</color>
 
 </resources>

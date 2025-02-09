@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -199,12 +200,28 @@ class HomeFragment : Fragment() {
     private fun updateRecommendMatesUI(mates: List<UserMateInfo>) {
         val parentLayout = binding.mainLinearLayout
         val referenceView = binding.viewHomeMate // 기존 view_home_mate 아래에 추가
+        val referenceIndex = parentLayout.indexOfChild(referenceView)
 
         // 기존의 CustomMateView 삭제 (이전 추천 메이트 삭제)
         parentLayout.children.filter { it is CustomMateView }.forEach { parentLayout.removeView(it) }
 
         // 추천 메이트 목록 추가 (최대 5개)
         mates.take(5).forEachIndexed { index, mate ->
+            // 첫 번째 뷰가 아닐 때만 가로 구분선 추가
+            if (index > 0) {
+                val dividerView = View(requireContext()).apply {
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        1.dpToPx(requireContext()) // 경계선 높이 1dp
+                    ).apply {
+                        setMargins(24.dpToPx(requireContext()), 0, 24.dpToPx(requireContext()), 4.dpToPx(requireContext()))
+                    }
+                    setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border)) // 경계선 색상
+                    tag = "divider" // 제거할 때 구분하기 위해 태그 추가
+                }
+                parentLayout.addView(dividerView, referenceIndex + 1) // 가로 경계선 추가
+            }
+
             val mateView = CustomMateView(requireContext()).apply {
                 setViewModel(viewModel)
                 updateMateInfo(mate, mates.size - index)
@@ -215,12 +232,11 @@ class HomeFragment : Fragment() {
                     LinearLayout.LayoutParams.WRAP_CONTENT
                 ).apply {
                     gravity = Gravity.CENTER_HORIZONTAL
-                    setMargins(24.dpToPx(requireContext()), 0, 24.dpToPx(requireContext()), 20.dpToPx(requireContext()))
+                    setMargins(24.dpToPx(requireContext()), 0, 24.dpToPx(requireContext()), 6.dpToPx(requireContext()))
                 }
             }
 
             // view_home_mate 바로 아래에 추가
-            val referenceIndex = parentLayout.indexOfChild(referenceView)
             parentLayout.addView(mateView, referenceIndex + 1)
         }
     }
