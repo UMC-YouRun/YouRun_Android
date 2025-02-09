@@ -10,6 +10,9 @@ import com.example.yourun.model.data.response.RunningStatsResponse
 import com.example.yourun.model.data.request.SignUpRequest
 import com.example.yourun.model.data.request.SignUpResponse
 import com.example.yourun.model.data.UserInfo
+import com.example.yourun.model.data.response.ApiResponseBoolean
+import com.example.yourun.model.data.response.HomeChallengeResponse
+import com.example.yourun.model.data.response.RecommendMateResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -44,6 +47,17 @@ interface ApiService {
 
     @GET("mypage")
     suspend fun getMyRunData() : Response<ApiResponse<UserInfo>>
+
+    @GET("users/home/challenges")
+    suspend fun getHomeChallengesInfo(): Response<HomeChallengeResponse>
+
+    @GET("users/mates/recommend")
+    suspend fun getRecommendMate(): Response<RecommendMateResponse>
+
+    @POST("users/mates/{mateId}")
+    suspend fun addMate(
+        @Path("mateId") mateId: Long
+    ): Response<ApiResponseBoolean>
 }
 
 

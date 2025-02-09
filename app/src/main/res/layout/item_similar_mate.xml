@@ -83,7 +83,7 @@
         app:layout_constraintStart_toEndOf="@id/bgd_user_run_day"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="18dp" />
 
     <TextView
         android:id="@+id/user_tag"
