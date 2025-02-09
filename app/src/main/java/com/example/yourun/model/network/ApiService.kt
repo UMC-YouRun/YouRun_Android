@@ -9,6 +9,7 @@ import com.example.yourun.model.data.NicknameduplicateResponse
 import com.example.yourun.model.data.RunningStatsResponse
 import com.example.yourun.model.data.SignUpRequest
 import com.example.yourun.model.data.SignUpResponse
+import com.example.yourun.model.data.UserInfo
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -41,6 +42,9 @@ interface ApiService {
 
     @GET("/challenge/solo/running-result")
     suspend fun getSoloChallengeResultData(): Response<ApiResponse<ChallengeResultResponse>>
+
+    @GET("mypage")
+    suspend fun getMyRunData() : Response<ApiResponse<UserInfo>>
 }
 
 
