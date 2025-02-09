@@ -16,6 +16,8 @@ import com.example.yourun.viewmodel.MyRunViewModelFactory
 import com.google.firebase.appdistribution.gradle.ApiService
 
 
+import android.util.Log
+
 class MyRunFragment : Fragment() {
     private var _binding: FragmentMyrunBinding? = null
     private val binding get() = _binding!!
@@ -37,26 +39,35 @@ class MyRunFragment : Fragment() {
         val factory = MyRunViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory)[MyRunViewModel::class.java]
 
+        Log.d("MyRunFragment", "ViewModel 초기화 완료") // ViewModel 생성 확인
+
         viewModel.fetchMyRunData()
+        Log.d("MyRunFragment", "fetchMyRunData() 호출") // 데이터 요청 확인
 
         viewModel.userInfo.observe(viewLifecycleOwner) { userInfo ->
+            Log.d("MyRunFragment", "LiveData 변경 감지: $userInfo") // 데이터 변경 감지
+
             userInfo?.let {
                 binding.tvMyrunName.text = it.nickname
-                binding.tvMyrunTag.text = it.tags.joinToString (", ")
+                binding.tvMyrunTag.text = it.tags.joinToString(", ")
                 binding.txtCrewReward1.text = it.crewReward.toString()
                 binding.txtSoloReward.text = it.personalReward.toString()
                 binding.txtMvp.text = it.mvp.toString()
-            }
+
+                Log.d("MyRunFragment", "UI 업데이트 완료") // UI 업데이트 확인
+            } ?: Log.e("MyRunFragment", "userInfo가 null입니다.") // 데이터가 없을 때
         }
 
         binding.btnEdit.setOnClickListener {
             val intent = Intent(activity, MyRun2Activity::class.java)
             startActivity(intent)
+            Log.d("MyRunFragment", "편집 버튼 클릭됨") // 버튼 클릭 로그
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        Log.d("MyRunFragment", "onDestroyView() 호출됨") // Fragment 소멸 확인
     }
 }
