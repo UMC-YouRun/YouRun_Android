@@ -9,10 +9,14 @@ import com.example.yourun.model.data.NicknameduplicateResponse
 import com.example.yourun.model.data.RunningStatsResponse
 import com.example.yourun.model.data.SignUpRequest
 import com.example.yourun.model.data.SignUpResponse
+import com.example.yourun.model.data.UpdateUserRequest
+import com.example.yourun.model.data.UpdateUserResponse
 import com.example.yourun.model.data.UserInfo
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -45,6 +49,12 @@ interface ApiService {
 
     @GET("mypage")
     suspend fun getMyRunData() : Response<ApiResponse<UserInfo>>
+
+    @PATCH("mypage")
+    suspend fun updateUserTagsAndNickname(
+        @Body request: UpdateUserRequest
+    ): UpdateUserResponse
+
 }
 
 
