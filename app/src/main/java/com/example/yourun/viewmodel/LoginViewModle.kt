@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.yourun.model.repository.LoginRepository
-import com.example.yourun.model.data.LoginResponse
+import com.example.yourun.model.data.response.LoginResponse
 import com.example.yourun.model.network.ApiClient
 import kotlinx.coroutines.launch
 import retrofit2.Response

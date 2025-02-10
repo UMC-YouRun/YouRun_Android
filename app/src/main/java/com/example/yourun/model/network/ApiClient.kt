@@ -58,6 +58,8 @@ object ApiClient {
     fun getApiService(): ApiService = retrofit.create(ApiService::class.java)
     fun getHomeApiService(): HomeApiService = retrofit.create(HomeApiService::class.java)
     fun getRunningApiService(): RunningApiService = retrofit.create(RunningApiService::class.java)
+    fun getChallengeApiService(): ChallengeApiService = retrofit.create(ChallengeApiService::class.java)
+
 
     object TokenManager {
         private val context: Context

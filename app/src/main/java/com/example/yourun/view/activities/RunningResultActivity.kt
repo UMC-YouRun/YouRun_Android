@@ -21,8 +21,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityRunningResultBinding
-import com.example.yourun.model.data.RunningResultRequest
-import com.example.yourun.model.data.RunningResultResponse
+import com.example.yourun.model.data.request.RunningResultRequest
+import com.example.yourun.model.data.response.RunningResultResponse
 import com.example.yourun.viewmodel.RunningViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback

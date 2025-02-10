@@ -1,11 +1,11 @@
 package com.example.yourun.model.network
 
-import com.example.yourun.model.data.ChallengeDataResponse
-import com.example.yourun.model.data.ChallengeResultResponse
+import com.example.yourun.model.data.response.ChallengeDataResponse
+import com.example.yourun.model.data.response.ChallengeResultResponse
 import com.example.yourun.model.data.EmailduplicateResponse
-import com.example.yourun.model.data.LoginRequest
-import com.example.yourun.model.data.LoginResponse
-import com.example.yourun.model.data.RunningStatsResponse
+import com.example.yourun.model.data.request.LoginRequest
+import com.example.yourun.model.data.response.LoginResponse
+import com.example.yourun.model.data.response.RunningStatsResponse
 import com.example.yourun.model.data.SignUpRequest
 import com.example.yourun.model.data.SignUpResponse
 import retrofit2.Response
@@ -31,11 +31,7 @@ interface ApiService {
         @Path("month") month: Int
     ): Response<ApiResponse<List<RunningStatsResponse>>>
 
-    @GET("/challenges/solo/matching")
-    suspend fun getChallengeData(): Response<ApiResponse<ChallengeDataResponse>>
 
-    @GET("/challenge/solo/running-result")
-    suspend fun getSoloChallengeResultData(): Response<ApiResponse<ChallengeResultResponse>>
 }
 
 

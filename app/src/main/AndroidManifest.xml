@@ -96,10 +96,10 @@
             android:name=".view.activities.OnboardingActivity"
             android:exported="true" />
 
-
         <activity
             android:name=".view.activities.ResultContributionActivity"
-            android:exported="true" />
+            android:exported="true">
+        </activity>
 
         <activity
             android:name=".view.activities.ResultCrewActivity"
@@ -117,6 +117,15 @@
         <activity
             android:name=".view.activities.RunningResultActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".view.activities.ChallengeStartActivity"
+            android:exported="true">
+        </activity>
+
+        <activity android:name=".view.activities.CrewChallengeStartActivity"
+            android:exported="true">
+        </activity>
 
     </application>
 

@@ -56,7 +56,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- 참여자 아이콘들 -->
         <LinearLayout
             android:id="@+id/layout_participants"
             android:layout_width="wrap_content"
@@ -68,26 +67,31 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <ImageView
+                android:id="@+id/img_stamp_1"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_stamp_success"
                 android:layout_margin="8dp"/>
             <ImageView
+                android:id="@+id/img_stamp_2"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_stamp_success"
                 android:layout_margin="8dp"/>
             <ImageView
+                android:id="@+id/img_stamp_3"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_stamp_success"
                 android:layout_margin="8dp"/>
             <ImageView
+                android:id="@+id/img_stamp_4"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_stamp_default"
                 android:layout_margin="8dp"/>
             <ImageView
+                android:id="@+id/img_stamp_5"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_stamp_default"
@@ -110,12 +114,14 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-<!--                나중에 프로필 받아와 실제 프로필 사진으로 필요-->
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/img_crew_trailrunner"
-                    android:layout_gravity="center_vertical"/>
+                    android:id="@+id/img_mate_profile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/profile_trailrunner"
+                android:layout_gravity="center_vertical"/>
+
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"

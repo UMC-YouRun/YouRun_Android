@@ -16,7 +16,7 @@
         android:layout_marginTop="130dp"
         android:background="@drawable/bgd_yellow_bubble"
         android:padding="5dp"
-        android:text="@string/default_daylog"
+        android:text="@string/default_daylog_crew"
         android:textSize="18sp"
         android:textStyle="bold"
         android:gravity="center"
@@ -48,7 +48,7 @@
 
         <!-- FACE MAKER 텍스트 -->
         <TextView
-            android:id="@+id/tv_facemaker_title"
+            android:id="@+id/tv_crew1_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start|top"
@@ -61,7 +61,7 @@
 
         <!-- FACE MAKER 캐릭터 -->
         <ImageView
-            android:id="@+id/img_crew_facemaker"
+            android:id="@+id/img_crew1"
             android:layout_width="140dp"
             android:layout_height="180dp"
             android:src="@drawable/img_crew_facemaker"
@@ -70,7 +70,6 @@
             android:layout_marginEnd="16dp"
             android:translationY="4dp" />
 
-        <!-- FACE MAKER 정보 텍스트 -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,58 +83,67 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical">
+
                 <TextView
-                    android:id="@+id/tv_facemaker_name"
+                    android:id="@+id/tv_crew1_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/default_name"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"/>
-                <TextView
-                    android:id="@+id/tv_facemaker_days"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="default_day"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:paddingTop="4dp"
-                    android:paddingBottom="4dp"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_tag" />
+
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_facemaker_role"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/default_runnerInfo"
-                android:textSize="16sp"
-                android:textColor="@color/black"/>
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="40dp">
 
-            <TextView
-                android:id="@+id/tv_facemaker_tags"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/default_tag"
-                android:textSize="14sp"
-                android:textColor="@color/brown"
-                android:textStyle="bold"
-                android:layout_marginTop="20dp"/>
+                <ImageView
+                    android:id="@+id/img_crew1_profile1"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_facemaker"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="8dp"/>
+
+                <ImageView
+                    android:id="@+id/img_crew1_profile2"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_sprinter"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="8dp"/>
+
+                <ImageView
+                    android:id="@+id/img_crew1_profile3"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_trailrunner"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="8dp"/>
+
+                <ImageView
+                    android:id="@+id/img_crew1_profile4"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_trailrunner"
+                    android:scaleType="centerCrop"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </FrameLayout>
 
-    <!-- SOLO CHALLENGE 배경 바 -->
     <View
         android:id="@+id/bgd_crew_bar"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/bgd_solo_bar"
+        android:background="@drawable/bgd_crew_bar"
         app:layout_constraintTop_toBottomOf="@id/facemaker_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -177,7 +185,7 @@
 
         <!-- TRAIL RUNNER 텍스트 (좌측 상단) -->
         <TextView
-            android:id="@+id/tv_trailrunner_title"
+            android:id="@+id/tv_crew2_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TRAIL RUNNER"
@@ -190,7 +198,7 @@
 
         <!-- TRAIL RUNNER 캐릭터 (배경보다 크게 설정) -->
         <ImageView
-            android:id="@+id/img_crew_trailrunner"
+            android:id="@+id/img_crew2"
             android:layout_width="140dp"
             android:layout_height="180dp"
             android:src="@drawable/img_crew_trailrunner"
@@ -208,16 +216,14 @@
             android:gravity="end"
             android:orientation="vertical">
 
-            <!-- 첫 번째 줄: 이름 + 27일째! -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <!-- 이름 -->
                 <TextView
-                    android:id="@+id/tv_trailrunner_name"
+                    android:id="@+id/tv_crew2_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/default_name"
@@ -225,42 +231,47 @@
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
-                <!-- 27일째! (둥근 배경) -->
-                <TextView
-                    android:id="@+id/tv_trailrunner_days"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:background="@drawable/bg_tag"
-                    android:paddingStart="10dp"
-                    android:paddingTop="4dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="4dp"
-                    android:text="@string/default_day"
-                    android:textColor="@color/white"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
             </LinearLayout>
 
-            <!-- 두 번째 줄: 러너 정보 -->
-            <TextView
-                android:id="@+id/tv_trailrunner_role"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/default_runnerInfo"
-                android:textColor="@color/black"
-                android:textSize="16sp" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="40dp">
 
-            <!-- 세 번째 줄: 해시태그 -->
-            <TextView
-                android:id="@+id/tv_trailrunner_tags"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:text="@string/default_tag"
-                android:textColor="@color/text_purple_900"
-                android:textStyle="bold"
-                android:textSize="14sp" />
+                <ImageView
+                    android:id="@+id/img_crew2_profile1"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_facemaker"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="8dp"/>
+
+                <ImageView
+                    android:id="@+id/img_crew2_profile2"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_sprinter"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="8dp"/>
+
+                <ImageView
+                    android:id="@+id/img_crew2_profile3"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_trailrunner"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="8dp"/>
+
+                <ImageView
+                    android:id="@+id/img_crew2_profile4"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_trailrunner"
+                    android:scaleType="centerCrop"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </FrameLayout>
