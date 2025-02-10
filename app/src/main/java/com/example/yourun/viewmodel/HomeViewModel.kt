@@ -95,7 +95,7 @@ class HomeViewModel(
             try {
                 Log.d("HomeViewModel", "추천 메이트 요청 시작")
 
-                val response = repository.getRecommendMates() // 토큰을 넘기지 않음 (Interceptor 처리)
+                val response = repository.getRecommendMates()
 
                 if (response == null) {
                     Log.e("HomeViewModel", "response가 null입니다. 빈 리스트 반환")
@@ -124,7 +124,7 @@ class HomeViewModel(
             try {
                 Log.d("HomeViewModel", "메이트 추가 요청 시작 (mateId: $mateId)")
 
-                val success = repository.addMate(mateId) // 토큰을 넘기지 않음 (Interceptor 처리)
+                val success = repository.addMate(mateId)
 
                 if (success) {
                     _likedMates.value = (_likedMates.value ?: emptySet()) + mateId // Set 업데이트 개선

@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentHomeBinding
 import com.example.yourun.model.data.UserInfo
@@ -124,7 +125,7 @@ class HomeFragment : Fragment() {
 
         // 추천 메이트 UI 업데이트
         viewModel.recommendMates.observe(viewLifecycleOwner) { mates ->
-            updateRecommendMatesUI(mates)
+            updateRecommendMatesUI(mates, viewModel)
         }
 
         // btn_redirect 클릭 시 최신 메이트 데이터 다시 불러오기
@@ -197,13 +198,14 @@ class HomeFragment : Fragment() {
     }
 
     // 추천 메이트 UI 추가
-    private fun updateRecommendMatesUI(mates: List<UserMateInfo>) {
+    private fun <T: ViewModel> updateRecommendMatesUI(mates: List<UserMateInfo>, viewModel: T) {
         val parentLayout = binding.mainLinearLayout
         val referenceView = binding.viewHomeMate // 기존 view_home_mate 아래에 추가
         val referenceIndex = parentLayout.indexOfChild(referenceView)
 
         // 기존의 CustomMateView 삭제 (이전 추천 메이트 삭제)
-        parentLayout.children.filter { it is CustomMateView }.forEach { parentLayout.removeView(it) }
+        parentLayout.children.filter { it is CustomMateView<*> || it.tag == "divider" }.forEach {
+            parentLayout.removeView(it) }
 
         // 추천 메이트 목록 추가 (최대 5개)
         mates.take(5).forEachIndexed { index, mate ->
@@ -222,7 +224,7 @@ class HomeFragment : Fragment() {
                 parentLayout.addView(dividerView, referenceIndex + 1) // 가로 경계선 추가
             }
 
-            val mateView = CustomMateView(requireContext()).apply {
+            val mateView = CustomMateView<T>(requireContext()).apply {
                 setViewModel(viewModel)
                 updateMateInfo(mate, mates.size - index)
 

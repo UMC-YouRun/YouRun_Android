@@ -1,25 +1,33 @@
 package com.example.yourun.viewmodel
 
-import android.app.Application
 import android.location.Location
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.yourun.model.data.request.RunningResultRequest
 import com.example.yourun.model.data.response.RunningResultResponse
+import com.example.yourun.model.data.response.UserMateInfo
 import com.example.yourun.model.network.ApiClient
+import com.example.yourun.model.repository.RunningRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.Response
 import java.time.Instant
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
-class RunningViewModel(application: Application) : AndroidViewModel(application) {
+class RunningViewModel(private val repository: RunningRepository) : ViewModel() {
 
-    private val runningApiService = ApiClient.getRunningApiService()
+    private val _recommendMates = MutableLiveData<List<UserMateInfo>>()
+    val recommendMates: LiveData<List<UserMateInfo>> get() = _recommendMates
+
+    private val _runningResult = MutableLiveData<RunningResultResponse?>()
+    val runningResult: LiveData<RunningResultResponse?> get() = _runningResult
 
     val targetTime = MutableLiveData<Int>()  // 목표 시간 (분)
     val startTime = MutableLiveData<String>()  // 러닝 시작 시간
@@ -36,15 +44,42 @@ class RunningViewModel(application: Application) : AndroidViewModel(application)
     private var elapsedTimeMillis: Long = 0
     private val handler = Handler(Looper.getMainLooper())
 
-    // 서버로 러닝 결과 전송
-    suspend fun sendRunningResult(request: RunningResultRequest): Response<RunningResultResponse> {
-        return withContext(Dispatchers.IO) {
+    // 추천 메이트 가져오기
+    fun fetchRecommendMates() {
+        viewModelScope.launch {
             try {
-                val token = "Bearer " + (ApiClient.TokenManager.getToken())
-                runningApiService.sendRunningResult(token, request)
+                Log.d("RunningViewModel", "추천 메이트 요청 시작")
+
+                val response = repository.getRecommendMates()
+
+                if (response == null) {
+                    Log.e("RunningViewModel", "response가 null입니다. 빈 리스트 반환")
+                    _recommendMates.value = emptyList()
+                    return@launch
+                }
+
+                response.data.let { mateList ->
+                    _recommendMates.value = if (mateList.isEmpty()) {
+                        Log.e("RunningViewModel", "추천 메이트 데이터 없음")
+                        emptyList()
+                    } else {
+                        Log.d("RunningViewModel", "추천 메이트 목록 가져오기 성공: ${mateList.size}명")
+                        mateList.take(5) // 최대 5명만 표시
+                    }
+                }
             } catch (e: Exception) {
-                Log.e("RunningViewModel", "API 요청 실패", e)
-                throw e
+                Log.e("RunningViewModel", "추천 메이트 가져오는 중 오류 발생", e)
+                _recommendMates.value = emptyList() // 네트워크 오류 발생 시 빈 리스트 할당
+            }
+        }
+    }
+
+    // 러닝 결과 서버 전송
+    fun sendRunningResult(request: RunningResultRequest) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = repository.sendRunningResult(request)
+            withContext(Dispatchers.Main) {
+                _runningResult.value = result // UI 업데이트
             }
         }
     }

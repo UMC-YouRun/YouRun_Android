@@ -7,11 +7,13 @@ import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.ViewModel
 import com.example.yourun.R
 import com.example.yourun.model.data.response.UserMateInfo
 import com.example.yourun.viewmodel.HomeViewModel
+import com.example.yourun.viewmodel.RunningViewModel
 
-class CustomMateView @JvmOverloads constructor(
+class CustomMateView<T: ViewModel> @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -26,7 +28,7 @@ class CustomMateView @JvmOverloads constructor(
     private val heartButton: ImageButton
     private var isLiked = false // 현재 좋아요 상태 저장
     private var mateId: Long = -1L
-    private var viewModel: HomeViewModel? = null
+    private var viewModel: T? = null
 
     init {
         LayoutInflater.from(context).inflate(R.layout.item_similar_mate, this, true)
@@ -40,12 +42,17 @@ class CustomMateView @JvmOverloads constructor(
         heartButton = findViewById(R.id.btn_mate_heart)
     }
 
-    fun setViewModel(viewModel: HomeViewModel) {
+    fun setViewModel(viewModel: T) {
         this.viewModel = viewModel
 
-        // 좋아요 상태를 ViewModel에서 가져와 반영
-        viewModel.likedMates.observeForever { likedMates ->
-            isLiked = likedMates.contains(mateId)
+        if (viewModel is HomeViewModel) {
+            viewModel.likedMates.observeForever { likedMates ->
+                isLiked = likedMates.contains(mateId)
+            }
+        }
+
+        if (viewModel is RunningViewModel) {
+            // RunningViewModel의 동작 추가 가능
         }
     }
 
@@ -68,7 +75,7 @@ class CustomMateView @JvmOverloads constructor(
         heartButton.setOnClickListener {
             isLiked = !isLiked // 좋아요 상태 변경
             heartButton.isSelected = isLiked // Selector를 활용하여 이미지 변경
-            viewModel?.addMate(mate.id)
+            (viewModel as? HomeViewModel)?.addMate(mate.id)
         }
     }
 }

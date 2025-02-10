@@ -84,13 +84,6 @@ class RunningFragment : Fragment() {
                 .addToBackStack(null)
                 .commit()
         }
-        /* 메이트 데이터를 받으면 메이트 선택 뷰 이미지 변경
-           러닝 시간 설정 버튼 활성화
-           시작하기 버튼은 모든 데이터가 받아졌을 때 동작
-         */
-
-        // 러닝 시간 설정 후 텍스트 변경
-
     }
 
     private fun setupMapView() {
