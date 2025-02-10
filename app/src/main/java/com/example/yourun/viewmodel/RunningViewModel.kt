@@ -40,7 +40,7 @@ class RunningViewModel(application: Application) : AndroidViewModel(application)
     suspend fun sendRunningResult(request: RunningResultRequest): Response<RunningResultResponse> {
         return withContext(Dispatchers.IO) {
             try {
-                val token = "Bearer " + (ApiClient.getApiService() ?: "")
+                val token = "Bearer " + (ApiClient.TokenManager.getToken())
                 runningApiService.sendRunningResult(token, request)
             } catch (e: Exception) {
                 Log.e("RunningViewModel", "API 요청 실패", e)

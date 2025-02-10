@@ -8,21 +8,24 @@
     </data>
 
     <ScrollView
+        android:id="@+id/mainScrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/main_constraint_layout"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginBottom="60dp"
+        android:clipToPadding="false">
+        
+        <LinearLayout
+            android:id="@+id/mainLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/main_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent"
                 android:background="@color/main_color">
 
                 <ImageView
@@ -54,8 +57,7 @@
                 android:id="@+id/main_up_frame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/main_color"
-                app:layout_constraintTop_toBottomOf="@id/main_header">
+                android:background="@color/main_color">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -66,7 +68,7 @@
                     android:layout_marginStart="20dp" />
 
                 <TextView
-                    android:id="@+id/txt_main_run_together"
+                    android:id="@+id/txtMainRunTogether"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/main_run_together"
@@ -77,10 +79,10 @@
                     android:layout_marginStart="34dp" />
 
                 <TextView
-                    android:id="@+id/txt_main_run_day"
+                    android:id="@+id/txtMainRunDay"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/main_run_day"
+                    android:text=""
                     android:textSize="32sp"
                     android:letterSpacing="0.03"
                     android:fontFamily="@font/roboto_semibold"
@@ -143,7 +145,6 @@
                 android:id="@+id/mainChallengeFrame"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/main_up_frame"
                 android:background="@color/main_color">
 
                 <View
@@ -159,7 +160,7 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/roboto_medium"
                     android:layout_marginTop="38dp"
-                    android:layout_marginStart="16dp"/>
+                    android:layout_marginStart="16dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -211,15 +212,22 @@
                     android:layout_marginTop="86dp"
                     android:layout_marginStart="74dp" />
 
-                <ImageButton
-                    android:id="@+id/btnAddChallenge"
+                <FrameLayout
+                    android:id="@+id/challengeButtonContainer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/add_challenge"
-                    android:src="@drawable/ic_add_challenge"
-                    android:background="@android:color/transparent"
                     android:layout_marginTop="140dp"
-                    android:layout_gravity="center_horizontal"/>
+                    android:layout_gravity="center_horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btnAddChallenge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/add_challenge"
+                        android:src="@drawable/ic_add_challenge"
+                        android:background="@android:color/transparent"/>
+
+                </FrameLayout>
 
             </FrameLayout>
 
@@ -229,20 +237,18 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/home_banner"
                 android:src="@drawable/img_home_banner"
-                android:scaleType="centerCrop"
-                app:layout_constraintTop_toBottomOf="@id/mainChallengeFrame" />
+                android:scaleType="centerCrop" />
 
             <LinearLayout
                 android:id="@+id/view_home_mate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toBottomOf="@id/img_main_banner"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="10dp">
 
                 <TextView
+                    android:id="@+id/txtMainUserSimilarMate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/similar_mate"
@@ -266,7 +272,7 @@
                     android:layout_weight="1" />
 
                 <ImageButton
-                    android:id="@+id/btn_redirect"
+                    android:id="@+id/btnRedirect"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:contentDescription="@string/redirect"
@@ -277,7 +283,7 @@
 
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
     </ScrollView>
 

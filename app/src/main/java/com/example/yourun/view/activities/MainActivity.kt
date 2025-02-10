@@ -1,7 +1,6 @@
 package com.example.yourun.view.activities
 
 import android.Manifest
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.ImageView
@@ -10,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.yourun.R
-import com.example.yourun.view.fragments.ChallengeFragment
 import com.example.yourun.view.fragments.HomeFragment
 import com.example.yourun.view.fragments.MateFragment
 import com.example.yourun.view.fragments.MyRunFragment
@@ -20,6 +18,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import com.example.yourun.view.fragments.ChallengeFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,29 +27,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        /*
-        // 온보딩 체크
-        if (!isOnboardingCompleted()) {
+        // 온보딩 완료 여부 확인 후, 처음 실행이면 온보딩 화면으로 이동
+        /* if (!isOnboardingCompleted()) {
             startActivity(Intent(this, OnboardingActivity::class.java))
-            finish()
+            finish() // MainActivity 종료
             return
-        }
-
-        // 로그인 상태 체크
-        if (!isLoggedIn()) {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()
-            return
-        }
-         */
-
+        } */
         setContentView(R.layout.activity_main)
 
         checkLocationPermission()
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val fabRunning = findViewById<ImageView>(R.id.fab_running)
-        val fabTitle = findViewById<TextView>(R.id.fab_title)
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.main_fragment_container, HomeFragment())
@@ -88,7 +76,6 @@ class MainActivity : AppCompatActivity() {
             val menu = bottomNavigationView.menu
             menu.getItem(2).isChecked = true
         }
-
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -121,14 +108,8 @@ class MainActivity : AppCompatActivity() {
     // 온보딩 완료 여부를 SharedPreferences에서 확인
     private fun isOnboardingCompleted(): Boolean {
         val sharedPreferences: SharedPreferences =
-            getSharedPreferences("user_prefs", MODE_PRIVATE)
+            getSharedPreferences("AppPrefs", MODE_PRIVATE)
         return sharedPreferences.getBoolean("isOnboardingCompleted", false)
-    }
-
-    private fun isLoggedIn(): Boolean {
-        val sharedPreferences: SharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-        val token = sharedPreferences.getString("access_token", null)
-        return !token.isNullOrEmpty()
     }
 
     private fun checkLocationPermission() {
@@ -136,8 +117,13 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
+            // 권한이 이미 허용된 경우 실행할 코드
         } else {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionRequestCode)
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                locationPermissionRequestCode
+            )
         }
     }
 

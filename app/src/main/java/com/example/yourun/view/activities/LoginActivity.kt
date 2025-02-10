@@ -4,24 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.text.InputType
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityLoginBinding
+import com.example.yourun.model.network.ApiClient
 import com.example.yourun.viewmodel.LoginViewModel
 import com.example.yourun.model.repository.LoginRepository
-import com.example.yourun.utils.TokenManager
-import com.example.yourun.model.network.RetrofitClient
 import com.example.yourun.viewmodel.LoginViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private val viewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory(LoginRepository(RetrofitClient.create(this), TokenManager.getInstance(this)))
+        LoginViewModelFactory(LoginRepository(ApiClient.getApiService()))
     }
     private var isPasswordVisible = false
 
@@ -35,16 +34,15 @@ class LoginActivity : AppCompatActivity() {
         setupSignupButton()
 
         // 로그인 결과 관찰
-        viewModel.loginResult.observe(this, Observer { result ->
-            result.onSuccess { token ->
-                Toast.makeText(this, "로그인 성공", Toast.LENGTH_SHORT).show()
+        viewModel.loginResult.observe(this) { result ->
+            result.onSuccess { response ->
+                Log.d("LoginFragment", "로그인 성공!")
                 startActivity(Intent(this, AppExpActivity::class.java))
                 finish()
+            }.onFailure { error ->
+                Log.e("LoginFragment", "🚨 로그인 실패: ${error.message}")
             }
-            result.onFailure { exception ->
-                Toast.makeText(this, exception.message, Toast.LENGTH_SHORT).show()
-            }
-        })
+        }
     }
 
     private fun setupPasswordVisibilityToggle() {
@@ -89,45 +87,8 @@ class LoginActivity : AppCompatActivity() {
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
             } else {
-                viewModel.login(email, password) // ViewModel을 통해 로그인 요청
+                viewModel.login(email, password)
             }
         }
     }
 }
-
-/*private suspend fun login(email: String, password: String) {
-    try {
-        val request = LoginRequest(email, password)
-        val response = apiService.login(request) // suspend 함수 호출
-
-        if (response.isSuccessful) {
-            val body = response.body()
-            if (body?.status == 200 && body.data?.access_token != null) {
-                val token = body.data.access_token
-                tokenManager.saveToken(token)
-                Log.d("LoginActivity", "토큰 저장됨: $token")
-
-                Toast.makeText(this@LoginActivity, "로그인 성공", Toast.LENGTH_SHORT).show()
-
-                val intent = Intent(this@LoginActivity, AppExpActivity::class.java)
-                startActivity(intent)
-                finish()
-            } else {
-                Toast.makeText(
-                    this@LoginActivity,
-                    "로그인 실패: ${body?.message ?: "알 수 없는 오류"}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        } else {
-            Toast.makeText(
-                this@LoginActivity,
-                "로그인 실패: 서버 오류(${response.code()})",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    } catch (e: Exception) {
-        Toast.makeText(this@LoginActivity, "네트워크 오류 발생: ${e.message}", Toast.LENGTH_SHORT).show()
-    }
-}
-}*/
