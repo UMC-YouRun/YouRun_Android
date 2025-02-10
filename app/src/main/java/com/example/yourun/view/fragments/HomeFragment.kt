@@ -125,7 +125,7 @@ class HomeFragment : Fragment() {
 
         // 추천 메이트 UI 업데이트
         viewModel.recommendMates.observe(viewLifecycleOwner) { mates ->
-            updateRecommendMatesUI(mates, viewModel)
+            updateRecommendMatesUI(mates, viewModel, showHeart = true)
         }
 
         // btn_redirect 클릭 시 최신 메이트 데이터 다시 불러오기
@@ -198,7 +198,7 @@ class HomeFragment : Fragment() {
     }
 
     // 추천 메이트 UI 추가
-    private fun <T: ViewModel> updateRecommendMatesUI(mates: List<UserMateInfo>, viewModel: T) {
+    private fun <T: ViewModel> updateRecommendMatesUI(mates: List<UserMateInfo>, viewModel: T, showHeart: Boolean) {
         val parentLayout = binding.mainLinearLayout
         val referenceView = binding.viewHomeMate // 기존 view_home_mate 아래에 추가
         val referenceIndex = parentLayout.indexOfChild(referenceView)
@@ -224,7 +224,7 @@ class HomeFragment : Fragment() {
                 parentLayout.addView(dividerView, referenceIndex + 1) // 가로 경계선 추가
             }
 
-            val mateView = CustomMateView<T>(requireContext()).apply {
+            val mateView = CustomMateView<T>(requireContext(), showHeartButton = showHeart).apply {
                 setViewModel(viewModel)
                 updateMateInfo(mate, mates.size - index)
 

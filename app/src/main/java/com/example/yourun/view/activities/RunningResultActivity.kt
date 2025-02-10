@@ -74,7 +74,7 @@ class RunningResultActivity : AppCompatActivity() {
 
         // 서버로 데이터 전송
         binding.btnOk.setOnClickListener {
-            sendRunningResult()
+            //sendRunningResult()
         }
 
         binding.runningResultTopBar.txtTopBarWithBackButton.text = "러닝 결과"
@@ -187,7 +187,7 @@ class RunningResultActivity : AppCompatActivity() {
         return bitmap
     }
 
-    private fun sendRunningResult() {
+    /*private fun sendRunningResult() {
         val request = RunningResultRequest(
             runningViewModel.targetTime.value ?: 0,
             runningViewModel.startTime.value ?: "",
@@ -208,7 +208,7 @@ class RunningResultActivity : AppCompatActivity() {
                 Toast.makeText(this@RunningResultActivity, "네트워크 오류 발생", Toast.LENGTH_SHORT).show()
             }
         }
-    }
+    }*/
 
     private fun navigateToChallengeResult(resultData: RunningResultResponse?) {
         /* 솔로, 크루 챌린지 결과 액티비티로 이동

@@ -11,12 +11,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.yourun.model.data.request.RunningResultRequest
 import com.example.yourun.model.data.response.RunningResultResponse
 import com.example.yourun.model.data.response.UserMateInfo
-import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.RunningRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Response
 import java.time.Instant
 import java.util.Locale
 import java.util.concurrent.TimeUnit
@@ -25,6 +23,9 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
 
     private val _recommendMates = MutableLiveData<List<UserMateInfo>>()
     val recommendMates: LiveData<List<UserMateInfo>> get() = _recommendMates
+
+    private val _mateList = MutableLiveData<List<UserMateInfo>>()
+    val mateList: LiveData<List<UserMateInfo>> get() = _mateList
 
     private val _runningResult = MutableLiveData<RunningResultResponse?>()
     val runningResult: LiveData<RunningResultResponse?> get() = _runningResult
@@ -70,6 +71,36 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
             } catch (e: Exception) {
                 Log.e("RunningViewModel", "추천 메이트 가져오는 중 오류 발생", e)
                 _recommendMates.value = emptyList() // 네트워크 오류 발생 시 빈 리스트 할당
+            }
+        }
+    }
+
+    // 메이트 목록 가져오기
+    fun fetchMateList() {
+        viewModelScope.launch {
+            try {
+                Log.d("RunningViewModel", "메이트 목록 조회 요청 시작")
+
+                val response = repository.getMatesList()
+
+                if (response == null) {
+                    Log.e("RunningViewModel", "response가 null입니다. 빈 리스트 반환")
+                    _mateList.value = emptyList()
+                    return@launch
+                }
+
+                response.data.let { mateList ->
+                    _mateList.value = if (mateList.isEmpty()) {
+                        Log.e("RunningViewModel", "메이트 목록 데이터 없음")
+                        emptyList()
+                    } else {
+                        Log.d("RunningViewModel", "메이트 목록 가져오기 성공: ${mateList.size}명")
+                        mateList.take(5) // 최대 5명만 표시
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("RunningViewModel", "메이트 목록 가져오는 중 오류 발생", e)
+                _mateList.value = emptyList() // 네트워크 오류 발생 시 빈 리스트 할당
             }
         }
     }

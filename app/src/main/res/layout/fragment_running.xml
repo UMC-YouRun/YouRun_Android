@@ -68,7 +68,7 @@
         </FrameLayout>
 
         <View
-            android:id="@+id/bgd_mate_select"
+            android:id="@+id/bgdMateSelect"
             android:layout_width="match_parent"
             android:layout_height="73dp"
             android:background="@drawable/bgd_mate_unselected"
@@ -78,31 +78,32 @@
             android:clickable="true" />
 
         <ImageView
-            android:id="@+id/img_mate_profile"
+            android:id="@+id/imgMateProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/mate_profile"
             android:src="@drawable/bgd_mate_profile"
-            android:layout_marginTop="288dp"
-            android:layout_marginStart="32dp" />
+            android:layout_marginTop="290dp"
+            android:layout_marginStart="34dp" />
 
         <ImageView
-            android:id="@+id/img_question_mark"
+            android:id="@+id/imgQuestionMark"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/question_mark"
             android:src="@drawable/img_question_mark"
-            android:layout_marginTop="302dp"
-            android:layout_marginStart="52dp" />
+            android:layout_marginTop="304dp"
+            android:layout_marginStart="54dp" />
 
         <TextView
+            android:id="@+id/txtMateSelect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/running_mate_select"
             android:textStyle="bold"
             android:textSize="18sp"
             android:layout_marginTop="307dp"
-            android:layout_marginStart="118dp"/>
+            android:layout_marginStart="112dp" />
 
     </FrameLayout>
 
@@ -126,7 +127,7 @@
             android:clickable="true"/>
 
         <TextView
-            android:id="@+id/txt_set_running_time"
+            android:id="@+id/txtSetRunningTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/running_time_set"

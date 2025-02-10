@@ -3,7 +3,7 @@ package com.example.yourun.model.repository
 import android.util.Log
 import com.example.yourun.model.data.UserInfo
 import com.example.yourun.model.data.response.ChallengeData
-import com.example.yourun.model.data.response.RecommendMateResponse
+import com.example.yourun.model.data.response.MateResponse
 import com.example.yourun.model.network.ApiResponse
 import com.example.yourun.model.network.ApiService
 
@@ -46,7 +46,7 @@ class HomeRepository(private val apiService: ApiService) {
         }
     }
 
-    suspend fun getRecommendMates(): RecommendMateResponse? {
+    suspend fun getRecommendMates(): MateResponse? {
         return try {
             val response = apiService.getRecommendMate()
 

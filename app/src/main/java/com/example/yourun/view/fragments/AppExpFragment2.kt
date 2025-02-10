@@ -10,32 +10,33 @@ import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.yourun.R
+import com.example.yourun.databinding.FragmentAppExp2Binding
 
 class AppExpFragment2 : Fragment() {
+
+    private var _binding: FragmentAppExp2Binding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_app_exp2, container, false)
+    ): View {
+        _binding = FragmentAppExp2Binding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imgCharactersView = view.findViewById<ImageView>(R.id.img_characters)
-
-        view.findViewById<Button>(R.id.next_btn).setOnClickListener {
-            slideImage(R.drawable.img_characters, imgCharactersView) {
+        // "다음" 버튼 클릭 시 다음 Fragment로 이동
+        binding.nextBtn.setOnClickListener {
+            slideImage(R.drawable.img_characters, binding.imgCharacters) {
                 val nextFragment = AppExpFragment3()
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.app_exp_fragment_container, nextFragment)
@@ -44,7 +45,8 @@ class AppExpFragment2 : Fragment() {
             }
         }
 
-        view.findViewById<ImageButton>(R.id.back_button).setOnClickListener {
+        // "뒤로 가기" 버튼 클릭 시 이전 Fragment로 이동
+        binding.appExpTopBarWithBackButton.backButton.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
 
@@ -57,9 +59,8 @@ class AppExpFragment2 : Fragment() {
             }
         }
 
-        val txtWhatCharacter = view.findViewById<TextView>(R.id.txt_app_exp_what_character)
-
-        val fullText = txtWhatCharacter.text.toString()
+        // "캐릭터" 텍스트 색상 변경
+        val fullText = binding.txtAppExpWhatCharacter.text.toString()
         val targetText = "캐릭터"
         val spannableString = SpannableString(fullText)
         val startIndex = fullText.indexOf(targetText)
@@ -73,11 +74,10 @@ class AppExpFragment2 : Fragment() {
                 SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
-        txtWhatCharacter.text = spannableString
-
+        binding.txtAppExpWhatCharacter.text = spannableString
     }
 
-    // 🔹 이미지 변경 + 애니메이션 (왼쪽으로 슬라이드)
+    // 이미지 변경 + 애니메이션 (왼쪽으로 슬라이드)
     private fun slideImage(newImageRes: Int, imageView: ImageView, onAnimationEnd: () -> Unit) {
         val animOut = ObjectAnimator.ofFloat(imageView, "translationX", 0f, -imageView.width.toFloat())
         animOut.duration = 300
@@ -98,5 +98,10 @@ class AppExpFragment2 : Fragment() {
         })
 
         animOut.start()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

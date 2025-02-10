@@ -10,32 +10,33 @@ import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.yourun.R
+import com.example.yourun.databinding.FragmentAppExp5Binding
 
 class AppExpFragment5 : Fragment() {
+
+    private var _binding: FragmentAppExp5Binding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_app_exp5, container, false)
+    ): View {
+        _binding = FragmentAppExp5Binding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imgCharactersView = view.findViewById<ImageView>(R.id.img_characters)
-
-        view.findViewById<Button>(R.id.next_btn).setOnClickListener {
-            slideImage(R.drawable.img_characters, imgCharactersView) {
+        // "다음" 버튼 클릭 시 다음 Fragment로 이동
+        binding.nextBtn.setOnClickListener {
+            slideImage(R.drawable.img_characters, binding.imgCharacters) {
                 val nextFragment = AppExpFragment6()
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.app_exp_fragment_container, nextFragment)
@@ -44,7 +45,8 @@ class AppExpFragment5 : Fragment() {
             }
         }
 
-        view.findViewById<ImageButton>(R.id.back_button).setOnClickListener {
+        // "뒤로 가기" 버튼 클릭 시 이전 Fragment로 이동
+        binding.appExpTopBarWithBackButton.backButton.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
 
@@ -57,9 +59,8 @@ class AppExpFragment5 : Fragment() {
             }
         }
 
-        val txtHowRun = view.findViewById<TextView>(R.id.txt_app_exp_how_run)
-
-        val fullText = txtHowRun.text.toString()
+        // "얼마나 러닝" 텍스트 색상 변경
+        val fullText = binding.txtAppExpHowRun.text.toString()
         val targetText = "얼마나 러닝"
         val spannableString = SpannableString(fullText)
         val startIndex = fullText.indexOf(targetText)
@@ -73,7 +74,7 @@ class AppExpFragment5 : Fragment() {
                 SPAN_EXCLUSIVE_EXCLUSIVE
             )
         }
-        txtHowRun.text = spannableString
+        binding.txtAppExpHowRun.text = spannableString
     }
 
     // 이미지 변경 + 애니메이션 (왼쪽으로 슬라이드)
@@ -99,4 +100,8 @@ class AppExpFragment5 : Fragment() {
         animOut.start()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

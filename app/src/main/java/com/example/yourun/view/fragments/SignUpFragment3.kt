@@ -1,5 +1,6 @@
 package com.example.yourun.view.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -21,6 +22,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
     private var _binding: FragmentSignup3Binding? = null
@@ -82,6 +86,16 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
                     "SignUpFragment3",
                     "✅ 닉네임 & 태그 저장됨: nickname=$nickname, tag1=${selectedTags[0]}, tag2=${selectedTags[1]}"
                 )
+
+                val sharedPref = requireActivity().getSharedPreferences("UserData", Context.MODE_PRIVATE)
+                val editor = sharedPref.edit()
+
+                // 현재 날짜 (가입 날짜) 저장
+                val currentDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+
+                editor.putString("nickname", nickname) // 닉네임 저장
+                editor.putString("signup_date", currentDate) // 가입 날짜 저장
+                editor.apply() // 비동기 저장
 
                 // Navigation으로 다른 Fragment로 이동
                 findNavController().navigate(R.id.action_signUpFragment3_to_questionFragment)

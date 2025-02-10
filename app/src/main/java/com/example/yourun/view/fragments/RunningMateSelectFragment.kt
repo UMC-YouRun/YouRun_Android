@@ -1,18 +1,15 @@
 package com.example.yourun.view.fragments
 
-import android.content.Context
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.children
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentRunningMateSelectBinding
 import com.example.yourun.model.data.response.UserMateInfo
@@ -31,6 +28,9 @@ class RunningMateSelectFragment : Fragment() {
         RunningViewModelFactory(RunningRepository(ApiClient.getApiService()))
     }
 
+    private var selectedMateNickname: String? = null
+    private var selectedMateTendency: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,6 +45,9 @@ class RunningMateSelectFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.fetchMateList() // 메이트 목록 데이터 가져오기
+        viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
+
         binding.mateSelectTopBar.txtTopBarWithBackButton.text = "러닝메이트 선택"
 
         binding.btnCalendar.setOnClickListener {
@@ -53,25 +56,35 @@ class RunningMateSelectFragment : Fragment() {
         }
 
         binding.mateSelectTopBar.backButton.setOnClickListener {
-            parentFragmentManager.popBackStack()
+            navigateBackWithSelection()
+        }
+
+        // 메이트 목록 UI 업데이트
+        viewModel.mateList.observe(viewLifecycleOwner) { mates ->
+            updateMatesUI(mates, viewModel, isRecommended = false)
         }
 
         // 추천 메이트 UI 업데이트
         viewModel.recommendMates.observe(viewLifecycleOwner) { mates ->
-            updateRecommendMatesUI(mates, viewModel)
+            updateMatesUI(mates, viewModel, isRecommended = true)
         }
     }
 
-    // 추천 메이트 UI 추가
-    private fun <T: ViewModel> updateRecommendMatesUI(mates: List<UserMateInfo>, viewModel: T) {
-        val container = binding.recommendMatesContainer
+    // 메이트 UI 업데이트 (추천 메이트 & 일반 메이트 목록 통합)
+    private fun updateMatesUI(
+        mates: List<UserMateInfo>,
+        viewModel: RunningViewModel,
+        isRecommended: Boolean
+    ) {
+        // 추천 메이트는 recommendMatesContainer에, 일반 메이트 목록은 matesListContainer에 추가
+        val container = if (isRecommended) binding.recommendMatesContainer else binding.matesListContainer
 
-        // 기존 추천 메이트 뷰 삭제
+        // 기존 메이트 뷰 삭제
         container.removeAllViews()
 
-        // 추천 메이트 목록 추가 (최대 5개)
+        // 메이트 목록 추가 (최대 5개)
         mates.take(5).forEachIndexed { index, mate ->
-            // 가로 경계선 추가 (첫 번째 뷰 제외)
+            // 가로 구분선 추가 (첫 번째 항목 제외)
             if (index > 0) {
                 val dividerView = View(requireContext()).apply {
                     layoutParams = LinearLayout.LayoutParams(
@@ -86,10 +99,14 @@ class RunningMateSelectFragment : Fragment() {
                 container.addView(dividerView)
             }
 
-            // 추천 메이트 CustomMateView 추가
-            val mateView = CustomMateView<T>(requireContext()).apply {
+            // CustomMateView 추가
+            val mateView = CustomMateView<RunningViewModel>(requireContext(), showHeartButton = false).apply {
                 setViewModel(viewModel)
-                updateMateInfo(mate, mates.size - index)
+                updateMateInfo(mate, index + 1)
+                onMateSelected = { nickname, tendency ->
+                    selectedMateNickname = nickname
+                    selectedMateTendency = tendency
+                }
 
                 layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
@@ -106,6 +123,15 @@ class RunningMateSelectFragment : Fragment() {
     // dp → px 변환 함수
     private fun Int.dpToPx(): Int {
         return (this * resources.displayMetrics.density).toInt()
+    }
+
+    private fun navigateBackWithSelection() {
+        val result = Bundle().apply {
+            putString("mate_nickname", selectedMateNickname)
+            putString("mate_tendency", selectedMateTendency)
+        }
+        parentFragmentManager.setFragmentResult("mateSelectionKey", result)
+        parentFragmentManager.popBackStack()
     }
 
     override fun onDestroyView() {

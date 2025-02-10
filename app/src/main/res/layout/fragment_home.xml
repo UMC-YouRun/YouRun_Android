@@ -182,8 +182,8 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/roboto_bolditalic"
                     android:letterSpacing="-0.03"
-                    android:layout_marginTop="59dp"
-                    android:layout_marginStart="81dp" />
+                    android:layout_marginTop="56dp"
+                    android:layout_marginStart="70dp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -191,7 +191,7 @@
                     android:contentDescription="@string/fire"
                     android:src="@drawable/img_fire"
                     android:layout_marginTop="60dp"
-                    android:layout_marginStart="172dp" />
+                    android:layout_marginStart="160dp" />
 
                 <ImageButton
                     android:id="@+id/btnCrew"
