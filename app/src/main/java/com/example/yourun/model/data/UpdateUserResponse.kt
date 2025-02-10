@@ -4,15 +4,7 @@ data class UpdateUserResponse(
     val status: Int,
     val code: String,
     val message: String,
-    val data: UserData
+    val data: UserInfo
 )
 
-data class UserData(
-    val id: Int,
-    val nickname: String,
-    val tendency: String,
-    val tags: String,
-    val crewReward: Int,
-    val personalReward: Int,
-    val mvp: Int
-)
+
