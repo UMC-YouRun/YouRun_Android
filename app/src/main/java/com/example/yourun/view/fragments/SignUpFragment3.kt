@@ -53,24 +53,18 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
         setCheckBoxListener(binding.checkbox6, "왕초보")
 
         // 닉네임 입력 감지 및 중복 확인
-        binding.editTextNickname.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        binding.btnDuplicate.setOnClickListener {
+            val nickname = binding.editTextNickname.text.toString().trim()
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(editable: Editable?) {
-                val nickname = editable.toString().trim()
-                if (isValidNickname(nickname)) {
-                    checkNicknameDuplicate(nickname) // 닉네임 중복 확인
-                } else {
-                    binding.nicknameContent.apply {
-                        text = "닉네임은 한글 2~4자만 입력 가능합니다."
-                        setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
-                    }
-                    binding.imgBtnSignupSuccess.isEnabled = false
+            if (isValidNickname(nickname)) {
+                checkNicknameDuplicate(nickname)
+            } else {
+                binding.nicknameContent.apply {
+                    text = "닉네임은 한글 2~4자만 입력 가능합니다."
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
                 }
             }
-        })
+        }
 
         // 회원가입 완료 버튼
         binding.imgBtnSignupSuccess.setOnClickListener {
@@ -139,6 +133,7 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
             }
         }
     }
+
 
     // 체크박스 리스너
     private fun setCheckBoxListener(checkBox: CheckBox, tag: String) {
