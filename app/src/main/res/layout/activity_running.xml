@@ -49,7 +49,7 @@
                 android:textStyle="bold" />
 
             <ImageButton
-                android:id="@id/btn_calendar"
+                android:id="@id/btnCalendar"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:contentDescription="@string/btn_calendar"

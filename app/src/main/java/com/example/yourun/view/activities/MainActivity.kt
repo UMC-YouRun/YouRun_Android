@@ -1,6 +1,7 @@
 package com.example.yourun.view.activities
 
 import android.Manifest
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.ImageView
@@ -16,9 +17,12 @@ import com.example.yourun.view.fragments.RunningFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.widget.Toast
+import android.net.Uri
+import android.provider.Settings
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import com.example.yourun.view.fragments.ChallengeFragment
+import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,29 +49,22 @@ class MainActivity : AppCompatActivity() {
             .commit()
 
         bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> {
-                    loadFragment(HomeFragment())
-                    true
-                }
-
-                R.id.nav_mate -> {
-                    loadFragment(MateFragment())
-                    true
-                }
-
-                R.id.nav_challenge -> {
-                    loadFragment(ChallengeFragment())
-                    true
-                }
-
-                R.id.nav_my -> {
-                    loadFragment(MyRunFragment())
-                    true
-                }
-
-                else -> false
+            val newFragment = when (item.itemId) {
+                R.id.nav_home -> HomeFragment()
+                R.id.nav_mate -> MateFragment()
+                R.id.nav_challenge -> ChallengeFragment()
+                R.id.nav_my -> MyRunFragment()
+                else -> return@setOnItemSelectedListener false
             }
+
+            // 현재 표시된 Fragment와 같으면 무시
+            val currentFragment = supportFragmentManager.findFragmentById(R.id.main_fragment_container)
+            if (currentFragment?.javaClass == newFragment.javaClass) {
+                return@setOnItemSelectedListener false
+            }
+
+            loadFragment(newFragment)
+            true
         }
 
         fabRunning.setOnClickListener {
@@ -113,17 +110,35 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkLocationPermission() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            // 권한이 이미 허용된 경우 실행할 코드
-        } else {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                locationPermissionRequestCode
-            )
+        val permission = Manifest.permission.ACCESS_FINE_LOCATION
+
+        when {
+            ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED -> {
+                // 권한이 이미 허용된 경우 실행할 코드
+            }
+
+            shouldShowRequestPermissionRationale(permission) -> {
+                AlertDialog.Builder(this)
+                    .setTitle("위치 권한 필요")
+                    .setMessage("앱에서 위치 권한을 허용해야 러닝 기능을 사용할 수 있습니다.")
+                    .setPositiveButton("확인") { _, _ ->
+                        ActivityCompat.requestPermissions(
+                            this,
+                            arrayOf(permission),
+                            locationPermissionRequestCode
+                        )
+                    }
+                    .setNegativeButton("취소", null)
+                    .show()
+            }
+
+            else -> {
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(permission),
+                    locationPermissionRequestCode
+                )
+            }
         }
     }
 
@@ -133,9 +148,18 @@ class MainActivity : AppCompatActivity() {
 
         if (requestCode == locationPermissionRequestCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted
+                // 권한 허용됨
             } else {
-                Toast.makeText(this, "위치 권한이 필요합니다.", Toast.LENGTH_SHORT).show()
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "위치 권한이 필요합니다. 설정에서 권한을 허용해주세요.",
+                    Snackbar.LENGTH_LONG
+                ).setAction("설정") {
+                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                        data = Uri.fromParts("package", packageName, null)
+                    }
+                    startActivity(intent)
+                }.show()
             }
         }
     }

@@ -14,6 +14,7 @@ import com.example.yourun.model.data.request.RunningResultRequest
 import com.example.yourun.model.data.response.ApiResponseBoolean
 import com.example.yourun.model.data.response.HomeChallengeResponse
 import com.example.yourun.model.data.response.MateResponse
+import com.example.yourun.model.data.response.RunningDataResponse
 import com.example.yourun.model.data.response.RunningResultResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -63,6 +64,11 @@ interface ApiService {
 
     @GET("users/mates/recommend")
     suspend fun getRecommendMate(): Response<MateResponse>
+
+    @GET("users/runnings/{id}")
+    suspend fun getRunningData(
+        @Path("id") id: Long
+    ): Response<RunningDataResponse>
 
     @POST("users/runnings")
     suspend fun sendRunningResult(

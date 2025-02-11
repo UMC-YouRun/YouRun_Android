@@ -1,6 +1,5 @@
 package com.example.yourun.view.fragments
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,6 +29,7 @@ class RunningMateSelectFragment : Fragment() {
 
     private var selectedMateNickname: String? = null
     private var selectedMateTendency: String? = null
+    private var selectedMateId: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,13 +37,14 @@ class RunningMateSelectFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentRunningMateSelectBinding.inflate(inflater, container, false)
-        binding.lifecycleOwner = this
-        binding.viewModel = viewModel
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         viewModel.fetchMateList() // 메이트 목록 데이터 가져오기
         viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
@@ -103,9 +104,10 @@ class RunningMateSelectFragment : Fragment() {
             val mateView = CustomMateView<RunningViewModel>(requireContext(), showHeartButton = false).apply {
                 setViewModel(viewModel)
                 updateMateInfo(mate, index + 1)
-                onMateSelected = { nickname, tendency ->
+                onMateSelected = { nickname, tendency, id ->
                     selectedMateNickname = nickname
                     selectedMateTendency = tendency
+                    selectedMateId = id
                 }
 
                 layoutParams = LinearLayout.LayoutParams(
@@ -126,12 +128,14 @@ class RunningMateSelectFragment : Fragment() {
     }
 
     private fun navigateBackWithSelection() {
-        val result = Bundle().apply {
-            putString("mate_nickname", selectedMateNickname)
-            putString("mate_tendency", selectedMateTendency)
+        val bundle = Bundle().apply {
+            putString("mateName", selectedMateNickname)
+            putString("mateTendency", selectedMateTendency)
+            selectedMateId?.let { putLong("mateId", it) }
         }
-        parentFragmentManager.setFragmentResult("mateSelectionKey", result)
-        parentFragmentManager.popBackStack()
+        parentFragmentManager.setFragmentResult("mateSelectKey", bundle)
+
+        parentFragmentManager.popBackStack() // RunningFragment로 돌아가기
     }
 
     override fun onDestroyView() {

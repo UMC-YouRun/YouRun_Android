@@ -1,14 +1,17 @@
 package com.example.yourun.viewmodel
 
+import android.app.Application
 import android.location.Location
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.yourun.model.data.request.RunningResultRequest
+import com.example.yourun.model.data.response.RunningDataResponse
 import com.example.yourun.model.data.response.RunningResultResponse
 import com.example.yourun.model.data.response.UserMateInfo
 import com.example.yourun.model.repository.RunningRepository
@@ -27,6 +30,9 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
     private val _mateList = MutableLiveData<List<UserMateInfo>>()
     val mateList: LiveData<List<UserMateInfo>> get() = _mateList
 
+    private val _mateRunningData = MutableLiveData<RunningDataResponse?>()
+    val mateRunningData: LiveData<RunningDataResponse?> get() = _mateRunningData
+
     private val _runningResult = MutableLiveData<RunningResultResponse?>()
     val runningResult: LiveData<RunningResultResponse?> get() = _runningResult
 
@@ -34,9 +40,13 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
     val startTime = MutableLiveData<String>()  // 러닝 시작 시간
     val endTime = MutableLiveData<String>()  // 러닝 종료 시간
     val totalDistance = MutableLiveData(0)  // 이동 거리 (m)
-    val mateName = MutableLiveData<String>()
     val totalTimeFormatted = MutableLiveData("0.00")  // 총 러닝 시간 (분)
     val averageSpeed = MutableLiveData("0.00 /km")  // 평균 속도
+    val mateName = MutableLiveData<String>() // 메이트 닉네임
+    val mateTendency = MutableLiveData<String>() // 메이트 성향
+    val mateId = MutableLiveData<Long>() // 메이트 ID
+    val mateRunningDistance = MutableLiveData<Int>() // 메이트 러닝 거리
+    val mateRunningPace = MutableLiveData<Int>() // 메이트 러닝 속도
     val isRunning = MutableLiveData(false)  // 러닝 중 여부
     val isStopped = MutableLiveData(false) // 러닝 종료 여부
 
@@ -101,6 +111,22 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
             } catch (e: Exception) {
                 Log.e("RunningViewModel", "메이트 목록 가져오는 중 오류 발생", e)
                 _mateList.value = emptyList() // 네트워크 오류 발생 시 빈 리스트 할당
+            }
+        }
+    }
+
+    // 메이트 러닝 데이터 가져오기
+    fun fetchMateRunningData(mateId: Long) {
+        viewModelScope.launch {
+            try {
+                val response = repository.getMateRunningData(mateId)
+                if (response != null) {
+                    _mateRunningData.postValue(response)
+                } else {
+                    Log.e("RunningViewModel", "메이트 러닝 데이터가 null입니다.")
+                }
+            } catch (e: Exception) {
+                Log.e("RunningViewModel", "메이트 러닝 데이터를 가져오는 중 오류 발생", e)
             }
         }
     }

@@ -36,7 +36,7 @@ class CustomMateView<T: ViewModel> @JvmOverloads constructor(
     private var viewModel: T? = null
     private var isSelected = false
 
-    var onMateSelected: ((String, String) -> Unit)? = null // 닉네임, 성향 전달
+    var onMateSelected: ((String, String, Long) -> Unit)? = null // 닉네임, 성향, ID 전달
 
     init {
         LayoutInflater.from(context).inflate(R.layout.item_similar_mate, this, true)
@@ -56,7 +56,7 @@ class CustomMateView<T: ViewModel> @JvmOverloads constructor(
 
         setOnClickListener {
             toggleSelection()
-            onMateSelected?.invoke(mateNickname, mateTendency)
+            onMateSelected?.invoke(mateNickname, mateTendency, mateId)
         }
     }
 
