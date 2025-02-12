@@ -13,6 +13,13 @@ class CreateCrew2Fragment : Fragment(R.layout.fragment_create_crew2) {
     private var _binding: FragmentCreateCrew2Binding? = null
     private val binding get() = _binding!!
 
+    // 이미지 리소스 설정
+    private val tendencyImages = mapOf(
+        "스프린터" to R.drawable.img_mate_sprinter,
+        "페이스메이커" to R.drawable.img_crew_facemaker,
+        "트레일러너" to R.drawable.img_crew_trailrunner
+    )
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,7 +30,22 @@ class CreateCrew2Fragment : Fragment(R.layout.fragment_create_crew2) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Your fragment code here
+
+        // 이전 프래그먼트에서 전달된 데이터 가져오기
+        val crewName = arguments?.getString("crewName") ?: ""
+        val startDate = arguments?.getString("startDate") ?: ""
+        val crewMotto = arguments?.getString("crewMotto") ?: ""
+        val endDate = arguments?.getString("endDate") ?: ""
+        val challengePeriod = arguments?.getInt("challengePeriod") ?: 0
+        val tendency = arguments?.getString("tendency") ?: ""
+
+        // resultSubTitle 텍스트 변경
+        val formattedText = "$crewMotto,$crewName 와 \n${startDate} ~ ${endDate}($challengePeriod 일 동안) \n최대러닝하기!"
+        binding.resultSubTitle.text = formattedText
+
+        // tendency에 맞는 이미지 설정
+        val imageResId = tendencyImages[tendency] ?: R.drawable.img_mate_sprinter // 기본 이미지 설정
+        binding.resultCharacter.setImageResource(imageResId)
     }
 
     override fun onDestroyView() {

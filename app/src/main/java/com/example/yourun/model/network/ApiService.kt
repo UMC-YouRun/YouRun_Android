@@ -2,6 +2,8 @@ package com.example.yourun.model.network
 
 import com.example.yourun.model.data.ChallengeDataResponse
 import com.example.yourun.model.data.ChallengeResultResponse
+import com.example.yourun.model.data.CreateCrewChallengeRequest
+import com.example.yourun.model.data.CreateCrewChallengeResponse
 import com.example.yourun.model.data.EmailduplicateResponse
 import com.example.yourun.model.data.LoginRequest
 import com.example.yourun.model.data.LoginResponse
@@ -54,6 +56,9 @@ interface ApiService {
     suspend fun updateUserTagsAndNickname(
         @Body request: UpdateUserRequest
     ): UpdateUserResponse
+
+    @POST("challenges/crew")
+    suspend fun createcrewchallenge(@Body request: CreateCrewChallengeRequest): CreateCrewChallengeResponse
 
 }
 

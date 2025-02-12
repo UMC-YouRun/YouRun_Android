@@ -48,7 +48,7 @@
 
     </FrameLayout>
 
-    <!-- Crew Challenge Text -->
+
     <TextView
         android:id="@+id/tv_crew1"
         android:layout_width="wrap_content"
@@ -61,9 +61,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.14"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_bar" />
+        app:layout_constraintTop_toBottomOf="@id/top_bar"
+        android:textColor="@color/black"/>
 
-    <!-- Other Crew Challenge Texts -->
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,7 +72,8 @@
         android:text="@string/tv_crew_challenge2"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/tv_crew1"
-        app:layout_constraintTop_toTopOf="@id/tv_crew1" />
+        app:layout_constraintTop_toTopOf="@id/tv_crew1"
+        android:textColor="@color/black"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -80,6 +82,7 @@
         android:text="@string/tv_crew_challenge3"
         android:textStyle="bold"
         android:textSize="16sp"
+        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/tv_crew1"
         app:layout_constraintTop_toTopOf="@id/tv_crew1" />
 
@@ -94,7 +97,7 @@
         app:layout_constraintStart_toStartOf="@id/tv_crew1"
         app:layout_constraintTop_toTopOf="@id/tv_crew1" />
 
-    <!-- Edit Text Fields -->
+
     <EditText
         android:id="@+id/et_crew_name"
         android:layout_width="340dp"
@@ -107,7 +110,7 @@
         app:layout_constraintStart_toStartOf="@id/tv_crew2"
         app:layout_constraintTop_toBottomOf="@id/tv_crew2" />
 
-    <!-- Other Text and EditText fields -->
+
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
@@ -117,7 +120,8 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/et_crew_name"
-        app:layout_constraintTop_toBottomOf="@+id/et_crew_name" />
+        app:layout_constraintTop_toBottomOf="@+id/et_crew_name"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/tv_crew3"
@@ -141,7 +145,7 @@
         app:layout_constraintStart_toStartOf="@id/tv_crew3"
         app:layout_constraintTop_toBottomOf="@id/tv_crew3" />
 
-    <!-- Date Text -->
+
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="wrap_content"
@@ -151,9 +155,10 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/tv_crew2"
-        app:layout_constraintTop_toBottomOf="@+id/et_crew" />
+        app:layout_constraintTop_toBottomOf="@+id/et_crew"
+        android:textColor="@color/black"/>
 
-    <!-- Calendar Layout -->
+
     <LinearLayout
         android:id="@+id/calender"
         android:layout_width="0dp"
@@ -166,7 +171,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_date">
 
-        <!-- Month/Year Layout -->
+
         <LinearLayout
             android:id="@+id/monthYearLayout"
             android:layout_width="match_parent"
@@ -185,7 +190,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Weekday Layout -->
+
         <LinearLayout
             android:id="@+id/weekdayLayout"
             android:layout_width="match_parent"
@@ -194,10 +199,10 @@
             android:padding="5dp"
             android:useDefaultMargins="false">
 
-            <!-- 요일을 동적으로 추가 -->
+
         </LinearLayout>
 
-        <!-- Calendar Grid -->
+
         <LinearLayout
             android:id="@+id/dragBarContainer"
             android:layout_width="match_parent"
@@ -217,15 +222,13 @@
                 android:useDefaultMargins="false"
                 android:clickable="true">
 
-                <!-- 날짜들이 동적으로 추가 -->
+
             </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Next Button -->
 
-    <!-- Bottom Navigation -->
 
     <ImageButton
         android:id="@+id/next_btn"

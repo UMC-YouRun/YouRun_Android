@@ -75,6 +75,7 @@
             android:text="@string/tv_crew_challenge1"
             android:textStyle="bold|italic"
             android:textSize="24sp"
+            android:textColor="@color/black"
             />
 
         <TextView
@@ -88,11 +89,10 @@
 
         <ImageView
             android:id="@+id/resultCharacter"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="80dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/img_facemaker_challenge"/>
+            android:layout_marginTop="80dp" />
 
         <ImageView
             android:layout_width="68.1dp"
@@ -108,7 +108,8 @@
             android:layout_gravity="center"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="15dp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -117,7 +118,8 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:textSize="11sp"
-            android:layout_marginTop="11dp"/>
+            android:layout_marginTop="11dp"
+            android:textColor="@color/black"/>
 
 
         <ImageButton
