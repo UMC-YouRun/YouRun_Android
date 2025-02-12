@@ -75,6 +75,7 @@
             android:textStyle="bold|italic"
             android:textSize="24sp"
             android:text="@string/tv_solo_challenge1"
+            android:textColor="@color/black"
 
             />
 
@@ -82,25 +83,25 @@
             android:id="@+id/resultSubTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="@string/tv_challenge6"
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/resultCharacter"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="80dp"
             android:layout_gravity="center"
-            android:background="@drawable/img_facemaker_challenge"/>
+            />
 
         <ImageView
             android:layout_width="68.1dp"
             android:layout_height="47dp"
-            android:background="@drawable/img_plus_logo"
             android:layout_gravity="center"
-            android:layout_marginTop="23dp"/>
+            android:layout_marginTop="25dp"
+            android:background="@drawable/img_plus_logo" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -109,6 +110,7 @@
             android:layout_gravity="center"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="@color/black"
             android:layout_marginTop="15dp"/>
 
         <TextView
@@ -116,17 +118,17 @@
             android:layout_height="wrap_content"
             android:text="@string/tv_challenge8"
             android:layout_gravity="center"
+            android:textColor="@color/black"
             android:gravity="center"
             android:textSize="11sp"
             android:layout_marginTop="11dp"/>
-
 
 
         <ImageButton
             android:id="@+id/startRunningButton"
             android:layout_width="328dp"
             android:layout_height="48dp"
-            android:layout_margin="16dp"
+            android:layout_margin="22dp"
             android:layout_marginTop="80dp"
             android:background="@drawable/btn_check"
             android:textColor="@color/black"

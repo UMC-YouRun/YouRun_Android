@@ -4,9 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.yourun.R
 import com.example.yourun.databinding.ActivityCreateChallengeBinding
-import com.example.yourun.view.fragments.CreateCrew1Fragment
 import com.example.yourun.view.fragments.CreateSolo1Fragment
 
 
@@ -41,7 +39,7 @@ class CreateChallengeActivity : AppCompatActivity() {
                 }
 
                 binding.checkboxSolo.isChecked -> {
-                    val intent = Intent(this, CreateSolo1Activity::class.java)
+                    val intent = Intent(this, CreateSoloActivity::class.java)
                     startActivity(intent)  // Solo 선택 시 CreateSoloActivity로 이동 (필요하면)
                 }
 

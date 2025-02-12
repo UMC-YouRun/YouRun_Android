@@ -4,6 +4,8 @@ import com.example.yourun.model.data.ChallengeDataResponse
 import com.example.yourun.model.data.ChallengeResultResponse
 import com.example.yourun.model.data.CreateCrewChallengeRequest
 import com.example.yourun.model.data.CreateCrewChallengeResponse
+import com.example.yourun.model.data.CreateSoloChallengeRequest
+import com.example.yourun.model.data.CreateSoloChallengeResponse
 import com.example.yourun.model.data.EmailduplicateResponse
 import com.example.yourun.model.data.LoginRequest
 import com.example.yourun.model.data.LoginResponse
@@ -59,6 +61,9 @@ interface ApiService {
 
     @POST("challenges/crew")
     suspend fun createcrewchallenge(@Body request: CreateCrewChallengeRequest): CreateCrewChallengeResponse
+
+    @POST("challenges/solo")
+    suspend fun createsolochallenge(@Body request: CreateSoloChallengeRequest): CreateSoloChallengeResponse
 
 }
 

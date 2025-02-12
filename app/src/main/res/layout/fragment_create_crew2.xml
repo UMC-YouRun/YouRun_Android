@@ -82,10 +82,10 @@
             android:id="@+id/resultSubTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:text="@string/tv_crew_challenge5"
             android:textSize="16sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/resultCharacter"
@@ -97,9 +97,9 @@
         <ImageView
             android:layout_width="68.1dp"
             android:layout_height="47dp"
-            android:background="@drawable/img_plus_logo"
             android:layout_gravity="center"
-            android:layout_marginTop="23dp"/>
+            android:layout_marginTop="25dp"
+            android:background="@drawable/img_plus_logo" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -126,10 +126,10 @@
             android:id="@+id/startRunningButton"
             android:layout_width="328dp"
             android:layout_height="48dp"
-            android:layout_margin="16dp"
+            android:layout_margin="22dp"
             android:layout_marginTop="80dp"
-            android:importantForAccessibility="no"
             android:background="@drawable/btn_check"
+            android:importantForAccessibility="no"
             android:textColor="@color/white"
             android:textSize="16sp" />
     </LinearLayout>

@@ -8,7 +8,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -188,12 +187,12 @@ class CreateCrew1Fragment : Fragment(R.layout.fragment_create_crew1) {
         private fun highlightSelectedDay(currentDate: LocalDate, textView: TextView) {
             when {
                 currentDate.isEqual(selectedStartDate) -> {
-                    textView.setBackgroundResource(R.drawable.selected_date_orange)
-                    textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                    textView.setBackgroundResource(R.drawable.bgd_selected_date_orange)
+                    textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 }
 
                 currentDate.isEqual(LocalDate.now()) -> {
-                    textView.setBackgroundResource(R.drawable.current_date_purple)
+                    textView.setBackgroundResource(R.drawable.bgd_current_date_purple)
                     textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                 }
 
@@ -226,7 +225,7 @@ class CreateCrew1Fragment : Fragment(R.layout.fragment_create_crew1) {
                                     }
 
                                     selectedEndDate != null && currentDate.isEqual(selectedEndDate) -> {
-                                        view.setBackgroundResource(R.drawable.range_gradient_yellow)
+                                        view.setBackgroundResource(R.drawable.bgd_selected_date_orange)
                                         view.setTextColor(
                                             ContextCompat.getColor(
                                                 requireContext(),
@@ -239,7 +238,7 @@ class CreateCrew1Fragment : Fragment(R.layout.fragment_create_crew1) {
                                             (currentDate.isAfter(selectedStartDate) && currentDate.isBefore(
                                                 selectedEndDate
                                             )) -> {
-                                        view.setBackgroundResource(R.drawable.range_gradient_yellow)
+                                        view.setBackgroundResource(R.drawable.bgd_selected_date_orange)
                                         view.setTextColor(
                                             ContextCompat.getColor(
                                                 requireContext(),
@@ -249,7 +248,7 @@ class CreateCrew1Fragment : Fragment(R.layout.fragment_create_crew1) {
                                     }
 
                                     currentDate.isEqual(LocalDate.now()) -> {
-                                        view.setBackgroundResource(R.drawable.current_date_purple)
+                                        view.setBackgroundResource(R.drawable.bgd_current_date_purple)
                                         view.setTextColor(
                                             ContextCompat.getColor(
                                                 requireContext(),
