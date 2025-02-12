@@ -73,14 +73,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:background="@drawable/rounded_bottom_corners" />
-
-            <ImageView
+            
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loadingRunningAnimation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/rotating_circle"
-                android:src="@drawable/bgd_rotating_circle"
                 android:layout_marginTop="40dp"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true" />
 
             <ImageView
                 android:layout_width="wrap_content"

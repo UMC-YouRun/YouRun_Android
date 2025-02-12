@@ -76,7 +76,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation("com.google.android.material:material:1.9.0")
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation("com.airbnb.android:lottie:6.0.0")
+    implementation("com.airbnb.android:lottie:6.1.0")
     implementation("com.kakao.sdk:v2-all:2.20.6")
     implementation ("com.kakao.maps.open:android:2.12.8")
     implementation ("com.google.android.gms:play-services-location:21.0.1") // FusedLocationProviderClient를 위한 의존성

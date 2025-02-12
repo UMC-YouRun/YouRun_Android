@@ -7,6 +7,7 @@ import android.os.Looper
 import android.text.SpannableString
 import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
 import android.text.style.AbsoluteSizeSpan
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -62,6 +63,13 @@ class RunningActivity : AppCompatActivity() {
         binding.txtTimeToRun.text = "${targetTime}분 러닝하기!"
 
         binding.txtTopBarWithBackButton.text = "러닝"
+
+        try {
+            binding.loadingRunningAnimation.setAnimation(R.raw.loading_running)
+            binding.loadingRunningAnimation.playAnimation()
+        } catch (e: Exception) {
+            Log.e("LottieError", "Lottie 애니메이션 로드 실패", e)
+        }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -136,6 +144,7 @@ class RunningActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        binding.loadingRunningAnimation.pauseAnimation()
         stopLocationUpdates() // 액티비티 종료 시 위치 업데이트 중지
         if (viewModel.isStopped.value != true) {
             viewModel.stopTracking()
