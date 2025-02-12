@@ -64,12 +64,8 @@ class RunningActivity : AppCompatActivity() {
 
         binding.txtTopBarWithBackButton.text = "러닝"
 
-        try {
-            binding.loadingRunningAnimation.setAnimation(R.raw.loading_running)
-            binding.loadingRunningAnimation.playAnimation()
-        } catch (e: Exception) {
-            Log.e("LottieError", "Lottie 애니메이션 로드 실패", e)
-        }
+        binding.loadingRunningAnimation.setAnimation(R.raw.loading_running)
+        binding.loadingRunningAnimation.playAnimation()
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 

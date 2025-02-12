@@ -25,6 +25,7 @@ import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.HomeRepository
 import com.example.yourun.view.activities.CalendarActivity
 import com.example.yourun.view.activities.ChallengeListActivity
+import com.example.yourun.view.activities.CreateChallengeActivity
 import com.example.yourun.view.custom.CustomHomeChallenge
 import com.example.yourun.view.custom.CustomMateView
 import com.example.yourun.viewmodel.HomeViewModel
@@ -102,6 +103,12 @@ class HomeFragment : Fragment() {
 
         // challengeButtonContainer에 기본 btnAddChallenge 뷰를 저장
         originalChallengeButton = binding.challengeButtonContainer.findViewById(R.id.btnAddChallenge)
+
+        binding.btnAddChallenge.setOnClickListener {
+            val intent = Intent(requireContext(), CreateChallengeActivity::class.java)
+            startActivity(intent)
+            parentFragmentManager.popBackStack()
+        }
 
         // ViewModel의 챌린지 데이터 옵저빙
         viewModel.challengeData.observe(viewLifecycleOwner) { challengeData ->
