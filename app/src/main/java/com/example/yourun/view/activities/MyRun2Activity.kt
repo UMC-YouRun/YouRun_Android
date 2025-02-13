@@ -1,15 +1,13 @@
 package com.example.yourun.view.activities
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityMyrun2Binding
-import com.example.yourun.model.data.UpdateUserRequest
+import com.example.yourun.model.data.request.UpdateUserRequest
 import com.example.yourun.model.network.ApiClient
 import kotlinx.coroutines.launch
 import androidx.lifecycle.lifecycleScope

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.yourun.model.data.UserInfo
+import com.example.yourun.model.data.response.UserInfo
 import com.example.yourun.model.repository.MyRunRepository
 import kotlinx.coroutines.launch
 

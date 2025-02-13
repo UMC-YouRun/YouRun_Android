@@ -35,5 +35,6 @@
     <color name="date_purple">#9285F6</color>
     <color name="date_yellow">#FFDD85</color>
     <color name="date_orange">#FFC368</color>
+    <color name="text_gray">#CDCDCD</color>
 
 </resources>

@@ -1,10 +1,11 @@
-package com.example.yourun.model.data
+package com.example.yourun.model.data.response
 
 data class CreateCrewChallengeResponse(
       val status: Int,
       val code: String,
       val message: String,
-      val data: CreateCrewChallenge)
+      val data: CreateCrewChallenge
+)
 
 data class CreateCrewChallenge
       ( val challengeId : Long,

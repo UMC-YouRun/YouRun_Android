@@ -16,7 +16,6 @@ import com.example.yourun.model.repository.RunningRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.time.Instant
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
@@ -35,18 +34,18 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
     val runningResult: LiveData<RunningResultResponse?> get() = _runningResult
 
     val targetTime = MutableLiveData<Int>()  // 목표 시간 (분)
-    val startTime = MutableLiveData<String>()  // 러닝 시작 시간
-    val endTime = MutableLiveData<String>()  // 러닝 종료 시간
-    val totalDistance = MutableLiveData(0)  // 이동 거리 (m)
+    val totalDistance = MutableLiveData(0.0)  // 이동 거리 (m)
     val totalTimeFormatted = MutableLiveData("0.00")  // 총 러닝 시간 (분)
     val averageSpeed = MutableLiveData("0.00 /km")  // 평균 속도
+    val isRunning = MutableLiveData(false)  // 러닝 중 여부
+    val isStopped = MutableLiveData(false) // 러닝 종료 여부
+    val userSpeed = MutableLiveData<Double>(0.0) // 유저 평균 속도 (km/h)
+
     val mateName = MutableLiveData<String>() // 메이트 닉네임
     val mateTendency = MutableLiveData<String>() // 메이트 성향
     val mateId = MutableLiveData<Long>() // 메이트 ID
     val mateRunningDistance = MutableLiveData<Int>() // 메이트 러닝 거리
     val mateRunningPace = MutableLiveData<Int>() // 메이트 러닝 속도
-    val isRunning = MutableLiveData(false)  // 러닝 중 여부
-    val isStopped = MutableLiveData(false) // 러닝 종료 여부
 
     private var lastLocation: Location? = null
     private var startTimeMillis: Long = 0
@@ -139,19 +138,21 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
         }
     }
 
+    // 1초마다 총 시간, 평균 속도 업데이트 및 목표 시간 체크
     private val updateTimeRunnable = object : Runnable {
         override fun run() {
             if (isRunning.value == true) {
                 updateTotalTime()
                 updateAverageSpeed()
                 checkIfTargetTimeReached()
-                handler.postDelayed(this, 1000) // 1초마다 실행
+                handler.postDelayed(this, 1000)
             }
         }
     }
 
+    // 러닝 상태 토글: 시작 또는 일시 정지
     fun toggleRunningState() {
-        if (isStopped.value == true) return  // 종료된 상태면 다시 시작 X
+        if (isStopped.value == true) return // 종료된 상태면 다시 시작 X
 
         if (isRunning.value == true) {
             pauseTracking()
@@ -166,8 +167,6 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
         isRunning.value = true
         startTimeMillis = System.currentTimeMillis() - elapsedTimeMillis
 
-        // 러닝 시작 시간 설정 (ISO 8601 형식)
-        startTime.value = Instant.ofEpochMilli(startTimeMillis).toString()
         handler.post(updateTimeRunnable)
     }
 
@@ -181,37 +180,35 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
         isRunning.value = false
         isStopped.value = true
         handler.removeCallbacks(updateTimeRunnable)
-
-        // 러닝 종료 시간 설정 (ISO 8601 형식)
-        endTime.value = System.currentTimeMillis().toString()
     }
 
+    // 위치 업데이트를 통해 총 이동 거리 갱신 (1m 이하 오차 무시)
     fun updateLocationData(location: Location) {
-        if (lastLocation != null) {
-            val distance = lastLocation!!.distanceTo(location).toInt()
-
-            // GPS 오차 방지: 1m 이하 변화는 무시
+        lastLocation?.let { previous ->
+            val distance = previous.distanceTo(location)
             if (distance > 1) {
-                totalDistance.value = (totalDistance.value ?: 0) + distance
+                totalDistance.value = (totalDistance.value ?: 0.0) + distance
             }
         }
         lastLocation = location // 현재 위치 저장 (다음 비교를 위해)
     }
 
+    // 경과 시간(분) 계산 및 UI 업데이트
     private fun updateTotalTime() {
         val elapsedMillis = System.currentTimeMillis() - startTimeMillis
-        val elapsedTimeMinutes = TimeUnit.MILLISECONDS.toMinutes(elapsedMillis).toDouble() +
+        val elapsedMinutes = TimeUnit.MILLISECONDS.toMinutes(elapsedMillis).toDouble() +
                 (TimeUnit.MILLISECONDS.toSeconds(elapsedMillis) % 60) / 100.0
-
-        totalTimeFormatted.value = String.format(Locale.US, "%.1f", elapsedTimeMinutes)
+        totalTimeFormatted.value = String.format(Locale.US, "%.1f", elapsedMinutes)
     }
 
+    // 평균 속도 계산하여 포맷팅
     private fun updateAverageSpeed() {
-        val distanceMeters = totalDistance.value ?: 0
+        val distanceMeters = totalDistance.value ?: 0.0
         val timeFormatted = totalTimeFormatted.value ?: "0.00"
 
-        if (distanceMeters == 0 || timeFormatted == "0.00") {
+        if (distanceMeters == 0.0 || timeFormatted == "0.00") {
             averageSpeed.value = "0.00 /km"
+            userSpeed.value = 0.0
             return
         }
 
@@ -219,19 +216,21 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
             val minutes = timeFormatted.toDouble()
             if (minutes == 0.0) {
                 averageSpeed.value = "0.00 /km"
+                userSpeed.value = 0.0
                 return
             }
-
             val distanceKm = distanceMeters / 1000.0
-            val speedPerKm = distanceKm / minutes
-
-            averageSpeed.value = String.format(Locale.US, "%.2f /km", speedPerKm)
+            val speedKmh = (distanceKm / minutes) * 60
+            averageSpeed.value = String.format(Locale.US, "%.2f /km", speedKmh)
+            userSpeed.value = speedKmh
         } catch (e: Exception) {
             Log.e("RunningViewModel", "평균 속도 계산 오류", e)
             averageSpeed.value = "0.00 /km"
+            userSpeed.value = 0.0
         }
     }
 
+    // 목표 시간 도달 시 러닝 종료
     private fun checkIfTargetTimeReached() {
         val targetMinutes = targetTime.value ?: return
         val elapsedMinutes = totalTimeFormatted.value?.toDoubleOrNull() ?: return

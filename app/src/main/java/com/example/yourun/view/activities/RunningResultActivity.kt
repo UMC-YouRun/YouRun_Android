@@ -65,9 +65,7 @@ class RunningResultActivity : AppCompatActivity() {
         // Intent에서 데이터 받기
         intent?.let {
             runningViewModel.targetTime.value = it.getIntExtra("targetTime", 0)
-            runningViewModel.startTime.value = it.getStringExtra("startTime") ?: ""
-            runningViewModel.endTime.value = it.getStringExtra("endTime") ?: ""
-            runningViewModel.totalDistance.value = it.getIntExtra("totalDistance", 0) // m 단위
+            // runningViewModel.totalDistance.value = it.getIntExtra("totalDistance", 0) // m 단위
             // runningViewModel.mateName.value = it.getStringExtra("mateName") ?: ""
             // TODO mate가 뛴 거리를 받아와서 비교해야함
         }
