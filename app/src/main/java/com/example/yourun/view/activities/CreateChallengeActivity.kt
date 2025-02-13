@@ -2,12 +2,10 @@ package com.example.yourun.view.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.yourun.R
 import com.example.yourun.databinding.ActivityCreateChallengeBinding
+import com.example.yourun.view.fragments.CreateCrew1Fragment
 
 
 class CreateChallengeActivity : AppCompatActivity() {
@@ -36,7 +34,7 @@ class CreateChallengeActivity : AppCompatActivity() {
         binding.nextBtn.setOnClickListener {
             // Crew 체크박스가 체크되어 있으면 CreateCrew1Activity로 이동
             if (binding.checkboxCrew.isChecked) {
-                val intent = Intent(this, CreateCrew1Activity::class.java)
+                val intent = Intent(this, CreateCrew1Fragment::class.java)
                 startActivity(intent)
             }
             // Solo 체크박스가 체크되어 있으면 CreateSolo1Activity로 이동

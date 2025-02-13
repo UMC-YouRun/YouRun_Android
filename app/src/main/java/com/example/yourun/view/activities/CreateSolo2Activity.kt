@@ -2,8 +2,8 @@ package com.example.yourun.view.activities
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.yourun.databinding.ActivityCreateCrew2Binding
 import com.example.yourun.databinding.ActivityCreateSolo2Binding
+
 
 class CreateSolo2Activity  : AppCompatActivity () {
     private lateinit var binding: ActivityCreateSolo2Binding

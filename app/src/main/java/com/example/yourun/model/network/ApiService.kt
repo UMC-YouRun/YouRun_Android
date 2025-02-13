@@ -10,6 +10,8 @@ import com.example.yourun.model.data.response.RunningStatsResponse
 import com.example.yourun.model.data.request.SignUpRequest
 import com.example.yourun.model.data.request.SignUpResponse
 import com.example.yourun.model.data.UserInfo
+import com.example.yourun.model.data.UpdateUserRequest
+import com.example.yourun.model.data.UpdateUserResponse
 import com.example.yourun.model.data.request.RunningResultRequest
 import com.example.yourun.model.data.response.ApiResponseBoolean
 import com.example.yourun.model.data.response.HomeChallengeResponse
@@ -19,6 +21,7 @@ import com.example.yourun.model.data.response.RunningResultResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -74,6 +77,12 @@ interface ApiService {
     suspend fun sendRunningResult(
         @Body request: RunningResultRequest
     ): Response<RunningResultResponse>
+
+    @PATCH("mypage")
+    suspend fun updateUserTagsAndNickname(
+        @Body request: UpdateUserRequest
+    ): UpdateUserResponse
+
 }
 
 data class ApiResponse<T>(

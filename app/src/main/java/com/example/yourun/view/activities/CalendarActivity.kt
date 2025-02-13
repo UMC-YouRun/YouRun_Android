@@ -69,7 +69,7 @@ class CalendarActivity : AppCompatActivity() {
         fetchRunningStats(selectedDate.year, selectedDate.monthValue)
 
         // View 초기화
-        weekCalendarGrid = findViewById(R.id.weekCalendarGrid)
+        weekCalendarGrid = findViewById(R.id.dateLayout)
         fullCalendarGrid = findViewById(R.id.fullCalendarGrid)
         dragBar = findViewById(R.id.dragBar)
 
