@@ -21,8 +21,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityRunningResultBinding
-import com.example.yourun.model.data.RunningResultRequest
-import com.example.yourun.model.data.RunningResultResponse
+import com.example.yourun.model.data.request.RunningResultRequest
+import com.example.yourun.model.data.response.RunningResultResponse
 import com.example.yourun.viewmodel.RunningViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -74,7 +74,7 @@ class RunningResultActivity : AppCompatActivity() {
 
         // 서버로 데이터 전송
         binding.btnOk.setOnClickListener {
-            sendRunningResult()
+            //sendRunningResult()
         }
 
         binding.runningResultTopBar.txtTopBarWithBackButton.text = "러닝 결과"
@@ -187,7 +187,7 @@ class RunningResultActivity : AppCompatActivity() {
         return bitmap
     }
 
-    private fun sendRunningResult() {
+    /*private fun sendRunningResult() {
         val request = RunningResultRequest(
             runningViewModel.targetTime.value ?: 0,
             runningViewModel.startTime.value ?: "",
@@ -208,7 +208,7 @@ class RunningResultActivity : AppCompatActivity() {
                 Toast.makeText(this@RunningResultActivity, "네트워크 오류 발생", Toast.LENGTH_SHORT).show()
             }
         }
-    }
+    }*/
 
     private fun navigateToChallengeResult(resultData: RunningResultResponse?) {
         /* 솔로, 크루 챌린지 결과 액티비티로 이동

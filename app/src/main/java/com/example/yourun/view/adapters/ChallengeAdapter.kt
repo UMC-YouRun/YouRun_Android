@@ -3,11 +3,10 @@ package com.example.yourun.view.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
-import com.example.yourun.model.data.ChallengeItem
+import com.example.yourun.model.data.response.ChallengeItem
 
 class ChallengeAdapter(private val challengeList: MutableList<ChallengeItem>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

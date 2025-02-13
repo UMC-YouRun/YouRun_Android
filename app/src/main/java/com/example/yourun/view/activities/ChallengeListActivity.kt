@@ -3,14 +3,10 @@ package com.example.yourun.view.activities
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.yourun.R
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.yourun.view.adapters.ChallengeAdapter
-import com.example.yourun.model.data.ChallengeItem
+import com.example.yourun.model.data.response.ChallengeItem
 import android.util.Log
 
 class ChallengeListActivity : AppCompatActivity() {

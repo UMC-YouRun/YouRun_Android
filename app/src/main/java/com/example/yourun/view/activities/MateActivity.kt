@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
 import com.example.yourun.view.adapters.MateAdapter
-import com.example.yourun.model.data.Mate
+import com.example.yourun.model.data.response.Mate
 
 class MateActivity : AppCompatActivity() {
 

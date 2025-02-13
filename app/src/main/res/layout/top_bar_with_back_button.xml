@@ -16,7 +16,7 @@
         android:background="@drawable/rounded_bottom_background" />
 
     <ImageButton
-        android:id="@+id/back_button"
+        android:id="@+id/backButton"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="?attr/selectableItemBackgroundBorderless"
@@ -28,7 +28,7 @@
         android:layout_marginBottom="8dp"/>
 
     <TextView
-        android:id="@+id/txt_top_bar_with_back_button"
+        android:id="@+id/txtTopBarWithBackButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

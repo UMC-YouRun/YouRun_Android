@@ -1,4 +1,4 @@
-package com.example.yourun.model.data
+package com.example.yourun.model.data.response
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

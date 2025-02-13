@@ -60,7 +60,7 @@
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@id/user_name"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="16dp"
         android:layout_marginStart="14dp" />
 
     <View
@@ -83,7 +83,7 @@
         app:layout_constraintStart_toEndOf="@id/bgd_user_run_day"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
+        android:layout_marginStart="17dp" />
 
     <TextView
         android:id="@+id/user_tag"

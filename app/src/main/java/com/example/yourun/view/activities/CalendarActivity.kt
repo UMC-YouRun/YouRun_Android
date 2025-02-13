@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.yourun.R
-import com.example.yourun.model.data.RunningStatsResponse
+import com.example.yourun.model.data.response.RunningStatsResponse
 import com.example.yourun.model.network.ApiClient
 import kotlinx.coroutines.launch
 import java.time.LocalDate
