@@ -53,12 +53,13 @@
         android:id="@+id/tv_crew1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="28dp"
         android:text="@string/tv_solo_challenge1"
         android:textSize="24sp"
+        android:textColor="@color/black"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.14"
+        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_bar" />
 
@@ -68,6 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:text="@string/tv_solo_challenge2"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/tv_crew1"
         app:layout_constraintTop_toTopOf="@id/tv_crew1" />
@@ -76,21 +78,23 @@
         android:id="@+id/tv_distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="35dp"
         android:text="@string/tv_challenge3_distance"
+        android:textColor="@color/black"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/tv_crew1"
-        app:layout_constraintTop_toTopOf="@id/tv_crew1" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
     <LinearLayout
         android:id="@+id/create_checkbox"
         android:layout_width="360dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
         android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="@id/tv_crew1"
+        app:layout_constraintStart_toStartOf="@+id/tv_distance"
         app:layout_constraintTop_toBottomOf="@+id/tv_distance">
 
         <CheckBox
@@ -136,15 +140,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/tv_challenge5_date"
+        android:textColor="@color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@id/tv_distance"
+        app:layout_constraintStart_toStartOf="@+id/tv_distance"
         app:layout_constraintTop_toBottomOf="@+id/create_checkbox" />
 
 
     <LinearLayout
         android:id="@+id/calender"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="4dp"
@@ -154,9 +159,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_date">
 
-        <!-- 상단 년/월 표시 리니어레이아웃 -->
 
-        <!-- 요일 표시 (날짜 앞에 나오는 일, 월, 화 등) -->
         <LinearLayout
             android:id="@+id/monthYearLayout"
             android:layout_width="match_parent"
@@ -164,7 +167,6 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <!-- 현재 년/월 표시 -->
             <TextView
                 android:id="@+id/monthYearText"
                 android:layout_width="wrap_content"
@@ -176,39 +178,40 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
+
         <LinearLayout
             android:id="@+id/weekdayLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:orientation="horizontal"
-            android:padding="8dp"
+            android:padding="5dp"
             android:useDefaultMargins="false">
-            <!-- 요일이 들어갈 TextView들을 동적으로 추가할 예정 -->
+
+
         </LinearLayout>
 
-        <!-- 주간 달력 -->
+
         <LinearLayout
             android:id="@+id/dragBarContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="0dp"
-            android:useDefaultMargins="false">
+            android:useDefaultMargins="false"
+            android:clickable="true">
 
-            <!-- 주간 달력 그리드 -->
-            <GridLayout
+            <LinearLayout
                 android:id="@+id/dateLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:columnCount="7"
                 android:orientation="horizontal"
-                android:padding="8dp"
-                android:useDefaultMargins="false">
-                <!-- 날짜를 동적으로 추가할 예정 -->
-            </GridLayout>
+                android:padding="5dp"
+                android:useDefaultMargins="false"
+                android:clickable="true">
+
+
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

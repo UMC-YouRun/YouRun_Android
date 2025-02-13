@@ -63,14 +63,10 @@
         <activity android:name=".view.activities.SignUpActivity"/>
 
         <activity
-            android:name=".view.activities.CreateSolo1Activity"
+            android:name=".view.activities.CreateSoloActivity"
             android:exported="true" >
-
         </activity>
 
-        <activity
-            android:name=".view.activities.CreateSolo2Activity"
-            android:exported="true" />
 
         <activity
             android:name=".view.activities.LoginActivity"

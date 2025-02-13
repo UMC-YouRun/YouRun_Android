@@ -130,6 +130,12 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.btnAddChallenge.setOnClickListener {
+            val intent = Intent(requireContext(), CreateChallengeActivity::class.java)
+            startActivity(intent)
+            parentFragmentManager.popBackStack()
+        }
+
         // 추천 메이트 UI 업데이트
         viewModel.recommendMates.observe(viewLifecycleOwner) { mates ->
             updateRecommendMatesUI(mates, viewModel, showHeart = true)
@@ -141,6 +147,8 @@ class HomeFragment : Fragment() {
             viewModel.fetchRecommendMates()
         }
     }
+
+
 
     // 버튼 상태에 따라 챌린지 UI 업데이트
     private fun updateChallengeView(challengeData: ChallengeData? = viewModel.challengeData.value) {

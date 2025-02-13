@@ -1,6 +1,8 @@
 package com.example.yourun.view.activities
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +22,16 @@ class MyRun2Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMyrun2Binding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val imageRes = intent.getIntExtra("profile_image_res", -1)
+
+        if (imageRes != -1) {
+            Log.d("MyRun2Activity", "받은 이미지 리소스: $imageRes") // 로그 확인
+            binding.ivProfileCharacter.setImageResource(imageRes)
+        } else {
+            Log.e("MyRun2Activity", "이미지 리소스가 정상적으로 전달되지 않음")
+        }
+
 
         binding.btnDuplicate.setOnClickListener {
             val nickname = binding.editTextNickname.text.toString()

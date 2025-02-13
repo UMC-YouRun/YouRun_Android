@@ -5,6 +5,11 @@ import com.example.yourun.model.data.response.ChallengeResultResponse
 import com.example.yourun.model.data.response.EmailduplicateResponse
 import com.example.yourun.model.data.request.LoginRequest
 import com.example.yourun.model.data.response.LoginResponse
+import com.example.yourun.model.data.CreateCrewChallengeRequest
+import com.example.yourun.model.data.CreateCrewChallengeResponse
+import com.example.yourun.model.data.CreateSoloChallengeRequest
+import com.example.yourun.model.data.CreateSoloChallengeResponse
+import com.example.yourun.model.data.EmailduplicateResponse
 import com.example.yourun.model.data.NicknameduplicateResponse
 import com.example.yourun.model.data.response.RunningStatsResponse
 import com.example.yourun.model.data.request.SignUpRequest
@@ -82,6 +87,12 @@ interface ApiService {
     suspend fun updateUserTagsAndNickname(
         @Body request: UpdateUserRequest
     ): UpdateUserResponse
+
+    @POST("challenges/crew")
+    suspend fun createcrewchallenge(@Body request: CreateCrewChallengeRequest): CreateCrewChallengeResponse
+
+    @POST("challenges/solo")
+    suspend fun createsolochallenge(@Body request: CreateSoloChallengeRequest): CreateSoloChallengeResponse
 
 }
 
