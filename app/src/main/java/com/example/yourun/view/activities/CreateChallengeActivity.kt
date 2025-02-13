@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.yourun.databinding.ActivityCreateChallengeBinding
-import com.example.yourun.view.fragments.CreateCrew1Fragment
+import com.example.yourun.view.fragments.CreateSolo1Fragment
 
 
 class CreateChallengeActivity : AppCompatActivity() {
@@ -32,19 +32,20 @@ class CreateChallengeActivity : AppCompatActivity() {
 
         // 다음 버튼 클릭 시
         binding.nextBtn.setOnClickListener {
-            // Crew 체크박스가 체크되어 있으면 CreateCrew1Activity로 이동
-            if (binding.checkboxCrew.isChecked) {
-                val intent = Intent(this, CreateCrew1Fragment::class.java)
-                startActivity(intent)
-            }
-            // Solo 체크박스가 체크되어 있으면 CreateSolo1Activity로 이동
-            else if (binding.checkboxSolo.isChecked) {
-                val intent = Intent(this, CreateSolo1Activity::class.java)
-                startActivity(intent)
-            }
-            // 체크박스가 선택되지 않으면 경고 메시지 표시
-            else {
-                Toast.makeText(this, "챌린지 종류를 선택해주세요.", Toast.LENGTH_SHORT).show()
+            when {
+                binding.checkboxCrew.isChecked -> {
+                    val intent = Intent(this, CreateCrewActivity::class.java)
+                    startActivity(intent)  // Crew 선택 시 CreateCrewActivity로 이동
+                }
+
+                binding.checkboxSolo.isChecked -> {
+                    val intent = Intent(this, CreateSoloActivity::class.java)
+                    startActivity(intent)  // Solo 선택 시 CreateSoloActivity로 이동 (필요하면)
+                }
+
+                else -> {
+                    Toast.makeText(this, "챌린지 종류를 선택해주세요.", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

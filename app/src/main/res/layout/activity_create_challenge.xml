@@ -62,7 +62,8 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_bar" />
+        app:layout_constraintTop_toBottomOf="@id/top_bar"
+        android:textColor="@color/black"/>
 
 
     <TextView
@@ -73,7 +74,8 @@
         android:text="@string/tv_challenge2"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/tv_create_1"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_1" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_1"
+        android:textColor="@color/black"/>
 
     <CheckBox
         android:id="@+id/checkbox_crew"
@@ -85,6 +87,7 @@
         android:clickable="true"
         android:gravity="center"
         android:text="@string/tv_challenge3"
+        android:textColor="@color/black"
         android:textSize="26sp"
         android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="@id/tv_create_2"
@@ -97,7 +100,8 @@
         android:layout_marginTop="100dp"
         android:text="@string/tv_challenge4"
         app:layout_constraintStart_toStartOf="@+id/tv_create_2"
-        app:layout_constraintTop_toTopOf="@+id/checkbox_crew" />
+        app:layout_constraintTop_toTopOf="@+id/checkbox_crew"
+        android:textColor="@color/black"/>
 
 
     <CheckBox
@@ -114,7 +118,8 @@
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="@+id/checkbox_crew"
         app:layout_constraintStart_toStartOf="@id/tv_create_04"
-        app:layout_constraintTop_toBottomOf="@+id/tv_create_04" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_create_04"
+        android:textColor="@color/black"/>
 
 
     <ImageButton

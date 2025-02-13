@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/date_orange" />
+    <corners android:radius="20dp" />
+    <size android:width="27dp" android:height="27dp"/>
+    <path
+        android:pathData="M13.5,13.5m-9,0a9,9 0,1 1,20 0a9,9 0,1 1,-20 0"
+        android:fillColor="@color/date_orange"/>
+</shape>

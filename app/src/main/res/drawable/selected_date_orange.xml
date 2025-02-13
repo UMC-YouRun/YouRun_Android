@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#FFB84F" /> <!-- 배경색 -->
-    <corners android:radius="20dp" /> <!-- 동그라미 모양을 위해 반지름 설정 -->
-    <size android:width="40dp" android:height="40dp"/> <!-- 크기 지정 (너비 = 높이) -->
-</shape>

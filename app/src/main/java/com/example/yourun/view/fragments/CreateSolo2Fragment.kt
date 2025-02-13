@@ -4,17 +4,16 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.yourun.R
-import com.example.yourun.databinding.FragmentCreateCrew2Binding
+import com.example.yourun.databinding.FragmentCreateSolo2Binding
 
 
-class CreateCrew2Fragment : Fragment(R.layout.fragment_create_crew2) {
-
-    private var _binding: FragmentCreateCrew2Binding? = null
+class CreateSolo2Fragment  : Fragment(R.layout.fragment_create_solo2) {
+    private var _binding: FragmentCreateSolo2Binding? = null
     private val binding get() = _binding!!
 
 
@@ -28,7 +27,7 @@ class CreateCrew2Fragment : Fragment(R.layout.fragment_create_crew2) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCreateCrew2Binding.inflate(inflater, container, false)
+        _binding = FragmentCreateSolo2Binding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -36,44 +35,40 @@ class CreateCrew2Fragment : Fragment(R.layout.fragment_create_crew2) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val crewName = arguments?.getString("crewName") ?: ""
+
         val startDate = arguments?.getString("startDate") ?: ""
-        val crewMotto = arguments?.getString("crewMotto") ?: ""
         val endDate = arguments?.getString("endDate") ?: ""
         val challengePeriod = arguments?.getInt("challengePeriod") ?: 0
         val tendency = arguments?.getString("tendency") ?: ""
+        val challengeDistanceValue = arguments?.getString("challengeDistanceValue")
 
-        val formattedText = "$crewMotto,$crewName 와 \n${startDate} ~ ${endDate}($challengePeriod 일 동안) \n최대 거리 러닝하기!"
+        val formattedText = " ${startDate} ~ ${endDate}($challengePeriod 일 간) \n매일 $challengeDistanceValue 러닝하기!"
 
         val spannable = SpannableString(formattedText)
 
-        // 색상 적용
-        // crewMotto,$crewName 부분 (주황색)
-        val crewMottoLength = crewMotto.length
-        val crewNameLength = crewName.length
-        spannable.setSpan(ForegroundColorSpan(Color.parseColor("#F4AA3A")), 0, crewMottoLength + crewNameLength + 1, 0) // ',' 포함
-
         // startDate ~ endDate 부분 (검은색)
-        val startDateIndex = crewMottoLength + crewNameLength + 3
-        val endDateIndex = startDateIndex + startDate.length + 3
+        val startDateIndex = 1 // 공백을 넘어서
+        val endDateIndex = startDateIndex + startDate.length + 3 // " ~ "를 넘어서
         spannable.setSpan(ForegroundColorSpan(Color.BLACK), startDateIndex, endDateIndex + endDate.length, 0)
 
         // challengePeriod 부분 (보라색)
-        val challengePeriodIndex = endDateIndex + endDate.length + 4
-        spannable.setSpan(ForegroundColorSpan(Color.parseColor("#9B4DFF")), challengePeriodIndex, challengePeriodIndex + challengePeriod.toString().length, 0)
+        val challengePeriodIndex = endDateIndex + endDate.length // "()"를 넘어서
+        spannable.setSpan(ForegroundColorSpan(Color.parseColor("#9B4DFF")), challengePeriodIndex, challengePeriodIndex + challengePeriod.toString().length + 6, 0)
 
-        // "최대 거리 러닝하기!" 부분 (검은색)
-        val runningTextIndex = challengePeriodIndex + challengePeriod.toString().length + 6
+        // 매일 $challengeDistance 부분 (주황색)
+        val distanceIndex = challengePeriodIndex + challengePeriod.toString().length +6
+        spannable.setSpan(ForegroundColorSpan(Color.parseColor("#F4AA3A")), distanceIndex, distanceIndex + challengeDistanceValue.toString().length, 0)
+
+        // 러닝하기! 부분 (검은색)
+        val runningTextIndex = distanceIndex + challengeDistanceValue.toString().length + 6
         spannable.setSpan(ForegroundColorSpan(Color.BLACK), runningTextIndex, formattedText.length, 0)
-
 
         binding.resultSubTitle.text = spannable
 
 
+
         val imageResId = tendencyImages[tendency] ?: R.drawable.img_mate_sprinter
         binding.resultCharacter.setImageResource(imageResId)
-
-
     }
 
     override fun onDestroyView() {
