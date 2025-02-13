@@ -239,6 +239,9 @@ class RunningActivity : AppCompatActivity() {
             putExtra("average_speed", avgSpeed)
             putExtra("mate_nickname", mateName)
             putExtra("distance_difference", distanceDifference)
+            putExtra("startTime", viewModel.startTime.value ?: "")
+            putExtra("endTime", viewModel.endTime.value ?: "")
+            putExtra("targetTime", viewModel.targetTime.value ?: 0)
         }
         startActivity(intent)
         finish()

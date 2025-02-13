@@ -8,14 +8,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.yourun.model.data.request.RunningResultRequest
 import com.example.yourun.model.data.response.RunningDataResponse
-import com.example.yourun.model.data.response.RunningResultResponse
 import com.example.yourun.model.data.response.UserMateInfo
 import com.example.yourun.model.repository.RunningRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import java.time.Instant
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
@@ -30,9 +27,6 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
     private val _mateRunningData = MutableLiveData<RunningDataResponse?>()
     val mateRunningData: LiveData<RunningDataResponse?> get() = _mateRunningData
 
-    private val _runningResult = MutableLiveData<RunningResultResponse?>()
-    val runningResult: LiveData<RunningResultResponse?> get() = _runningResult
-
     val targetTime = MutableLiveData<Int>()  // 목표 시간 (분)
     val totalDistance = MutableLiveData(0.0)  // 이동 거리 (m)
     val totalTimeFormatted = MutableLiveData("0.00")  // 총 러닝 시간 (분)
@@ -40,6 +34,8 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
     val isRunning = MutableLiveData(false)  // 러닝 중 여부
     val isStopped = MutableLiveData(false) // 러닝 종료 여부
     val userSpeed = MutableLiveData<Double>(0.0) // 유저 평균 속도 (km/h)
+    val startTime = MutableLiveData<String>()
+    val endTime = MutableLiveData<String>()
 
     val mateName = MutableLiveData<String>() // 메이트 닉네임
     val mateTendency = MutableLiveData<String>() // 메이트 성향
@@ -128,16 +124,6 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
         }
     }
 
-    // 러닝 결과 서버 전송
-    fun sendRunningResult(request: RunningResultRequest) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val result = repository.sendRunningResult(request)
-            withContext(Dispatchers.Main) {
-                _runningResult.value = result // UI 업데이트
-            }
-        }
-    }
-
     // 1초마다 총 시간, 평균 속도 업데이트 및 목표 시간 체크
     private val updateTimeRunnable = object : Runnable {
         override fun run() {
@@ -166,6 +152,7 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
 
         isRunning.value = true
         startTimeMillis = System.currentTimeMillis() - elapsedTimeMillis
+        startTime.value = Instant.now().toString()
 
         handler.post(updateTimeRunnable)
     }
@@ -178,6 +165,7 @@ class RunningViewModel(private val repository: RunningRepository) : ViewModel() 
 
     fun stopTracking() {
         isRunning.value = false
+        endTime.value = Instant.now().toString()
         isStopped.value = true
         handler.removeCallbacks(updateTimeRunnable)
     }
