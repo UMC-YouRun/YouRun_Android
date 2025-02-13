@@ -56,7 +56,7 @@ class CreateSolo2Fragment  : Fragment(R.layout.fragment_create_solo2) {
         spannable.setSpan(ForegroundColorSpan(Color.parseColor("#9B4DFF")), challengePeriodIndex, challengePeriodIndex + challengePeriod.toString().length + 6, 0)
 
         // 매일 $challengeDistance 부분 (주황색)
-        val distanceIndex = challengePeriodIndex + challengePeriod.toString().length + 6
+        val distanceIndex = challengePeriodIndex + challengePeriod.toString().length +6
         spannable.setSpan(ForegroundColorSpan(Color.parseColor("#F4AA3A")), distanceIndex, distanceIndex + challengeDistanceValue.toString().length, 0)
 
         // 러닝하기! 부분 (검은색)

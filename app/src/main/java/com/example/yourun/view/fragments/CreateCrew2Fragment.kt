@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentCreateCrew2Binding
 
+
 class CreateCrew2Fragment : Fragment(R.layout.fragment_create_crew2) {
 
     private var _binding: FragmentCreateCrew2Binding? = null
@@ -71,6 +72,8 @@ class CreateCrew2Fragment : Fragment(R.layout.fragment_create_crew2) {
 
         val imageResId = tendencyImages[tendency] ?: R.drawable.img_mate_sprinter
         binding.resultCharacter.setImageResource(imageResId)
+
+
     }
 
     override fun onDestroyView() {
