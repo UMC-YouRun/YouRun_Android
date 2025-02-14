@@ -11,21 +11,20 @@ import com.example.yourun.model.network.ApiService
 
 class MateRepository(private val apiService: ApiService) {
 
-    suspend fun getMyPage(token: String): UserInfo? {
+    suspend fun getMyRunData(): UserInfo? {
         return try {
-            val response = apiService.getMyPage(token) // ✅ MateResponse 받아오기
-            if (response.status == 200) {
-                response.data?.let { myPageData ->
+            val response = apiService.getMyRunData() // ✅ 변경된 함수명 반영
+            if (response.isSuccessful) {
+                response.body()?.data?.let { myPageData ->
                     UserInfo(
                         id = myPageData.id,
                         nickname = myPageData.nickname,
                         tendency = myPageData.tendency,
-                        tags = myPageData.tags ?: emptyList(),
-                        crewReward = myPageData.crewReward,   // ✅ 추가
-                        personalReward = myPageData.personalReward,  // ✅ 추가
-                        mvp = myPageData.mvp   // ✅ 추가
-
-                    )  // ✅ MyPageData를 UserInfo로 변환
+                        tags = myPageData.tags,
+                        crewReward = myPageData.crewReward,
+                        personalReward = myPageData.personalReward,
+                        mvp = myPageData.mvp
+                    )
                 }
             } else {
                 null
@@ -37,9 +36,9 @@ class MateRepository(private val apiService: ApiService) {
     }
 
     // ✅ 메이트(친구) 정보 조회 API
-    suspend fun getMates(token: String): List<MateData> {
+    suspend fun getMates(): List<MateData> {
         return try {
-            val response = apiService.getMates(token)
+            val response = apiService.getMates()
 
 
             // ✅ API 응답 데이터 변환

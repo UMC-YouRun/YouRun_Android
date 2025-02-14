@@ -62,10 +62,10 @@ class MateFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
                 // ✅ 내 정보 가져오기 (UserInfo 타입으로 반환)
-                val userInfo = mateRepository.getMyPage("Bearer $token")  // 'data' 필드 제거
+                val userInfo = mateRepository.getMyRunData()
 
                 // ✅ 친구(메이트) 정보 조회
-                val mates = mateRepository.getMates("Bearer $token")
+                val mates = mateRepository.getMates()
 
                 // 리스트 초기화
                 mateDataList.clear()
