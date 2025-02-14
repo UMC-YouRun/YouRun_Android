@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
-import com.example.yourun.model.data.Mate
+import com.example.yourun.model.data.response.Mate
 
 
 class MateAdapter(private val mateList: List<Mate>) :

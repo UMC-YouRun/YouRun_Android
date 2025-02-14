@@ -53,7 +53,7 @@
                 android:layout_marginTop="111dp"
                 android:layout_marginEnd="110dp"
                 android:layout_marginBottom="111dp"
-                android:background="@drawable/img_face01" />
+                 />
 
             <TextView
                 android:id="@+id/tv_myrun_name"
@@ -67,21 +67,21 @@
                 />
 
 
-
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="147dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/img_profile_bg"
                 android:layout_marginStart="150dp"
-                android:layout_marginTop="310dp"/>
+                android:layout_marginTop="310dp"
+                android:background="@drawable/img_profile_bg" />
 
             <TextView
+                android:id="@+id/tv_myrun_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_myrun_profile"
                 android:layout_marginStart="170dp"
                 android:layout_marginTop="312dp"
-                android:textSize="16sp"/>
+                android:text="@string/tv_myrun_profile"
+                android:textSize="16sp" />
 
 
         </FrameLayout>
@@ -141,10 +141,9 @@
                 android:layout_marginEnd="16dp"
                 android:background="@drawable/img_myrun_ranking"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.49"
+                app:layout_constraintHorizontal_bias="0.529"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/btn_edit" />
-
 
             <TextView
                 android:id="@+id/tv_crew_reward1"
@@ -223,7 +222,7 @@
                 app:layout_constraintTop_toTopOf="@id/tv_crew_reward1" />
 
             <TextView
-                android:id="@+id/txt_crew_reward2"
+                android:id="@+id/txt_solo_reward"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"
@@ -235,7 +234,7 @@
                 app:layout_constraintTop_toTopOf="@id/tv_reward2" />
 
             <TextView
-                android:id="@+id/txt_crew_reward3"
+                android:id="@+id/txt_mvp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="25dp"

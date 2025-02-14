@@ -30,10 +30,7 @@
             android:name=".view.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.YouRun">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+
         </activity>
 
         <activity
@@ -54,29 +51,30 @@
 
         <activity
             android:name=".view.activities.CreateChallengeActivity"
-            android:exported="true" />
+            android:exported="true" >
 
-        <activity
-            android:name=".view.activities.CreateCrew1Activity"
-            android:exported="true" />
+        </activity>
 
-        <activity
-            android:name=".view.activities.CreateCrew2Activity"
-            android:exported="true" />
+        <activity android:name=".view.activities.CreateCrewActivity"
+            android:exported="true">
+
+        </activity>
 
         <activity android:name=".view.activities.SignUpActivity"/>
 
         <activity
-            android:name=".view.activities.CreateSolo1Activity"
-            android:exported="true" />
+            android:name=".view.activities.CreateSoloActivity"
+            android:exported="true" >
+        </activity>
 
-        <activity
-            android:name=".view.activities.CreateSolo2Activity"
-            android:exported="true" />
 
         <activity
             android:name=".view.activities.LoginActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -88,9 +86,8 @@
             android:name=".view.activities.MyRunActivity"
             android:exported="true" />
 
-        <activity
-            android:name=".view.activities.MyRun2Activity"
-            android:exported="true" />
+        <activity android:name=".view.activities.MyRun2Activity"
+            android:exported="true"/>
 
         <activity
             android:name=".view.activities.OnboardingActivity"

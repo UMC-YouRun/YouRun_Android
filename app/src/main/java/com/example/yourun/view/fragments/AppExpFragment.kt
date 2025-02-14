@@ -10,47 +10,46 @@ import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.yourun.R
+import com.example.yourun.databinding.FragmentAppExpBinding
 
 class AppExpFragment : Fragment(R.layout.fragment_app_exp) {
+
+    private var _binding: FragmentAppExpBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_app_exp, container, false)
+    ): View {
+        _binding = FragmentAppExpBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val nickname = arguments?.getString("nickname", null) ?: ""
-     
-        val welcomeTextView = view.findViewById<TextView>(R.id.txt_app_exp_welcome)
 
         if (nickname.isNotEmpty()) {
-        val spannable = SpannableStringBuilder(nickname).apply {
-            setSpan(
-                ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.text_purple)),
-                0, length,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
-        }
-        spannable.append(welcomeTextView.text) // 기존 텍스트 추가
-        welcomeTextView.text = spannable
+            val spannable = SpannableStringBuilder(nickname).apply {
+                setSpan(
+                    ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.text_purple)),
+                    0, length,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+            spannable.append(binding.txtAppExpWelcome.text) // 기존 텍스트 추가
+            binding.txtAppExpWelcome.text = spannable
         }
 
-        val imgCharactersView = view.findViewById<ImageView>(R.id.img_characters)
-
-        view.findViewById<Button>(R.id.next_btn).setOnClickListener {
-            slideImage(R.drawable.img_characters3, imgCharactersView) {
+        binding.nextBtn.setOnClickListener {
+            slideImage(R.drawable.img_characters3, binding.imgCharacters) {
                 val nextFragment = AppExpFragment2()
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.app_exp_fragment_container, nextFragment)
@@ -58,7 +57,6 @@ class AppExpFragment : Fragment(R.layout.fragment_app_exp) {
                     .commit()
             }
         }
-
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (parentFragmentManager.backStackEntryCount > 0) {
@@ -90,5 +88,10 @@ class AppExpFragment : Fragment(R.layout.fragment_app_exp) {
         })
 
         animOut.start()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

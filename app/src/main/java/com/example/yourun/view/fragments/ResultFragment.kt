@@ -2,7 +2,6 @@ package com.example.yourun.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,17 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentResultBinding
-import com.example.yourun.model.network.ApiClientNoAuth
+import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.ResultRepository
 import com.example.yourun.view.activities.MainActivity
 import com.example.yourun.viewmodel.SignUpViewModel
-import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
-import org.json.JSONTokener
 
 class ResultFragment : Fragment(R.layout.fragment_result) {
 
@@ -75,7 +71,7 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val apiService = ApiClientNoAuth.getApiService()
+                val apiService = ApiClient.getApiService()
                 apiService.signUp(signUpRequest)
 
                 withContext(Dispatchers.Main) {
