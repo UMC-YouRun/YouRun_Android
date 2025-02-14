@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentCreateSolo1Binding
-import com.example.yourun.model.data.CreateSoloChallengeRequest
+import com.example.yourun.model.data.request.CreateSoloChallengeRequest
 import com.example.yourun.model.network.ApiClient
 import kotlinx.coroutines.launch
 import java.time.LocalDate

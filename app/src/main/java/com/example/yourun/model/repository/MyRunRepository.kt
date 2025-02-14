@@ -1,6 +1,6 @@
 package com.example.yourun.model.repository
 
-import com.example.yourun.model.data.UserInfo
+import com.example.yourun.model.data.response.UserInfo
 import com.example.yourun.model.network.ApiResponse
 import com.example.yourun.model.network.ApiService
 

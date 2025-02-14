@@ -16,7 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentHomeBinding
-import com.example.yourun.model.data.UserInfo
+import com.example.yourun.model.data.response.UserInfo
 import com.example.yourun.model.data.response.ChallengeData
 import com.example.yourun.model.data.response.UserCrewChallengeInfo
 import com.example.yourun.model.data.response.UserMateInfo

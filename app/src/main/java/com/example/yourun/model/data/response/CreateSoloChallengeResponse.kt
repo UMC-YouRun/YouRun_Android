@@ -1,12 +1,11 @@
-package com.example.yourun.model.data
-
-import java.time.LocalDate
+package com.example.yourun.model.data.response
 
 data class CreateSoloChallengeResponse(
     val status: Int,
     val code: String,
     val message: String,
-    val data: CreateSoloChallenge)
+    val data: CreateSoloChallenge
+)
 
 data class CreateSoloChallenge (
     val challengeId : Long,

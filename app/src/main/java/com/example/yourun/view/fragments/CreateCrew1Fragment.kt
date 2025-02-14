@@ -16,7 +16,7 @@ import androidx.core.view.children
 import androidx.lifecycle.lifecycleScope
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentCreateCrew1Binding
-import com.example.yourun.model.data.CreateCrewChallengeRequest
+import com.example.yourun.model.data.request.CreateCrewChallengeRequest
 import com.example.yourun.model.network.ApiClient
 import kotlinx.coroutines.launch
 import java.time.LocalDate

@@ -1,7 +1,7 @@
 package com.example.yourun.model.repository
 
 import android.util.Log
-import com.example.yourun.model.data.UserInfo
+import com.example.yourun.model.data.response.UserInfo
 import com.example.yourun.model.data.response.ChallengeData
 import com.example.yourun.model.data.response.MateResponse
 import com.example.yourun.model.network.ApiResponse

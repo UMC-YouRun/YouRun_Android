@@ -1,6 +1,4 @@
-package com.example.yourun.model.data
-
-import java.time.LocalDate
+package com.example.yourun.model.data.request
 
 data class CreateCrewChallengeRequest(
     val crewName : String,
