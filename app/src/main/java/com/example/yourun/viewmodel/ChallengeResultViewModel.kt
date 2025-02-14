@@ -18,7 +18,7 @@ class ChallengeResultViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 Log.d("ChallengeResultViewModel", "API 요청 시작")
-                val response = ApiClient.getApiService().getSoloChallengeResultData()
+                val response = ApiClient.getChallengeApiService().getSoloChallengeResultData()
 
                 if (response.isSuccessful) {
                     val challengeResponse = response.body()?.data

@@ -29,7 +29,6 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         _binding = FragmentResultBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     //가입날짜
     private fun saveSignUpDate() {
         val sharedPref = requireActivity().getSharedPreferences("UserData", android.content.Context.MODE_PRIVATE)

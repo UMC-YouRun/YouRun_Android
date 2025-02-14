@@ -2,7 +2,6 @@ package com.example.yourun.view.activities
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -15,14 +14,16 @@ import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityRunningResultBinding
 import com.example.yourun.model.data.request.RunningResultRequest
-import com.example.yourun.model.network.ApiClient
-import com.example.yourun.model.network.ApiService
+import com.example.yourun.model.data.response.RunningResultResponse
+import com.example.yourun.viewmodel.RunningViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -44,17 +45,17 @@ import java.util.Locale
 class RunningResultActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRunningResultBinding
+    private val runningViewModel: RunningViewModel by viewModels()
     private lateinit var mapView: MapView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private lateinit var apiService: ApiService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityRunningResultBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        // API 인스턴스 생성
-        apiService = ApiClient.getApiService()
+        // 데이터 바인딩 초기화
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_running_result)
+        binding.viewModel = runningViewModel
+        binding.lifecycleOwner = this
 
         // 카카오 맵 초기화
         mapView = binding.kakaoMap
@@ -62,92 +63,24 @@ class RunningResultActivity : AppCompatActivity() {
         setupMapView()
 
         // Intent에서 데이터 받기
-        val userRunningDistance = intent.getDoubleExtra("user_running_distance", 0.0) // km 단위
-        val userRunningDistanceMeters = (userRunningDistance * 1000).toInt()
-        val runningTime = intent.getStringExtra("running_time") ?: "0.00"
-        val avgSpeed = intent.getStringExtra("average_speed") ?: "0.00 /km"
-        val mateNickname = intent.getStringExtra("mate_nickname") ?: ""
-        val distanceDifference = intent.getDoubleExtra("distance_difference", 0.0) // km
-        val startTime = intent.getStringExtra("startTime") ?: ""
-        val endTime = intent.getStringExtra("endTime") ?: ""
-        val targetTime = intent.getIntExtra("targetTime", 0)
-        val formattedTargetTime = targetTime * 60
-
-        // UI 업데이트
-        // 1. 사용자 러닝 완료 문구
-        val completeText = String.format(Locale.US, "%.2fkm 러닝 완료!", userRunningDistance)
-        binding.txtRunningComplete.text = completeText
-
-        // 2. 러닝 시간 (txtResultTime) 업데이트
-        val completeText2 = String.format(Locale.US, "$runningTime\"", userRunningDistance)
-        binding.txtResultTime.text = completeText2
-
-        // 3. 평균 속도 (txtResultDistance) 업데이트
-        binding.txtResultDistance.text = applySpannable(avgSpeed, 16, 11)
-
-        // 4. 메이트 닉네임 표시 (txtResultNameMate)
-        val mateText = "$mateNickname 보다"
-        val spannableMate = SpannableString(mateText)
-        val startIndex = mateText.indexOf(mateNickname)
-        if (startIndex >= 0) {
-            spannableMate.setSpan(
-                ForegroundColorSpan(ContextCompat.getColor(this, R.color.text_purple)),
-                startIndex,
-                startIndex + mateNickname.length,
-                SPAN_EXCLUSIVE_EXCLUSIVE
-            )
+        intent?.let {
+            runningViewModel.targetTime.value = it.getIntExtra("targetTime", 0)
+            runningViewModel.startTime.value = it.getStringExtra("startTime") ?: ""
+            runningViewModel.endTime.value = it.getStringExtra("endTime") ?: ""
+            runningViewModel.totalDistance.value = it.getIntExtra("totalDistance", 0) // m 단위
+            // runningViewModel.mateName.value = it.getStringExtra("mateName") ?: ""
+            // TODO mate가 뛴 거리를 받아와서 비교해야함
         }
-        binding.txtResultNameMate.text = spannableMate
-
-        // 5. 메이트와의 거리 차이 (txt_result_distance_mate) 업데이트
-        val diffText = if (distanceDifference >= 0)
-            String.format(Locale.US, "%.2fkm 더 뛰었어요!", distanceDifference)
-        else
-            String.format(Locale.US, "%.2fkm 덜 뛰었어요!", kotlin.math.abs(distanceDifference))
-        binding.txtResultDistanceMate.text = diffText
-
-        // 6. 상단 타이틀 업데이트
-        binding.runningResultTopBar.txtTopBarWithBackButton.text = "러닝 결과"
 
         // 서버로 데이터 전송
         binding.btnOk.setOnClickListener {
-            sendRunningResult(
-                RunningResultRequest(
-                    targetTime = formattedTargetTime,
-                    startTime = startTime,
-                    endTime = endTime,
-                    totalDistance = userRunningDistanceMeters
-                )
-            )
-            // TODO 결과 화면으로 이동
+            sendRunningResult()
         }
 
-        // 백 버튼 클릭 시, 홈 화면으로 이동
-        binding.runningResultTopBar.backButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+        binding.runningResultTopBar.txtTopBarWithBackButton.text = "러닝 결과"
 
-        // 캘린더 화면으로 이동
-        binding.btnCalendar.setOnClickListener {
-            val intent = Intent(this, CalendarActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
-    private fun sendRunningResult(request: RunningResultRequest) {
-        lifecycleScope.launch {
-            try {
-                val response = apiService.sendRunningResult(request)
-                if (response.isSuccessful) {
-                    Log.d("RunningResultActivity", "러닝 결과 전송 성공")
-                } else {
-                    Log.e("RunningResultActivity", "서버 응답 에러: ${response.errorBody()?.string()}")
-                }
-            } catch (e: Exception) {
-                Log.e("RunningResultActivity", "네트워크 요청 중 오류 발생", e)
-            }
-        }
+        // UI 업데이트 (Spannable 적용)
+        applySpannableFormatting()
     }
 
     private fun setupMapView() {
@@ -254,16 +187,86 @@ class RunningResultActivity : AppCompatActivity() {
         return bitmap
     }
 
+    private fun sendRunningResult() {
+        val request = RunningResultRequest(
+            runningViewModel.targetTime.value ?: 0,
+            runningViewModel.startTime.value ?: "",
+            runningViewModel.endTime.value ?: "",
+            runningViewModel.totalDistance.value ?: 0)
+
+        lifecycleScope.launch {
+            try {
+                val response = runningViewModel.sendRunningResult(request)
+                if (response.isSuccessful) {
+                    val resultData = response.body()
+                    navigateToChallengeResult(resultData)
+                } else {
+                    Toast.makeText(this@RunningResultActivity, "결과 전송 실패", Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                Log.e("RunningResultActivity", "API 요청 중 오류 발생", e)
+                Toast.makeText(this@RunningResultActivity, "네트워크 오류 발생", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun navigateToChallengeResult(resultData: RunningResultResponse?) {
+        /* 솔로, 크루 챌린지 결과 액티비티로 이동
+        val intent = Intent(this, ResultSoloActivity::class.java).apply {
+            putExtra("resultData", resultData) // 서버 응답 데이터 전달
+        }
+        startActivity(intent)
+        finish() // 현재 액티비티 종료
+         */
+    }
+
+
     // UI 텍스트 포맷팅 (Spannable 적용)
+    private fun applySpannableFormatting() {
+        runningViewModel.totalDistance.observe(this) { distanceInMeters ->
+            val distanceInKm = distanceInMeters / 1000.0
+            val formattedDistance = String.format(Locale.US, "%.1f", distanceInKm)
+            binding.txtRunningComplete.text = applySpannable("$formattedDistance km 러닝 완료!", 42, 25)
+        }
+
+        runningViewModel.totalTimeFormatted.observe(this) { formattedTime ->
+            binding.txtResultTime.text = applySpannable("$formattedTime\"", 16, 11)
+        }
+
+        runningViewModel.averageSpeed.observe(this) { averageSpeed ->
+            binding.txtResultDistance.text = applySpannable("$averageSpeed /km", 16, 11)
+        }
+
+        runningViewModel.mateName.observe(this) { mateName ->
+            val formattedMate = "$mateName 보다"
+            val spannableString = SpannableString(formattedMate)
+            val startIndex = formattedMate.indexOf(mateName)
+            val endIndex = startIndex + mateName.length
+
+            if (startIndex >= 0) {
+                spannableString.setSpan(
+                    ForegroundColorSpan(ContextCompat.getColor(this, R.color.text_purple)),
+                    startIndex,
+                    endIndex,
+                    SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            }
+            binding.txtResultNameMate.text = spannableString
+        }
+    }
+
+    // Spannable 적용 (숫자와 단위 크기 조정)
     private fun applySpannable(text: String, numberSize: Int, unitSize: Int): SpannableString {
         val spannable = SpannableString(text)
         val splitIndex = text.indexOf(" ")
+
         if (splitIndex > 0) {
             spannable.setSpan(AbsoluteSizeSpan(numberSize, true), 0, splitIndex, SPAN_EXCLUSIVE_EXCLUSIVE)
             spannable.setSpan(AbsoluteSizeSpan(unitSize, true), splitIndex, text.length, SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         return spannable
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -273,5 +276,9 @@ class RunningResultActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         mapView.pause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 }
