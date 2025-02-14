@@ -7,19 +7,22 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
-import com.example.yourun.model.data.response.Mate
+import com.example.yourun.model.data.MateData
+import android.graphics.Color
 
 
-class MateAdapter(private val mateList: List<Mate>) :
-    RecyclerView.Adapter<MateAdapter.MateViewHolder>() {
+class MateRankingAdapter(private val mateDataList: List<MateData>, private val userNickname: String) :
+    RecyclerView.Adapter<MateRankingAdapter.MateViewHolder>() {
 
     class MateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val rank: TextView = itemView.findViewById((R.id.idx_challenge_item))
         val profileImage: ImageView = itemView.findViewById(R.id.img_user_profile)
-        val name: TextView = itemView.findViewById(R.id.user_name)
-        val runday: TextView = itemView.findViewById(R.id.user_runday)
+        val nickname: TextView = itemView.findViewById(R.id.user_name)
+        val tags: TextView = itemView.findViewById(R.id.user_tag)
+        val countDay: TextView = itemView.findViewById(R.id.user_runday)
         val change: TextView = itemView.findViewById(R.id.mate_change)
         val distance: TextView = itemView.findViewById(R.id.user_km)
+        val itemLayout: View = itemView.findViewById(R.id.mate_item_layout) // 사용자는 배경색 변경
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MateViewHolder {
@@ -29,16 +32,23 @@ class MateAdapter(private val mateList: List<Mate>) :
     }
 
     override fun onBindViewHolder(holder: MateViewHolder, position: Int) {
-        val mate = mateList[position]
+        val mate = mateDataList[position]
         holder.rank.text = mate.rank.toString()
         holder.profileImage.setImageResource(mate.profileImageResId)
-        holder.name.text = mate.name
-        holder.runday.text = "${mate.runday}일째"
-        holder.distance.text = "${mate.distance}km"
+        holder.nickname.text = mate.nickname
+        holder.tags.text
+        holder.countDay.text = "${mate.countDay}일째"
+        holder.distance.text = "${mate.totalDistance}km"
         holder.change.text = "${mate.change}위"
+        // 🔹 현재 사용자의 닉네임과 리스트의 닉네임이 같다면 노란색 배경 적용
+        if (mate.nickname == userNickname) {
+            holder.itemLayout.setBackgroundColor(Color.parseColor("#FFF4C2")) // 연한 노란색
+        } else {
+            holder.itemLayout.setBackgroundColor(Color.WHITE) // 기본 흰색 배경
+        }
     }
 
     override fun getItemCount(): Int {
-        return mateList.size
+        return mateDataList.size
     }
 }
