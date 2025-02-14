@@ -17,14 +17,14 @@ import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.MateRepository
 import com.example.yourun.model.data.UserInfo
 import com.example.yourun.utils.TokenManager
-import com.example.yourun.view.adapters.MateAdapter
+import com.example.yourun.view.adapters.MateRankingAdapter
 import kotlinx.coroutines.launch
 
 
 class MateFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var mateAdapter: MateAdapter
+    private lateinit var mateAdapter: MateRankingAdapter
     private val mateDataList = mutableListOf<MateData>()
     private var userInfo: UserInfo? = null  // 사용자 정보 저장
 
@@ -38,7 +38,7 @@ class MateFragment : Fragment() {
 
         // RecyclerView 설정
         recyclerView = view.findViewById(R.id.recycler_view)
-        mateAdapter = MateAdapter(mateDataList, userInfo?.nickname ?: "")
+        mateAdapter = MateRankingAdapter(mateDataList, userInfo?.nickname ?: "")
         recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = mateAdapter
@@ -101,7 +101,7 @@ class MateFragment : Fragment() {
 
                 // 🔹 RecyclerView Adapter 업데이트
                 userInfo?.let { user ->
-                    mateAdapter = MateAdapter(mateDataList, user.nickname)
+                    mateAdapter = MateRankingAdapter(mateDataList, user.nickname)
                     recyclerView.adapter = mateAdapter
                 }
 

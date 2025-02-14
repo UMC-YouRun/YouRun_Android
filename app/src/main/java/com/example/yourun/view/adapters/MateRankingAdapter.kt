@@ -11,8 +11,8 @@ import com.example.yourun.model.data.MateData
 import android.graphics.Color
 
 
-class MateAdapter(private val mateDataList: List<MateData>, private val userNickname: String) :
-    RecyclerView.Adapter<MateAdapter.MateViewHolder>() {
+class MateRankingAdapter(private val mateDataList: List<MateData>, private val userNickname: String) :
+    RecyclerView.Adapter<MateRankingAdapter.MateViewHolder>() {
 
     class MateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val rank: TextView = itemView.findViewById((R.id.idx_challenge_item))
