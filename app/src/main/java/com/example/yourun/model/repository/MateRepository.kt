@@ -6,7 +6,7 @@ import com.example.yourun.model.data.MateApiData
 import com.example.yourun.model.data.MateData
 import com.example.yourun.model.data.MateResponse
 import com.example.yourun.model.data.MyPageData
-import com.example.yourun.model.data.UserInfo
+import com.example.yourun.model.data.response.UserInfo
 import com.example.yourun.model.network.ApiService
 
 class MateRepository(private val apiService: ApiService) {
