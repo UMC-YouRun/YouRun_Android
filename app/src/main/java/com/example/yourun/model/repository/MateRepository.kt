@@ -1,5 +1,6 @@
 package com.example.yourun.model.repository
 
+import android.util.Log
 import com.example.yourun.R
 import com.example.yourun.model.data.*
 import com.example.yourun.model.data.MateApiData
@@ -43,6 +44,8 @@ class MateRepository(private val apiService: ApiService) {
 
             // ✅ API 응답 데이터 변환
             response.data?.mapIndexed { index, apiData ->
+                Log.d("MateRepository", "메이트 거리 값: ${apiData.totalDistance}")
+
                 MateData(
                     rank = index + 1,
                     profileImageResId = getProfileImageByTendency(apiData.tendency),

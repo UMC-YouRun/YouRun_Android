@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
 import com.example.yourun.model.data.MateData
 import android.graphics.Color
+import android.util.Log
 
 
 class MateRankingAdapter(private val mateDataList: List<MateData>, private val userNickname: String) :
@@ -39,6 +40,7 @@ class MateRankingAdapter(private val mateDataList: List<MateData>, private val u
         holder.tags.text
         holder.countDay.text = "${mate.countDay}일째"
         holder.distance.text = "${mate.totalDistance}km"
+        Log.d("MateAdapter", "메이트 거리 값 (UI 표시): ${mate.totalDistance}")
         holder.change.text = "${mate.change}위"
         // 🔹 현재 사용자의 닉네임과 리스트의 닉네임이 같다면 노란색 배경 적용
         if (mate.nickname == userNickname) {
