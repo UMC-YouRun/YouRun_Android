@@ -52,6 +52,7 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
         binding.topBar.txtTopBarWithBackButton.text = "회원가입"
 
 
+
         // 체크박스 리스너 설정
         setCheckBoxListener(binding.checkbox1, "느긋하게")
         setCheckBoxListener(binding.checkbox2, "음악과")
@@ -129,6 +130,7 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.purple))
                         }
                         binding.imgBtnSignupSuccess.isEnabled = true
+                        binding.btnDuplicate.setImageResource(R.drawable.img_again_check_color)
                     } else {
                         // 중복된 닉네임
                         binding.nicknameContent.apply {
@@ -136,6 +138,7 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
                         }
                         binding.imgBtnSignupSuccess.isEnabled = false
+                        binding.btnDuplicate.setImageResource(R.drawable.img_againcheck)
                     }
                 }
             } catch (e: Exception) {

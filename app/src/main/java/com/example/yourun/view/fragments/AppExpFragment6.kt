@@ -1,10 +1,12 @@
 package com.example.yourun.view.fragments
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,11 +35,18 @@ class AppExpFragment6 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         // "유런 시작하기" 버튼 클릭 시 MainActivity로 이동
         binding.btnStartYourun.setOnClickListener {
+
+            val sharedPref = requireActivity().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+            sharedPref.edit().putBoolean("isAppExpSeen", true).apply()
+
+
             val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
             requireActivity().finish()
+
         }
 
         // "뒤로 가기" 버튼 클릭 시 이전 Fragment로 이동
@@ -45,7 +54,7 @@ class AppExpFragment6 : Fragment() {
             parentFragmentManager.popBackStack()
         }
 
-        // android back button
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             if (parentFragmentManager.backStackEntryCount > 0) {
                 parentFragmentManager.popBackStack()

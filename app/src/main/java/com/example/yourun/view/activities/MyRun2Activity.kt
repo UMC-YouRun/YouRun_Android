@@ -74,11 +74,13 @@ class MyRun2Activity : AppCompatActivity() {
                         text = "사용 가능한 닉네임입니다."
                         setTextColor(ContextCompat.getColor(this@MyRun2Activity, R.color.purple))
                     }
+                    binding.btnDuplicate.setImageResource(R.drawable.img_again_check_color)
                 } else {
                     binding.nicknameContent.apply {
                         text = "이미 사용 중인 닉네임입니다."
                         setTextColor(ContextCompat.getColor(this@MyRun2Activity, R.color.red))
                     }
+                    binding.btnDuplicate.setImageResource(R.drawable.img_againcheck)
                 }
             } catch (e: Exception) {
                 Toast.makeText(this@MyRun2Activity, "에러가 발생했습니다: ${e.message}", Toast.LENGTH_SHORT).show()
