@@ -2,6 +2,7 @@ package com.example.yourun.view.fragments
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
@@ -43,27 +44,69 @@ class CreateSolo2Fragment  : Fragment(R.layout.fragment_create_solo2) {
         val challengeDistanceValue = arguments?.getString("challengeDistanceValue")
 
         val formattedText = " ${startDate} ~ ${endDate}($challengePeriod 일 간) \n매일 $challengeDistanceValue 러닝하기!"
-
         val spannable = SpannableString(formattedText)
 
-        // startDate ~ endDate 부분 (검은색)
-        val startDateIndex = 1 // 공백을 넘어서
-        val endDateIndex = startDateIndex + startDate.length + 3 // " ~ "를 넘어서
-        spannable.setSpan(ForegroundColorSpan(Color.BLACK), startDateIndex, endDateIndex + endDate.length, 0)
+// "startDate ~ endDate" 부분 (검은색)
+        val startDateToEndDate = "${startDate} ~ ${endDate}"
+        val startDateIndex = formattedText.indexOf(startDateToEndDate)
+        if (startDateIndex != -1) {
+            spannable.setSpan(
+                ForegroundColorSpan(Color.BLACK),
+                startDateIndex,
+                startDateIndex + startDateToEndDate.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
 
-        // challengePeriod 부분 (보라색)
-        val challengePeriodIndex = endDateIndex + endDate.length // "()"를 넘어서
-        spannable.setSpan(ForegroundColorSpan(Color.parseColor("#9B4DFF")), challengePeriodIndex, challengePeriodIndex + challengePeriod.toString().length + 6, 0)
+// "challengePeriod" 부분 (보라색)
+        val challengePeriodText = "($challengePeriod 일 간)"
+        val challengePeriodIndex = formattedText.indexOf(challengePeriodText)
+        if (challengePeriodIndex != -1) {
+            spannable.setSpan(
+                ForegroundColorSpan(Color.parseColor("#9B4DFF")),
+                challengePeriodIndex,
+                challengePeriodIndex + challengePeriodText.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
 
-        // 매일 $challengeDistance 부분 (주황색)
-        val distanceIndex = challengePeriodIndex + challengePeriod.toString().length +6
-        spannable.setSpan(ForegroundColorSpan(Color.parseColor("#F4AA3A")), distanceIndex, distanceIndex + challengeDistanceValue.toString().length, 0)
+// "매일" 부분 (검은색)
+        val dailyIndex = formattedText.indexOf("매일")
+        if (dailyIndex != -1) {
+            spannable.setSpan(
+                ForegroundColorSpan(Color.BLACK),
+                dailyIndex,
+                dailyIndex + "매일".length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
 
-        // 러닝하기! 부분 (검은색)
-        val runningTextIndex = distanceIndex + challengeDistanceValue.toString().length + 6
-        spannable.setSpan(ForegroundColorSpan(Color.BLACK), runningTextIndex, formattedText.length, 0)
+// "challengeDistanceValue" 부분 (주황색)
+        val challengeDistanceText = "$challengeDistanceValue 러닝하기!"
+        val distanceIndex = formattedText.indexOf(challengeDistanceText)
+        if (distanceIndex != -1) {
+            spannable.setSpan(
+                ForegroundColorSpan(Color.parseColor("#F4AA3A")),
+                distanceIndex,
+                distanceIndex + challengeDistanceText.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
+
+// "러닝하기!" 부분 (검은색)
+        val runningTextIndex = formattedText.indexOf("러닝하기!")
+        if (runningTextIndex != -1) {
+            spannable.setSpan(
+                ForegroundColorSpan(Color.BLACK),
+                runningTextIndex,
+                formattedText.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
 
         binding.resultSubTitle.text = spannable
+
+
 
 
 

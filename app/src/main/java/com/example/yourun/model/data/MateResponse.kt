@@ -1,6 +1,6 @@
 package com.example.yourun.model.data
 
-import com.example.yourun.model.data.UserInfo
+import com.example.yourun.model.data.response.UserInfo
 
 data class MateResponse<T>(
     val status: Int,
