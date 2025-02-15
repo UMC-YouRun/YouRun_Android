@@ -63,8 +63,8 @@ interface ApiService {
     @GET("users/home/challenges")
     suspend fun getHomeChallengesInfo(): Response<HomeChallengeResponse>
 
-    //@GET("users/mates")
-    //suspend fun getMatesList(): Response<MateResponse>
+    @GET("users/mates")
+    suspend fun getMatesList(): Response<MateResponse>
 
     @GET("users/mates")
     suspend fun getMates(): MateResponse<List<MateApiData>>
@@ -74,8 +74,8 @@ interface ApiService {
         @Path("mateId") mateId: Long
     ): Response<ApiResponseBoolean>
 
-    //@GET("users/mates/recommend")
-    //suspend fun getRecommendMate(): Response<MateResponse>
+    @GET("users/mates/recommend")
+    suspend fun getRecommendMate(): Response<MateResponse>
 
     @GET("users/runnings/{id}")
     suspend fun getRunningData(
