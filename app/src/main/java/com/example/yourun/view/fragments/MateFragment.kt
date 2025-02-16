@@ -15,7 +15,7 @@ import com.example.yourun.R
 import com.example.yourun.model.data.MateData
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.MateRepository
-import com.example.yourun.model.data.UserInfo
+import com.example.yourun.model.data.response.UserInfo
 import com.example.yourun.utils.TokenManager
 import com.example.yourun.view.adapters.MateRankingAdapter
 import kotlinx.coroutines.launch
