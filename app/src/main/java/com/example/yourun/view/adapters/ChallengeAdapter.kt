@@ -45,4 +45,10 @@ class ChallengeAdapter(private val challengeList: MutableList<ChallengeItem>) : 
     }
 
     inner class FooterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+
+    fun updateList(newList: List<ChallengeItem>) {
+        challengeList.clear() // 기존 데이터 삭제
+        challengeList.addAll(newList) // 새로운 데이터 추가
+        notifyDataSetChanged() // RecyclerView 업데이트
+    }
 }

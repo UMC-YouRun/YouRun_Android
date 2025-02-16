@@ -18,7 +18,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import com.example.yourun.view.fragments.ChallengeFragment
+import com.example.yourun.view.fragments.ChallengeListFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_challenge -> {
-                    loadFragment(ChallengeFragment())
+                    loadFragment(ChallengeListFragment())
                     true
                 }
 

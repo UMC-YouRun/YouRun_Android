@@ -65,7 +65,7 @@
 
     </FrameLayout>
 
-    <!-- 고정된 하단 새로고침 영역 -->
+    <!-- 상단 버튼 + UI -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
         android:paddingVertical="36dp">
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tv_challenge_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -85,41 +85,41 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/tv_challenge_encouraging"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="바로 도전해보세요!"
             android:textSize="13sp"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/textView5" />
+            app:layout_constraintStart_toStartOf="@+id/tv_challenge_month"
+            app:layout_constraintTop_toBottomOf="@+id/tv_challenge_month" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/btn_crew"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@null"
             android:cropToPadding="false"
             android:padding="0dp"
-            app:layout_constraintStart_toStartOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
-            app:srcCompat="@drawable/btn_crew" />
+            app:layout_constraintStart_toStartOf="@+id/tv_challenge_encouraging"
+            app:layout_constraintTop_toBottomOf="@+id/tv_challenge_encouraging"
+            app:srcCompat="@drawable/btn_crew_default" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/btn_personal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:background="@null"
             android:cropToPadding="false"
             android:padding="0dp"
-            app:layout_constraintStart_toEndOf="@+id/imageButton3"
-            app:layout_constraintTop_toTopOf="@+id/imageButton3"
-            app:srcCompat="@drawable/btn_personal" />
+            app:layout_constraintStart_toEndOf="@+id/btn_crew"
+            app:layout_constraintTop_toTopOf="@+id/btn_crew"
+            app:srcCompat="@drawable/btn_personal_selected" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/img_user_profile_challenge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
@@ -129,24 +129,23 @@
             app:srcCompat="@drawable/img_user" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/img_badge_background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
+            app:layout_constraintEnd_toEndOf="@+id/img_user_profile_challenge"
+            app:layout_constraintTop_toBottomOf="@+id/img_user_profile_challenge"
             app:srcCompat="@drawable/img_rewards" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <!-- 크루/개인 프래그먼트 컨테이너 -->
+    <FrameLayout
+        android:id="@+id/challenge_fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:layout_marginTop="253dp"
-        android:clipToPadding="false"
-        android:paddingBottom="80dp"
-        tools:listitem="@layout/item_challenge" />
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"

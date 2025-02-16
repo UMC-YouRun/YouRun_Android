@@ -110,7 +110,7 @@
 
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tv_challenge_month"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -129,7 +129,7 @@
         android:textColor="@color/gray"
         android:textSize="11sp"
         app:layout_constraintStart_toStartOf="@id/et_crew_name"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_challenge_month" />
 
     <EditText
         android:id="@+id/et_crew"

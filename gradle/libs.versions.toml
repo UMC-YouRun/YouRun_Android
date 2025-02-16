@@ -14,6 +14,7 @@ monitor = "1.7.2"
 junitKtx = "1.2.1"
 firebaseAppdistributionGradle = "5.1.0"
 places = "4.1.0"
+mediationTestSuite = "3.0.0"
 
 
 [libraries]
@@ -31,6 +32,7 @@ androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.
 firebase-appdistribution-gradle = { group = "com.google.firebase", name = "firebase-appdistribution-gradle", version.ref = "firebaseAppdistributionGradle" }
 places = { group = "com.google.android.libraries.places", name = "places", version.ref = "places" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "converterGson" }
+mediation-test-suite = { group = "com.google.android.ads", name = "mediation-test-suite", version.ref = "mediationTestSuite" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
