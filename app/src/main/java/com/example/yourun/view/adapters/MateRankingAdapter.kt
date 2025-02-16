@@ -37,14 +37,15 @@ class MateRankingAdapter(private val mateDataList: List<MateData>, private val u
         holder.rank.text = mate.rank.toString()
         holder.profileImage.setImageResource(mate.profileImageResId)
         holder.nickname.text = mate.nickname
-        holder.tags.text
+        holder.tags.text = mate.tags?.joinToString(", ") ?: ""
         holder.countDay.text = "${mate.countDay}일째"
+        val distanceKm = (mate.totalDistance / 1000)
         holder.distance.text = "${mate.totalDistance}km"
-        Log.d("MateAdapter", "메이트 거리 값 (UI 표시): ${mate.totalDistance}")
+        Log.d("MateAdapter", "메이트 거리 값 (변환 후 UI 표시): ${distanceKm}km")
         holder.change.text = "${mate.change}위"
-        // 🔹 현재 사용자의 닉네임과 리스트의 닉네임이 같다면 노란색 배경 적용
+        // 현재 사용자의 닉네임과 리스트의 닉네임이 같다면 노란색 배경 적용
         if (mate.nickname == userNickname) {
-            holder.itemLayout.setBackgroundColor(Color.parseColor("#FFF4C2")) // 연한 노란색
+            holder.itemLayout.setBackgroundColor(Color.parseColor("#FFDD85")) // 연한 노란색
         } else {
             holder.itemLayout.setBackgroundColor(Color.WHITE) // 기본 흰색 배경
         }
