@@ -65,7 +65,7 @@ class MateFragment : Fragment() {
                 val userInfo = mateRepository.getMyRunData()
 
                 // ✅ 친구(메이트) 정보 조회
-                val mates = mateRepository.getMates()
+                // val mates = mateRepository.getMates()
 
                 // 리스트 초기화
                 mateDataList.clear()
@@ -89,7 +89,7 @@ class MateFragment : Fragment() {
                 }
 
                 // 🔹 친구(메이트) 정보 추가
-                mateDataList.addAll(mates)
+                // mateDataList.addAll(mates)
 
                 // 🔹 전체 정렬 (예: 총 거리 기준)
                 mateDataList.sortByDescending { it.totalDistance }

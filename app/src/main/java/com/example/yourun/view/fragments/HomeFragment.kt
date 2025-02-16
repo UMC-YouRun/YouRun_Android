@@ -148,8 +148,6 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-
     // 버튼 상태에 따라 챌린지 UI 업데이트
     private fun updateChallengeView(challengeData: ChallengeData? = viewModel.challengeData.value) {
         val container = binding.challengeButtonContainer
