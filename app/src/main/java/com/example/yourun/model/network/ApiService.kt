@@ -1,5 +1,6 @@
 package com.example.yourun.model.network
 
+import com.example.yourun.model.data.BaseResponse
 import com.example.yourun.model.data.ChallengeDataResponse
 import com.example.yourun.model.data.ChallengeResultResponse
 import com.example.yourun.model.data.CrewChallengeResponse
@@ -54,7 +55,7 @@ interface ApiService {
     suspend fun getMates(): MateResponse<List<MateApiData>>
 
     @GET("challenges/crew/pending")
-    suspend fun getPendingCrewChallenges(): Response<CrewChallengeResponse>
+    suspend fun getPendingCrewChallenges(): Response<BaseResponse<CrewChallengeResponse>>
 
 }
 

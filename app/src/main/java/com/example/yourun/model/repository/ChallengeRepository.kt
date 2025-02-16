@@ -10,9 +10,19 @@ class ChallengeRepository(private val apiService: ApiService) {
     suspend fun getPendingCrewChallenges(): List<CrewChallengeRes>? {
         return try {
             val response = apiService.getPendingCrewChallenges()
+
             if (response.isSuccessful) {
-                Log.d("API_SUCCESS", "Response Body: ${response.body()}")
-                response.body()?.crewChallengeRes
+                val body = response.body()
+                Log.d("API_SUCCESS", "Raw Response Body: ${response.body()}") // 전체 응답 로그
+                Log.d("API_SUCCESS", "BaseResponse data: ${body?.data}")
+
+                body?.data?.crewChallengeRes?.also {
+                    it.forEach { challenge ->
+                        challenge.participantIdsInfo.forEach { member ->
+                            Log.d("DEBUG", "memberTendency: ${member.memberTendency}")  // 🔥 여기서 타입 확인
+                        }
+                    }
+                } ?: emptyList()
             } else {
                 Log.e("API_ERROR", "Error: ${response.errorBody()?.string()}")
                 null
@@ -22,4 +32,5 @@ class ChallengeRepository(private val apiService: ApiService) {
             null
         }
     }
+
 }

@@ -5,6 +5,9 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.example.yourun.BuildConfig
 import com.example.yourun.MyApplication
+import com.example.yourun.model.data.Tendency
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

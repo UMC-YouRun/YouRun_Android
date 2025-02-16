@@ -1,6 +1,7 @@
 package com.example.yourun.view.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
 import com.example.yourun.model.data.ChallengeItem
 import com.example.yourun.model.network.ApiClient
-import com.example.yourun.model.network.ApiService
 import com.example.yourun.model.repository.ChallengeRepository
 import com.example.yourun.view.adapters.ChallengeAdapter
 import com.example.yourun.viewmodel.ChallengeViewModel
 import com.example.yourun.viewmodel.ChallengeViewModelFactory
-import com.google.android.ads.mediationtestsuite.viewmodels.ViewModelFactory
 
 class CrewChallengeFragment : Fragment() {
 
@@ -47,20 +46,32 @@ class CrewChallengeFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.pendingCrewChallenges.observe(viewLifecycleOwner) { challenges ->
-            challenges?.let {
-                val challengeItems = it.map { crewChallengeRes ->
-                    ChallengeItem(
-                        badgeImage = R.drawable.img_crew_badge_count, // 이 부분은 필요에 따라 수정
-                        title = crewChallengeRes.crewName,
-                        description = "챌린지 기간: ${crewChallengeRes.challengePeriod}일",
-                        members = listOf(), // 필요하면 crewChallengeRes에서 멤버 정보를 매핑
-                        remaining = "남은 인원: ${crewChallengeRes.remaining}명"
-                    )
-                }
-                challengeAdapter.updateList(challengeItems) // 🔥 변환된 리스트 전달
+            if (challenges.isNullOrEmpty()) {
+                Log.e("UI_DEBUG", "데이터가 null 또는 비어 있음")
+                challengeAdapter.updateList(mutableListOf()) // RecyclerView를 비우기
+                return@observe
             }
+
+            Log.d("UI_DEBUG", "받은 데이터: $challenges")  // 정상적으로 데이터 오는지 로그 확인
+
+            // CrewChallengeRes -> ChallengeItem으로 변환
+            val challengeItems = challenges.map { crewChallengeRes ->
+                ChallengeItem(
+                    badgeImage = R.drawable.img_crew_badge_count, // 필요에 따라 수정 가능
+                    title = crewChallengeRes.crewName,
+                    description = "챌린지 기간: ${crewChallengeRes.challengePeriod}일",
+                    members = crewChallengeRes.participantIdsInfo.map {
+                        it.memberTendencyRaw.hashCode() // 🔥 `String`을 `Int`로 변환
+                    },
+                    remaining = "남은 인원: ${crewChallengeRes.remaining}명"
+                )
+            }
+
+            // 🔥 변환된 리스트 전달
+            challengeAdapter.updateList(challengeItems)
         }
     }
+
 
     override fun onResume() {
         super.onResume()
