@@ -1,3 +1,4 @@
+/*
 package com.example.yourun.view.fragments
 
 import android.content.Context
@@ -265,3 +266,5 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
+
+ */
