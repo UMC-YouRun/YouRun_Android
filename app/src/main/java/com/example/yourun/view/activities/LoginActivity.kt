@@ -90,12 +90,14 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.editTextNickname.text.toString().trim()
             val password = binding.editTextPassword.text.toString().trim()
 
-            handleAppExpNavigation()
+
 
             if (email.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.login(email, password)
+
+                handleAppExpNavigation()
             }
         }
     }
@@ -107,14 +109,12 @@ class LoginActivity : AppCompatActivity() {
         Log.d("LoginActivity", "isAppExpSeen: $isAppExpSeen")
 
         // 앱 설명을 이미 봤다면 MainActivity로 이동
-        if (isAppExpSeen) {
+        if (isAppExpSeen)  {
             startActivity(Intent(this, MainActivity::class.java))
-        } else {
+        } else{
             // 앱 설명을 안 봤다면 AppExpActivity로 이동
             startActivity(Intent(this, AppExpActivity::class.java))
 
-            // 앱 설명을 본 후에는 isAppExpSeen을 true로 설정
-            sharedPref.edit().putBoolean("isAppExpSeen", true).apply()
         }
 
         finish() // 현재 Activity 종료하여 뒤로 가기 방지

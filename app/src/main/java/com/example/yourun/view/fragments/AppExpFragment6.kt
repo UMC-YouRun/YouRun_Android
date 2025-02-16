@@ -43,10 +43,9 @@ class AppExpFragment6 : Fragment() {
             sharedPref.edit().putBoolean("isAppExpSeen", true).apply()
 
 
+
             val intent = Intent(requireContext(), MainActivity::class.java)
             startActivity(intent)
-            requireActivity().finish()
-
         }
 
         // "뒤로 가기" 버튼 클릭 시 이전 Fragment로 이동
