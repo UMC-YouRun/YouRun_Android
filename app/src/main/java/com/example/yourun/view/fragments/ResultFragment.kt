@@ -12,6 +12,7 @@ import com.example.yourun.R
 import com.example.yourun.databinding.FragmentResultBinding
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.ResultRepository
+import com.example.yourun.view.activities.LoginActivity
 import com.example.yourun.view.activities.MainActivity
 import com.example.yourun.viewmodel.SignUpViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -77,14 +78,14 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 withContext(Dispatchers.Main) {
                     saveSignUpDate()
                     Toast.makeText(requireContext(), "회원가입이 완료되었습니다!", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(requireActivity(), MainActivity::class.java)
+                    val intent = Intent(requireActivity(), LoginActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     saveSignUpDate()
-                    val intent = Intent(requireActivity(), MainActivity::class.java)
+                    val intent = Intent(requireActivity(), LoginActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()
                 }

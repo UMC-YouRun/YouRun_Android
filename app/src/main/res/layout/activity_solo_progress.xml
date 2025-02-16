@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/top_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/rounded_bottom_background"
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:background="@drawable/rounded_bottom_background" />
+
+
+        <TextView
+            android:id="@+id/txt_top_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:letterSpacing="0.03"
+            android:lineSpacingExtra="14sp"
+            android:text="개인 챌린지 진행도"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/ic_calendar" />
+    </FrameLayout>
+
+    <TextView
+        android:id ="@+id/tv1_solo_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="116dp"
+        android:text="챌린지 n일차!"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="@id/top_bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_running_message"
+        android:layout_width="158dp"
+        android:layout_height="48.66dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/bgd_yellow_bubble"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/default_daylog"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.841"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_bar" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:text="1월 12일 15:00 기준"
+        android:textSize="11sp"
+        app:layout_constraintStart_toStartOf="@id/tv1_solo_progress"
+        app:layout_constraintTop_toBottomOf="@id/tv1_solo_progress" />
+
+
+    <ImageView
+        android:id="@+id/img_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="110dp"
+        android:background="@drawable/img_solo_progress_vector"
+        app:layout_constraintStart_toStartOf="@id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+
+    <ImageView
+        android:id="@+id/img_stamp1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:background="@drawable/img_stamp_yet"
+        app:layout_constraintStart_toStartOf="@id/img_background"
+        app:layout_constraintTop_toBottomOf="@id/textView7"
+        android:layout_marginTop="84dp"/>
+
+    <ImageView
+        android:id="@+id/img_stamp2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView7"
+        android:layout_marginTop="84dp"
+        app:layout_constraintStart_toStartOf="@id/img_background"
+        android:layout_marginStart="135dp"
+        android:background="@drawable/img_stamp_yet"/>
+
+    <ImageView
+        android:id="@+id/img_stamp3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView7"
+        android:layout_marginTop="203dp"
+        app:layout_constraintStart_toStartOf="@id/img_background"
+        android:layout_marginStart="210dp"
+        android:background="@drawable/img_stamp_yet"/>
+
+
+    <ImageView
+        android:id="@+id/img_stamp4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textView7"
+        android:layout_marginTop="203dp"
+        app:layout_constraintStart_toStartOf="@id/img_background"
+        android:layout_marginStart="68dp"
+        android:background="@drawable/img_stamp_yet"/>
+
+
+    <ImageView
+        android:id="@+id/img_stamp5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/img_stamp_yet"
+        app:layout_constraintTop_toBottomOf="@id/textView7"
+        android:layout_marginTop="323dp"
+        app:layout_constraintStart_toStartOf="@id/img_background"
+        android:layout_marginStart="135dp"/>
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/img_stamp_date1"
+        app:layout_constraintStart_toStartOf="@id/img_stamp1"
+        android:layout_marginTop="57dp"
+        app:layout_constraintTop_toBottomOf="@id/textView7"
+        android:layout_marginStart="6.5dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/img_stamp_date2"
+        android:layout_marginTop="57dp"
+        app:layout_constraintTop_toBottomOf="@id/textView7"
+        app:layout_constraintStart_toStartOf="@id/img_stamp2"
+        android:layout_marginStart="6.5dp"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/img_stamp_date3"
+        android:layout_marginTop="176dp"
+        app:layout_constraintTop_toBottomOf="@id/textView7"
+        app:layout_constraintStart_toStartOf="@id/img_stamp3"
+        android:layout_marginStart="6.5dp"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/img_stamp_date4"
+        android:layout_marginTop="176dp"
+        app:layout_constraintTop_toBottomOf="@id/textView7"
+        app:layout_constraintStart_toStartOf="@id/img_stamp4"
+        android:layout_marginStart="6.5dp"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/img_stamp_date5"
+        app:layout_constraintStart_toStartOf="@id/img_stamp5"
+        android:layout_marginTop="296dp"
+        app:layout_constraintTop_toBottomOf="@id/textView7"
+        android:layout_marginStart="6.5dp"
+        />
+
+
+
+    <TextView
+        android:id="@+id/tv_8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="나의 러닝 메이트는?"
+        app:layout_constraintStart_toStartOf="@id/textView7"
+        app:layout_constraintTop_toBottomOf="@id/img_background"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_runner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:backgroundTint="@color/gray_400"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_8"
+        android:layout_marginTop="10dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/img_mate_profile"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/profile_trailrunner" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_lucy_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_name"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_lucy_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/challenge_success"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_lucy_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_day"
+                    android:textColor="@color/text_gray2"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_lucy_distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/defalut_pace"
+                    android:textColor="@color/text_purple_900"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <TextView
+        android:id="@+id/tv_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="오늘의 챌린지도 성공!"
+        android:textColor="@color/text_purple"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/card_runner"
+        app:layout_constraintStart_toStartOf="@id/tv_8"
+        android:layout_marginTop="62dp"
+        android:layout_marginStart="76dp"
+        />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/img_solo_progress_success"
+        app:layout_constraintStart_toStartOf="@id/card_runner"
+        app:layout_constraintTop_toBottomOf="@id/tv_10"
+        android:layout_marginStart="52dp"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+</ScrollView>

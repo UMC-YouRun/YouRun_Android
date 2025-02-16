@@ -1,4 +1,4 @@
-package com.example.yourun.view.activities
+/*package com.example.yourun.view.activities
 
 import android.Manifest
 import android.content.Context
@@ -281,4 +281,4 @@ class RunningResultActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
     }
-}
+}*/

@@ -2,6 +2,7 @@ package com.example.yourun.view.fragments
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import androidx.fragment.app.Fragment
@@ -47,27 +48,64 @@ class CreateCrew2Fragment : Fragment(R.layout.fragment_create_crew2) {
 
         val spannable = SpannableString(formattedText)
 
-        // 색상 적용
-        // crewMotto,$crewName 부분 (주황색)
-        val crewMottoLength = crewMotto.length
-        val crewNameLength = crewName.length
-        spannable.setSpan(ForegroundColorSpan(Color.parseColor("#F4AA3A")), 0, crewMottoLength + crewNameLength + 1, 0) // ',' 포함
+    // 색상 적용
+    // crewMotto,$crewName 부분 (주황색)
+        val crewMottoIndex = formattedText.indexOf(crewMotto)
+        val crewNameIndex = formattedText.indexOf(crewName)
+        spannable.setSpan(
+            ForegroundColorSpan(Color.parseColor("#F4AA3A")),
+            crewMottoIndex,
+            crewNameIndex + crewName.length + 1, // ',' 포함
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
 
-        // startDate ~ endDate 부분 (검은색)
-        val startDateIndex = crewMottoLength + crewNameLength + 3
-        val endDateIndex = startDateIndex + startDate.length + 3
-        spannable.setSpan(ForegroundColorSpan(Color.BLACK), startDateIndex, endDateIndex + endDate.length, 0)
+    // "와" 부분 (검은색)
+        val waIndex = formattedText.indexOf("와")
+        if (waIndex != -1) {
+            spannable.setSpan(
+                ForegroundColorSpan(Color.BLACK),
+                waIndex,
+                waIndex + 1,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
 
-        // challengePeriod 부분 (보라색)
-        val challengePeriodIndex = endDateIndex + endDate.length + 4
-        spannable.setSpan(ForegroundColorSpan(Color.parseColor("#9B4DFF")), challengePeriodIndex, challengePeriodIndex + challengePeriod.toString().length, 0)
+    // startDate ~ endDate 부분 (검은색)
+        val startDateIndex = formattedText.indexOf(startDate)
+        val endDateIndex = formattedText.indexOf(endDate)
+        if (startDateIndex != -1 && endDateIndex != -1) {
+            spannable.setSpan(
+                ForegroundColorSpan(Color.BLACK),
+                startDateIndex,
+                endDateIndex + endDate.length + 3, // " ~ "를 포함
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
 
-        // "최대 거리 러닝하기!" 부분 (검은색)
-        val runningTextIndex = challengePeriodIndex + challengePeriod.toString().length + 6
-        spannable.setSpan(ForegroundColorSpan(Color.BLACK), runningTextIndex, formattedText.length, 0)
+        val challengePeriodText = "(${challengePeriod} 일 동안)"
+        val challengePeriodIndex = formattedText.indexOf(challengePeriodText)
+        if (challengePeriodIndex != -1) {
+            spannable.setSpan(
+                ForegroundColorSpan(Color.parseColor("#9B4DFF")),
+                challengePeriodIndex,
+                challengePeriodIndex + challengePeriodText.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
 
+    // "최대 거리 러닝하기!" 부분 (검은색)
+        val runningTextIndex = formattedText.indexOf("러닝하기!")
+        if (runningTextIndex != -1) {
+            spannable.setSpan(
+                ForegroundColorSpan(Color.BLACK),
+                runningTextIndex,
+                formattedText.length,
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
 
         binding.resultSubTitle.text = spannable
+
 
 
         val imageResId = tendencyImages[tendency] ?: R.drawable.img_mate_sprinter

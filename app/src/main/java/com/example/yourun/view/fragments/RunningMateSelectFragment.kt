@@ -1,4 +1,4 @@
-package com.example.yourun.view.fragments
+/*package com.example.yourun.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -142,4 +142,4 @@ class RunningMateSelectFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-}
+}*/

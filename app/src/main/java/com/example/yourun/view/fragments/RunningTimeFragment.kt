@@ -1,4 +1,4 @@
-package com.example.yourun.view.fragments
+/*package com.example.yourun.view.fragments
 
 import android.content.Intent
 import android.graphics.Color
@@ -164,4 +164,4 @@ class RunningTimeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-}
+}*/

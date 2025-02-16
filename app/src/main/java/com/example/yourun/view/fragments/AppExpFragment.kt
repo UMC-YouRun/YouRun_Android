@@ -3,6 +3,7 @@ package com.example.yourun.view.fragments
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -34,17 +35,18 @@ class AppExpFragment : Fragment(R.layout.fragment_app_exp) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val nickname = arguments?.getString("nickname", null) ?: ""
+        val sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
+        val nickname = sharedPref.getString("nickname", "") ?: ""
 
         if (nickname.isNotEmpty()) {
-            val spannable = SpannableStringBuilder(nickname).apply {
+            val welcomeText = binding.txtAppExpWelcome.text.toString()
+            val spannable = SpannableStringBuilder(nickname + welcomeText).apply {
                 setSpan(
                     ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.text_purple)),
-                    0, length,
+                    0, nickname.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
             }
-            spannable.append(binding.txtAppExpWelcome.text) // 기존 텍스트 추가
             binding.txtAppExpWelcome.text = spannable
         }
 

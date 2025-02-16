@@ -1,4 +1,4 @@
-package com.example.yourun.view.activities
+/*package com.example.yourun.view.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -255,4 +255,4 @@ class RunningActivity : AppCompatActivity() {
             viewModel.stopTracking()
         }
     }
-}
+}*/

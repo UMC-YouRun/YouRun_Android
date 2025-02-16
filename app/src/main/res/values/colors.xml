@@ -36,5 +36,6 @@
     <color name="date_yellow">#FFDD85</color>
     <color name="date_orange">#FFC368</color>
     <color name="text_gray">#CDCDCD</color>
+    <color name="text_gray2">#5A5A5A</color>
 
 </resources>
