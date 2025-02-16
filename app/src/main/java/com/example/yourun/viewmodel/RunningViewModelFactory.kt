@@ -1,4 +1,4 @@
-package com.example.yourun.viewmodel
+/*package com.example.yourun.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -12,4 +12,4 @@ class RunningViewModelFactory(private val repository: RunningRepository) : ViewM
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-}
+}*/

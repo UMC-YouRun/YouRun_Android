@@ -1,4 +1,4 @@
-package com.example.yourun.model.repository
+/*package com.example.yourun.model.repository
 
 import com.example.yourun.R
 import com.example.yourun.model.data.*
@@ -79,4 +79,4 @@ class MateRepository(private val apiService: ApiService) {
             else -> R.drawable.img_profile_pacemaker_purple
         }
     }
-}
+}*/

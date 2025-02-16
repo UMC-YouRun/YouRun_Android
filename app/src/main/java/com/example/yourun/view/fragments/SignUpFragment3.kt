@@ -1,6 +1,7 @@
 package com.example.yourun.view.fragments
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -32,19 +33,25 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
     private val signUpViewModel: SignUpViewModel by activityViewModels()
     private var selectedTags = mutableListOf<String>()
     private var selectedCount = 0
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSignup3Binding.inflate(inflater, container, false)
+        sharedPref = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.topBar.txtTopBarWithBackButton.text = "회원가입"
+
+
 
         // 체크박스 리스너 설정
         setCheckBoxListener(binding.checkbox1, "느긋하게")
@@ -80,6 +87,11 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
                     "SignUpFragment3",
                     "✅ 닉네임 & 태그 저장됨: nickname=$nickname, tag1=${selectedTags[0]}, tag2=${selectedTags[1]}"
                 )
+
+                with(sharedPref.edit()) {
+                    putString("nickname", nickname)
+                    commit()
+                }
 
                 // Navigation으로 다른 Fragment로 이동
                 findNavController().navigate(R.id.action_signUpFragment3_to_questionFragment)
@@ -118,6 +130,7 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.purple))
                         }
                         binding.imgBtnSignupSuccess.isEnabled = true
+                        binding.btnDuplicate.setImageResource(R.drawable.img_again_check_color)
                     } else {
                         // 중복된 닉네임
                         binding.nicknameContent.apply {
@@ -125,6 +138,7 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
                         }
                         binding.imgBtnSignupSuccess.isEnabled = false
+                        binding.btnDuplicate.setImageResource(R.drawable.img_againcheck)
                     }
                 }
             } catch (e: Exception) {

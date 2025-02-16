@@ -11,9 +11,9 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.yourun.R
 import com.example.yourun.view.fragments.HomeFragment
-import com.example.yourun.view.fragments.MateFragment
+// import com.example.yourun.view.fragments.MateFragment
 import com.example.yourun.view.fragments.MyRunFragment
-import com.example.yourun.view.fragments.RunningFragment
+// import com.example.yourun.view.fragments.RunningFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         } */
         setContentView(R.layout.activity_main)
 
-        checkLocationPermission()
+        /*checkLocationPermission()*/
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val fabRunning = findViewById<ImageView>(R.id.fab_running)
@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnItemSelectedListener { item ->
             val newFragment = when (item.itemId) {
                 R.id.nav_home -> HomeFragment()
-                R.id.nav_mate -> MateFragment()
+                /*R.id.nav_mate -> MateFragment()*/
                 R.id.nav_challenge -> ChallengeFragment()
                 R.id.nav_my -> MyRunFragment()
                 else -> return@setOnItemSelectedListener false
@@ -67,12 +67,12 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        fabRunning.setOnClickListener {
+        /* fabRunning.setOnClickListener {
             changeFabColor(RunningFragment())
             loadFragment(RunningFragment())
             val menu = bottomNavigationView.menu
             menu.getItem(2).isChecked = true
-        }
+        }*/
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         val fabRunning = findViewById<ImageView>(R.id.fab_running)
         val fabTitle = findViewById<TextView>(R.id.fab_title)
 
-        if (fragment is RunningFragment) {
+        /*if (fragment is RunningFragment) {
             fabRunning.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.yellow))
             fabRunning.imageTintList =
@@ -100,6 +100,7 @@ class MainActivity : AppCompatActivity() {
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.round_button))
             fabTitle.setTextColor(ContextCompat.getColor(this, R.color.round_button))
         }
+    */
     }
 
     // 온보딩 완료 여부를 SharedPreferences에서 확인

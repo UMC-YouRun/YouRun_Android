@@ -274,4 +274,8 @@ class RunningResultActivity : AppCompatActivity() {
         super.onPause()
         mapView.pause()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+    }
 }

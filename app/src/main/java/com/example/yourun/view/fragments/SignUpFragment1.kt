@@ -213,6 +213,7 @@ class SignUpFragment1 : Fragment(R.layout.fragment_signup1) {
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.purple))
                         }
                         binding.btnNext.isEnabled = true
+                        binding.btnDuplicate.setImageResource(R.drawable.img_again_check_color)
                     } else {
                         // 이미 존재하는 이메일 (사용 불가능)
                         binding.tvEmailDuplicate.apply {
@@ -220,6 +221,7 @@ class SignUpFragment1 : Fragment(R.layout.fragment_signup1) {
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
                         }
                         binding.btnNext.isEnabled = false
+                        binding.btnDuplicate.setImageResource(R.drawable.img_againcheck)
                     }
                 }
             } catch (e: Exception) {

@@ -1,4 +1,4 @@
-package com.example.yourun.view.fragments
+/*package com.example.yourun.view.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -193,4 +193,4 @@ class MateFragment : Fragment() {
         }
     }
 
-}
+}*/

@@ -1,4 +1,4 @@
-package com.example.yourun.view.fragments
+/*package com.example.yourun.view.fragments
 
 import android.Manifest
 import android.content.Context
@@ -309,4 +309,4 @@ class RunningFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-}
+}*/
