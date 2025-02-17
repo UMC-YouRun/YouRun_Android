@@ -3,6 +3,7 @@ package com.example.yourun.model.repository
 import android.util.Log
 import com.example.yourun.model.data.CrewChallengeRes
 import com.example.yourun.model.data.CrewChallengeResponse
+import com.example.yourun.model.data.SoloChallengeRes
 import com.example.yourun.model.network.ApiService
 
 class ChallengeRepository(private val apiService: ApiService) {
@@ -16,7 +17,7 @@ class ChallengeRepository(private val apiService: ApiService) {
                 Log.d("API_SUCCESS", "Raw Response Body: ${response.body()}") // 전체 응답 로그
                 Log.d("API_SUCCESS", "BaseResponse data: ${body?.data}")
 
-                body?.data?.crewChallengeRes?.also {
+                body?.data?.crewChallengeResList?.also {
                     it.forEach { challenge ->
                         challenge.participantIdsInfo.forEach { member ->
                             Log.d("DEBUG", "memberTendency: ${member.memberTendency}")  // 🔥 여기서 타입 확인
@@ -33,4 +34,23 @@ class ChallengeRepository(private val apiService: ApiService) {
         }
     }
 
+    suspend fun getPendingPersonalChallenges(): List<SoloChallengeRes>? {
+        return try {
+            val response = apiService.getPendingPersonalChallenges()
+
+            if (response.isSuccessful) {
+                val body = response.body()
+                Log.d("API_SUCCESS", "Raw Response Body: ${response.body()}")
+                Log.d("API_SUCCESS", "BaseResponse data: ${body?.data}")
+
+                body?.data?.soloChallengeList ?: emptyList()
+            } else {
+                Log.e("API_ERROR", "Error: ${response.errorBody()?.string()}")
+                null
+            }
+        } catch (e: Exception) {
+            Log.e("API_EXCEPTION", "Exception: ${e.message}")
+            null
+        }
+    }
 }

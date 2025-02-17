@@ -13,6 +13,7 @@ import com.example.yourun.model.data.MyPageResponse
 import com.example.yourun.model.data.SignUpRequest
 import com.example.yourun.model.data.UserInfo
 import com.example.yourun.model.data.NicknameduplicateResponse
+import com.example.yourun.model.data.PersonalChallengeResponse
 import com.example.yourun.model.data.RunningStatsResponse
 import com.example.yourun.model.data.SignUpResponse
 import retrofit2.Response
@@ -57,6 +58,8 @@ interface ApiService {
     @GET("challenges/crew/pending")
     suspend fun getPendingCrewChallenges(): Response<BaseResponse<CrewChallengeResponse>>
 
+    @GET("challenges/solo/pending")
+    suspend fun getPendingPersonalChallenges(): Response<BaseResponse<PersonalChallengeResponse>>
 }
 
 

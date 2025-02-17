@@ -46,6 +46,10 @@ class CrewChallengeFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.pendingCrewChallenges.observe(viewLifecycleOwner) { challenges ->
+            Log.d("UI_DEBUG", "받은 크루 챌린지 데이터 전체: $challenges")
+            challenges?.forEachIndexed { index, crewChallengeRes ->
+                Log.d("UI_DEBUG", "크루 챌린지 $index: challengeId=${crewChallengeRes.challengeId}, crewName=${crewChallengeRes.crewName}, remaining=${crewChallengeRes.remaining}")
+            }
             if (challenges.isNullOrEmpty()) {
                 Log.e("UI_DEBUG", "데이터가 null 또는 비어 있음")
                 challengeAdapter.updateList(mutableListOf()) // RecyclerView를 비우기
@@ -57,7 +61,7 @@ class CrewChallengeFragment : Fragment() {
             // CrewChallengeRes -> ChallengeItem으로 변환
             val challengeItems = challenges.map { crewChallengeRes ->
                 ChallengeItem(
-                    badgeImage = R.drawable.img_crew_badge_count, // 필요에 따라 수정 가능
+                    badgeImage = R.drawable.img_crew_badge_count_2, // 필요에 따라 수정 가능
                     title = crewChallengeRes.crewName,
                     description = "챌린지 기간: ${crewChallengeRes.challengePeriod}일",
                     members = crewChallengeRes.participantIdsInfo.map {
@@ -75,6 +79,7 @@ class CrewChallengeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        Log.d("FRAGMENT_DEBUG", "onResume 호출됨 - 크루 챌린지 API 요청 실행")
         viewModel.fetchPendingCrewChallenges() // API 호출
     }
 

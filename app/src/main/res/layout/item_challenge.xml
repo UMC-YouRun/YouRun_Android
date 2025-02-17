@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/img_crew_badge_count" />
+        app:srcCompat="@drawable/img_crew_badge_count_2" />
 
     <TextView
         android:id="@+id/descriptionText"

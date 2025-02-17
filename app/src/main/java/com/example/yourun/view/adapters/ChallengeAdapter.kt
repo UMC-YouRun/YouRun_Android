@@ -1,5 +1,6 @@
 package com.example.yourun.view.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,8 +48,13 @@ class ChallengeAdapter(private val challengeList: MutableList<ChallengeItem>) : 
     inner class FooterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     fun updateList(newList: List<ChallengeItem>) {
+        Log.d("ADAPTER_DEBUG", "updateList 호출됨, 새 리스트 크기: ${newList.size}")
+        for (item in newList) {
+            Log.d("ADAPTER_DEBUG", "챌린지 제목: ${item.title}, 남은 시간: ${item.remaining}")
+        }
         challengeList.clear() // 기존 데이터 삭제
         challengeList.addAll(newList) // 새로운 데이터 추가
-        notifyDataSetChanged() // RecyclerView 업데이트
+        Log.d("ADAPTER_DEBUG", "업데이트 후 리스트 크기: ${challengeList.size}")
+        notifyItemRangeChanged(0, challengeList.size)
     }
 }
