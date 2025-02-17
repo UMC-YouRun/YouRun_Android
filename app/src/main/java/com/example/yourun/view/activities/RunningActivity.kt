@@ -1,12 +1,14 @@
-/*package com.example.yourun.view.activities
+package com.example.yourun.view.activities
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Looper
 import android.text.SpannableString
 import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
 import android.text.style.AbsoluteSizeSpan
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -60,7 +62,9 @@ class RunningActivity : AppCompatActivity() {
         mateName = intent.getStringExtra("mate_nickname") ?: "닉네임"
         // val targetTime = intent.getIntExtra("target_time", 0)
         mateRunningDistanceMeters = intent.getIntExtra("mate_running_distance", 0)
+        Log.d("mateRunningDistance", mateRunningDistanceMeters.toString())
         val matePaceInt = intent.getIntExtra("mate_running_pace", 0)
+        Log.d("matePaceInt", matePaceInt.toString())
         // matePace를 평균 속도로 변환 (km/h = 60 / pace)
         val mateSpeed = if (matePaceInt != 0) 60.0 / matePaceInt else 0.0
 
@@ -80,6 +84,7 @@ class RunningActivity : AppCompatActivity() {
         // 백 버튼 클릭 시, 홈 화면으로 이동
         binding.backButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
 
@@ -255,4 +260,4 @@ class RunningActivity : AppCompatActivity() {
             viewModel.stopTracking()
         }
     }
-}*/
+}

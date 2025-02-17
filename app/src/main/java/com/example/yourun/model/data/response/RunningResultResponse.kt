@@ -10,5 +10,8 @@ data class RunningResultResponse(
     val startTime: String,
     val endTime: String,
     val totalDistance: Int,
-    val totalTime: Int
+    val totalTime: Int,
+    val pace: Int,
+    val isSoloChallengeInProgress: Boolean,
+    val isCrewChallengeInProgress: Boolean
 ) : Parcelable

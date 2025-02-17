@@ -1,6 +1,8 @@
 package com.example.yourun.view.activities
 
 import android.Manifest
+import android.app.ActivityManager
+import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -13,7 +15,6 @@ import com.example.yourun.R
 import com.example.yourun.view.fragments.HomeFragment
 // import com.example.yourun.view.fragments.MateFragment
 import com.example.yourun.view.fragments.MyRunFragment
-// import com.example.yourun.view.fragments.RunningFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -22,6 +23,7 @@ import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import com.example.yourun.view.fragments.ChallengeFragment
+import com.example.yourun.view.fragments.RunningFragment
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         } */
         setContentView(R.layout.activity_main)
 
-        /*checkLocationPermission()*/
+        checkLocationPermission()
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         val fabRunning = findViewById<ImageView>(R.id.fab_running)
@@ -67,12 +69,32 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        /* fabRunning.setOnClickListener {
-            changeFabColor(RunningFragment())
-            loadFragment(RunningFragment())
+        fabRunning.setOnClickListener {
+            if (isActivityRunning(this, RunningActivity::class.java)) {
+                // RunningActivity가 백그라운드에 있으면 복원
+                val intent = Intent(this, RunningActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT) // 기존 액티비티를 최상단으로 이동
+                startActivity(intent)
+            } else {
+                // RunningActivity가 종료된 경우 새로 실행
+                val intent = Intent(this, RunningActivity::class.java)
+                startActivity(intent)
+            }
             val menu = bottomNavigationView.menu
             menu.getItem(2).isChecked = true
-        }*/
+        }
+    }
+
+    fun isActivityRunning(context: Context, activityClass: Class<*>): Boolean {
+        val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val runningTasks = activityManager.appTasks // 현재 실행 중인 모든 태스크 가져오기
+
+        for (task in runningTasks) {
+            if (task.taskInfo.baseActivity?.className == activityClass.name) {
+                return true // RunningActivity가 실행 중이라면 true 반환
+            }
+        }
+        return false // 실행 중이 아니라면 false 반환
     }
 
     private fun loadFragment(fragment: Fragment) {
@@ -86,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         val fabRunning = findViewById<ImageView>(R.id.fab_running)
         val fabTitle = findViewById<TextView>(R.id.fab_title)
 
-        /*if (fragment is RunningFragment) {
+        if (fragment is RunningFragment) {
             fabRunning.backgroundTintList =
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.yellow))
             fabRunning.imageTintList =
@@ -100,7 +122,6 @@ class MainActivity : AppCompatActivity() {
                 ColorStateList.valueOf(ContextCompat.getColor(this, R.color.round_button))
             fabTitle.setTextColor(ContextCompat.getColor(this, R.color.round_button))
         }
-    */
     }
 
     // 온보딩 완료 여부를 SharedPreferences에서 확인
