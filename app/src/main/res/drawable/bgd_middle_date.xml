@@ -3,7 +3,7 @@
     android:height="12dp"
     android:viewportWidth="27"
     android:viewportHeight="27">
-    <path
-        android:pathData="M13.5,13.5m-9,0a9,9 0,1 1,20 0a9,9 0,1 1,-20 0"
-        android:fillColor="@color/date_orange"/>
+<path
+    android:pathData="M13.5,13.5m-9,0a9,9 0,1 1,20 0a9,9 0,1 1,-20 0"
+    android:fillColor="@color/selected_light_orange"/>
 </vector>

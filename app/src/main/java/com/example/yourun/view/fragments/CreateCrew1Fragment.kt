@@ -184,95 +184,66 @@ class CreateCrew1Fragment : Fragment(R.layout.fragment_create_crew1) {
         }
 
 
-        private fun highlightSelectedDay(currentDate: LocalDate, textView: TextView) {
-            when {
-                currentDate.isEqual(selectedStartDate) -> {
-                    textView.setBackgroundResource(R.drawable.bgd_selected_date_orange)
-                    textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                }
+    private fun highlightSelectedDay(currentDate: LocalDate, textView: TextView) {
+        when {
+            currentDate.isEqual(selectedStartDate) -> {
+                textView.setBackgroundResource(R.drawable.bgd_selected_date_orange)
+                textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            }
 
-                currentDate.isEqual(LocalDate.now()) -> {
-                    textView.setBackgroundResource(R.drawable.bgd_current_date_purple)
-                    textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                }
+            currentDate.isEqual(LocalDate.now()) -> {
+                textView.setBackgroundResource(R.drawable.bgd_current_date_purple)
+                textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            }
 
-                else -> {
-                    textView.setBackgroundColor(Color.TRANSPARENT)
-                    textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                }
+            else -> {
+                textView.setBackgroundColor(Color.TRANSPARENT)
+                textView.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
             }
         }
 
-        private fun highlightSelectedDates() {
-            weekCalendarGrid.children.forEach { row ->
-                if (row is LinearLayout) {
-                    row.children.forEach { view ->
-                        if (view is TextView) {
-                            val dateText = view.text.toString().toIntOrNull()
-                            dateText?.let {
-                                val currentDate = selectedDate.withDayOfMonth(dateText)
-                                when {
-                                    selectedStartDate != null && currentDate.isEqual(
-                                        selectedStartDate
-                                    ) -> {
-                                        view.setBackgroundResource(R.drawable.range_gradient_yellow)
-                                        view.setTextColor(
-                                            ContextCompat.getColor(
-                                                requireContext(),
-                                                R.color.white
-                                            )
-                                        )
-                                    }
+    }
 
-                                    selectedEndDate != null && currentDate.isEqual(selectedEndDate) -> {
-                                        view.setBackgroundResource(R.drawable.bgd_selected_date_orange)
-                                        view.setTextColor(
-                                            ContextCompat.getColor(
-                                                requireContext(),
-                                                R.color.white
-                                            )
-                                        )
-                                    }
+    private fun highlightSelectedDates() {
+        weekCalendarGrid.children.forEach { row ->
+            if (row is LinearLayout) {
+                row.children.forEach { view ->
+                    if (view is TextView) {
+                        val dateText = view.text.toString().toIntOrNull()
+                        dateText?.let {
+                            val currentDate = selectedDate.withDayOfMonth(dateText)
 
-                                    selectedStartDate != null && selectedEndDate != null &&
-                                            (currentDate.isAfter(selectedStartDate) && currentDate.isBefore(
-                                                selectedEndDate
-                                            )) -> {
-                                        view.setBackgroundResource(R.drawable.bgd_selected_date_orange)
-                                        view.setTextColor(
-                                            ContextCompat.getColor(
-                                                requireContext(),
-                                                R.color.black
-                                            )
-                                        )
-                                    }
+                            when {
+                                // 시작 날짜 & 마지막 날짜
+                                selectedStartDate != null && currentDate.isEqual(selectedStartDate) ||
+                                        selectedEndDate != null && currentDate.isEqual(selectedEndDate) -> {
+                                    view.setBackgroundResource(R.drawable.bgd_selected_date_orange)
+                                    view.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                                }
 
-                                    currentDate.isEqual(LocalDate.now()) -> {
-                                        view.setBackgroundResource(R.drawable.bgd_current_date_purple)
-                                        view.setTextColor(
-                                            ContextCompat.getColor(
-                                                requireContext(),
-                                                R.color.black
-                                            )
-                                        )
-                                    }
+                                // 중간 날짜 (연한 주황색)
+                                selectedStartDate != null && selectedEndDate != null &&
+                                        currentDate.isAfter(selectedStartDate) && currentDate.isBefore(selectedEndDate) -> {
+                                    view.setBackgroundResource(R.drawable.bgd_middle_date)
+                                    view.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                                }
 
-                                    else -> {
-                                        view.setBackgroundColor(Color.TRANSPARENT)
-                                        view.setTextColor(
-                                            ContextCompat.getColor(
-                                                requireContext(),
-                                                R.color.black
-                                            )
-                                        )
-                                    }
+                                // 오늘 날짜
+                                currentDate.isEqual(LocalDate.now()) -> {
+                                    view.setBackgroundResource(R.drawable.bgd_current_date_purple)
+                                    view.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+                                }
 
+                                else -> {
+                                    view.setBackgroundColor(Color.TRANSPARENT)
+                                    view.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
                                 }
                             }
                         }
                     }
                 }
             }
+        }
         }
                 private fun getCurrentWeekDates(date: LocalDate): List<LocalDate> {
                     return (0..6).map { date.plusDays(it.toLong()) }
