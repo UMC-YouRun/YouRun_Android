@@ -70,13 +70,6 @@ class HomeFragment : Fragment() {
         viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
         viewModel.fetchUserInfo()
 
-        // 유저 정보 관리
-        viewModel.userInfo.observe(viewLifecycleOwner) { userInfo ->
-            userInfo?.let { safeUserInfo ->
-                updateUserInfoText(safeUserInfo)
-            }
-        }
-
         viewModel.isPressedCrew.observe(viewLifecycleOwner) { isPressed ->
             binding.btnCrew.setImageResource(
                 if (isPressed) R.drawable.img_crew_btn_selected else R.drawable.img_crew_btn_unselected
@@ -99,6 +92,13 @@ class HomeFragment : Fragment() {
             viewModel.toggleSoloButton()
             isCrewSelected = false
             updateChallengeView()
+        }
+
+        // 유저 정보 관리
+        viewModel.userInfo.observe(viewLifecycleOwner) { userInfo ->
+            userInfo?.let { safeUserInfo ->
+                updateUserInfoText(safeUserInfo)
+            }
         }
 
         // challengeButtonContainer에 기본 btnAddChallenge 뷰를 저장
