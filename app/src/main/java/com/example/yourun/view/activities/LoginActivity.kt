@@ -15,6 +15,7 @@ import com.example.yourun.model.network.ApiClient
 import com.example.yourun.viewmodel.LoginViewModel
 import com.example.yourun.model.repository.LoginRepository
 import com.example.yourun.viewmodel.LoginViewModelFactory
+import com.kakao.sdk.user.UserApiClient
 
 class LoginActivity : AppCompatActivity() {
 
@@ -36,6 +37,25 @@ class LoginActivity : AppCompatActivity() {
         setupLoginButton()
         setupSignupButton()
 
+        // 카카오 로그인 버튼 클릭
+        binding.imgBtnKakao.setOnClickListener {
+            if (UserApiClient.instance.isKakaoTalkLoginAvailable(this)) {
+                UserApiClient.instance.loginWithKakaoTalk(this) { token, error ->
+                    if (error != null) {
+                        Log.e("KakaoLogin", "카카오톡 로그인 실패", error)
+                        // 카카오톡 로그인 실패 시 카카오계정 로그인 시도
+                        loginWithKakaoAccount()
+                    } else if (token != null) {
+                        Log.i("KakaoLogin", "카카오톡 로그인 성공: ${token.accessToken}")
+                        // ViewModel에 액세스 토큰 전달
+                        viewModel.kakaoLogin(token.accessToken)
+                    }
+                }
+            } else {
+                loginWithKakaoAccount()
+            }
+        }
+
         // 로그인 결과 관찰
         viewModel.loginResult.observe(this) { result ->
             result.onSuccess { response ->
@@ -43,7 +63,19 @@ class LoginActivity : AppCompatActivity() {
 
 
             }.onFailure { error ->
-                Log.e("LoginFragment", "🚨 로그인 실패: ${error.message}")
+                Log.e("LoginFragment", "로그인 실패: ${error.message}")
+            }
+        }
+    }
+
+    private fun loginWithKakaoAccount() {
+        UserApiClient.instance.loginWithKakaoAccount(this) { token, error ->
+            if (error != null) {
+                Log.e("KakaoLogin", "카카오계정 로그인 실패", error)
+                Toast.makeText(this, "카카오 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
+            } else if (token != null) {
+                Log.i("KakaoLogin", "카카오계정 로그인 성공: ${token.accessToken}")
+                viewModel.kakaoLogin(token.accessToken)
             }
         }
     }

@@ -35,6 +35,9 @@ interface ApiService {
     @POST("users/login")
     suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
 
+    @GET("users/kakao-login")
+    suspend fun loginWithKakao(@Query("kakaoAccessToken") kakaoAccessToken: String): Response<LoginResponse>
+
     @POST("users")
     suspend fun signUp(@Body request: SignUpRequest): ApiResponse<SignUpResponse>
 
