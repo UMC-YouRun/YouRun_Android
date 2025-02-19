@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
 // import com.example.yourun.model.data.ChallengeItem
 import com.example.yourun.model.data.SoloChallengeRes
+import com.example.yourun.model.data.response.ChallengeItem
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.ChallengeRepository
 import com.example.yourun.view.activities.SoloChallengeDetailActivity

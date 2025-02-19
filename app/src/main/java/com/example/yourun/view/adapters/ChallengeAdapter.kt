@@ -16,9 +16,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
-import com.example.yourun.model.data.ChallengeItem
 import com.example.yourun.model.data.CrewChallengeRes
 import com.example.yourun.model.data.SoloChallengeRes
+import com.example.yourun.model.data.response.ChallengeItem
 import com.example.yourun.view.activities.CrewChallengeDetailActivity
 import com.example.yourun.view.activities.SoloChallengeDetailActivity
 
