@@ -90,8 +90,8 @@
 
         <CheckBox
             android:id="@+id/myCheckBox"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
             android:layout_marginStart="180dp"
             android:background="@drawable/bg_checkbox"
             android:button = "@android:color/transparent"

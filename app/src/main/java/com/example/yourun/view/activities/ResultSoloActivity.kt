@@ -31,8 +31,11 @@ class ResultSoloActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val isCrewChallengeInProgress = intent.getBooleanExtra("isCrewChallengeInProgress", false)
+        val isSoloChallengeInProgress = intent.getBooleanExtra("isSoloChallengeInProgress", false)
 
-        val btnConfirm = findViewById<Button>(R.id.btn_confirm)
+//        val btnConfirm = findViewById<Button>(R.id.btn_confirm)
+
         val imgRunner: ImageView = findViewById(R.id.img_runner)
         val imgMateProfile: ImageView = findViewById(R.id.img_mate_profile)
         val tvChallengeMate: TextView = findViewById(R.id.tv_challenge_mate)
@@ -62,7 +65,6 @@ class ResultSoloActivity : AppCompatActivity() {
                     val dayCount = it.dayCount
                     val challengePeriod = it.challengePeriod
 
-                    // ✅ 챌린지 정보 표시
                     tvRunningMessage.text = "${it.challengeDistance}km 달리기 완료!"
                     tvChallengeMate.text = "$mateName 과(와)의 러닝 챌린지"
                     tvChallengeResult.text = if (isUserSuccess) "${dayCount}일째 성공!" else "${dayCount}일째 실패!"
@@ -89,7 +91,12 @@ class ResultSoloActivity : AppCompatActivity() {
             }
         }
 
-        btnConfirm.setOnClickListener {
+        findViewById<Button>(R.id.btn_confirm).setOnClickListener {
+            if (isSoloChallengeInProgress && isCrewChallengeInProgress) {
+                // 둘 다 true일 경우 ResultCrewActivity 실행
+                val intent = Intent(this, ResultCrewActivity::class.java)
+                startActivity(intent)
+            }
             finish()
         }
     }

@@ -193,6 +193,12 @@ class HomeFragment : Fragment() {
             else -> 0
         }
         customView.updateChallengeState(soloChallengeLevel)
+
+        customView.setOnClickListener {
+            val intent = Intent(requireContext(), ResultSoloActivity::class.java)
+            startActivity(intent)
+        }
+
         return customView
     }
 
@@ -212,6 +218,12 @@ class HomeFragment : Fragment() {
             else -> 0
         }
         customView.updateChallengeState(crewChallengeLevel)
+
+        customView.setOnClickListener {
+            val intent = Intent(requireContext(), ResultCrewActivity::class.java)
+            startActivity(intent)
+        }
+
         return customView
     }
 
