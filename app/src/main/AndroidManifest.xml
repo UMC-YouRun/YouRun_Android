@@ -132,6 +132,11 @@
             android:name=".view.activities.RunningActivity"
             android:exported="true" />
 
+        <activity android:name=".view.activities.SoloProgressActivity"
+                android:exported="true" />
+        <activity android:name=".view.activities.CrewProgressActivity"
+            android:exported="true" />
+
     </application>
 
 </manifest>

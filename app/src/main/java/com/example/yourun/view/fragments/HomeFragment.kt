@@ -26,6 +26,11 @@ import com.example.yourun.model.repository.HomeRepository
 import com.example.yourun.view.activities.CalendarActivity
 import com.example.yourun.view.activities.ChallengeListActivity
 import com.example.yourun.view.activities.CreateChallengeActivity
+import com.example.yourun.view.activities.CrewProgressActivity
+import com.example.yourun.view.activities.ResultContributionActivity
+import com.example.yourun.view.activities.ResultCrewActivity
+import com.example.yourun.view.activities.ResultSoloActivity
+import com.example.yourun.view.activities.SoloProgressActivity
 import com.example.yourun.view.custom.CustomHomeChallenge
 import com.example.yourun.view.custom.CustomMateView
 import com.example.yourun.viewmodel.HomeViewModel
@@ -62,12 +67,20 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //테스트 위한 버튼 수정하기
+        binding.imgMainBanner.setOnClickListener {
+            val intent = Intent(requireContext(), ResultContributionActivity::class.java)
+            startActivity(intent)
+        }
+
         // 서버에서 챌린지 데이터 가져오기, 처음 한 번 호출
         viewModel.fetchHomeChallengeData()
-        viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
+        //viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
         viewModel.fetchUserInfo()
 
         viewModel.isPressedCrew.observe(viewLifecycleOwner) { isPressed ->
@@ -144,7 +157,7 @@ class HomeFragment : Fragment() {
         // btn_redirect 클릭 시 최신 메이트 데이터 다시 불러오기
         binding.btnRedirect.setOnClickListener {
             Log.d("HomeFragment", "btn_redirect 클릭됨 - 추천 메이트 갱신")
-            viewModel.fetchRecommendMates()
+            //viewModel.fetchRecommendMates()
         }
     }
 

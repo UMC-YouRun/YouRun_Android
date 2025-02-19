@@ -46,21 +46,21 @@ class HomeRepository(private val apiService: ApiService) {
         }
     }
 
-    suspend fun getRecommendMates(): MateResponse? {
-        return try {
-            val response = apiService.getRecommendMate()
-
-            if (response.isSuccessful) {
-                response.body()
-            } else {
-                Log.e("HomeRepository", "추천 메이트 요청 실패: ${response.errorBody()?.string()}")
-                null
-            }
-        } catch (e: Exception) {
-            Log.e("HomeRepository", "추천 메이트 가져오는 중 오류 발생", e)
-            null
-        }
-    }
+//    suspend fun getRecommendMates(): MateResponse? {
+//        return try {
+//            val response = apiService.getRecommendMate()
+//
+//            if (response.isSuccessful) {
+//                response.body()
+//            } else {
+//                Log.e("HomeRepository", "추천 메이트 요청 실패: ${response.errorBody()?.string()}")
+//                null
+//            }
+//        } catch (e: Exception) {
+//            Log.e("HomeRepository", "추천 메이트 가져오는 중 오류 발생", e)
+//            null
+//        }
+//    }
 
     suspend fun addMate(mateId: Long): Boolean {
         return try {
