@@ -67,16 +67,8 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //테스트 위한 버튼 수정하기
-        binding.imgMainBanner.setOnClickListener {
-            val intent = Intent(requireContext(), ResultContributionActivity::class.java)
-            startActivity(intent)
-        }
 
         // 서버에서 챌린지 데이터 가져오기, 처음 한 번 호출
         viewModel.fetchHomeChallengeData()

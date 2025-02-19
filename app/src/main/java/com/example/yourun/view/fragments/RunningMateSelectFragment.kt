@@ -40,36 +40,36 @@ class RunningMateSelectFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = viewLifecycleOwner
-
-        viewModel.fetchMateList() // 메이트 목록 데이터 가져오기
-        viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
-
-        binding.mateSelectTopBar.txtTopBarWithBackButton.text = "러닝메이트 선택"
-
-        binding.btnCalendar.setOnClickListener {
-            val intent = Intent(requireContext(), CalendarActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.mateSelectTopBar.backButton.setOnClickListener {
-            navigateBackWithSelection()
-        }
-
-        // 메이트 목록 UI 업데이트
-        viewModel.mateList.observe(viewLifecycleOwner) { mates ->
-            updateMatesUI(mates, viewModel, isRecommended = false)
-        }
-
-        // 추천 메이트 UI 업데이트
-        viewModel.recommendMates.observe(viewLifecycleOwner) { mates ->
-            updateMatesUI(mates, viewModel, isRecommended = true)
-        }
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        binding.viewModel = viewModel
+//        binding.lifecycleOwner = viewLifecycleOwner
+//
+//        viewModel.fetchMateList() // 메이트 목록 데이터 가져오기
+//        viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
+//
+//        binding.mateSelectTopBar.txtTopBarWithBackButton.text = "러닝메이트 선택"
+//
+//        binding.btnCalendar.setOnClickListener {
+//            val intent = Intent(requireContext(), CalendarActivity::class.java)
+//            startActivity(intent)
+//        }
+//
+//        binding.mateSelectTopBar.backButton.setOnClickListener {
+//            navigateBackWithSelection()
+//        }
+//
+//        // 메이트 목록 UI 업데이트
+//        viewModel.mateList.observe(viewLifecycleOwner) { mates ->
+//            updateMatesUI(mates, viewModel, isRecommended = false)
+//        }
+//
+//        // 추천 메이트 UI 업데이트
+//        viewModel.recommendMates.observe(viewLifecycleOwner) { mates ->
+//            updateMatesUI(mates, viewModel, isRecommended = true)
+//        }
+//    }
 
     // 메이트 UI 업데이트 (추천 메이트 & 일반 메이트 목록 통합)
     private fun updateMatesUI(

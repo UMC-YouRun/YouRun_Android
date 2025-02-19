@@ -1,7 +1,9 @@
 package com.example.yourun.view.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -23,6 +25,11 @@ class ResultSoloActivity : AppCompatActivity() {
 
         val topBarTitle: TextView = findViewById(R.id.txtTopBarWithBackButton)
         topBarTitle.text = "솔로 챌린지 결과"
+        val calendarButton: ImageButton = findViewById(R.id.CalanderButton)
+        calendarButton.setOnClickListener {
+            val intent = Intent(this, CalendarActivity::class.java)
+            startActivity(intent)
+        }
 
 
         val btnConfirm = findViewById<Button>(R.id.btn_confirm)

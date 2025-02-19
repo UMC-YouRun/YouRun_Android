@@ -63,9 +63,9 @@ class RunningTimeFragment : Fragment() {
             startActivity(intent)
         }
 
-        viewModel.mateId.observe(viewLifecycleOwner) { id ->
-            viewModel.fetchMateRunningData(id)
-        }
+//        viewModel.mateId.observe(viewLifecycleOwner) { id ->
+//            viewModel.fetchMateRunningData(id)
+//        }
 
         viewModel.mateRunningData.observe(viewLifecycleOwner) { runningData ->
             val mateRunningDistance = runningData?.data?.totalDistance

@@ -8,7 +8,6 @@
     android:id="@+id/layout_activity_create_crew"
     >
 
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/create_solo_fragment_container"
         android:layout_width="match_parent"

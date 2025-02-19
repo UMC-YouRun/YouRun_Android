@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/top_bar"
-        layout="@layout/top_bar_with_back_button"
+        layout="@layout/top_bar_with_both"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

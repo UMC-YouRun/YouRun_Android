@@ -41,7 +41,7 @@ class RunningActivity : AppCompatActivity() {
         override fun onLocationResult(locationResult: LocationResult) {
             super.onLocationResult(locationResult)
             for (location in locationResult.locations) {
-                viewModel.updateLocationData(location)
+                //viewModel.updateLocationData(location)
             }
         }
     }
@@ -107,7 +107,7 @@ class RunningActivity : AppCompatActivity() {
 
         // 버튼 누를 시 러닝 시작, 중지
         binding.btnRunningPlayPause.setOnClickListener {
-            viewModel.toggleRunningState()
+            //viewModel.toggleRunningState()
         }
 
         // 목표 시간 도달 또는 수동 종료 시 RunningResultActivity로 이동
@@ -256,7 +256,7 @@ class RunningActivity : AppCompatActivity() {
         binding.loadingRunningAnimation.pauseAnimation()
         stopLocationUpdates() // 액티비티 종료 시 위치 업데이트 중지
         if (viewModel.isStopped.value != true) {
-            viewModel.stopTracking()
+            //viewModel.stopTracking()
         }
     }
 }
