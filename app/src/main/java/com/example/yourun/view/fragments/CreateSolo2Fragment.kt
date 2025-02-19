@@ -1,5 +1,6 @@
 package com.example.yourun.view.fragments
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
@@ -11,6 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentCreateSolo2Binding
+import com.example.yourun.view.activities.MainActivity
 
 
 class CreateSolo2Fragment  : Fragment(R.layout.fragment_create_solo2) {
@@ -43,7 +45,7 @@ class CreateSolo2Fragment  : Fragment(R.layout.fragment_create_solo2) {
         val tendency = arguments?.getString("tendency") ?: ""
         val challengeDistanceValue = arguments?.getString("challengeDistanceValue")
 
-        val formattedText = " ${startDate} ~ ${endDate}($challengePeriod 일 간) \n매일 $challengeDistanceValue 러닝하기!"
+        val formattedText = " ${startDate} ~ \n${endDate}($challengePeriod 일 간) \n매일 $challengeDistanceValue 러닝하기!"
         val spannable = SpannableString(formattedText)
 
 // "startDate ~ endDate" 부분 (검은색)
@@ -112,7 +114,18 @@ class CreateSolo2Fragment  : Fragment(R.layout.fragment_create_solo2) {
 
         val imageResId = tendencyImages[tendency] ?: R.drawable.img_mate_sprinter
         binding.resultCharacter.setImageResource(imageResId)
+
+        binding.startRunningButton.setOnClickListener {
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+        }
+
+
+
     }
+
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()
