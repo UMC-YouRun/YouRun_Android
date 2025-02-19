@@ -38,5 +38,6 @@
     <color name="text_gray">#CDCDCD</color>
     <color name="text_gray2">#5A5A5A</color>
     <color name="selected_light_orange">#FFE9B1</color>
+    <color name="text_gray3">#7D7D7D</color>
 
 </resources>

@@ -42,10 +42,10 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/blur_img"
-                android:src="@drawable/img_blur"
                 android:layout_gravity="center"
-                android:backgroundTint="@android:color/transparent"/>
+                android:backgroundTint="@android:color/transparent"
+                android:contentDescription="@string/blur_img"
+                android:src="@drawable/img_blur" />
 
             <ImageView
                 android:id="@+id/imgCharacters"

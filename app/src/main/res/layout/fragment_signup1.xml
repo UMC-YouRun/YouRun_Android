@@ -64,7 +64,7 @@
 
     <EditText
         android:id="@+id/et_id"
-        android:layout_width="328sp"
+        android:layout_width="310dp"
         android:layout_height="60sp"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_edittext_rounded_corner"
@@ -117,7 +117,7 @@
 
     <EditText
         android:id="@+id/et_password"
-        android:layout_width="328sp"
+        android:layout_width="310sp"
         android:layout_height="60sp"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_edittext_rounded_corner"
@@ -138,7 +138,8 @@
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tv_password"
-        app:layout_constraintTop_toBottomOf="@+id/et_password" />
+        app:layout_constraintTop_toBottomOf="@+id/et_password"
+        android:textColor="@color/text_gray3"/>
 
     <TextView
         android:id="@+id/password_content"
@@ -151,7 +152,7 @@
 
     <EditText
         android:id="@+id/edit_text_password_check"
-        android:layout_width="328sp"
+        android:layout_width="310sp"
         android:layout_height="60sp"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_edittext_rounded_corner"
