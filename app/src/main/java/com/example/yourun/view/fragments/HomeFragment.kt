@@ -67,12 +67,10 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //테스트 위한 버튼 수정하기
+        // 테스트 위한 버튼 수정하기
         binding.imgMainBanner.setOnClickListener {
             val intent = Intent(requireContext(), ResultContributionActivity::class.java)
             startActivity(intent)
@@ -80,8 +78,7 @@ class HomeFragment : Fragment() {
 
         // 서버에서 챌린지 데이터 가져오기, 처음 한 번 호출
         viewModel.fetchHomeChallengeData()
-        //viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
-        viewModel.fetchUserInfo()
+        viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
 
         viewModel.isPressedCrew.observe(viewLifecycleOwner) { isPressed ->
             binding.btnCrew.setImageResource(
@@ -107,13 +104,6 @@ class HomeFragment : Fragment() {
             updateChallengeView()
         }
 
-        // 유저 정보 관리
-        viewModel.userInfo.observe(viewLifecycleOwner) { userInfo ->
-            userInfo?.let { safeUserInfo ->
-                updateUserInfoText(safeUserInfo)
-            }
-        }
-
         // challengeButtonContainer에 기본 btnAddChallenge 뷰를 저장
         originalChallengeButton = binding.challengeButtonContainer.findViewById(R.id.btnAddChallenge)
 
@@ -129,6 +119,7 @@ class HomeFragment : Fragment() {
                 Log.d("HomeFragment","홈 챌린지 데이터를 불러오지 못했습니다.")
             } else {
                 updateChallengeView(challengeData)
+                updateUserInfoText(challengeData)
             }
         }
 
@@ -157,7 +148,7 @@ class HomeFragment : Fragment() {
         // btn_redirect 클릭 시 최신 메이트 데이터 다시 불러오기
         binding.btnRedirect.setOnClickListener {
             Log.d("HomeFragment", "btn_redirect 클릭됨 - 추천 메이트 갱신")
-            //viewModel.fetchRecommendMates()
+            viewModel.fetchRecommendMates()
         }
     }
 
@@ -274,14 +265,17 @@ class HomeFragment : Fragment() {
         return (this * context.resources.displayMetrics.density).toInt()
     }
 
-    private fun updateUserInfoText(userInfo: UserInfo) {
+    private fun updateUserInfoText(challengeData: ChallengeData?) {
 
         val sharedPref = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        val userNickname = userInfo.nickname
+        val userNickname = challengeData?.homeNickName ?: ""
         val signupDateStr = sharedPref.getString("signup_date", "") ?: ""
-        val crewReward = userInfo.crewReward
-        val soloReward = userInfo.personalReward
-        val userTendency = userInfo.tendency
+        val crewReward = challengeData?.crewReward
+        val soloReward = challengeData?.soloReward
+        val userTendency = challengeData?.tendency
+        val editor = sharedPref.edit()
+        editor.putString("user_tendency", userTendency)
+        editor.apply()
 
         if (userNickname.isNotEmpty()) {
             val originalRunText = getString(R.string.main_run_together)

@@ -29,42 +29,23 @@ object ApiClient {
                 val originalRequest = chain.request()
                 val requestUrl = originalRequest.url.toString()
 
-//                if (requestUrl.contains("/api/v1/users/login")) {
-//                    Log.d("Interceptor", "로그인 요청이므로 Authorization 헤더를 추가하지 않음")
-//                    return@addInterceptor chain.proceed(originalRequest)
-//                }
+                if (requestUrl.contains("/api/v1/users/login")) {
+                    Log.d("Interceptor", "로그인 요청이므로 Authorization 헤더를 추가하지 않음")
+                    return@addInterceptor chain.proceed(originalRequest)
+                }
 
+                // 로그인 이외의 요청에만 토큰 추가
                 val token = TokenManager.getToken()
-                val requestBuilder = originalRequest.newBuilder()
-
-                if (!token.isNullOrEmpty()) {
-                    requestBuilder.header("Authorization", "Bearer $token")
+                if (token.isNotEmpty()) {
+                    val requestWithAuth = originalRequest.newBuilder()
+                        .addHeader("Authorization", "Bearer $token") // 올바른 형식으로 추가
+                        .build()
                     Log.d("Interceptor", "Authorization 헤더 추가됨: Bearer $token")
+                    return@addInterceptor chain.proceed(requestWithAuth)
                 }
 
-                val response = chain.proceed(requestBuilder.build())
-
-                if (response.code == 302 || response.code == 301 || response.code == 307) {
-                    val newUrl = response.header("Location")
-
-                    if (!newUrl.isNullOrEmpty()) {
-                        Log.d("Interceptor", "302 Redirect → 새로운 URL 요청: $newUrl")
-
-                        if (newUrl.contains("/oauth2/authorization/kakao")) {
-                            Log.e("Interceptor", "카카오 로그인 리디렉션 감지 - 수동 처리 필요!")
-                            return@addInterceptor response
-                        }
-
-                        val newRequest = originalRequest.newBuilder()
-                            .url(newUrl)
-                            .build()
-                        return@addInterceptor chain.proceed(newRequest)
-                    }
-                }
-
-                return@addInterceptor response
+                return@addInterceptor chain.proceed(originalRequest)
             }
-
             .build()
     }
 
@@ -82,6 +63,7 @@ object ApiClient {
         Log.d("API_BASE_URL", "현재 BASE_URL: $BASE_URL")
         return retrofit.create(ChallengeApiService::class.java)
     }
+
     object TokenManager {
         private val context: Context
             get() = MyApplication.instance.applicationContext

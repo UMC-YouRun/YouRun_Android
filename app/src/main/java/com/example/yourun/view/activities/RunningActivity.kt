@@ -1,6 +1,7 @@
 package com.example.yourun.view.activities
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Looper
@@ -8,9 +9,11 @@ import android.text.SpannableString
 import android.text.Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
 import android.text.style.AbsoluteSizeSpan
 import android.util.Log
+import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.airbnb.lottie.LottieAnimationView
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityRunningBinding
 import com.example.yourun.model.network.ApiClient
@@ -54,7 +57,9 @@ class RunningActivity : AppCompatActivity() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        // 테스트용 데이터
+        val sharedPreferences = this.getSharedPreferences("UserData", Context.MODE_PRIVATE)
+        val userTendency = sharedPreferences.getString("user_tendency", "")
+
         val targetTime = 15
 
         // 초기 데이터 설정
@@ -74,17 +79,37 @@ class RunningActivity : AppCompatActivity() {
 
         binding.txtTopBarWithBackButton.text = "러닝"
         binding.txtTimeToRun.text = "${targetTime}분 러닝하기!"
-        binding.txtMateRunningPace.text = "$mateName ${String.format(Locale.US, "%.2f/km", mateSpeed)}"
-        binding.txtMateRunningDistance.text = String.format(Locale.US, "%.2fkm", mateRunningDistanceMeters / 1000.0)
+        binding.txtMateRunningPace.text =
+            "$mateName ${String.format(Locale.US, "%.2f/km", mateSpeed)}"
+        binding.txtMateRunningDistance.text =
+            String.format(Locale.US, "%.2fkm", mateRunningDistanceMeters / 1000.0)
 
         binding.loadingRunningAnimation.setAnimation(R.raw.loading_running)
         binding.loadingRunningAnimation.playAnimation()
 
+        val characterAnimationView =
+            findViewById<LottieAnimationView>(R.id.charcterRunningAnimation)
+        val layoutParams = characterAnimationView.layoutParams as ViewGroup.MarginLayoutParams
+
+//        when (userTendency) {
+//            "페이스메이커" -> { binding.charcterRunningAnimation.setAnimation(R.raw.facemaker_running)
+//            layoutParams.setMargins(18, 50, 18, 0)
+//            characterAnimationView.layoutParams = layoutParams
+//            }
+//            "트레일러너" -> { binding.charcterRunningAnimation.setAnimation(R.raw.trailrunner_running)
+//            layoutParams.setMargins(18, 50, 18, 0)
+////            characterAnimationView.layoutParams = layoutParams
+//              }
+//            "스프린터" -> { binding.charcterRunningAnimation.setAnimation(R.raw.sprinter_running)
+//            layoutParams.setMargins(18, 50, 18, 0)
+////            characterAnimationView.layoutParams = layoutParams
+//        }
+        binding.charcterRunningAnimation.setAnimation(R.raw.trailrunner_running)
+        binding.charcterRunningAnimation.playAnimation()
+
         // 백 버튼 클릭 시, 홈 화면으로 이동
         binding.backButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent)
+            moveTaskToBack(true)
         }
 
         // 캘린더 화면으로 이동
@@ -254,6 +279,7 @@ class RunningActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         binding.loadingRunningAnimation.pauseAnimation()
+        binding.charcterRunningAnimation.pauseAnimation()
         stopLocationUpdates() // 액티비티 종료 시 위치 업데이트 중지
         if (viewModel.isStopped.value != true) {
             viewModel.stopTracking()
