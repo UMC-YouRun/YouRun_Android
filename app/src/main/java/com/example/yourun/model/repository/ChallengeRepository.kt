@@ -7,7 +7,9 @@ import com.example.yourun.model.data.CrewChallengeResponse
 import com.example.yourun.model.data.SoloChallengeDetailRes
 import com.example.yourun.model.data.SoloChallengeRes
 import com.example.yourun.model.network.ApiClient
+import com.example.yourun.model.network.ApiResponse
 import com.example.yourun.model.network.ApiService
+import com.google.android.gms.common.api.Api
 import retrofit2.Response
 
 class ChallengeRepository(private val apiService: ApiService = ApiClient.getApiService()) {
@@ -58,11 +60,11 @@ class ChallengeRepository(private val apiService: ApiService = ApiClient.getApiS
         }
     }
 
-    suspend fun getCrewChallengeDetail(challengeId: String): Response<CrewChallengeDetailRes> {
+    suspend fun getCrewChallengeDetail(challengeId: String): Response<ApiResponse<CrewChallengeDetailRes>> {
         return apiService.getCrewChallengeDetail(challengeId)
     }
 
-    suspend fun getSoloChallengeDetail(challengeId: String): Response<SoloChallengeDetailRes> {
-        return apiService.getSoloChallengeDetail(challengeId)
+    suspend fun getSoloChallengeDetail(challengeId: String): Response<ApiResponse<SoloChallengeDetailRes>> {
+        return apiService.getSoloChallengeDetail(challengeId.toLong())
     }
 }

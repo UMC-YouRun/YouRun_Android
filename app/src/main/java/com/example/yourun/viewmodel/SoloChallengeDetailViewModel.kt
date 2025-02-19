@@ -13,11 +13,12 @@ class SoloChallengeDetailViewModel(private val repository: ChallengeRepository) 
     private val _soloChallengeDetail = MutableLiveData<SoloChallengeDetailRes?>()
     val soloChallengeDetail: LiveData<SoloChallengeDetailRes?> get() = _soloChallengeDetail
 
-    fun fetchSoloChallengeDetail(challengeId: Long) {
+    fun fetchSoloChallengeDetail(challengeId: String) {
         viewModelScope.launch {
-            val response = repository.getSoloChallengeDetail(challengeId.toString())
+            val response = repository.getSoloChallengeDetail(challengeId) // API 호출
             if (response.isSuccessful) {
-                _soloChallengeDetail.postValue(response.body())
+                val responseBody = response.body()
+                _soloChallengeDetail.postValue(responseBody?.data) // ✅ data 필드만 저장
             } else {
                 _soloChallengeDetail.postValue(null)
             }

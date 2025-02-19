@@ -37,15 +37,19 @@ class CrewChallengeDetailActivity : AppCompatActivity() {
 
         viewModel.crewChallengeDetail.observe(this) { detail ->
             Log.d("DEBUG", "API에서 받은 startDate: ${detail?.startDate}, endDate: ${detail?.endDate}")
+            Log.d("DEBUG", "ViewModel에서 받은 데이터: $detail")
+            Log.d("DEBUG", "ViewModel에서 받은 startDate: ${detail?.startDate}, endDate: ${detail?.endDate}")
             detail?.let { updateUI(it) }
         }
     }
 
     private fun updateUI(detail: CrewChallengeDetailRes) {
+        Log.d("DEBUG", "UI 업데이트 - 받은 startDate: ${detail.startDate}, endDate: ${detail.endDate}")
         val crewName = findViewById<TextView>(R.id.crew_name)
         val startToEndDate = findViewById<TextView>(R.id.tv_peroid)
         val challengePeriod = findViewById<TextView>(R.id.challenge_crew_title)
         val joinCount = findViewById<TextView>(R.id.joincount)
+        val subtitle = findViewById<TextView>(R.id.challenge_crew_subtitle)
         val reward = findViewById<TextView>(R.id.tv_reward)
         val participantImage1 = findViewById<ImageView>(R.id.participant_1_profile)
         val participantImage2 = findViewById<ImageView>(R.id.participant_2_profile)
@@ -53,10 +57,11 @@ class CrewChallengeDetailActivity : AppCompatActivity() {
         val creatorCharacterImage = findViewById<ImageView>(R.id.participant_1_character)
         val crewSlogan = findViewById<TextView>(R.id.crew_slogan)
 
-        crewName.text = detail.crewName
+        crewName.text = "${detail.crewName}\n크루"
         startToEndDate.text = "${detail.startDate} ~ ${detail.endDate}"
         challengePeriod.text = "${detail.challengePeriod}일 동안 최대 거리 러닝!"
         joinCount.text = "${detail.joinCount}/4명"
+        subtitle.text = "${detail.crewName} 크루와 함께!"
         reward.text = String.format("내가 더 잘 나가 %d개, MVP 달성 시 %d개", detail.reward, detail.reward * 2)
 
         // 🚀 Null 체크 추가

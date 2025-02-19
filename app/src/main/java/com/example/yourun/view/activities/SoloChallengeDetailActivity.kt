@@ -25,7 +25,7 @@ class SoloChallengeDetailActivity : AppCompatActivity() {
 
         val challengeId = intent.getLongExtra("challengeId", -1)
         if (challengeId != -1L) {
-            viewModel.fetchSoloChallengeDetail(challengeId)
+            viewModel.fetchSoloChallengeDetail(challengeId.toString())
         } else {
             Toast.makeText(this, "잘못된 접근입니다.", Toast.LENGTH_SHORT).show()
             finish()

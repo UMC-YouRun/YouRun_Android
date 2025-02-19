@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.yourun.R
 // import com.example.yourun.view.fragments.HomeFragment
-// import com.example.yourun.view.fragments.MateFragment
+import com.example.yourun.view.fragments.MateFragment
 import com.example.yourun.view.fragments.MyRunFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.content.SharedPreferences
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 /*
                 R.id.nav_home -> HomeFragment()
                  */
-                /*R.id.nav_mate -> MateFragment()*/
+                R.id.nav_mate -> MateFragment()
                 R.id.nav_challenge -> ChallengeListFragment()
                 R.id.nav_my -> MyRunFragment()
                 else -> return@setOnItemSelectedListener false
