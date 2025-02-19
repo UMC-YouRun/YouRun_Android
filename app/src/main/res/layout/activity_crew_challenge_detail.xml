@@ -171,7 +171,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/back_card" />
 
                     <ImageView
-                        android:id="@+id/bg_headcount"
+                        android:id="@+id/bg_joincount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="68sp"
@@ -192,16 +192,16 @@
                         app:layout_constraintTop_toBottomOf="@+id/challenge_crew_subtitle" />
 
                     <TextView
-                        android:id="@+id/headcount"
+                        android:id="@+id/joincount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/tv_crew_headcount"
                         android:textColor="@color/gray"
                         android:textSize="13sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/bg_headcount"
-                        app:layout_constraintEnd_toEndOf="@+id/bg_headcount"
-                        app:layout_constraintStart_toStartOf="@+id/bg_headcount"
-                        app:layout_constraintTop_toTopOf="@+id/bg_headcount" />
+                        app:layout_constraintBottom_toBottomOf="@+id/bg_joincount"
+                        app:layout_constraintEnd_toEndOf="@+id/bg_joincount"
+                        app:layout_constraintStart_toStartOf="@+id/bg_joincount"
+                        app:layout_constraintTop_toTopOf="@+id/bg_joincount" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -226,7 +226,7 @@
                     app:srcCompat="@drawable/img_bar_horizontal" />
 
                 <TextView
-                    android:id="@+id/challenge_reward"
+                    android:id="@+id/title_reward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
@@ -244,7 +244,7 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="12dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/challenge_reward"
+                    app:layout_constraintTop_toBottomOf="@+id/title_reward"
                     app:srcCompat="@drawable/img_badge_c" />
 
                 <TextView
@@ -257,10 +257,10 @@
                     android:textColor="@color/gray"
                     android:textSize="13sp"
                     app:layout_constraintStart_toEndOf="@+id/badge_crew"
-                    app:layout_constraintTop_toBottomOf="@+id/challenge_reward" />
+                    app:layout_constraintTop_toBottomOf="@+id/title_reward" />
 
                 <TextView
-                    android:id="@+id/period"
+                    android:id="@+id/title_challenge_period"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -280,7 +280,7 @@
                     android:text="@string/tv_period_detail"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/period" />
+                    app:layout_constraintTop_toBottomOf="@+id/title_challenge_period" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -293,7 +293,7 @@
     </ScrollView>
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/btn_join"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"

@@ -130,7 +130,7 @@
         </activity>
 
         <activity
-            android:name=".view.activities.ChallengeDetailTeamActivity"
+            android:name=".view.activities.ChallengeDetailActivity"
             android:exported="true"
             android:theme="@style/Theme.YouRun">
           
@@ -151,6 +151,16 @@
         <activity
             android:name=".view.activities.RunningResultActivity"
             android:exported="true" />
+
+        <activity
+            android:name=".view.activities.CrewChallengeDetailActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".view.activities.SoloChallengeDetailActivity"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

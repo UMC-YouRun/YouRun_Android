@@ -1,19 +1,16 @@
 package com.example.yourun.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.example.yourun.R
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.yourun.view.adapters.ChallengeAdapter
-import com.example.yourun.model.data.ChallengeItem
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
+import com.example.yourun.view.activities.CreateChallengeActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ChallengeListFragment : Fragment() {
 
@@ -44,7 +41,13 @@ class ChallengeListFragment : Fragment() {
         personalButton.setOnClickListener {
             Log.d("ChallengeListFragment", "개인 버튼 클릭됨")
             setSelectedButton(false)
-            replaceFragment(PersonalChallengeFragment())
+            replaceFragment(SoloChallengeFragment())
+        }
+
+        val fab = view.findViewById<FloatingActionButton>(R.id.fab_plus)
+        fab.setOnClickListener {
+            val intent = Intent(requireContext(), CreateChallengeActivity::class.java)
+            startActivity(intent)
         }
 
         return view
@@ -73,21 +76,3 @@ class ChallengeListFragment : Fragment() {
     }
 
 }
-
-    /*
-    private fun getSampleData(): List<ChallengeItem> {
-        return listOf(
-            ChallengeItem(
-                badgeImage = R.drawable.img_crew_badge_count,
-                title = "3일 연속 3km 러닝!",
-                description = "챌린지 메이트 루시와 함께!",
-                members = listOf(
-                    R.drawable.img_mini2_pacemaker,
-                    R.drawable.img_mini2_trailrunner,
-                    R.drawable.img_mini2_sprinter
-                ),
-                remaining = "남은 1명!"
-            )
-        )
-    }
-    */

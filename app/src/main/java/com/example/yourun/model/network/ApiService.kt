@@ -3,6 +3,7 @@ package com.example.yourun.model.network
 import com.example.yourun.model.data.BaseResponse
 import com.example.yourun.model.data.ChallengeDataResponse
 import com.example.yourun.model.data.ChallengeResultResponse
+import com.example.yourun.model.data.CrewChallengeDetailRes
 import com.example.yourun.model.data.CrewChallengeResponse
 import com.example.yourun.model.data.EmailduplicateResponse
 import com.example.yourun.model.data.LoginRequest
@@ -16,6 +17,7 @@ import com.example.yourun.model.data.NicknameduplicateResponse
 import com.example.yourun.model.data.PersonalChallengeResponse
 import com.example.yourun.model.data.RunningStatsResponse
 import com.example.yourun.model.data.SignUpResponse
+import com.example.yourun.model.data.SoloChallengeDetailRes
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -60,6 +62,16 @@ interface ApiService {
 
     @GET("challenges/solo/pending")
     suspend fun getPendingPersonalChallenges(): Response<BaseResponse<PersonalChallengeResponse>>
+
+    @GET("challenges/crew/pending/{challengeId}")
+    suspend fun getCrewChallengeDetail(
+        @Path("challengeId") challengeId: String
+    ): Response<BaseResponse<CrewChallengeDetailRes>>
+
+    @GET("challenges/solo/pending/{challengeId}")
+    suspend fun getSoloChallengeDetail(
+        @Path("challengeId") challengeId: String
+    ): Response<BaseResponse<SoloChallengeDetailRes>>
 }
 
 

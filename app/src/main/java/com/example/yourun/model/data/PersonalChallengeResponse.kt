@@ -15,6 +15,7 @@ data class SoloChallengeRes(
     val challengeId: Long,
     val challengeDistance: Int,
     val challengePeriod: Int,
+    @SerializedName("challengeCreatorNickName")
     val challengeCreatorNickname: String,
     val challengeCreatorHashtags: List<String>,
     val reward: Int,
