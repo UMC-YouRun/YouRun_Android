@@ -68,16 +68,8 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //테스트 위한 버튼 수정하기
-        binding.imgMainBanner.setOnClickListener {
-            val intent = Intent(requireContext(), ResultContributionActivity::class.java)
-            startActivity(intent)
-        }
 
         // 서버에서 챌린지 데이터 가져오기, 처음 한 번 호출
         viewModel.fetchHomeChallengeData()
@@ -202,6 +194,12 @@ class HomeFragment : Fragment() {
             else -> 0
         }
         customView.updateChallengeState(soloChallengeLevel)
+
+        customView.setOnClickListener {
+            val intent = Intent(requireContext(), ResultSoloActivity::class.java)
+            startActivity(intent)
+        }
+
         return customView
     }
 
@@ -221,6 +219,12 @@ class HomeFragment : Fragment() {
             else -> 0
         }
         customView.updateChallengeState(crewChallengeLevel)
+
+        customView.setOnClickListener {
+            val intent = Intent(requireContext(), ResultCrewActivity::class.java)
+            startActivity(intent)
+        }
+
         return customView
     }
 
