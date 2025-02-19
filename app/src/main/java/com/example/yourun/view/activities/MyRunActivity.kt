@@ -20,8 +20,11 @@ class MyRunActivity : AppCompatActivity() {
 
         // Fragment 추가
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, MyRunFragment())
+            .replace(R.id.my_run_fragment_container, MyRunFragment())
             .commit()
+
+
+
 
 
     }

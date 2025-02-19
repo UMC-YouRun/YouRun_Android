@@ -48,7 +48,7 @@
                 android:backgroundTint="@android:color/transparent"/>
 
             <ImageView
-                android:id="@+id/img_characters"
+                android:id="@id/imgCharacters"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/characters"
@@ -125,7 +125,7 @@
             android:layout_marginTop="2dp" />
 
         <Button
-            android:id="@id/next_btn"
+            android:id="@id/nextBtn"
             android:layout_width="328dp"
             android:layout_height="48dp"
             android:layout_gravity="center"

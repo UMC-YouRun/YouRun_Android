@@ -1,83 +1,145 @@
 package com.example.yourun.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.yourun.R
+import com.example.yourun.databinding.FragmentRunningMateSelectBinding
+import com.example.yourun.model.data.response.UserMateInfo
+import com.example.yourun.model.network.ApiClient
+import com.example.yourun.model.repository.RunningRepository
+import com.example.yourun.view.activities.CalendarActivity
+import com.example.yourun.view.custom.CustomMateView
+import com.example.yourun.viewmodel.RunningViewModel
+import com.example.yourun.viewmodel.RunningViewModelFactory
 
 class RunningMateSelectFragment : Fragment() {
+
+    private var _binding: FragmentRunningMateSelectBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: RunningViewModel by viewModels {
+        RunningViewModelFactory(RunningRepository(ApiClient.getApiService()))
+    }
+
+    private var selectedMateNickname: String? = null
+    private var selectedMateTendency: String? = null
+    private var selectedMateId: Long? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_running_mate_select, container, false)
+    ): View {
+        _binding = FragmentRunningMateSelectBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val topBarView = view.findViewById<View>(R.id.mate_select_top_bar)
-        val titleTextView = topBarView.findViewById<TextView>(R.id.txt_top_bar_with_back_button)
-        titleTextView.text = "러닝메이트 선택"
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        view.findViewById<ImageButton>(R.id.back_button).setOnClickListener {
-            parentFragmentManager.popBackStack()
+        viewModel.fetchMateList() // 메이트 목록 데이터 가져오기
+        viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
+
+        binding.mateSelectTopBar.txtTopBarWithBackButton.text = "러닝메이트 선택"
+
+        binding.btnCalendar.setOnClickListener {
+            val intent = Intent(requireContext(), CalendarActivity::class.java)
+            startActivity(intent)
         }
 
-        // 나의 러닝 메이트 텍스트 밑에 추가
-        val mateSelectConstraintLayout = view.findViewById<ConstraintLayout>(R.id.mate_select_constraint_layout)
-        /* viewModel로 데이터 받아와서 item 추가하기
-        // ViewModel 데이터 관찰
-        viewModel.items.observe(viewLifecycleOwner, Observer { items ->
-            addItemsToBottom(constraintLayout, items.take(5)) // 최대 5개의 아이템 추가
-        })
+        binding.mateSelectTopBar.backButton.setOnClickListener {
+            navigateBackWithSelection()
+        }
 
-        // 서버 데이터 로드
-        viewModel.fetchDataFromServer() */
+        // 메이트 목록 UI 업데이트
+        viewModel.mateList.observe(viewLifecycleOwner) { mates ->
+            updateMatesUI(mates, viewModel, isRecommended = false)
+        }
 
+        // 추천 메이트 UI 업데이트
+        viewModel.recommendMates.observe(viewLifecycleOwner) { mates ->
+            updateMatesUI(mates, viewModel, isRecommended = true)
+        }
     }
 
-    /* 메이트 아이템 추가하는 함수
-    private fun addItemsToBottom(constraintLayout: ConstraintLayout, items: List<UserData>) {
-        val inflater = LayoutInflater.from(requireContext())
-        var lastViewId = R.id.view_home_mate // 마지막 뷰의 ID
+    // 메이트 UI 업데이트 (추천 메이트 & 일반 메이트 목록 통합)
+    private fun updateMatesUI(
+        mates: List<UserMateInfo>,
+        viewModel: RunningViewModel,
+        isRecommended: Boolean
+    ) {
+        // 추천 메이트는 recommendMatesContainer에, 일반 메이트 목록은 matesListContainer에 추가
+        val container = if (isRecommended) binding.recommendMatesContainer else binding.matesListContainer
 
-        items.forEach { user ->
-            // 아이템 레이아웃 Inflate
-            val itemView = inflater.inflate(R.layout.item_layout, constraintLayout, false)
-            itemView.id = View.generateViewId() // 고유 ID 설정
+        // 기존 메이트 뷰 삭제
+        container.removeAllViews()
 
-            // 하트 이미지 버튼 없애기
+        // 메이트 목록 추가 (최대 5개)
+        mates.take(5).forEachIndexed { index, mate ->
+            // 가로 구분선 추가 (첫 번째 항목 제외)
+            if (index > 0) {
+                val dividerView = View(requireContext()).apply {
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        1.dpToPx()
+                    ).apply {
+                        setMargins(24.dpToPx(), 0, 24.dpToPx(), 4.dpToPx())
+                    }
+                    setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border))
+                    tag = "divider" // 제거할 때 구분하기 위해 태그 추가
+                }
+                container.addView(dividerView)
+            }
 
-            // 데이터 설정
-            itemView.findViewById<TextView>(R.id.idx_challenge_item).text = user.index
-            itemView.findViewById<TextView>(R.id.user_name).text = user.name
-            itemView.findViewById<TextView>(R.id.user_run_day).text = user.runDays
-            itemView.findViewById<TextView>(R.id.user_tag).text = user.tag
-            itemView.findViewById<ImageView>(R.id.img_user_profile).setImageResource(user.profileImage)
+            // CustomMateView 추가
+            val mateView = CustomMateView<RunningViewModel>(requireContext(), showHeartButton = false).apply {
+                setViewModel(viewModel)
+                updateMateInfo(mate, index + 1)
+                onMateSelected = { nickname, tendency, id ->
+                    selectedMateNickname = nickname
+                    selectedMateTendency = tendency
+                    selectedMateId = id
+                }
 
-            // ConstraintLayout에 추가
-            constraintLayout.addView(itemView)
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    setMargins(24.dpToPx(), 8.dpToPx(), 24.dpToPx(), 8.dpToPx())
+                }
+            }
 
-            // ConstraintSet으로 레이아웃 배치
-            val constraintSet = ConstraintSet()
-            constraintSet.clone(constraintLayout)
+            container.addView(mateView)
+        }
+    }
 
-            // 이전 뷰 아래에 배치
-            constraintSet.connect(itemView.id, ConstraintSet.TOP, lastViewId, ConstraintSet.BOTTOM, 16)
-            constraintSet.connect(itemView.id, ConstraintSet.START, ConstraintSet.PARENT_ID, ConstraintSet.START, 16)
-            constraintSet.connect(itemView.id, ConstraintSet.END, ConstraintSet.PARENT_ID, ConstraintSet.END, 16)
+    // dp → px 변환 함수
+    private fun Int.dpToPx(): Int {
+        return (this * resources.displayMetrics.density).toInt()
+    }
 
-            constraintSet.applyTo(constraintLayout)
+    private fun navigateBackWithSelection() {
+        val bundle = Bundle().apply {
+            putString("mateName", selectedMateNickname)
+            putString("mateTendency", selectedMateTendency)
+            selectedMateId?.let { putLong("mateId", it) }
+        }
+        parentFragmentManager.setFragmentResult("mateSelectKey", bundle)
 
-            // 마지막 뷰 ID 업데이트
-            lastViewId = itemView.id
-        } */
+        parentFragmentManager.popBackStack() // RunningFragment로 돌아가기
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.yourun.view.fragments
+/*package com.example.yourun.view.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +15,7 @@ import com.example.yourun.R
 import com.example.yourun.model.data.MateData
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.MateRepository
-import com.example.yourun.model.data.UserInfo
+import com.example.yourun.model.data.response.UserInfo
 import com.example.yourun.utils.TokenManager
 import com.example.yourun.view.adapters.MateRankingAdapter
 import kotlinx.coroutines.launch
@@ -65,7 +65,7 @@ class MateFragment : Fragment() {
                 val userInfo = mateRepository.getMyRunData()
 
                 // ✅ 친구(메이트) 정보 조회
-                val mates = mateRepository.getMates()
+                // val mates = mateRepository.getMates()
 
                 // 리스트 초기화
                 mateDataList.clear()
@@ -89,7 +89,7 @@ class MateFragment : Fragment() {
                 }
 
                 // 🔹 친구(메이트) 정보 추가
-                mateDataList.addAll(mates)
+                // mateDataList.addAll(mates)
 
                 // 🔹 전체 정렬 (예: 총 거리 기준)
                 mateDataList.sortByDescending { it.totalDistance }
@@ -193,4 +193,4 @@ class MateFragment : Fragment() {
         }
     }
 
-}
+}*/

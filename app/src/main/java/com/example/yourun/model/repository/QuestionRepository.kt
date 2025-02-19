@@ -1,6 +1,6 @@
 package com.example.yourun.model.repository
 
-import com.example.yourun.model.data.Question
+import com.example.yourun.model.data.response.Question
 
 object QuestionRepository {
     val questions = listOf(

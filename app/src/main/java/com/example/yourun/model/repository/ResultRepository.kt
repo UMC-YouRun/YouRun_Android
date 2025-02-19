@@ -1,7 +1,7 @@
 package com.example.yourun.model.repository
 
 import com.example.yourun.R
-import com.example.yourun.model.data.ResultData
+import com.example.yourun.model.data.response.ResultData
 
 object ResultRepository {
 

@@ -1,222 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <FrameLayout
-        android:id="@+id/running_time_set_top_frame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.yourun.viewmodel.RunningViewModel" />
+    </data>
 
-        <include
-            android:id="@+id/running_time_set_top_bar"
-            layout="@layout/top_bar_with_back_button" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <FrameLayout
+            android:id="@+id/running_time_set_top_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <include
+                android:id="@+id/runningTimeSetTopBar"
+                layout="@layout/top_bar_with_back_button" />
+
+            <ImageButton
+                android:id="@id/btnCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:contentDescription="@string/btn_calendar"
+                android:src="@drawable/ic_calendar"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="17dp"
+                android:backgroundTint="@android:color/transparent"
+                android:layout_gravity="end" />
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/running_time_set_top_frame"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/today_how_run"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="40dp"
+            android:layout_marginStart="17dp" />
+
+        <TextView
+            android:id="@+id/txtRunningTimeMate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/running_time_set_top_frame"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text=""
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:layout_marginTop="87dp"
+            android:layout_marginStart="17dp" />
+
+        <TextView
+            android:id="@+id/txt_more_run"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/running_time_set_top_frame"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/more_run"
+            android:textSize="14sp"
+            android:textStyle="normal"
+            android:textColor="@color/text_purple"
+            android:layout_marginTop="107dp"
+            android:layout_marginStart="17dp" />
+
+        <FrameLayout
+            android:id="@+id/time_15_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/txt_more_run"
+            app:layout_constraintBottom_toTopOf="@id/time_30_frame">
+
+            <View
+                android:id="@+id/bgdTime15"
+                android:layout_width="match_parent"
+                android:layout_height="69dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/bgd_time_button"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/txt_time_15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minute_15"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="60dp"
+                android:layout_gravity="center_vertical" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/time_30_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/time_15_frame"
+            app:layout_constraintBottom_toTopOf="@id/time_45_frame">
+
+            <View
+                android:id="@+id/bgdTime30"
+                android:layout_width="match_parent"
+                android:layout_height="69dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/bgd_time_button"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/txt_time_30"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minute_30"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="60dp"
+                android:layout_gravity="center_vertical" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/time_45_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/time_30_frame"
+            app:layout_constraintBottom_toTopOf="@id/time_60_frame">
+
+            <View
+                android:id="@+id/bgdTime45"
+                android:layout_width="match_parent"
+                android:layout_height="69dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/bgd_time_button"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/txt_time_45"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minute_45"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="60dp"
+                android:layout_gravity="center_vertical" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/time_60_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/time_45_frame"
+            app:layout_constraintBottom_toTopOf="@id/btn_select_time">
+
+            <View
+                android:id="@+id/bgdTime60"
+                android:layout_width="match_parent"
+                android:layout_height="69dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:background="@drawable/bgd_time_button"
+                android:clickable="true"
+                android:focusable="true" />
+
+            <TextView
+                android:id="@+id/txt_time_60"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/minute_60"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:layout_marginStart="60dp"
+                android:layout_gravity="center_vertical" />
+
+        </FrameLayout>
 
         <ImageButton
-            android:id="@id/btn_calendar"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:contentDescription="@string/btn_calendar"
-            android:src="@drawable/ic_calendar"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="17dp"
-            android:backgroundTint="@android:color/transparent"
-            android:layout_gravity="end" />
-
-    </FrameLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/running_time_set_top_frame"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/today_how_run"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="17dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/running_time_set_top_frame"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/mate_run_time"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        android:layout_marginTop="87dp"
-        android:layout_marginStart="17dp" />
-
-    <TextView
-        android:id="@+id/txt_more_run"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/running_time_set_top_frame"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/more_run"
-        android:textSize="14sp"
-        android:textStyle="normal"
-        android:textColor="@color/text_purple"
-        android:layout_marginTop="107dp"
-        android:layout_marginStart="17dp" />
-
-    <FrameLayout
-        android:id="@+id/time_15_frame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_more_run"
-        app:layout_constraintBottom_toTopOf="@id/time_30_frame">
-
-        <View
-            android:id="@+id/bgd_time_15"
-            android:layout_width="match_parent"
-            android:layout_height="69dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/bgd_time_button"
-            android:clickable="true"
-            android:focusable="true" />
-
-        <TextView
-            android:id="@+id/txt_time_15"
+            android:id="@+id/btn_select_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/minute_15"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="60dp"
-            android:layout_gravity="center_vertical" />
+            android:contentDescription="@string/select_time"
+            android:src="@drawable/ic_select"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toBottomOf="@id/time_60_frame"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="46dp" />
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <FrameLayout
-        android:id="@+id/time_30_frame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/time_15_frame"
-        app:layout_constraintBottom_toTopOf="@id/time_45_frame">
-
-        <View
-            android:id="@+id/bgd_time_30"
-            android:layout_width="match_parent"
-            android:layout_height="69dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/bgd_time_button"
-            android:clickable="true"
-            android:focusable="true" />
-
-        <TextView
-            android:id="@+id/txt_time_30"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/minute_30"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="60dp"
-            android:layout_gravity="center_vertical" />
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/time_45_frame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/time_30_frame"
-        app:layout_constraintBottom_toTopOf="@id/time_60_frame">
-
-        <View
-            android:id="@+id/bgd_time_45"
-            android:layout_width="match_parent"
-            android:layout_height="69dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/bgd_time_button"
-            android:clickable="true"
-            android:focusable="true" />
-
-        <TextView
-            android:id="@+id/txt_time_45"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/minute_45"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="60dp"
-            android:layout_gravity="center_vertical" />
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:id="@+id/time_60_frame"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/time_45_frame"
-        app:layout_constraintBottom_toTopOf="@id/btn_select_time">
-
-        <View
-            android:id="@+id/bgd_time_60"
-            android:layout_width="match_parent"
-            android:layout_height="69dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            android:background="@drawable/bgd_time_button"
-            android:clickable="true"
-            android:focusable="true" />
-
-        <TextView
-            android:id="@+id/txt_time_60"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/minute_60"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            android:layout_marginStart="60dp"
-            android:layout_gravity="center_vertical" />
-
-    </FrameLayout>
-
-    <ImageButton
-        android:id="@+id/btn_select_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/select_time"
-        android:src="@drawable/ic_select"
-        android:background="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@id/time_60_frame"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="46dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

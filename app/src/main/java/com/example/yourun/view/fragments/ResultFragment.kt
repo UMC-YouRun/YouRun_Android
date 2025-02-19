@@ -2,7 +2,6 @@ package com.example.yourun.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,17 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentResultBinding
-import com.example.yourun.model.network.ApiClientNoAuth
+import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.ResultRepository
+import com.example.yourun.view.activities.LoginActivity
 import com.example.yourun.view.activities.MainActivity
 import com.example.yourun.viewmodel.SignUpViewModel
-import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
-import org.json.JSONTokener
 
 class ResultFragment : Fragment(R.layout.fragment_result) {
 
@@ -33,7 +30,6 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         _binding = FragmentResultBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     //가입날짜
     private fun saveSignUpDate() {
         val sharedPref = requireActivity().getSharedPreferences("UserData", android.content.Context.MODE_PRIVATE)
@@ -76,20 +72,20 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val apiService = ApiClientNoAuth.getApiService()
+                val apiService = ApiClient.getApiService()
                 apiService.signUp(signUpRequest)
 
                 withContext(Dispatchers.Main) {
                     saveSignUpDate()
                     Toast.makeText(requireContext(), "회원가입이 완료되었습니다!", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(requireActivity(), MainActivity::class.java)
+                    val intent = Intent(requireActivity(), LoginActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()
                 }
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     saveSignUpDate()
-                    val intent = Intent(requireActivity(), MainActivity::class.java)
+                    val intent = Intent(requireActivity(), LoginActivity::class.java)
                     startActivity(intent)
                     requireActivity().finish()
                 }

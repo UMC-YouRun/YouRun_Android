@@ -189,7 +189,7 @@
     <string name="default_tag">#tag1 #tag2</string>
     <string name="default_name">name</string>
     <string name="default_day">default_day</string>
-    <string name="default_daylog">n일 연속 nkm 러닝!</string>
+    <string name="default_daylog">0일 연속 최대 거리 러닝</string>
     <string name="challenge_success">챌린지 성공</string>
     <string name="default_success">name와의 러닝 챌린지\n n일째 성공!</string>
     <string name="default_crew_success">관악구 사슴 크루\n총 18km 러닝!</string>
@@ -208,5 +208,7 @@
     <string name="app_exp_6_1">지금 바로 유런에서</string>
     <string name="app_exp_6_2">다양한 사람들과 함께 러닝을 시작해 보아요!</string>
     <string name="start_yourun">유런 시작하기</string>
+
+    <string name="default_daylog_crew">3일동안 최대 거리 러닝!</string>
 
 </resources>

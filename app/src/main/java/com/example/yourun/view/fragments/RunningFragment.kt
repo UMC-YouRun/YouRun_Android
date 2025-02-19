@@ -2,6 +2,7 @@ package com.example.yourun.view.fragments
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -9,15 +10,25 @@ import android.graphics.drawable.GradientDrawable
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.yourun.R
+import com.example.yourun.databinding.FragmentRunningBinding
+import com.example.yourun.model.network.ApiClient
+import com.example.yourun.model.repository.RunningRepository
+import com.example.yourun.view.activities.CalendarActivity
+import com.example.yourun.view.activities.RunningActivity
+import com.example.yourun.viewmodel.RunningViewModel
+import com.example.yourun.viewmodel.RunningViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -36,6 +47,12 @@ import com.kakao.vectormap.label.LabelStyles
 
 class RunningFragment : Fragment() {
 
+    private var _binding: FragmentRunningBinding? = null
+    private val binding get() = _binding!!
+    private val viewModel: RunningViewModel by viewModels {
+        RunningViewModelFactory(RunningRepository(ApiClient.getApiService()))
+    }
+
     private lateinit var mapView: MapView
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
@@ -43,54 +60,120 @@ class RunningFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_running, container, false)
+    ): View {
+        _binding = FragmentRunningBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        parentFragmentManager.setFragmentResultListener("requestKey", this) { _, bundle ->
-            val data = bundle.getString("target_time")
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-            val timeTextView = view.findViewById<TextView>(R.id.txt_set_running_time)
-            timeTextView.text = data
-            val runningTimeSetView = view.findViewById<View>(R.id.running_time_set)
-            val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.custom_rounded_button)?.mutate()
-            drawable?.let {
-                (it as GradientDrawable).setColor(ContextCompat.getColor(requireContext(), R.color.btn_selected))
-                runningTimeSetView.background = it
+        // 초기 상태: 버튼 비활성화
+        binding.btnRunningStart.isEnabled = false
+
+        var mateId: Long = 0
+
+        parentFragmentManager.setFragmentResultListener("mateSelectKey", this) { key, bundle ->
+            val mateName = bundle.getString("mateName")
+            val mateTendency = bundle.getString("mateTendency")
+            mateId = bundle.getLong("mateId")
+
+            viewModel.mateName.value = mateName
+            viewModel.mateTendency.value = mateTendency
+            viewModel.mateId.value = mateId
+        }
+
+        parentFragmentManager.setFragmentResultListener("targetTimeKey", this) { key, bundle ->
+            val targetTime = bundle.getInt("targetTime")
+
+            viewModel.targetTime.value = targetTime
+        }
+
+        // 메이트 닉네임 관찰
+        viewModel.mateName.observe(viewLifecycleOwner) { nickname ->
+            checkAndEnableStartButton()
+            if (!nickname.isNullOrEmpty()) {
+                binding.bgdMateSelect.setBackgroundResource(R.drawable.bgd_mate_selected)
+                binding.imgQuestionMark.visibility = View.GONE
+
+                // 닉네임 색상 변경
+                val fullText = "${nickname}와 함께 러닝하기"
+                val spannable = SpannableStringBuilder(fullText).apply {
+                    setSpan(
+                        ForegroundColorSpan(ContextCompat.getColor(requireContext(), R.color.text_purple)),
+                        0, nickname.length,
+                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
+                }
+                binding.txtMateSelect.text = spannable
             }
         }
 
-        mapView = view.findViewById(R.id.kakao_map)
+        // 메이트 성향 관찰
+        viewModel.mateTendency.observe(viewLifecycleOwner) { tendency ->
+            checkAndEnableStartButton()
+            binding.imgMateProfile.setImageResource(getProfileImageRes(tendency))
+        }
+
+        // 러닝 시간 데이터 관찰
+        viewModel.targetTime.observe(viewLifecycleOwner) { selectedTime ->
+            checkAndEnableStartButton()
+            val timeText = "${selectedTime}분"
+            binding.txtSetRunningTime.text = timeText
+
+            // 버튼 색상 변경
+            val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.custom_rounded_button)?.mutate()
+            drawable?.let {
+                (it as GradientDrawable).setColor(ContextCompat.getColor(requireContext(), R.color.btn_selected))
+                binding.runningTimeSet.background = it
+            }
+        }
+
+        mapView = binding.kakaoMap
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         setupMapView()
 
-        val topBarView = view.findViewById<View>(R.id.before_running_top_bar)
-        val titleTextView = topBarView.findViewById<TextView>(R.id.txt_top_bar)
-        titleTextView.text = "러닝 시작하기"
+        binding.beforeRunningTopBar.txtTopBar.text = "러닝 시작하기"
 
-        view.findViewById<View>(R.id.bgd_mate_select).setOnClickListener {
+        binding.bgdMateSelect.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.main_fragment_container, RunningMateSelectFragment())
                 .addToBackStack(null)
                 .commit()
         }
 
-        view.findViewById<View>(R.id.running_time_set).setOnClickListener {
+        binding.runningTimeSet.setOnClickListener {
+            val bundle = Bundle().apply {
+                putLong("mateId", mateId)
+                putString("mateName", viewModel.mateName.value)
+            }
+            val runningTimeFragment = RunningTimeFragment().apply {
+                arguments = bundle
+            }
             parentFragmentManager.beginTransaction()
-                .replace(R.id.main_fragment_container, RunningTimeFragment())
+                .replace(R.id.main_fragment_container, runningTimeFragment)
                 .addToBackStack(null)
                 .commit()
         }
-        /* 메이트 데이터를 받으면 메이트 선택 뷰 이미지 변경
-           러닝 시간 설정 버튼 활성화
-           시작하기 버튼은 모든 데이터가 받아졌을 때 동작
-         */
 
-        // 러닝 시간 설정 후 텍스트 변경
+        binding.btnCalendar.setOnClickListener {
+            val intent = Intent(requireContext(), CalendarActivity::class.java)
+            startActivity(intent)
+        }
 
+        // 러닝 시작 버튼 클릭 -> RunningActivity로 이동
+        binding.btnRunningStart.setOnClickListener {
+            val intent = Intent(requireContext(), RunningActivity::class.java).apply {
+                putExtra("mate_nickname", viewModel.mateName.value)
+                putExtra("target_time", viewModel.targetTime.value)
+                putExtra("mate_running_distance", viewModel.mateRunningDistance.value)
+                putExtra("mate_running_pace", viewModel.mateRunningPace.value)
+            }
+            startActivity(intent)
+        }
     }
 
     private fun setupMapView() {
@@ -195,6 +278,24 @@ class RunningFragment : Fragment() {
         }
     }
 
+    private fun getProfileImageRes(tendency: String?): Int {
+        return when (tendency) {
+            "페이스메이커" -> R.drawable.img_circle_profile_facemaker
+            "스프린터" -> R.drawable.img_circle_profile_sprinter
+            "트레일러너" -> R.drawable.img_circle_profile_trailrunner
+            else -> R.drawable.bgd_mate_profile
+        }
+    }
+
+    // 모든 필수 데이터가 설정되었을 때 btnRunningStart 활성화
+    private fun checkAndEnableStartButton() {
+        val isMateSelected = !viewModel.mateName.value.isNullOrEmpty()
+        val isTendencySelected = !viewModel.mateTendency.value.isNullOrEmpty()
+        val isTimeSelected = viewModel.targetTime.value != null
+
+        binding.btnRunningStart.isEnabled = isMateSelected && isTendencySelected && isTimeSelected
+    }
+
     override fun onResume() {
         super.onResume()
         mapView.resume()
@@ -207,5 +308,6 @@ class RunningFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        _binding = null
     }
 }

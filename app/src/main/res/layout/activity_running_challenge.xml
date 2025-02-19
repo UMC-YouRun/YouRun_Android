@@ -135,7 +135,7 @@
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/bgd_crew_bar"
+        android:background="@drawable/bgd_solo_bar"
         app:layout_constraintTop_toBottomOf="@id/facemaker_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

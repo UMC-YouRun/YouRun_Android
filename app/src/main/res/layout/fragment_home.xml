@@ -42,7 +42,7 @@
                     android:layout_weight="1" />
 
                 <ImageButton
-                    android:id="@+id/btn_calendar"
+                    android:id="@+id/btnCalendar"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:contentDescription="@string/main_calendar"
@@ -106,12 +106,13 @@
                     android:layout_marginStart="40dp" />
 
                 <TextView
+                    android:id="@+id/txtMainCrewReward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/badge_count"
-                    android:fontFamily="@font/roboto_medium"
+                    android:layout_marginStart="58dp"
                     android:layout_marginTop="156dp"
-                    android:layout_marginStart="58dp" />
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -122,20 +123,20 @@
                     android:layout_marginStart="86dp" />
 
                 <TextView
+                    android:id="@+id/txtMainSoloReward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/badge_count"
+                    android:text=""
                     android:fontFamily="@font/roboto_medium"
                     android:layout_marginTop="156dp"
                     android:layout_marginStart="104dp" />
 
                 <ImageView
-                    android:id="@+id/img_home_character"
+                    android:id="@+id/imgHomeCharacter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/img_home_character"
-                    android:src="@drawable/img_home_character"
-                    android:layout_marginTop="35dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="8dp"
                     android:layout_gravity="end" />
 
@@ -181,8 +182,8 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/roboto_bolditalic"
                     android:letterSpacing="-0.03"
-                    android:layout_marginTop="59dp"
-                    android:layout_marginStart="81dp" />
+                    android:layout_marginTop="58dp"
+                    android:layout_marginStart="70dp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -190,7 +191,7 @@
                     android:contentDescription="@string/fire"
                     android:src="@drawable/img_fire"
                     android:layout_marginTop="60dp"
-                    android:layout_marginStart="172dp" />
+                    android:layout_marginStart="160dp" />
 
                 <ImageButton
                     android:id="@+id/btnCrew"

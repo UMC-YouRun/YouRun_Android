@@ -312,7 +312,7 @@
 
                     <!-- 주간 달력 -->
                     <GridLayout
-                        android:id="@+id/weekCalendarGrid"
+                        android:id="@+id/dateLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:columnCount="7"

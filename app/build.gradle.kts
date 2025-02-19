@@ -76,7 +76,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation("com.google.android.material:material:1.9.0")
     implementation ("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
-    implementation("com.airbnb.android:lottie:6.0.0")
+    implementation("com.airbnb.android:lottie:6.1.0")
     implementation("com.kakao.sdk:v2-all:2.20.6")
     implementation ("com.kakao.maps.open:android:2.12.8")
     implementation ("com.google.android.gms:play-services-location:21.0.1") // FusedLocationProviderClient를 위한 의존성
@@ -91,7 +91,9 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.6")
     implementation(libs.places)
-    //implementation(libs.mediation.test.suite)
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.11.5") // JSON Serializer 추가
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -9,8 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/running_top_frame"
@@ -22,7 +22,7 @@
             android:background="@color/main_color">
 
             <ImageButton
-                android:id="@id/back_button"
+                android:id="@id/backButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
@@ -49,7 +49,7 @@
                 android:textStyle="bold" />
 
             <ImageButton
-                android:id="@id/btn_calendar"
+                android:id="@id/btnCalendar"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:contentDescription="@string/btn_calendar"
@@ -73,14 +73,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:background="@drawable/rounded_bottom_corners" />
-
-            <ImageView
+            
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loadingRunningAnimation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/rotating_circle"
-                android:src="@drawable/bgd_rotating_circle"
                 android:layout_marginTop="40dp"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -106,7 +107,7 @@
                 android:contentDescription="@string/running_character"
                 android:src="@drawable/img_running_character"
                 android:layout_marginTop="102dp"
-                android:layout_marginStart="62dp" />
+                android:layout_marginStart="56dp" />
 
             <TextView
                 android:id="@+id/txtRunningDistance"
@@ -115,15 +116,16 @@
                 android:textStyle="bold"
                 android:textColor="@color/txt_running_color"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="300dp" />
+                android:layout_marginTop="286dp"
+                android:layout_marginStart="6dp" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/clock"
-                android:src="@drawable/img_clock"
+                android:layout_marginStart="54dp"
                 android:layout_marginTop="318dp"
-                android:layout_marginStart="60dp"/>
+                android:contentDescription="@string/clock"
+                android:src="@drawable/img_clock" />
 
             <TextView
                 android:id="@+id/txtRunningTime"
@@ -132,23 +134,22 @@
                 android:textStyle="bold"
                 android:textColor="@color/txt_running_color"
                 android:layout_marginTop="346dp"
-                android:layout_marginStart="58dp"
-                />
+                android:layout_marginStart="50dp" />
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:contentDescription="@string/distance"
                 android:src="@drawable/img_distance"
-                android:layout_marginTop="308dp"
-                android:layout_marginStart="292dp"
+                android:layout_marginTop="310dp"
+                android:layout_marginStart="290dp"
                 android:layout_marginEnd="34dp"/>
 
             <TextView
                 android:id="@+id/txtAverageSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="288dp"
+                android:layout_marginStart="280dp"
                 android:layout_marginTop="346dp"
                 android:textColor="@color/txt_running_color"
                 android:textStyle="bold" />
@@ -165,18 +166,62 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/running_bottom_background" />
 
             <TextView
+                android:id="@+id/txtRunningComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fighting_more"
+                android:text=""
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="150dp" />
+                android:layout_marginTop="170dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBarDistance"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="312dp"
+                android:layout_height="28dp"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/custom_progress_bar"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="90dp"
+                android:layout_marginHorizontal="16dp" />
+
+            <TextView
+                android:id="@+id/txtDistanceDiff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bgd_small_speech_bubble"
+                android:padding="6dp"
+                android:textStyle="bold"
+                android:text=""
+                android:layout_gravity="end"
+                android:layout_marginTop="54dp"
+                android:layout_marginEnd="50dp" />
+
+            <TextView
+                android:id="@+id/txtMateRunningPace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/text_gray"
+                android:layout_marginTop="122dp"
+                android:layout_marginStart="32dp" />
+
+            <TextView
+                android:id="@+id/txtMateRunningDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/text_gray"
+                android:layout_gravity="end"
+                android:layout_marginTop="122dp"
+                android:layout_marginEnd="32dp" />
 
         </FrameLayout>
 

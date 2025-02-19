@@ -1,6 +1,7 @@
 package com.example.yourun.view.fragments
 
-import android.content.Intent
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -13,7 +14,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentSignup3Binding
@@ -23,6 +23,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
     private var _binding: FragmentSignup3Binding? = null
@@ -30,19 +33,25 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
     private val signUpViewModel: SignUpViewModel by activityViewModels()
     private var selectedTags = mutableListOf<String>()
     private var selectedCount = 0
+    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSignup3Binding.inflate(inflater, container, false)
+        sharedPref = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.topBar.txtTopBarWithBackButton.text = "회원가입"
+
+
 
         // 체크박스 리스너 설정
         setCheckBoxListener(binding.checkbox1, "느긋하게")
@@ -53,24 +62,18 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
         setCheckBoxListener(binding.checkbox6, "왕초보")
 
         // 닉네임 입력 감지 및 중복 확인
-        binding.editTextNickname.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        binding.btnDuplicate.setOnClickListener {
+            val nickname = binding.editTextNickname.text.toString().trim()
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(editable: Editable?) {
-                val nickname = editable.toString().trim()
-                if (isValidNickname(nickname)) {
-                    checkNicknameDuplicate(nickname) // 닉네임 중복 확인
-                } else {
-                    binding.nicknameContent.apply {
-                        text = "닉네임은 한글 2~4자만 입력 가능합니다."
-                        setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
-                    }
-                    binding.imgBtnSignupSuccess.isEnabled = false
+            if (isValidNickname(nickname)) {
+                checkNicknameDuplicate(nickname)
+            } else {
+                binding.nicknameContent.apply {
+                    text = "닉네임은 한글 2~4자만 입력 가능합니다."
+                    setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
                 }
             }
-        })
+        }
 
         // 회원가입 완료 버튼
         binding.imgBtnSignupSuccess.setOnClickListener {
@@ -84,6 +87,11 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
                     "SignUpFragment3",
                     "✅ 닉네임 & 태그 저장됨: nickname=$nickname, tag1=${selectedTags[0]}, tag2=${selectedTags[1]}"
                 )
+
+                with(sharedPref.edit()) {
+                    putString("nickname", nickname)
+                    commit()
+                }
 
                 // Navigation으로 다른 Fragment로 이동
                 findNavController().navigate(R.id.action_signUpFragment3_to_questionFragment)
@@ -122,6 +130,7 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.purple))
                         }
                         binding.imgBtnSignupSuccess.isEnabled = true
+                        binding.btnDuplicate.setImageResource(R.drawable.img_again_check_color)
                     } else {
                         // 중복된 닉네임
                         binding.nicknameContent.apply {
@@ -129,6 +138,7 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
                             setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
                         }
                         binding.imgBtnSignupSuccess.isEnabled = false
+                        binding.btnDuplicate.setImageResource(R.drawable.img_againcheck)
                     }
                 }
             } catch (e: Exception) {
@@ -139,6 +149,7 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
             }
         }
     }
+
 
     // 체크박스 리스너
     private fun setCheckBoxListener(checkBox: CheckBox, tag: String) {

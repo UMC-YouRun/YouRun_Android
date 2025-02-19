@@ -6,7 +6,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import com.example.yourun.model.network.ApiClient
-import com.example.yourun.model.data.ChallengeResultResponse
+import com.example.yourun.model.data.response.ChallengeResultResponse
 import android.util.Log
 
 class ChallengeResultViewModel : ViewModel() {
@@ -18,7 +18,7 @@ class ChallengeResultViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 Log.d("ChallengeResultViewModel", "API 요청 시작")
-                val response = ApiClient.getApiService().getSoloChallengeResultData()
+                val response = ApiClient.getChallengeApiService().getSoloChallengeResultData()
 
                 if (response.isSuccessful) {
                     val challengeResponse = response.body()?.data

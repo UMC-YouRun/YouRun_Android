@@ -1,27 +1,37 @@
 package com.example.yourun.model.network
 
 import com.example.yourun.model.data.BaseResponse
-import com.example.yourun.model.data.ChallengeDataResponse
-import com.example.yourun.model.data.ChallengeResultResponse
 import com.example.yourun.model.data.CrewChallengeDetailRes
 import com.example.yourun.model.data.CrewChallengeResponse
-import com.example.yourun.model.data.EmailduplicateResponse
-import com.example.yourun.model.data.LoginRequest
-import com.example.yourun.model.data.LoginResponse
-import com.example.yourun.model.data.MateApiData
-import com.example.yourun.model.data.MateResponse
+import com.example.yourun.model.data.response.ChallengeDataResponse
+import com.example.yourun.model.data.response.ChallengeResultResponse
+import com.example.yourun.model.data.response.EmailduplicateResponse
+import com.example.yourun.model.data.request.LoginRequest
+import com.example.yourun.model.data.response.LoginResponse
+import com.example.yourun.model.data.request.CreateCrewChallengeRequest
+import com.example.yourun.model.data.response.CreateCrewChallengeResponse
+import com.example.yourun.model.data.request.CreateSoloChallengeRequest
+import com.example.yourun.model.data.response.CreateSoloChallengeResponse
+import com.example.yourun.model.data.response.NicknameduplicateResponse
+import com.example.yourun.model.data.response.RunningStatsResponse
+import com.example.yourun.model.data.request.SignUpRequest
+import com.example.yourun.model.data.request.SignUpResponse
+import com.example.yourun.model.data.response.UserInfo
+import com.example.yourun.model.data.request.UpdateUserRequest
+import com.example.yourun.model.data.response.UpdateUserResponse
+import com.example.yourun.model.data.request.RunningResultRequest
+import com.example.yourun.model.data.response.ApiResponseBoolean
+import com.example.yourun.model.data.response.HomeChallengeResponse
+import com.example.yourun.model.data.response.RunningDataResponse
+import com.example.yourun.model.data.response.RunningResultResponse
+import com.example.yourun.model.data.response.MateResponse
 import com.example.yourun.model.data.MyPageResponse
-import com.example.yourun.model.data.SignUpRequest
-import com.example.yourun.model.data.UserInfo
-import com.example.yourun.model.data.NicknameduplicateResponse
 import com.example.yourun.model.data.PersonalChallengeResponse
-import com.example.yourun.model.data.RunningStatsResponse
-import com.example.yourun.model.data.SignUpResponse
 import com.example.yourun.model.data.SoloChallengeDetailRes
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Header
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -29,6 +39,9 @@ import retrofit2.http.Query
 interface ApiService {
     @POST("users/login")
     suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
+
+    @GET("users/kakao-login")
+    suspend fun loginWithKakao(@Query("kakaoAccessToken") kakaoAccessToken: String): Response<LoginResponse>
 
     @POST("users")
     suspend fun signUp(@Body request: SignUpRequest): ApiResponse<SignUpResponse>
@@ -54,8 +67,43 @@ interface ApiService {
     @GET("mypage")
     suspend fun getMyRunData() : Response<ApiResponse<UserInfo>>
 
+    @GET("users/home/challenges")
+    suspend fun getHomeChallengesInfo(): Response<HomeChallengeResponse>
+
     @GET("users/mates")
-    suspend fun getMates(): MateResponse<List<MateApiData>>
+    suspend fun getMatesList(): Response<MateResponse>
+
+    //@GET("users/mates")
+    //suspend fun getMates(): MateResponse<List<MateApiData>>
+
+    @POST("users/mates/{mateId}")
+    suspend fun addMate(
+        @Path("mateId") mateId: Long
+    ): Response<ApiResponseBoolean>
+
+    @GET("users/mates/recommend")
+    suspend fun getRecommendMate(): Response<MateResponse>
+
+    @GET("users/runnings/{id}")
+    suspend fun getRunningData(
+        @Path("id") id: Long
+    ): Response<RunningDataResponse>
+
+    @POST("users/runnings")
+    suspend fun sendRunningResult(
+        @Body request: RunningResultRequest
+    ): Response<RunningResultResponse>
+
+    @PATCH("mypage")
+    suspend fun updateUserTagsAndNickname(
+        @Body request: UpdateUserRequest
+    ): UpdateUserResponse
+
+    @POST("challenges/crew")
+    suspend fun createcrewchallenge(@Body request: CreateCrewChallengeRequest): CreateCrewChallengeResponse
+
+    @POST("challenges/solo")
+    suspend fun createsolochallenge(@Body request: CreateSoloChallengeRequest): CreateSoloChallengeResponse
 
     @GET("challenges/crew/pending")
     suspend fun getPendingCrewChallenges(): Response<BaseResponse<CrewChallengeResponse>>
@@ -73,7 +121,6 @@ interface ApiService {
         @Path("challengeId") challengeId: String
     ): Response<BaseResponse<SoloChallengeDetailRes>>
 }
-
 
 data class ApiResponse<T>(
     val status: Int,

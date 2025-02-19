@@ -1,4 +1,4 @@
-package com.example.yourun.model.repository
+/*package com.example.yourun.model.repository
 
 import android.util.Log
 import com.example.yourun.R
@@ -7,7 +7,7 @@ import com.example.yourun.model.data.MateApiData
 import com.example.yourun.model.data.MateData
 import com.example.yourun.model.data.MateResponse
 import com.example.yourun.model.data.MyPageData
-import com.example.yourun.model.data.UserInfo
+import com.example.yourun.model.data.response.UserInfo
 import com.example.yourun.model.network.ApiService
 
 class MateRepository(private val apiService: ApiService) {
@@ -37,7 +37,7 @@ class MateRepository(private val apiService: ApiService) {
     }
 
     // ✅ 메이트(친구) 정보 조회 API
-    suspend fun getMates(): List<MateData> {
+    /*suspend fun getMates(): List<MateData> {
         return try {
             val response = apiService.getMates()
 
@@ -61,7 +61,7 @@ class MateRepository(private val apiService: ApiService) {
             e.printStackTrace()
             emptyList() // API 호출 실패 시 빈 리스트 반환
         }
-    }
+    }*/
 
     /*
     private fun getRandomProfileImage(): Int {
@@ -82,4 +82,4 @@ class MateRepository(private val apiService: ApiService) {
             else -> R.drawable.img_profile_pacemaker_purple
         }
     }
-}
+}*/
