@@ -60,11 +60,9 @@ class RunningActivity : AppCompatActivity() {
         val sharedPreferences = this.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val userTendency = sharedPreferences.getString("user_tendency", "")
 
-        val targetTime = 15
-
         // 초기 데이터 설정
         mateName = intent.getStringExtra("mate_nickname") ?: "닉네임"
-        // val targetTime = intent.getIntExtra("target_time", 0)
+        val targetTime = intent.getIntExtra("target_time", 0)
         mateRunningDistanceMeters = intent.getIntExtra("mate_running_distance", 0)
         Log.d("mateRunningDistance", mateRunningDistanceMeters.toString())
         val matePaceInt = intent.getIntExtra("mate_running_pace", 0)
@@ -91,20 +89,23 @@ class RunningActivity : AppCompatActivity() {
             findViewById<LottieAnimationView>(R.id.charcterRunningAnimation)
         val layoutParams = characterAnimationView.layoutParams as ViewGroup.MarginLayoutParams
 
-//        when (userTendency) {
-//            "페이스메이커" -> { binding.charcterRunningAnimation.setAnimation(R.raw.facemaker_running)
-//            layoutParams.setMargins(18, 50, 18, 0)
-//            characterAnimationView.layoutParams = layoutParams
-//            }
-//            "트레일러너" -> { binding.charcterRunningAnimation.setAnimation(R.raw.trailrunner_running)
-//            layoutParams.setMargins(18, 50, 18, 0)
-////            characterAnimationView.layoutParams = layoutParams
-//              }
-//            "스프린터" -> { binding.charcterRunningAnimation.setAnimation(R.raw.sprinter_running)
-//            layoutParams.setMargins(18, 50, 18, 0)
-////            characterAnimationView.layoutParams = layoutParams
-//        }
-        binding.charcterRunningAnimation.setAnimation(R.raw.trailrunner_running)
+        when (userTendency) {
+            "페이스메이커" -> {
+                binding.charcterRunningAnimation.setAnimation(R.raw.facemaker_running)
+                layoutParams.setMargins(20, 60, 20, 0)
+                characterAnimationView.layoutParams = layoutParams
+            }
+            "트레일러너" -> {
+                binding.charcterRunningAnimation.setAnimation(R.raw.trailrunner_running)
+                layoutParams.setMargins(16, 36, 16, 0)
+                characterAnimationView.layoutParams = layoutParams
+            }
+            "스프린터" -> {
+                binding.charcterRunningAnimation.setAnimation(R.raw.sprinter_running)
+                layoutParams.setMargins(8, 54, 8, 0)
+                characterAnimationView.layoutParams = layoutParams
+            }
+        }
         binding.charcterRunningAnimation.playAnimation()
 
         // 백 버튼 클릭 시, 홈 화면으로 이동
