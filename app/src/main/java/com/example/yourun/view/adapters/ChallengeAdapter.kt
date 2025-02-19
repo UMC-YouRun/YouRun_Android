@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
 import com.example.yourun.model.data.response.ChallengeItem
+import com.example.yourun.model.data.response.SoloChallengeItem
 import com.example.yourun.view.activities.CrewChallengeDetailActivity
 import com.example.yourun.view.activities.SoloChallengeDetailActivity
 
@@ -88,7 +89,7 @@ class CrewChallengeAdapter(private var challengeList: MutableList<ChallengeItem>
     }
 }
 
-class SoloChallengeAdapter(private val challengeList: MutableList<ChallengeItem>) :
+class SoloChallengeAdapter(private val challengeList: MutableList<SoloChallengeItem>) :
     RecyclerView.Adapter<SoloChallengeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -106,7 +107,7 @@ class SoloChallengeAdapter(private val challengeList: MutableList<ChallengeItem>
     override fun getItemCount(): Int = challengeList.size
 
     /* 새로운 데이터로 갱신하는 함수 추가 */
-    fun updateData(newChallenges: List<ChallengeItem>) {
+    fun updateData(newChallenges: List<SoloChallengeItem>) {
         Log.d("UI_DEBUG", "🚀 updateData 호출됨! 새로운 데이터: $newChallenges") // 로그 추가
         challengeList.clear()
         challengeList.addAll(newChallenges)
@@ -114,20 +115,22 @@ class SoloChallengeAdapter(private val challengeList: MutableList<ChallengeItem>
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(challenge: ChallengeItem) {
-            Log.d("BIND_DEBUG", "Binding challenge: ${challenge.title}") // ✅ 확인용 로그 추가
+        fun bind(challenge: SoloChallengeItem) {
+            Log.d("BIND_DEBUG", "Binding challenge: ${challenge.title}")
+            Log.d("BIND_DEBUG", "Challenge creator tendency: ${challenge.challengeCreatorTendency}")
+            Log.d("BIND_DEBUG", "Challenge hashtags: ${challenge.hashtags}")
 
             val textViewGoalTitle = itemView.findViewById<TextView>(R.id.tv_goal_title)
-            textViewGoalTitle.text = challenge.title  // ✅ UI 반영
+            textViewGoalTitle.text = challenge.title
 
-            val descriptionText = challenge.description // "챌린지 메이트 OO와 함께!"
-            val crewName = descriptionText.substringBefore("과 함께!").substringBefore("와 함께!") // 크루 이름 추출
+            val descriptionText = "챌린지 메이트 ${challenge.description}"
+            val creatorName = descriptionText.removePrefix("챌린지 메이트 ").substringBefore("과 함께!").substringBefore("와 함께!")
 
-            val color = ContextCompat.getColor(itemView.context, R.color.purple) // 보라색
+            val color = ContextCompat.getColor(itemView.context, R.color.purple)
 
             val spannable = SpannableStringBuilder(descriptionText)
-            val startIndex = descriptionText.indexOf(crewName)
-            val endIndex = startIndex + crewName.length
+            val startIndex = descriptionText.indexOf(creatorName)
+            val endIndex = startIndex + creatorName.length
 
             spannable.setSpan(
                 ForegroundColorSpan(color),
@@ -136,18 +139,37 @@ class SoloChallengeAdapter(private val challengeList: MutableList<ChallengeItem>
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
             )
 
-            val textView = itemView.findViewById<TextView>(R.id.tv_description)
-            textView.text = "" // 기존 텍스트 클리어
-            textView.append(spannable) // append() 사용
+            val textViewDescription = itemView.findViewById<TextView>(R.id.tv_description)
+            textViewDescription.text = ""
+            textViewDescription.append(spannable)
 
-            itemView.findViewById<TextView>(R.id.tv_remaincount).text = challenge.remaining
-            itemView.findViewById<ImageView>(R.id.img_reward_count).setImageResource(challenge.badgeImage)
+            val hashtagTextView = itemView.findViewById<TextView>(R.id.tv_challenge_creator_hashtags)
+            hashtagTextView.text = challenge.hashtags
+
+            val profileImageView = itemView.findViewById<ImageView>(R.id.img_challenge_creator)
+            val profileImageRes = getProfileImageRes(challenge.challengeCreatorTendency)
+
+            Log.d("BIND_DEBUG", "Setting profile image resource: $profileImageRes for tendency: ${challenge.challengeCreatorTendency}")
+
+            profileImageView.setImageResource(profileImageRes)
+
+            itemView.findViewById<ImageView>(R.id.img_reward_count)
+                .setImageResource(challenge.badgeImage)
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, SoloChallengeDetailActivity::class.java)
-                intent.putExtra("challengeId", challenge.challengeId) // 상세 조회용 ID 전달
+                intent.putExtra("challengeId", challenge.challengeId)
                 itemView.context.startActivity(intent)
             }
+        }
+    }
+
+    fun getProfileImageRes(tendency: String): Int {
+        return when (tendency) {
+            "스프린터", "SPRINTER" -> R.drawable.img_mini2_sprinter
+            "페이스메이커", "PACEMAKER" -> R.drawable.img_mini2_pacemaker
+            "트레일러너", "TRAIL_RUNNER" -> R.drawable.img_mini2_trailrunner
+            else -> R.drawable.img_mini2_pacemaker
         }
     }
 }

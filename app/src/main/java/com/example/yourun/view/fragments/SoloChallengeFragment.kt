@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
 import com.example.yourun.model.data.SoloChallengeRes
 import com.example.yourun.model.data.response.ChallengeItem
+import com.example.yourun.model.data.response.SoloChallengeItem
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.ChallengeRepository
 import com.example.yourun.view.adapters.CrewChallengeAdapter
@@ -24,7 +25,7 @@ class SoloChallengeFragment : Fragment() {
     private lateinit var viewModel: ChallengeViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var challengeAdapter: SoloChallengeAdapter
-    private var challengeItems: MutableList<ChallengeItem> = mutableListOf()
+    private var challengeItems: MutableList<SoloChallengeItem> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +37,7 @@ class SoloChallengeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // 어댑터 초기화
-        challengeAdapter = SoloChallengeAdapter(challengeItems)
+        challengeAdapter = SoloChallengeAdapter(mutableListOf())
         recyclerView.adapter = challengeAdapter
 
         viewModel = ViewModelProvider(
@@ -65,19 +66,18 @@ class SoloChallengeFragment : Fragment() {
 
             val newChallengeItems = challenges.map { soloChallengeRes ->
                 val correctPostposition = getCorrectPostposition(soloChallengeRes.challengeCreatorNickname) // 조사 결정
-                ChallengeItem(
+                SoloChallengeItem(
                     challengeId = soloChallengeRes.challengeId,
                     badgeImage = when (soloChallengeRes.reward) {
-                        1 -> R.drawable.img_crew_badge_count_1
-                        2 -> R.drawable.img_crew_badge_count_2
-                        3 -> R.drawable.img_crew_badge_count_3
-                        else -> R.drawable.img_crew_badge_count_1
+                        1 -> R.drawable.img_personal_badge_count_1
+                        2 -> R.drawable.img_personal_badge_count_2
+                        3 -> R.drawable.img_personal_badge_count_3
+                        else -> R.drawable.img_personal_badge_count_1
                     },
                     title = "${soloChallengeRes.challengePeriod}일 연속 3km 러닝!",
                     description = "${soloChallengeRes.challengeCreatorNickname}$correctPostposition 함께!",
-                    members = soloChallengeRes.challengeCreatorHashtags?.map { it.hashCode() } ?: emptyList(),
-                    remaining = "${soloChallengeRes.challengeCreatorHashtags}",
-                    isCrewChallenge = false
+                    hashtags = soloChallengeRes.challengeCreatorHashtags?.joinToString(" ") { "#$it" } ?: "",
+                    challengeCreatorTendency = soloChallengeRes.challengeCreatorTendency.toString()
                 )
             }
 

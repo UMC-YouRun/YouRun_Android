@@ -106,10 +106,10 @@ interface ApiService {
     suspend fun createsolochallenge(@Body request: CreateSoloChallengeRequest): CreateSoloChallengeResponse
 
     @GET("challenges/crew/pending")
-    suspend fun getPendingCrewChallenges(): Response<BaseResponse<CrewChallengeResponse>>
+    suspend fun getPendingCrewChallenges(): Response<ApiResponse<CrewChallengeResponse>>
 
     @GET("challenges/solo/pending")
-    suspend fun getPendingPersonalChallenges(): Response<BaseResponse<PersonalChallengeResponse>>
+    suspend fun getPendingPersonalChallenges(): Response<ApiResponse<PersonalChallengeResponse>>
 
     @GET("challenges/crew/pending/{challengeId}")
     suspend fun getCrewChallengeDetail(
