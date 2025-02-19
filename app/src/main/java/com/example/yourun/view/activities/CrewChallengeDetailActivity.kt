@@ -17,7 +17,6 @@ import com.example.yourun.viewmodel.CrewChallengeDetailViewModelFactory
 
 class CrewChallengeDetailActivity : AppCompatActivity() {
 
-    // ✅ Repository 및 ViewModel을 올바르게 생성
     private val repository by lazy { ChallengeRepository(ApiClient.getApiService()) }
     private val viewModel: CrewChallengeDetailViewModel by viewModels {
         CrewChallengeDetailViewModelFactory(repository)
@@ -25,7 +24,7 @@ class CrewChallengeDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_crew_challenge_detail) // XML 파일 지정
+        setContentView(R.layout.activity_crew_challenge_detail)
 
         val challengeId = intent.getStringExtra("challengeId") ?: ""
         if (challengeId.isNotEmpty()) {
@@ -36,15 +35,12 @@ class CrewChallengeDetailActivity : AppCompatActivity() {
         }
 
         viewModel.crewChallengeDetail.observe(this) { detail ->
-            Log.d("DEBUG", "API에서 받은 startDate: ${detail?.startDate}, endDate: ${detail?.endDate}")
-            Log.d("DEBUG", "ViewModel에서 받은 데이터: $detail")
-            Log.d("DEBUG", "ViewModel에서 받은 startDate: ${detail?.startDate}, endDate: ${detail?.endDate}")
+            Log.d("DEBUG", "API에서 받은 데이터: $detail")
             detail?.let { updateUI(it) }
         }
     }
 
     private fun updateUI(detail: CrewChallengeDetailRes) {
-        Log.d("DEBUG", "UI 업데이트 - 받은 startDate: ${detail.startDate}, endDate: ${detail.endDate}")
         val crewName = findViewById<TextView>(R.id.crew_name)
         val startToEndDate = findViewById<TextView>(R.id.tv_peroid)
         val challengePeriod = findViewById<TextView>(R.id.challenge_crew_title)
@@ -64,58 +60,76 @@ class CrewChallengeDetailActivity : AppCompatActivity() {
         subtitle.text = "${detail.crewName} 크루와 함께!"
         reward.text = String.format("내가 더 잘 나가 %d개, MVP 달성 시 %d개", detail.reward, detail.reward * 2)
 
-        // 🚀 Null 체크 추가
         val participants = detail.participantIdInfos ?: emptyList()
 
+        // 🚀 크루 생성자의 성향을 기반으로 캐릭터 이미지 설정
         setCreatorCharacterImage(participants, creatorCharacterImage)
+
+        // 🚀 모든 참여자의 성향을 기반으로 미니 프로필 이미지 설정
         updateParticipantImages(participants, listOf(participantImage1, participantImage2, participantImage3))
 
         crewSlogan.text = detail.slogan ?: "슬로건 없음"
     }
 
+    /** 🚀 크루 챌린지 생성자의 성향을 기반으로 캐릭터 이미지 설정 */
     private fun setCreatorCharacterImage(participants: List<ParticipantIdInfo>?, imageView: ImageView) {
         if (participants.isNullOrEmpty()) {
-            imageView.visibility = ImageView.INVISIBLE // 🚀 참여자가 없으면 숨김 처리
+            Log.d("DEBUG", "🚨 참여자 목록이 비어 있음. 생성자 캐릭터 설정 불가")
+            imageView.visibility = ImageView.INVISIBLE
             return
         }
 
-        val creator = participants.first()
-        imageView.setImageResource(getCharacterImageResource(creator.userTendency.toString()))
+        val creator = participants.first() // 첫 번째 참여자를 챌린지 생성자로 간주
+        Log.d("DEBUG", "✅ 크루 생성자 성향: ${creator.userTendency}")
+        val characterResId = getCharacterImageResource(creator.userTendency.toString())
+        imageView.setImageResource(characterResId)
+        imageView.invalidate()
         imageView.visibility = ImageView.VISIBLE
     }
 
+    /** 🚀 모든 참여자의 성향을 기반으로 미니 프로필 이미지 설정 */
     private fun updateParticipantImages(participants: List<ParticipantIdInfo>?, imageViews: List<ImageView>) {
         if (participants.isNullOrEmpty()) {
-            imageViews.forEach { it.visibility = ImageView.INVISIBLE } // 🚀 참여자가 없으면 전부 숨김 처리
+            Log.d("DEBUG", "🚨 참여자 목록이 없음. 미니 프로필 설정 불가")
+            imageViews.forEach { it.visibility = ImageView.INVISIBLE }
             return
         }
+
+        Log.d("DEBUG", "✅ 참여자 성향 리스트: ${participants.map { it.userTendency }}")
 
         imageViews.forEachIndexed { index, imageView ->
             if (index < participants.size) {
                 val participant = participants[index]
-                imageView.setImageResource(getProfileImageResource(participant.userTendency.toString()))
+                val profileResId = getProfileImageResource(participant.userTendency.toString())
+
+                Log.d("DEBUG", "🔹 참여자 $index: ${participant.userTendency} → 아이콘 설정")
+                imageView.setImageResource(profileResId)
+                imageView.invalidate()
                 imageView.visibility = ImageView.VISIBLE
             } else {
-                imageView.visibility = ImageView.INVISIBLE // 참여자가 부족하면 숨김 처리
+                imageView.visibility = ImageView.INVISIBLE
             }
         }
     }
 
+    /** 🚀 성향(Tendency)에 따른 캐릭터 이미지 반환 */
     private fun getCharacterImageResource(userTendency: String): Int {
-        return when (userTendency) {
-            "스프린터" -> R.drawable.img_sprinter_challenge
-            "페이스메이커" -> R.drawable.img_pacemaker_challenge
-            "트레일러너" -> R.drawable.img_trailrunner_challenge
+        return when (userTendency.lowercase()) {
+            "sprinter", "스프린터" -> R.drawable.img_sprinter_challenge
+            "pacemaker", "페이스메이커" -> R.drawable.img_pacemaker_challenge
+            "trail_runner", "트레일러너" -> R.drawable.img_trailrunner_challenge
             else -> R.drawable.img_pacemaker_challenge
         }
     }
 
+    /** 🚀 성향(Tendency)에 따른 미니 프로필 이미지 반환 */
     private fun getProfileImageResource(userTendency: String): Int {
-        return when (userTendency) {
-            "스프린터" -> R.drawable.img_mini_sprinter
-            "페이스메이커" -> R.drawable.img_mini_pacemaker
-            "트레일러너" -> R.drawable.img_mini_trailrunner
+        return when (userTendency.lowercase()) {
+            "sprinter", "스프린터" -> R.drawable.img_mini_sprinter
+            "pacemaker", "페이스메이커" -> R.drawable.img_mini_pacemaker
+            "trail_runner", "트레일러너" -> R.drawable.img_mini_trailrunner
             else -> R.drawable.img_mini_pacemaker
         }
     }
+
 }
