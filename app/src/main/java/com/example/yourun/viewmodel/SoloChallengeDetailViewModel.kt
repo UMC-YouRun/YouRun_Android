@@ -3,6 +3,7 @@ package com.example.yourun.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.yourun.model.data.SoloChallengeDetailRes
 import com.example.yourun.model.repository.ChallengeRepository
@@ -22,6 +23,16 @@ class SoloChallengeDetailViewModel(private val repository: ChallengeRepository) 
             } else {
                 _soloChallengeDetail.postValue(null)
             }
+        }
+    }
+
+    class Factory(private val repository: ChallengeRepository) : ViewModelProvider.Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(SoloChallengeDetailViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return SoloChallengeDetailViewModel(repository) as T
+            }
+            throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
 }
