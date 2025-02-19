@@ -130,6 +130,13 @@ class HomeFragment : Fragment() {
             parentFragmentManager.popBackStack()
         }*/
 
+//테스트용 버튼 
+//        binding.imgMainBanner.setOnClickListener {
+//            val intent = Intent(requireContext(), ResultContributionActivity::class.java) // 이동할 액티비티 설정
+//            startActivity(intent)
+//        }
+
+
         binding.btnCalendar.setOnClickListener {
             val intent = Intent(requireContext(), CalendarActivity::class.java)
             startActivity(intent)
@@ -186,17 +193,21 @@ class HomeFragment : Fragment() {
         customView.updatePeriodSolo(soloChallenge.challengePeriod)
         customView.updateDistance(soloChallenge.challengeDistance)
         customView.updateSoloImage(soloChallenge.challengeMateTendency)
+
         val soloChallengeLevel = when (soloChallenge.status) {
-            "PENDING" -> 0
-            "IN_PROGRESS" -> 1
-            "COMPLETED" -> 2
+            "PENDING" -> 0  // 매칭 대기중
+            "IN_PROGRESS" -> 1 // 진행 중
+            "COMPLETED" -> 2 // 완료
             else -> 0
         }
         customView.updateChallengeState(soloChallengeLevel)
 
-        customView.setOnClickListener {
-            val intent = Intent(requireContext(), ResultSoloActivity::class.java)
-            startActivity(intent)
+        // **진행 중(IN_PROGRESS)인 경우에만 클릭 가능**
+        if (soloChallenge.status == "IN_PROGRESS") {
+            customView.setOnClickListener {
+                val intent = Intent(requireContext(), ResultSoloActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         return customView
@@ -209,19 +220,22 @@ class HomeFragment : Fragment() {
         customView.updateCrewTitle(crewChallenge.crewName)
         customView.updateDates(startDate = crewChallenge.crewStartDate, dayCount = crewChallenge.crewDayCount)
         customView.updatePeriodCrew(crewChallenge.challengePeriod)
+
         val crewTendencies = crewChallenge.myParticipantIdsInfo.map { it.memberTendency }
-            //customView.updateCrewImages(crewTendencies)
         val crewChallengeLevel = when (crewChallenge.challengeStatus) {
-            "PENDING" -> 0
-            "IN_PROGRESS" -> 1
-            "COMPLETED" -> 2
+            "PENDING" -> 0  // 매칭 대기중
+            "IN_PROGRESS" -> 1 // 진행 중
+            "COMPLETED" -> 2 // 완료
             else -> 0
         }
         customView.updateChallengeState(crewChallengeLevel)
 
-        customView.setOnClickListener {
-            val intent = Intent(requireContext(), ResultCrewActivity::class.java)
-            startActivity(intent)
+        // **진행 중(IN_PROGRESS)인 경우에만 클릭 가능**
+        if (crewChallenge.challengeStatus == "IN_PROGRESS") {
+            customView.setOnClickListener {
+                val intent = Intent(requireContext(), ResultCrewActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         return customView

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bgd_popup_background_crew"
+    android:padding="20dp"
+    android:gravity="center"
+    android:elevation="10dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/imgBadge"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_badge_crew" />
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SOLO CHALLENGE"
+        android:textSize="18sp"
+        android:textColor="#6A5ACD"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/txtSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="리워드"
+        android:textSize="16sp"
+        android:textColor="#6A5ACD"
+        android:gravity="center"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/txtReward"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="너보다 내가 잘 나가"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginTop="12dp"
+        android:padding="10dp"/>
+</LinearLayout>

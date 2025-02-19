@@ -13,8 +13,6 @@
         android:usesCleartextTraffic="false"
         tools:replace="android:usesCleartextTraffic"
         android:allowBackup="true"
-        android:usesCleartextTraffic="false"
-        tools:replace="android:usesCleartextTraffic"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -61,10 +59,6 @@
         <activity
             android:name=".view.activities.CalendarActivity"
             android:exported="true" />
-
-
-
-
 
         <activity
             android:name=".view.activities.CreateChallengeActivity"
@@ -136,8 +130,6 @@
                 android:exported="true" />
         <activity android:name=".view.activities.CrewProgressActivity"
             android:exported="true" />
-
-
 
     </application>
 
