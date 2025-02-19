@@ -150,7 +150,7 @@ class HomeFragment : Fragment() {
 
         // 추천 메이트 UI 업데이트
         viewModel.recommendMates.observe(viewLifecycleOwner) { mates ->
-            updateRecommendMatesUI(mates, viewModel, showHeart = true)
+            //updateRecommendMatesUI(mates, viewModel, showHeart = true)
         }
 
         // btn_redirect 클릭 시 최신 메이트 데이터 다시 불러오기
@@ -242,50 +242,50 @@ class HomeFragment : Fragment() {
     }
 
     // 추천 메이트 UI 추가
-    private fun <T: ViewModel> updateRecommendMatesUI(mates: List<UserMateInfo>, viewModel: T, showHeart: Boolean) {
-        val parentLayout = binding.mainLinearLayout
-        val referenceView = binding.viewHomeMate // 기존 view_home_mate 아래에 추가
-        val referenceIndex = parentLayout.indexOfChild(referenceView)
-
-        // 기존의 CustomMateView 삭제 (이전 추천 메이트 삭제)
-        parentLayout.children.filter { it is CustomMateView<*> || it.tag == "divider" }.forEach {
-            parentLayout.removeView(it) }
-
-        // 추천 메이트 목록 추가 (최대 5개)
-        mates.take(5).forEachIndexed { index, mate ->
-            // 첫 번째 뷰가 아닐 때만 가로 구분선 추가
-            if (index > 0) {
-                val dividerView = View(requireContext()).apply {
-                    layoutParams = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        1.dpToPx(requireContext()) // 경계선 높이 1dp
-                    ).apply {
-                        setMargins(24.dpToPx(requireContext()), 0, 24.dpToPx(requireContext()), 4.dpToPx(requireContext()))
-                    }
-                    setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border)) // 경계선 색상
-                    tag = "divider" // 제거할 때 구분하기 위해 태그 추가
-                }
-                parentLayout.addView(dividerView, referenceIndex + 1) // 가로 경계선 추가
-            }
-
-            val mateView = CustomMateView<T>(requireContext(), showHeartButton = showHeart).apply {
-                setViewModel(viewModel)
-                updateMateInfo(mate, mates.size - index)
-
-                // 상단 마진을 최소화하여 뷰를 더 위로 붙이기
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    gravity = Gravity.CENTER_HORIZONTAL
-                    setMargins(24.dpToPx(requireContext()), 0, 24.dpToPx(requireContext()), 6.dpToPx(requireContext()))
-                }
-            }
-
-            // view_home_mate 바로 아래에 추가
-            parentLayout.addView(mateView, referenceIndex + 1)
-        }
-    }
+//    private fun <T: ViewModel> updateRecommendMatesUI(mates: List<UserMateInfo>, viewModel: T, showHeart: Boolean) {
+//        val parentLayout = binding.mainLinearLayout
+//        val referenceView = binding.viewHomeMate // 기존 view_home_mate 아래에 추가
+//        val referenceIndex = parentLayout.indexOfChild(referenceView)
+//
+//        // 기존의 CustomMateView 삭제 (이전 추천 메이트 삭제)
+//        parentLayout.children.filter { it is CustomMateView<*> || it.tag == "divider" }.forEach {
+//            parentLayout.removeView(it) }
+//
+//        // 추천 메이트 목록 추가 (최대 5개)
+//        mates.take(5).forEachIndexed { index, mate ->
+//            // 첫 번째 뷰가 아닐 때만 가로 구분선 추가
+//            if (index > 0) {
+//                val dividerView = View(requireContext()).apply {
+//                    layoutParams = LinearLayout.LayoutParams(
+//                        LinearLayout.LayoutParams.MATCH_PARENT,
+//                        1.dpToPx(requireContext()) // 경계선 높이 1dp
+//                    ).apply {
+//                        setMargins(24.dpToPx(requireContext()), 0, 24.dpToPx(requireContext()), 4.dpToPx(requireContext()))
+//                    }
+//                    setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border)) // 경계선 색상
+//                    tag = "divider" // 제거할 때 구분하기 위해 태그 추가
+//                }
+//                parentLayout.addView(dividerView, referenceIndex + 1) // 가로 경계선 추가
+//            }
+//
+//            val mateView = CustomMateView<T>(requireContext(), showHeartButton = showHeart).apply {
+//                setViewModel(viewModel)
+//                updateMateInfo(mate, mates.size - index)
+//
+//                // 상단 마진을 최소화하여 뷰를 더 위로 붙이기
+//                layoutParams = LinearLayout.LayoutParams(
+//                    LinearLayout.LayoutParams.MATCH_PARENT,
+//                    LinearLayout.LayoutParams.WRAP_CONTENT
+//                ).apply {
+//                    gravity = Gravity.CENTER_HORIZONTAL
+//                    setMargins(24.dpToPx(requireContext()), 0, 24.dpToPx(requireContext()), 6.dpToPx(requireContext()))
+//                }
+//            }
+//
+//            // view_home_mate 바로 아래에 추가
+//            parentLayout.addView(mateView, referenceIndex + 1)
+//        }
+//    }
 
     // dp → px 변환 함수
     private fun Int.dpToPx(context: Context): Int {
