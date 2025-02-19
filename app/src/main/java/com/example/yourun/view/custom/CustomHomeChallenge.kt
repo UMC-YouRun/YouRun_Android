@@ -133,7 +133,11 @@ class CustomHomeChallenge @JvmOverloads constructor(
         }
     }
 
-    fun updateSoloImage(tendency: String) {
+    fun updateSoloImage(tendency: String?) {
+        if (tendency == null) {
+            Log.e("CustomHomeChallenge", "tendency 값이 null입니다.")
+            return
+        }
         val userImage = getTendencyImage(tendency)
         imgUser1.setImageResource(userImage)
         imgUser1.isVisible = true
@@ -158,7 +162,11 @@ class CustomHomeChallenge @JvmOverloads constructor(
         return (this * context.resources.displayMetrics.density).toInt()
     }
 
-    fun updateCrewImages(tendencies: List<String>) {
+    fun updateCrewImages(tendencies: List<String>?) {
+        if (tendencies == null) {
+            Log.e("CustomHomeChallenge", "tendency 값이 null입니다.")
+            return
+        }
         val imageViews = listOf(imgUser1, imgUser2, imgUser3, imgUser4)
 
         // 최대 4명까지만 표시

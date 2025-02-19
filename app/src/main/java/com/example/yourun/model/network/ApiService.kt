@@ -21,11 +21,8 @@ import com.example.yourun.model.data.response.ApiResponseBoolean
 import com.example.yourun.model.data.response.HomeChallengeResponse
 import com.example.yourun.model.data.response.RunningDataResponse
 import com.example.yourun.model.data.response.RunningResultResponse
-
-
 import com.example.yourun.model.data.response.MateResponse
 import com.example.yourun.model.data.MyPageResponse
-
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -37,6 +34,9 @@ import retrofit2.http.Query
 interface ApiService {
     @POST("users/login")
     suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
+
+    @GET("users/kakao-login")
+    suspend fun loginWithKakao(@Query("kakaoAccessToken") kakaoAccessToken: String): Response<LoginResponse>
 
     @POST("users")
     suspend fun signUp(@Body request: SignUpRequest): ApiResponse<SignUpResponse>
@@ -53,6 +53,11 @@ interface ApiService {
         @Path("month") month: Int
     ): Response<ApiResponse<List<RunningStatsResponse>>>
 
+    @GET("/challenges/solo/matching")
+    suspend fun getChallengeData(): Response<ApiResponse<ChallengeDataResponse>>
+
+    @GET("/challenge/solo/running-result")
+    suspend fun getSoloChallengeResultData(): Response<ApiResponse<ChallengeResultResponse>>
 
     @GET("mypage")
     suspend fun getMyRunData() : Response<ApiResponse<UserInfo>>
@@ -60,21 +65,16 @@ interface ApiService {
     @GET("users/home/challenges")
     suspend fun getHomeChallengesInfo(): Response<HomeChallengeResponse>
 
-//    @GET("users/mates")
-//    suspend fun getMatesList(): Response<MateResponse>
-
-    /*@GET("users/mates")
-    suspend fun getMates(): MateResponse<List<MateApiData>>*/
-
-
+    @GET("users/mates")
+    suspend fun getMatesList(): Response<MateResponse>
 
     @POST("users/mates/{mateId}")
     suspend fun addMate(
         @Path("mateId") mateId: Long
     ): Response<ApiResponseBoolean>
 
-//    @GET("users/mates/recommend")
-//    suspend fun getRecommendMate(): Response<MateResponse>
+    @GET("users/mates/recommend")
+    suspend fun getRecommendMate(): Response<MateResponse>
 
     @GET("users/runnings/{id}")
     suspend fun getRunningData(

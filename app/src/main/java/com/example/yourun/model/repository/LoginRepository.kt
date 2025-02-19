@@ -10,4 +10,9 @@ class LoginRepository(private val apiService: ApiService) {
     suspend fun login(email: String, password: String): Response<LoginResponse> {
         return apiService.login(LoginRequest(email, password))
     }
+
+    // 카카오 로그인
+    /*suspend fun loginWithKakao(kakaoAccessToken: String): Response<LoginResponse> {
+        return apiService.loginWithKakao(KakaoLoginRequest(kakaoAccessToken))
+    }*/
 }

@@ -39,4 +39,32 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
             }
         }
     }
+
+    // 카카오 로그인 함수
+    /* fun kakaoLogin(kakaoAccessToken: String) {
+        viewModelScope.launch {
+            try {
+                // Repository의 loginWithKakao 함수는 카카오 액세스 토큰을 받아 백엔드의 카카오 로그인 API를 호출한다고 가정합니다.
+                val response: Response<LoginResponse> = repository.loginWithKakao(kakaoAccessToken)
+
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body?.status == 200 && body.data != null) {
+                        // 서버에서 발급한 JWT를 저장
+                        ApiClient.TokenManager.saveToken(body.data.accessToken)
+                        Log.d("LoginViewModel", "카카오 로그인 성공: ${body.data.accessToken}")
+
+                        _loginResult.value = Result.success(body)
+                    } else {
+                        _loginResult.value =
+                            Result.failure(Exception(body?.message ?: "카카오 로그인 실패"))
+                    }
+                } else {
+                    _loginResult.value = Result.failure(Exception("서버 오류(${response.code()})"))
+                }
+            } catch (e: Exception) {
+                _loginResult.value = Result.failure(Exception("네트워크 오류 발생: ${e.message}"))
+            }
+        }
+    }*/
 }

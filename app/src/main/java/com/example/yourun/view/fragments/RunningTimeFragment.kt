@@ -1,4 +1,4 @@
-/*package com.example.yourun.view.fragments
+package com.example.yourun.view.fragments
 
 import android.content.Intent
 import android.graphics.Color
@@ -49,6 +49,8 @@ class RunningTimeFragment : Fragment() {
 
         val mateId = arguments?.getLong("mateId")
         viewModel.mateId.value = mateId
+        val mateName = arguments?.getString("mateName")
+        viewModel.mateName.value = mateName
 
         // 상단 바 설정
         binding.runningTimeSetTopBar.txtTopBarWithBackButton.text = "러닝 시작하기"
@@ -164,4 +166,4 @@ class RunningTimeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-}*/
+}

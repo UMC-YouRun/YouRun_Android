@@ -1,4 +1,4 @@
-/*package com.example.yourun.view.fragments
+package com.example.yourun.view.fragments
 
 import android.Manifest
 import android.content.Context
@@ -148,6 +148,7 @@ class RunningFragment : Fragment() {
         binding.runningTimeSet.setOnClickListener {
             val bundle = Bundle().apply {
                 putLong("mateId", mateId)
+                putString("mateName", viewModel.mateName.value)
             }
             val runningTimeFragment = RunningTimeFragment().apply {
                 arguments = bundle
@@ -309,4 +310,4 @@ class RunningFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-}*/
+}

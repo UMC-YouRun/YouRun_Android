@@ -111,15 +111,52 @@ class RunningResultActivity : AppCompatActivity() {
 
         // 서버로 데이터 전송
         binding.btnOk.setOnClickListener {
-            sendRunningResult(
-                RunningResultRequest(
-                    targetTime = formattedTargetTime,
-                    startTime = startTime,
-                    endTime = endTime,
-                    totalDistance = userRunningDistanceMeters
-                )
-            )
-            // TODO 결과 화면으로 이동
+            lifecycleScope.launch {
+                try {
+                    val response = apiService.sendRunningResult(
+                        RunningResultRequest(
+                            targetTime = formattedTargetTime,
+                            startTime = startTime,
+                            endTime = endTime,
+                            totalDistance = userRunningDistanceMeters
+                        )
+                    )
+                    if (response.isSuccessful) {
+                        val data = response.body()
+                        if (data != null) {
+                            if (data.isSoloChallengeInProgress && data.isCrewChallengeInProgress) {
+                                // 개인, 크루 챌린지 결과
+                                val intent = Intent(this@RunningResultActivity, ResultSoloActivity::class.java)
+                                intent.putExtra("isCrewChallengeInProgress", true)
+                                intent.putExtra("isSoloChallengeInProgress", true)
+                                startActivity(intent)
+                                finish()
+                            } else if (data.isSoloChallengeInProgress) {
+                                // 개인 챌린지 결과
+                                val intent = Intent(this@RunningResultActivity, ResultSoloActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else if (data.isCrewChallengeInProgress) {
+                                // 크루 챌린지 결과
+                                val intent = Intent(this@RunningResultActivity, ResultCrewActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                // 챌린지 진행 중이 아닐 때
+                                val intent = Intent(this@RunningResultActivity, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }
+                        } else {
+                            Log.e("RunningResultActivity", "서버 응답 데이터가 null입니다.")
+                        }
+                    } else {
+                        Log.e("RunningResultActivity", "서버 응답 실패: ${response.errorBody()?.string()}")
+                    }
+                } catch (e: Exception) {
+                    Log.e("RunningResultActivity", "네트워크 요청 실패: ${e.message}")
+                }
+            }
         }
 
         // 백 버튼 클릭 시, 홈 화면으로 이동
