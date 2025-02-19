@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.yourun.R
-import com.example.yourun.view.fragments.HomeFragment
+// import com.example.yourun.view.fragments.HomeFragment
 // import com.example.yourun.view.fragments.MateFragment
 import com.example.yourun.view.fragments.MyRunFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -48,12 +48,16 @@ class MainActivity : AppCompatActivity() {
         val fabRunning = findViewById<ImageView>(R.id.fab_running)
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.main_fragment_container, HomeFragment())
+            /*.replace(R.id.main_fragment_container
+            , HomeFragment())
+             */
             .commit()
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             val newFragment = when (item.itemId) {
+                /*
                 R.id.nav_home -> HomeFragment()
+                 */
                 /*R.id.nav_mate -> MateFragment()*/
                 R.id.nav_challenge -> ChallengeListFragment()
                 R.id.nav_my -> MyRunFragment()

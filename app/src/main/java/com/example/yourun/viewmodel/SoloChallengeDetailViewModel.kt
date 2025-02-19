@@ -13,10 +13,14 @@ class SoloChallengeDetailViewModel(private val repository: ChallengeRepository) 
     private val _soloChallengeDetail = MutableLiveData<SoloChallengeDetailRes?>()
     val soloChallengeDetail: LiveData<SoloChallengeDetailRes?> get() = _soloChallengeDetail
 
-    fun fetchSoloChallengeDetail(challengeId: String) {
+    fun fetchSoloChallengeDetail(challengeId: Long) {
         viewModelScope.launch {
-            val response = repository.getSoloChallengeDetail(challengeId)
-            _soloChallengeDetail.postValue(response)
+            val response = repository.getSoloChallengeDetail(challengeId.toString())
+            if (response.isSuccessful) {
+                _soloChallengeDetail.postValue(response.body())
+            } else {
+                _soloChallengeDetail.postValue(null)
+            }
         }
     }
 }

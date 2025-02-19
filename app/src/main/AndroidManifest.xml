@@ -59,14 +59,6 @@
             android:exported="true" />
 
         <activity
-            android:name=".view.activities.ChallengeDetailTeamActivity"
-            android:exported="true" />
-
-        <activity
-            android:name=".view.activities.ChallengeListActivity"
-            android:exported="true" />
-
-        <activity
             android:name=".view.activities.CreateChallengeActivity"
             android:exported="true" >
 

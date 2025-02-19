@@ -2,10 +2,7 @@ package com.example.yourun.view.adapters
 
 import android.content.Intent
 import android.text.Spannable
-import android.text.SpannableString
 import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.method.LinkMovementMethod
 import android.text.style.ForegroundColorSpan
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,8 +13,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
-import com.example.yourun.model.data.CrewChallengeRes
-import com.example.yourun.model.data.SoloChallengeRes
 import com.example.yourun.model.data.response.ChallengeItem
 import com.example.yourun.view.activities.CrewChallengeDetailActivity
 import com.example.yourun.view.activities.SoloChallengeDetailActivity
@@ -33,17 +28,25 @@ class CrewChallengeAdapter(private var challengeList: MutableList<ChallengeItem>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val challenge = challengeList[position]
+        Log.d("BIND_DEBUG", "Binding challenge: ${challenge.title} at position $position")
         holder.bind(challenge)
     }
 
-    override fun getItemCount(): Int = challengeList.size
+    override fun getItemCount(): Int {
+        val size = challengeList.size
+        Log.d("DEBUG", "getItemCount 호출됨, 리스트 크기: $size")
+        return size
+    }
 
     /* 새로운 데이터로 갱신하는 함수 추가 */
     fun updateData(newChallenges: List<ChallengeItem>) {
         Log.d("UI_DEBUG", "🚀 updateData 호출됨! 새로운 데이터: $newChallenges") // 로그 추가
         challengeList.clear()
         challengeList.addAll(newChallenges)
+        Log.d("UI_DEBUG", "업데이트 후 challengeList 사이즈: ${challengeList.size}")
+
         notifyDataSetChanged()
+        Log.d("UI_DEBUG", "🚀 notifyDataSetChanged 호출됨!")
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -78,7 +81,7 @@ class CrewChallengeAdapter(private var challengeList: MutableList<ChallengeItem>
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, CrewChallengeDetailActivity::class.java)
-                intent.putExtra("CHALLENGE_ID", challenge.challengeId) // 상세 조회용 ID 전달
+                intent.putExtra("challengeId", challenge.challengeId.toString()) // 상세 조회용 ID 전달
                 itemView.context.startActivity(intent)
             }
         }
@@ -142,7 +145,7 @@ class SoloChallengeAdapter(private val challengeList: MutableList<ChallengeItem>
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, SoloChallengeDetailActivity::class.java)
-                intent.putExtra("CHALLENGE_ID", challenge.challengeId) // 상세 조회용 ID 전달
+                intent.putExtra("challengeId", challenge.challengeId) // 상세 조회용 ID 전달
                 itemView.context.startActivity(intent)
             }
         }

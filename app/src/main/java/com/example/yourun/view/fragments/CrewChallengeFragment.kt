@@ -21,7 +21,7 @@ import com.example.yourun.model.data.SoloChallengeRes
 import com.example.yourun.model.data.response.ChallengeItem
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.ChallengeRepository
-import com.example.yourun.view.activities.SoloChallengeDetailActivity
+//import com.example.yourun.view.activities.SoloChallengeDetailActivity
 import com.example.yourun.view.adapters.CrewChallengeAdapter
 import com.example.yourun.viewmodel.ChallengeViewModel
 import com.example.yourun.viewmodel.ChallengeViewModelFactory

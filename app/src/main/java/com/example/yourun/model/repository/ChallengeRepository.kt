@@ -6,9 +6,11 @@ import com.example.yourun.model.data.CrewChallengeRes
 import com.example.yourun.model.data.CrewChallengeResponse
 import com.example.yourun.model.data.SoloChallengeDetailRes
 import com.example.yourun.model.data.SoloChallengeRes
+import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.network.ApiService
+import retrofit2.Response
 
-class ChallengeRepository(private val apiService: ApiService) {
+class ChallengeRepository(private val apiService: ApiService = ApiClient.getApiService()) {
 
     suspend fun getPendingCrewChallenges(): List<CrewChallengeRes>? {
         return try {
@@ -56,36 +58,11 @@ class ChallengeRepository(private val apiService: ApiService) {
         }
     }
 
-    suspend fun getCrewChallengeDetail(challengeId: String): CrewChallengeDetailRes? {
-        return try {
-            val response = apiService.getCrewChallengeDetail(challengeId)
-
-            if (response.isSuccessful) {
-                val body = response.body()
-                Log.d("API_SUCCESS", "Raw Response Body: ${response.body()}") // 전체 응답 로그
-                body?.data
-            } else {
-                Log.e("API_ERROR", "Error: ${response.errorBody()?.string()}")
-                null
-            }
-        } catch (e: Exception) {
-            Log.e("API_EXCEPTION", "Exception: ${e.message}")
-            null
-        }
+    suspend fun getCrewChallengeDetail(challengeId: String): Response<CrewChallengeDetailRes> {
+        return apiService.getCrewChallengeDetail(challengeId)
     }
 
-    suspend fun getSoloChallengeDetail(challengeId: String): SoloChallengeDetailRes? {
-        return try {
-            val response = apiService.getSoloChallengeDetail(challengeId)
-            if (response.isSuccessful) {
-                response.body()?.data
-            } else {
-                Log.e("API_ERROR", "Error: ${response.errorBody()?.string()}")
-                null
-            }
-        } catch (e: Exception) {
-            Log.e("API_EXCEPTION", "Exception: ${e.message}")
-            null
-        }
+    suspend fun getSoloChallengeDetail(challengeId: String): Response<SoloChallengeDetailRes> {
+        return apiService.getSoloChallengeDetail(challengeId)
     }
 }

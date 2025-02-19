@@ -20,7 +20,7 @@ class CreateSolo2Fragment  : Fragment(R.layout.fragment_create_solo2) {
 
     private val tendencyImages = mapOf(
         "스프린터" to R.drawable.img_challenge_sprinter,
-        "페이스메이커" to R.drawable.img_facemaker_challenge,
+        "페이스메이커" to R.drawable.img_pacemaker_challenge,
         "트레일러너" to R.drawable.img_challenge_trailrunner
     )
 

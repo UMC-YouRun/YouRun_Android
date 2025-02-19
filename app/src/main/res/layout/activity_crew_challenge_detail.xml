@@ -3,7 +3,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -94,14 +93,14 @@
                         app:srcCompat="@drawable/bg_user_profile" />
 
                     <ImageView
-                        android:id="@+id/pacemaker_challenge"
+                        android:id="@+id/participant_1_character"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:layout_marginVertical="76dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/img_facemaker_challenge" />
+                        app:srcCompat="@drawable/img_pacemaker_challenge" />
 
                     <TextView
                         android:id="@+id/crew_slogan"
@@ -116,7 +115,7 @@
                         app:layout_constraintStart_toStartOf="@+id/back_card" />
 
                     <ImageView
-                        android:id="@+id/mini_pacemaker"
+                        android:id="@+id/participant_1_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
@@ -126,23 +125,23 @@
                         app:srcCompat="@drawable/img_mini_pacemaker" />
 
                     <ImageView
-                        android:id="@+id/mini_sprinter"
+                        android:id="@+id/participant_2_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:layout_marginBottom="10dp"
                         app:layout_constraintBottom_toBottomOf="@+id/back_card"
-                        app:layout_constraintStart_toEndOf="@+id/mini_pacemaker"
+                        app:layout_constraintStart_toEndOf="@+id/participant_1_profile"
                         app:srcCompat="@drawable/img_mini_sprinter" />
 
                     <ImageView
-                        android:id="@+id/mini_trailrunner"
+                        android:id="@+id/participant_3_profile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
                         android:layout_marginBottom="10dp"
                         app:layout_constraintBottom_toBottomOf="@+id/back_card"
-                        app:layout_constraintStart_toEndOf="@+id/mini_sprinter"
+                        app:layout_constraintStart_toEndOf="@+id/participant_2_profile"
                         app:srcCompat="@drawable/img_mini_trailrunner" />
 
                     <TextView

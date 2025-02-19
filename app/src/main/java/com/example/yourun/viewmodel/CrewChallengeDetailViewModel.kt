@@ -15,8 +15,12 @@ class CrewChallengeDetailViewModel(private val repository: ChallengeRepository) 
 
     fun fetchCrewChallengeDetail(challengeId: String) {
         viewModelScope.launch {
-            val response = repository.getCrewChallengeDetail(challengeId)
-            _crewChallengeDetail.postValue(response)
+            val response = repository.getCrewChallengeDetail(challengeId.toString()) // API 호출
+            if (response.isSuccessful) {
+                _crewChallengeDetail.postValue(response.body())
+            } else {
+                _crewChallengeDetail.postValue(null)
+            }
         }
     }
 }

@@ -114,12 +114,12 @@ interface ApiService {
     @GET("challenges/crew/pending/{challengeId}")
     suspend fun getCrewChallengeDetail(
         @Path("challengeId") challengeId: String
-    ): Response<BaseResponse<CrewChallengeDetailRes>>
+    ): Response<CrewChallengeDetailRes>
 
     @GET("challenges/solo/pending/{challengeId}")
     suspend fun getSoloChallengeDetail(
         @Path("challengeId") challengeId: String
-    ): Response<BaseResponse<SoloChallengeDetailRes>>
+    ): Response<SoloChallengeDetailRes>
 }
 
 data class ApiResponse<T>(
