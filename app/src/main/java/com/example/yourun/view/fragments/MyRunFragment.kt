@@ -18,6 +18,7 @@ import com.example.yourun.viewmodel.MyRunViewModelFactory
 import android.util.Log
 import com.example.yourun.R
 import com.example.yourun.view.activities.MyRun2Activity
+import com.example.yourun.view.activities.SignUpActivity
 
 class MyRunFragment : Fragment(R.layout.fragment_myrun) {
     private var _binding: FragmentMyrunBinding? = null
@@ -86,6 +87,15 @@ class MyRunFragment : Fragment(R.layout.fragment_myrun) {
                 startActivity(intent)
             } ?: Log.e("MyRunFragment", "userInfo가 null이라 이미지 전달 불가")
         }
+        binding.btnTestAgain.setOnClickListener {
+            // QuestionFragment로 이동
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            val questionFragment = QuestionFragment() // QuestionFragment 객체 생성
+            transaction.replace(R.id.my_run_fragment_container, questionFragment) // 현재 MyRunFragment를 QuestionFragment로 교체
+            transaction.addToBackStack(null) // 뒤로가기 가능하도록 설정
+            transaction.commit()
+        }
+
     }
 
     private fun getRandomImageForTendency(tendency: String, context: Context): Int {

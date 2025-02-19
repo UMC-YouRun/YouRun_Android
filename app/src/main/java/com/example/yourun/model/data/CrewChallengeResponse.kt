@@ -17,5 +17,5 @@ data class CrewChallengeRes(
     val challengePeriod: Int,
     val remaining: Int,
     val reward: Int,
-    val participantIdsInfo: List<MemberTendencyInfo>
+    //val participantIdsInfo: List<MemberTendencyInfo>
 )

@@ -1,4 +1,4 @@
-package com.example.yourun.view.activities
+/*package com.example.yourun.view.activities
 
 import android.os.Bundle
 import android.util.Log
@@ -55,4 +55,4 @@ class CrewChallengeDetailActivity : AppCompatActivity() {
             })
         */
     }
-}
+}*/

@@ -1,4 +1,4 @@
-package com.example.yourun.view.adapters
+/*package com.example.yourun.view.adapters
 
 import android.content.Intent
 import android.text.Spannable
@@ -147,4 +147,4 @@ class SoloChallengeAdapter(private val challengeList: MutableList<ChallengeItem>
             }
         }
     }
-}
+}*/

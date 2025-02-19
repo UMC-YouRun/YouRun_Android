@@ -1,4 +1,3 @@
-/*
 package com.example.yourun.view.fragments
 
 import android.content.Context
@@ -25,7 +24,7 @@ import com.example.yourun.model.data.response.UserSoloChallengeInfo
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.HomeRepository
 import com.example.yourun.view.activities.CalendarActivity
-import com.example.yourun.view.activities.ChallengeListActivity
+//import com.example.yourun.view.activities.ChallengeListActivity
 import com.example.yourun.view.activities.CreateChallengeActivity
 import com.example.yourun.view.activities.CrewProgressActivity
 import com.example.yourun.view.activities.ResultContributionActivity
@@ -133,11 +132,11 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.btnAddChallenge.setOnClickListener {
+        /*binding.btnAddChallenge.setOnClickListener {
             val intent = Intent(requireContext(), ChallengeListActivity::class.java)
             startActivity(intent)
             parentFragmentManager.popBackStack()
-        }
+        }*/
 
         binding.btnCalendar.setOnClickListener {
             val intent = Intent(requireContext(), CalendarActivity::class.java)
@@ -213,7 +212,7 @@ class HomeFragment : Fragment() {
         customView.updateDates(startDate = crewChallenge.crewStartDate, dayCount = crewChallenge.crewDayCount)
         customView.updatePeriodCrew(crewChallenge.challengePeriod)
         val crewTendencies = crewChallenge.myParticipantIdsInfo.map { it.memberTendency }
-        customView.updateCrewImages(crewTendencies)
+            //customView.updateCrewImages(crewTendencies)
         val crewChallengeLevel = when (crewChallenge.challengeStatus) {
             "PENDING" -> 0
             "IN_PROGRESS" -> 1
@@ -331,4 +330,3 @@ class HomeFragment : Fragment() {
     }
 }
 
- */

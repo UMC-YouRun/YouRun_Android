@@ -1,4 +1,4 @@
-package com.example.yourun.view.fragments
+/*package com.example.yourun.view.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -99,3 +99,4 @@ private fun getCorrectPostposition(crewName: String): String {
         if (lastChar == 0) "와" else "과" // 받침이 없으면 "와", 있으면 "과"
     } else "과" // 한글이 아닐 경우 기본 "과"
 }
+*/

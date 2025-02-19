@@ -1,5 +1,6 @@
 package com.example.yourun.model.data.response
 
+import com.example.yourun.model.data.Tendency
 import com.google.gson.annotations.SerializedName
 
 data class MemberTendencyInfo(
