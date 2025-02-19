@@ -10,7 +10,7 @@ import com.example.yourun.model.network.ApiService
 
 class ChallengeRepository(private val apiService: ApiService) {
 
-    suspend fun getPendingCrewChallenges(): List<CrewChallengeRes>? {
+   /* suspend fun getPendingCrewChallenges(): List<CrewChallengeRes>? {
         return try {
             val response = apiService.getPendingCrewChallenges()
 
@@ -34,7 +34,7 @@ class ChallengeRepository(private val apiService: ApiService) {
             Log.e("API_EXCEPTION", "Exception: ${e.message}")
             null
         }
-    }
+    }*/
 
     suspend fun getPendingPersonalChallenges(): List<SoloChallengeRes>? {
         return try {

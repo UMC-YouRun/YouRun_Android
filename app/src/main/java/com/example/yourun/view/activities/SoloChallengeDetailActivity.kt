@@ -1,4 +1,4 @@
-package com.example.yourun.view.activities
+/*package com.example.yourun.view.activities
 
 import android.os.Bundle
 import android.util.Log
@@ -25,4 +25,4 @@ class SoloChallengeDetailActivity : AppCompatActivity() {
             Log.d("DEBUG", "받은 CHALLENGE_ID: $challengeId")
         }
     }
-}
+}*/

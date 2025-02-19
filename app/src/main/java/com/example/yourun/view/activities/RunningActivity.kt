@@ -37,14 +37,14 @@ class RunningActivity : AppCompatActivity() {
     private var mateRunningDistanceMeters: Int = 0
 
     // 위치 업데이트 콜백: 새 위치가 들어올 때마다 distance 업데이트
-    /*private val locationCallback = object : LocationCallback() {
+    private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             super.onLocationResult(locationResult)
             for (location in locationResult.locations) {
                 viewModel.updateLocationData(location)
             }
         }
-    }*/
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
