@@ -1,6 +1,7 @@
 package com.example.yourun
 
 import android.app.Application
+import com.example.yourun.utils.ChallengeCheckManager
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.vectormap.KakaoMapSdk
 
@@ -20,5 +21,8 @@ class MyApplication : Application() {
         val kakaoAppKey: String = BuildConfig.KAKAO_NATIVE_APP_KEY
         KakaoSdk.init(this, kakaoAppKey)
         KakaoMapSdk.init(this, kakaoAppKey)
+
+        ChallengeCheckManager.init(this)
+        ChallengeCheckManager.startPeriodicCheck(this)
     }
 }

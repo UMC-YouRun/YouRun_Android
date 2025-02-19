@@ -102,51 +102,51 @@
 
     <ImageView
         android:id="@+id/img_stamp1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         android:layout_marginStart="0dp"
-        android:background="@drawable/img_stamp_yet"
+        android:background="@drawable/img_stamp_default"
         app:layout_constraintStart_toStartOf="@id/img_background"
         app:layout_constraintTop_toBottomOf="@id/textView7"
         android:layout_marginTop="84dp"/>
 
     <ImageView
         android:id="@+id/img_stamp2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         app:layout_constraintTop_toBottomOf="@id/textView7"
         android:layout_marginTop="84dp"
         app:layout_constraintStart_toStartOf="@id/img_background"
         android:layout_marginStart="135dp"
-        android:background="@drawable/img_stamp_yet"/>
+        android:background="@drawable/img_stamp_default"/>
 
     <ImageView
         android:id="@+id/img_stamp3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         app:layout_constraintTop_toBottomOf="@id/textView7"
         android:layout_marginTop="203dp"
         app:layout_constraintStart_toStartOf="@id/img_background"
         android:layout_marginStart="210dp"
-        android:background="@drawable/img_stamp_yet"/>
+        android:background="@drawable/img_stamp_default"/>
 
 
     <ImageView
         android:id="@+id/img_stamp4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
         app:layout_constraintTop_toBottomOf="@id/textView7"
         android:layout_marginTop="203dp"
         app:layout_constraintStart_toStartOf="@id/img_background"
         android:layout_marginStart="68dp"
-        android:background="@drawable/img_stamp_yet"/>
+        android:background="@drawable/img_stamp_default"/>
 
 
     <ImageView
         android:id="@+id/img_stamp5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/img_stamp_yet"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="@drawable/img_stamp_default"
         app:layout_constraintTop_toBottomOf="@id/textView7"
         android:layout_marginTop="323dp"
         app:layout_constraintStart_toStartOf="@id/img_background"
@@ -213,78 +213,76 @@
         android:id="@+id/card_runner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginHorizontal="16dp"
-        android:backgroundTint="@color/gray_400"
-        app:cardCornerRadius="16dp"
         app:layout_constraintTop_toBottomOf="@id/tv_8"
-        android:layout_marginTop="10dp">
-
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardUseCompatPadding="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:background="@drawable/bg_solo_mate"
             android:padding="16dp">
 
             <ImageView
                 android:id="@+id/img_mate_profile"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/profile_trailrunner" />
-
+                android:src="@drawable/profile_trailrunner"
+                android:layout_gravity="center_vertical"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginStart="16dp">
 
                 <TextView
                     android:id="@+id/tv_lucy_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/default_name"
-                    android:textColor="@color/black"
                     android:textSize="14sp"
-                    />
+                    android:textStyle="bold"
+                    android:textColor="@color/purple_700"/>
 
                 <TextView
                     android:id="@+id/tv_lucy_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/challenge_success"
-                    android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 android:layout_gravity="end"
                 android:layout_weight="1"
-                android:gravity="end"
-                android:orientation="vertical">
+                android:gravity="end">
 
                 <TextView
                     android:id="@+id/tv_lucy_days"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/default_day"
-                    android:textColor="@color/text_gray2"
-                    android:textSize="12sp" />
+                    android:textSize="14sp"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:id="@+id/tv_lucy_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/defalut_pace"
-                    android:textColor="@color/text_purple_900"
-                    android:textSize="12sp" />
+                    android:textSize="14sp"
+                    android:textColor="@color/text_purple_900"/>
             </LinearLayout>
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
 
@@ -304,15 +302,14 @@
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/img_solo_progress_success"
-        app:layout_constraintStart_toStartOf="@id/card_runner"
+        android:id="@+id/img_challenge_status"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="-20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_10"
-        android:layout_marginStart="52dp"/>
-
-
+        android:layout_marginStart="0dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

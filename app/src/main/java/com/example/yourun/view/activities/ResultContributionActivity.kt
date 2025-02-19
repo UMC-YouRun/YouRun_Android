@@ -22,11 +22,16 @@ class ResultContributionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_crew_contribution)
 
-        val topBarTitle: TextView = findViewById(R.id.txt_top_bar_with_back_button)
+        val topBarTitle: TextView = findViewById(R.id.txtTopBarWithBackButton)
+        topBarTitle.text = "크루 챌린지 결과"
+
+//        val topBarTitle: TextView = findViewById(R.id.txt_top_bar_with_back_button)
         val tvWin: TextView = findViewById(R.id.tv_win)
         val layoutContributionList: LinearLayout = findViewById(R.id.layout_contribution_list)
         val layoutToggle: LinearLayout = findViewById(R.id.layout_toggle)
         val imgToggleArrow: ImageView = findViewById(R.id.img_toggle_arrow)
+        val btnNext: Button = findViewById(R.id.btn_next)
+
 
         layoutToggle.setOnClickListener {
             isListVisible = !isListVisible // 토글 상태 반전
@@ -36,6 +41,10 @@ class ResultContributionActivity : AppCompatActivity() {
 //            Log.d("ResultContributionActivity", "Toggle clicked, isListVisible: $isListVisible")
         }
 
+        btnNext.setOnClickListener {
+            finish()
+        }
+
         // API 호출
         viewModel.fetchResultContributionData()
 
@@ -43,7 +52,7 @@ class ResultContributionActivity : AppCompatActivity() {
             viewModel.contributionData.collectLatest { resultList ->
                 if (resultList.isNotEmpty()) {
                     val result = resultList[0]
-                    topBarTitle.text = result.crewName
+                    //topBarTitle.text = result.crewName
                     tvWin.text = if (result.win) "WIN!" else "LOSE"
                     tvWin.setTextColor(getColor(if (result.win) R.color.text_purple_900 else R.color.red))
 

@@ -17,16 +17,22 @@ class CrewChallengeResultViewModel : ViewModel() {
     fun fetchCrewChallengeResult() {
         viewModelScope.launch {
             try {
+                Log.d("CrewChallengeViewModel", "📢 API 요청 시작")
                 val response = ApiClient.getChallengeApiService().getCrewChallengeResult()
+
                 if (response.isSuccessful) {
-                    response.body()?.data?.let { data ->
+                    val body = response.body()
+                    Log.d("CrewChallengeViewModel", "✅ API 응답 성공: $body")
+                    body?.data?.let { data ->
                         _challengeData.value = data
-                    }
+                    } ?: Log.e("CrewChallengeViewModel", "⚠️ 응답 데이터가 null")
                 } else {
-                    Log.e("CrewChallengeViewModel", "API Error: ${response.code()} - ${response.message()}")
+                    val errorBody = response.errorBody()?.string()
+                    Log.e("CrewChallengeViewModel", "❌ API 응답 실패 - 코드: ${response.code()}, 메시지: ${response.message()}")
+                    Log.e("CrewChallengeViewModel", "❗ 서버 에러 응답 본문: $errorBody")
                 }
             } catch (e: Exception) {
-                Log.e("CrewChallengeViewModel", "Exception: ${e.message}")
+                Log.e("CrewChallengeViewModel", "❗ 예외 발생: ${e.message}")
             }
         }
     }
