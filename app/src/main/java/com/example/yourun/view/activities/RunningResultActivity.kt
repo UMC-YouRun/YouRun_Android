@@ -124,20 +124,29 @@ class RunningResultActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val data = response.body()
                         if (data != null) {
-                            if (data.isSoloChallengeInProgress) { // 개인 챌린지 결과
+                            if (data.isSoloChallengeInProgress && data.isCrewChallengeInProgress) {
+                                // 개인, 크루 챌린지 결과
+                                val intent = Intent(this@RunningResultActivity, ResultSoloActivity::class.java)
+                                intent.putExtra("isCrewChallengeInProgress", true)
+                                intent.putExtra("isSoloChallengeInProgress", true)
+                                startActivity(intent)
+                                finish()
+                            } else if (data.isSoloChallengeInProgress) {
+                                // 개인 챌린지 결과
                                 val intent = Intent(this@RunningResultActivity, ResultSoloActivity::class.java)
                                 startActivity(intent)
                                 finish()
-                            }
-                            if (data.isCrewChallengeInProgress) { // 크루 챌린지 결과
+                            } else if (data.isCrewChallengeInProgress) {
+                                // 크루 챌린지 결과
                                 val intent = Intent(this@RunningResultActivity, ResultCrewActivity::class.java)
                                 startActivity(intent)
                                 finish()
+                            } else {
+                                // 챌린지 진행 중이 아닐 때
+                                val intent = Intent(this@RunningResultActivity, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
                             }
-                            // 챌린지 진행 중이 아닐 때
-                            val intent = Intent(this@RunningResultActivity, MainActivity::class.java)
-                            startActivity(intent)
-                            finish()
                         } else {
                             Log.e("RunningResultActivity", "서버 응답 데이터가 null입니다.")
                         }

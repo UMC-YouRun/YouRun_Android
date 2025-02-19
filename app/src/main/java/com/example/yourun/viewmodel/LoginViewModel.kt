@@ -41,7 +41,7 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
     }
 
     // 카카오 로그인 함수
-    fun kakaoLogin(kakaoAccessToken: String) {
+    /* fun kakaoLogin(kakaoAccessToken: String) {
         viewModelScope.launch {
             try {
                 // Repository의 loginWithKakao 함수는 카카오 액세스 토큰을 받아 백엔드의 카카오 로그인 API를 호출한다고 가정합니다.
@@ -66,5 +66,5 @@ class LoginViewModel(private val repository: LoginRepository) : ViewModel() {
                 _loginResult.value = Result.failure(Exception("네트워크 오류 발생: ${e.message}"))
             }
         }
-    }
+    }*/
 }

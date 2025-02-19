@@ -12,7 +12,7 @@ class LoginRepository(private val apiService: ApiService) {
     }
 
     // 카카오 로그인
-    suspend fun loginWithKakao(kakaoAccessToken: String): Response<LoginResponse> {
+    /*suspend fun loginWithKakao(kakaoAccessToken: String): Response<LoginResponse> {
         return apiService.loginWithKakao(KakaoLoginRequest(kakaoAccessToken))
-    }
+    }*/
 }

@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
                     } else if (token != null) {
                         Log.i("KakaoLogin", "카카오톡 로그인 성공: ${token.accessToken}")
                         // ViewModel에 액세스 토큰 전달
-                        viewModel.kakaoLogin(token.accessToken)
+                        //viewModel.kakaoLogin(token.accessToken)
                     }
                 }
             } else {
@@ -75,7 +75,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "카카오 로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
             } else if (token != null) {
                 Log.i("KakaoLogin", "카카오계정 로그인 성공: ${token.accessToken}")
-                viewModel.kakaoLogin(token.accessToken)
+                //viewModel.kakaoLogin(token.accessToken)
             }
         }
     }
