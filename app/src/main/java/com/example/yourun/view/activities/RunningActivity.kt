@@ -37,14 +37,14 @@ class RunningActivity : AppCompatActivity() {
     private var mateRunningDistanceMeters: Int = 0
 
     // 위치 업데이트 콜백: 새 위치가 들어올 때마다 distance 업데이트
-    private val locationCallback = object : LocationCallback() {
+    /*private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             super.onLocationResult(locationResult)
             for (location in locationResult.locations) {
                 viewModel.updateLocationData(location)
             }
         }
-    }
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,7 +107,7 @@ class RunningActivity : AppCompatActivity() {
 
         // 버튼 누를 시 러닝 시작, 중지
         binding.btnRunningPlayPause.setOnClickListener {
-            viewModel.toggleRunningState()
+          //  viewModel.toggleRunningState()
         }
 
         // 목표 시간 도달 또는 수동 종료 시 RunningResultActivity로 이동
@@ -149,11 +149,11 @@ class RunningActivity : AppCompatActivity() {
             .setMinUpdateIntervalMillis(1000) // 1초마다 최소 업데이트
             .build()
 
-        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+      //  fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
     }
 
     private fun stopLocationUpdates() {
-        fusedLocationClient.removeLocationUpdates(locationCallback)
+      //  fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 
     private fun applySpannable(text: String, numberSize: Int, unitSize: Int): SpannableString {
@@ -256,7 +256,7 @@ class RunningActivity : AppCompatActivity() {
         binding.loadingRunningAnimation.pauseAnimation()
         stopLocationUpdates() // 액티비티 종료 시 위치 업데이트 중지
         if (viewModel.isStopped.value != true) {
-            viewModel.stopTracking()
+            //viewModel.stopTracking()
         }
     }
 }

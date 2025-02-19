@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
 
     <FrameLayout
@@ -226,13 +226,12 @@
         android:layout_width="360dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
-        android:layout_marginTop="452dp"
+        android:layout_marginTop="410dp"
         android:background="@drawable/btn_create"
+        app:layout_constraintEnd_toEndOf="@+id/create_checkbox"
         app:layout_constraintStart_toStartOf="@id/create_checkbox"
         app:layout_constraintTop_toTopOf="@id/create_checkbox" />
 
-    <include
-        layout="@layout/bottom_navigation" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
