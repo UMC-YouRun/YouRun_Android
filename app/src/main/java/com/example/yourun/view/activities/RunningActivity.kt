@@ -84,9 +84,7 @@ class RunningActivity : AppCompatActivity() {
 
         // 백 버튼 클릭 시, 홈 화면으로 이동
         binding.backButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent)
+            moveTaskToBack(true)
         }
 
         // 캘린더 화면으로 이동
