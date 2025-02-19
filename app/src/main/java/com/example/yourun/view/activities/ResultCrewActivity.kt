@@ -22,6 +22,9 @@ class ResultCrewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result_crew)
 
+        val topBarTitle: TextView = findViewById(R.id.txtTopBarWithBackButton)
+        topBarTitle.text = "크루 챌린지 결과"
+
         val btnConfirm: Button = findViewById(R.id.btn_next)
         val tvRunningMessage: TextView = findViewById(R.id.tv_running_message)
         val tvOverlayText:TextView = findViewById(R.id.tv_overlay_text)
@@ -62,7 +65,7 @@ class ResultCrewActivity : AppCompatActivity() {
                 tvChallengeResult.text = "${myCrewName} 크루\n총 ${afterDistance}km 러닝!"
 
                 tvMyCrewName.text = myCrewName
-                tvMyCrewName.setTextColor(ContextCompat.getColor(this@ResultCrewActivity, R.color.yellow))
+                tvMyCrewName.setTextColor(ContextCompat.getColor(this@ResultCrewActivity, R.color.black))
 
                 tvMyCrewDistance.text = "총 ${afterDistance}km 러닝"
 
