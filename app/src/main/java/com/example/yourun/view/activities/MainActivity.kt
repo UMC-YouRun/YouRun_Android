@@ -77,16 +77,15 @@ class MainActivity : AppCompatActivity() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT) // 기존 액티비티를 최상단으로 이동
                 startActivity(intent)
             } else {
-                // RunningActivity가 종료된 경우 새로 실행
-                val intent = Intent(this, RunningActivity::class.java)
-                startActivity(intent)
+                changeFabColor(RunningFragment())
+                loadFragment(RunningFragment())
             }
             val menu = bottomNavigationView.menu
             menu.getItem(2).isChecked = true
         }
     }
 
-    fun isActivityRunning(context: Context, activityClass: Class<*>): Boolean {
+    private fun isActivityRunning(context: Context, activityClass: Class<*>): Boolean {
         val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val runningTasks = activityManager.appTasks // 현재 실행 중인 모든 태스크 가져오기
 

@@ -16,7 +16,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentHomeBinding
-import com.example.yourun.model.data.response.UserInfo
 import com.example.yourun.model.data.response.ChallengeData
 import com.example.yourun.model.data.response.UserCrewChallengeInfo
 import com.example.yourun.model.data.response.UserMateInfo
@@ -26,11 +25,7 @@ import com.example.yourun.model.repository.HomeRepository
 import com.example.yourun.view.activities.CalendarActivity
 //import com.example.yourun.view.activities.ChallengeListActivity
 import com.example.yourun.view.activities.CreateChallengeActivity
-import com.example.yourun.view.activities.CrewProgressActivity
 import com.example.yourun.view.activities.ResultContributionActivity
-import com.example.yourun.view.activities.ResultCrewActivity
-import com.example.yourun.view.activities.ResultSoloActivity
-import com.example.yourun.view.activities.SoloProgressActivity
 import com.example.yourun.view.custom.CustomHomeChallenge
 import com.example.yourun.view.custom.CustomMateView
 import com.example.yourun.viewmodel.HomeViewModel
@@ -70,10 +65,15 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 테스트 위한 버튼 수정하기
+        binding.imgMainBanner.setOnClickListener {
+            val intent = Intent(requireContext(), ResultContributionActivity::class.java)
+            startActivity(intent)
+        }
+
         // 서버에서 챌린지 데이터 가져오기, 처음 한 번 호출
         viewModel.fetchHomeChallengeData()
-        //viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
-        viewModel.fetchUserInfo()
+        viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
 
         viewModel.isPressedCrew.observe(viewLifecycleOwner) { isPressed ->
             binding.btnCrew.setImageResource(
@@ -99,13 +99,6 @@ class HomeFragment : Fragment() {
             updateChallengeView()
         }
 
-        // 유저 정보 관리
-        viewModel.userInfo.observe(viewLifecycleOwner) { userInfo ->
-            userInfo?.let { safeUserInfo ->
-                updateUserInfoText(safeUserInfo)
-            }
-        }
-
         // challengeButtonContainer에 기본 btnAddChallenge 뷰를 저장
         originalChallengeButton = binding.challengeButtonContainer.findViewById(R.id.btnAddChallenge)
 
@@ -121,21 +114,9 @@ class HomeFragment : Fragment() {
                 Log.d("HomeFragment","홈 챌린지 데이터를 불러오지 못했습니다.")
             } else {
                 updateChallengeView(challengeData)
+                updateUserInfoText(challengeData)
             }
         }
-
-        /*binding.btnAddChallenge.setOnClickListener {
-            val intent = Intent(requireContext(), ChallengeListActivity::class.java)
-            startActivity(intent)
-            parentFragmentManager.popBackStack()
-        }*/
-
-//테스트용 버튼 
-//        binding.imgMainBanner.setOnClickListener {
-//            val intent = Intent(requireContext(), ResultContributionActivity::class.java) // 이동할 액티비티 설정
-//            startActivity(intent)
-//        }
-
 
         binding.btnCalendar.setOnClickListener {
             val intent = Intent(requireContext(), CalendarActivity::class.java)
@@ -156,7 +137,7 @@ class HomeFragment : Fragment() {
         // btn_redirect 클릭 시 최신 메이트 데이터 다시 불러오기
         binding.btnRedirect.setOnClickListener {
             Log.d("HomeFragment", "btn_redirect 클릭됨 - 추천 메이트 갱신")
-            //viewModel.fetchRecommendMates()
+            viewModel.fetchRecommendMates()
         }
     }
 
@@ -242,64 +223,67 @@ class HomeFragment : Fragment() {
     }
 
     // 추천 메이트 UI 추가
-//    private fun <T: ViewModel> updateRecommendMatesUI(mates: List<UserMateInfo>, viewModel: T, showHeart: Boolean) {
-//        val parentLayout = binding.mainLinearLayout
-//        val referenceView = binding.viewHomeMate // 기존 view_home_mate 아래에 추가
-//        val referenceIndex = parentLayout.indexOfChild(referenceView)
-//
-//        // 기존의 CustomMateView 삭제 (이전 추천 메이트 삭제)
-//        parentLayout.children.filter { it is CustomMateView<*> || it.tag == "divider" }.forEach {
-//            parentLayout.removeView(it) }
-//
-//        // 추천 메이트 목록 추가 (최대 5개)
-//        mates.take(5).forEachIndexed { index, mate ->
-//            // 첫 번째 뷰가 아닐 때만 가로 구분선 추가
-//            if (index > 0) {
-//                val dividerView = View(requireContext()).apply {
-//                    layoutParams = LinearLayout.LayoutParams(
-//                        LinearLayout.LayoutParams.MATCH_PARENT,
-//                        1.dpToPx(requireContext()) // 경계선 높이 1dp
-//                    ).apply {
-//                        setMargins(24.dpToPx(requireContext()), 0, 24.dpToPx(requireContext()), 4.dpToPx(requireContext()))
-//                    }
-//                    setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border)) // 경계선 색상
-//                    tag = "divider" // 제거할 때 구분하기 위해 태그 추가
-//                }
-//                parentLayout.addView(dividerView, referenceIndex + 1) // 가로 경계선 추가
-//            }
-//
-//            val mateView = CustomMateView<T>(requireContext(), showHeartButton = showHeart).apply {
-//                setViewModel(viewModel)
-//                updateMateInfo(mate, mates.size - index)
-//
-//                // 상단 마진을 최소화하여 뷰를 더 위로 붙이기
-//                layoutParams = LinearLayout.LayoutParams(
-//                    LinearLayout.LayoutParams.MATCH_PARENT,
-//                    LinearLayout.LayoutParams.WRAP_CONTENT
-//                ).apply {
-//                    gravity = Gravity.CENTER_HORIZONTAL
-//                    setMargins(24.dpToPx(requireContext()), 0, 24.dpToPx(requireContext()), 6.dpToPx(requireContext()))
-//                }
-//            }
-//
-//            // view_home_mate 바로 아래에 추가
-//            parentLayout.addView(mateView, referenceIndex + 1)
-//        }
-//    }
+    private fun <T: ViewModel> updateRecommendMatesUI(mates: List<UserMateInfo>, viewModel: T, showHeart: Boolean) {
+        val parentLayout = binding.mainLinearLayout
+        val referenceView = binding.viewHomeMate // 기존 view_home_mate 아래에 추가
+        val referenceIndex = parentLayout.indexOfChild(referenceView)
+
+        // 기존의 CustomMateView 삭제 (이전 추천 메이트 삭제)
+        parentLayout.children.filter { it is CustomMateView<*> || it.tag == "divider" }.forEach {
+            parentLayout.removeView(it) }
+
+        // 추천 메이트 목록 추가 (최대 5개)
+        mates.take(5).forEachIndexed { index, mate ->
+            // 첫 번째 뷰가 아닐 때만 가로 구분선 추가
+            if (index > 0) {
+                val dividerView = View(requireContext()).apply {
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        1.dpToPx(requireContext()) // 경계선 높이 1dp
+                    ).apply {
+                        setMargins(24.dpToPx(requireContext()), 0, 24.dpToPx(requireContext()), 4.dpToPx(requireContext()))
+                    }
+                    setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.border)) // 경계선 색상
+                    tag = "divider" // 제거할 때 구분하기 위해 태그 추가
+                }
+                parentLayout.addView(dividerView, referenceIndex + 1) // 가로 경계선 추가
+            }
+
+            val mateView = CustomMateView<T>(requireContext(), showHeartButton = showHeart).apply {
+                setViewModel(viewModel)
+                updateMateInfo(mate, mates.size - index)
+
+                // 상단 마진을 최소화하여 뷰를 더 위로 붙이기
+                layoutParams = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT
+                ).apply {
+                    gravity = Gravity.CENTER_HORIZONTAL
+                    setMargins(24.dpToPx(requireContext()), 0, 24.dpToPx(requireContext()), 6.dpToPx(requireContext()))
+                }
+            }
+
+            // view_home_mate 바로 아래에 추가
+            parentLayout.addView(mateView, referenceIndex + 1)
+        }
+    }
 
     // dp → px 변환 함수
     private fun Int.dpToPx(context: Context): Int {
         return (this * context.resources.displayMetrics.density).toInt()
     }
 
-    private fun updateUserInfoText(userInfo: UserInfo) {
+    private fun updateUserInfoText(challengeData: ChallengeData?) {
 
         val sharedPref = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        val userNickname = userInfo.nickname
+        val userNickname = challengeData?.homeNickName ?: ""
         val signupDateStr = sharedPref.getString("signup_date", "") ?: ""
-        val crewReward = userInfo.crewReward
-        val soloReward = userInfo.personalReward
-        val userTendency = userInfo.tendency
+        val crewReward = challengeData?.crewReward
+        val soloReward = challengeData?.soloReward
+        val userTendency = challengeData?.tendency
+        val editor = sharedPref.edit()
+        editor.putString("user_tendency", userTendency)
+        editor.apply()
 
         if (userNickname.isNotEmpty()) {
             val originalRunText = getString(R.string.main_run_together)

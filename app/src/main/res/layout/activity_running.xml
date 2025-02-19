@@ -101,13 +101,13 @@
                 android:layout_marginTop="23dp"
                 android:layout_gravity="center_horizontal" />
 
-            <ImageView
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/charcterRunningAnimation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/running_character"
-                android:src="@drawable/img_running_character"
-                android:layout_marginTop="102dp"
-                android:layout_marginStart="56dp" />
+                android:layout_gravity="center_horizontal"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true" />
 
             <TextView
                 android:id="@+id/txtRunningDistance"
@@ -142,14 +142,14 @@
                 android:contentDescription="@string/distance"
                 android:src="@drawable/img_distance"
                 android:layout_marginTop="310dp"
-                android:layout_marginStart="290dp"
-                android:layout_marginEnd="34dp"/>
+                android:layout_marginStart="294dp"
+                android:layout_marginEnd="30dp"/>
 
             <TextView
                 android:id="@+id/txtAverageSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="280dp"
+                android:layout_marginStart="288dp"
                 android:layout_marginTop="346dp"
                 android:textColor="@color/txt_running_color"
                 android:textStyle="bold" />
