@@ -16,17 +16,10 @@ class CreateSoloActivity : AppCompatActivity () {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val topBarTitle: TextView = findViewById(R.id.txtTopBarWithBackButton)
-        topBarTitle.text = "챌린지 생성하기"
-        val calendarButton: ImageButton = findViewById(R.id.CalanderButton)
-        calendarButton.setOnClickListener {
-            val intent = Intent(this, CalendarActivity::class.java)
-            startActivity(intent)
-        }
-
         // View Binding 초기화
         binding = ActivityCreateSoloBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         // Fragment 추가
         supportFragmentManager.beginTransaction()
