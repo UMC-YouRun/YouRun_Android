@@ -5,9 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.yourun.model.data.CrewChallengeRes
-import com.example.yourun.model.data.MemberTendencyInfo
 import com.example.yourun.model.data.SoloChallengeRes
 import com.example.yourun.model.data.Tendency
+import com.example.yourun.model.data.response.MemberTendencyInfo
 import com.example.yourun.model.repository.ChallengeRepository
 import kotlinx.coroutines.launch
 

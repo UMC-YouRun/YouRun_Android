@@ -1,5 +1,6 @@
 package com.example.yourun.model.data
 
+import com.example.yourun.model.data.response.MemberTendencyInfo
 import com.google.gson.annotations.SerializedName
 
 data class CrewChallengeResponse(
