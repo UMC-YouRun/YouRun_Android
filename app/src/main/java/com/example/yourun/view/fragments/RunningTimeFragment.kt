@@ -64,7 +64,9 @@ class RunningTimeFragment : Fragment() {
         }
 
         viewModel.mateId.observe(viewLifecycleOwner) { id ->
+            /*
             viewModel.fetchMateRunningData(id)
+             */
         }
 
         viewModel.mateRunningData.observe(viewLifecycleOwner) { runningData ->

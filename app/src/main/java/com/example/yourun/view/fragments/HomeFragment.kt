@@ -1,4 +1,3 @@
-/*
 package com.example.yourun.view.fragments
 
 import android.content.Context
@@ -25,7 +24,7 @@ import com.example.yourun.model.data.response.UserSoloChallengeInfo
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.HomeRepository
 import com.example.yourun.view.activities.CalendarActivity
-import com.example.yourun.view.activities.ChallengeListActivity
+//import com.example.yourun.view.activities.ChallengeListActivity
 import com.example.yourun.view.activities.CreateChallengeActivity
 import com.example.yourun.view.activities.CrewProgressActivity
 import com.example.yourun.view.activities.ResultContributionActivity
@@ -134,8 +133,10 @@ class HomeFragment : Fragment() {
         }
 
         binding.btnAddChallenge.setOnClickListener {
+            /*
             val intent = Intent(requireContext(), ChallengeListActivity::class.java)
             startActivity(intent)
+             */
             parentFragmentManager.popBackStack()
         }
 
@@ -330,5 +331,3 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
-
- */

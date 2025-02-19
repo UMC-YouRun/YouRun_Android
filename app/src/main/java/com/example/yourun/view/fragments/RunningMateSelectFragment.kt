@@ -46,8 +46,10 @@ class RunningMateSelectFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        /*
         viewModel.fetchMateList() // 메이트 목록 데이터 가져오기
         viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
+         */
 
         binding.mateSelectTopBar.txtTopBarWithBackButton.text = "러닝메이트 선택"
 
