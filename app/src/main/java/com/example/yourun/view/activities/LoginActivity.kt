@@ -134,8 +134,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-// 앱 설명을 봤는지 여부에 따른 화면 이동 처리
-private fun handleAppExpNavigation() {
+       
+
+        // 앱 설명을 이미 봤다면 MainActivity로 이동
+  private fun handleAppExpNavigation() {
     val sharedPref = getSharedPreferences("AppPrefs", MODE_PRIVATE)
     val isAppExpSeen = sharedPref.getBoolean("isAppExpSeen", false)
     Log.d("LoginActivity", "isAppExpSeen: $isAppExpSeen")
