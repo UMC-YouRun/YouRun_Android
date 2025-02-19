@@ -137,6 +137,16 @@
         <activity android:name=".view.activities.CrewProgressActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".view.activities.CrewChallengeDetailActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".view.activities.SoloChallengeDetailActivity"
+            android:exported="true">
+        </activity>
+
     </application>
 
 </manifest>
