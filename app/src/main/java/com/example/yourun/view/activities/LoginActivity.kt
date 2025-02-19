@@ -126,26 +126,31 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "이메일과 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.login(email, password)
+                startActivity(Intent(this, MainActivity::class.java))
 
-                handleAppExpNavigation()
+                //handleAppExpNavigation()
             }
         }
     }
 
-    // 앱 설명을 봤는지 여부에 따른 화면 이동 처리
-    private fun handleAppExpNavigation() {
-        val sharedPref = getSharedPreferences("AppPrefs", MODE_PRIVATE)
-        val isAppExpSeen = sharedPref.getBoolean("isAppExpSeen", false)
-        Log.d("LoginActivity", "isAppExpSeen: $isAppExpSeen")
 
-        // 앱 설명을 이미 봤다면 MainActivity로 이동
-        if (isAppExpSeen)  {
-            startActivity(Intent(this, MainActivity::class.java))
-        } else{
-            // 앱 설명을 안 봤다면 AppExpActivity로 이동
-            startActivity(Intent(this, AppExpActivity::class.java))
+// 앱 설명을 봤는지 여부에 따른 화면 이동 처리
+private fun handleAppExpNavigation() {
+    val sharedPref = getSharedPreferences("AppPrefs", MODE_PRIVATE)
+    val isAppExpSeen = sharedPref.getBoolean("isAppExpSeen", false)
+    Log.d("LoginActivity", "isAppExpSeen: $isAppExpSeen")
 
-        }
+    startActivity(Intent(this, AppExpActivity::class.java))
+
+
+    // 앱 설명을 이미 봤다면 MainActivity로 이동
+//        if (isAppExpSeen)  {
+//            startActivity(Intent(this, MainActivity::class.java))
+//        } else{
+//            // 앱 설명을 안 봤다면 AppExpActivity로 이동
+//            startActivity(Intent(this, AppExpActivity::class.java))
+//
+//        }
 
         finish() // 현재 Activity 종료하여 뒤로 가기 방지
     }

@@ -24,20 +24,21 @@
             android:id="@+id/txt_app_exp_what_character"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/app_exp_2"
-            android:textSize="24sp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="121dp"
+            android:layout_marginBottom="58dp"
             android:letterSpacing="-0.03"
             android:lineSpacingExtra="8sp"
-            android:layout_marginTop="80dp"
-            android:layout_marginBottom="74dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="121dp"/>
+            android:text="@string/app_exp_2"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:layout_width="wrap_content"
