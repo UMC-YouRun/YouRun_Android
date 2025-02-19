@@ -15,6 +15,12 @@ object ChallengeCheckManager {
     private var checkJob: Job? = null // 코루틴 잡을 저장
     private val handler = Handler(Looper.getMainLooper()) // UI 스레드에서 실행
 
+    private val excludedActivities = setOf(
+        "com.example.yourun.view.activities.OnboardingActivity",
+        "com.example.yourun.view.activities.SignUpActivity",
+        "com.example.yourun.view.activities.LoginActivity"
+    )
+
     fun init(context: Context) {
         prefs = context.getSharedPreferences("challenge_prefs", Context.MODE_PRIVATE)
     }
@@ -28,10 +34,19 @@ object ChallengeCheckManager {
     }
 
     /**
-     * ✅ 앱 실행 후 30초 대기 후 주기적으로 챌린지 상태 확인
+     * ✅ 특정 액티비티에서는 `startPeriodicCheck` 실행 방지
      */
     fun startPeriodicCheck(context: Context) {
         checkJob?.cancel() // 기존 실행 중인 잡이 있다면 취소
+
+        // ✅ 현재 실행 중인 액티비티 확인
+        val activityName = getCurrentActivityName(context)
+
+        // 특정 액티비티라면 실행하지 않음
+        if (activityName in excludedActivities) {
+            Log.d("ChallengeCheckManager", "현재 액티비티 제외 목록에 있음: $activityName → 주기적 체크 실행 안함")
+            return
+        }
 
         checkJob = CoroutineScope(Dispatchers.IO).launch {
             delay(30000) //30초후
@@ -74,7 +89,6 @@ object ChallengeCheckManager {
         }
     }
 
-
     private fun openChallengeActivity(context: Context, type: String) {
         handler.post {
             val intent = when (type) {
@@ -84,6 +98,20 @@ object ChallengeCheckManager {
             }
             intent.flags = android.content.Intent.FLAG_ACTIVITY_NEW_TASK
             context.startActivity(intent)
+        }
+    }
+
+    /**
+     * ✅ 현재 실행 중인 액티비티 이름 가져오기
+     */
+    private fun getCurrentActivityName(context: Context): String? {
+        return try {
+            val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager
+            val runningTask = activityManager.appTasks.firstOrNull()?.taskInfo?.topActivity
+            runningTask?.className
+        } catch (e: Exception) {
+            Log.e("ChallengeCheckManager", "현재 액티비티 가져오는 중 오류 발생", e)
+            null
         }
     }
 }
