@@ -75,7 +75,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginHorizontal="16dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
+            app:cardUseCompatPadding="false"
             app:layout_constraintTop_toBottomOf="@id/tv_win">
 
             <LinearLayout
@@ -121,29 +121,18 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <ImageButton
-            android:id="@+id/btn_confirm"
+        <Button
+            android:id="@+id/btn_next"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/rounded_button"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="16dp"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/btn_check"
-            app:layout_constraintTop_toBottomOf="@id/card_crew_contribution"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-        <TextView
-            android:id="@+id/btn_confirm_text"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/btn_check"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:layout_height="48dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/btn_next"
+            android:text="확인"
             android:textColor="@color/black"
-            android:gravity="center"
+            android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/card_crew_contribution"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

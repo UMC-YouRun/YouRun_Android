@@ -15,6 +15,7 @@
             android:id="@+id/top_bar"
             layout="@layout/top_bar_with_back_button" />
 
+
         <TextView
             android:id="@+id/tv_running_message"
             android:layout_width="250dp"
@@ -40,14 +41,12 @@
             app:layout_constraintTop_toBottomOf="@id/tv_running_message"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-
-        <!-- 챌린지 결과 메시지 -->
         <TextView
-            android:id="@+id/tv_challenge_result"
+            android:id="@+id/tv_challenge_mate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/default_success"
-            android:textSize="22sp"
+            android:text="러닝 챌린지"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textAlignment="center"
             android:gravity="center"
@@ -55,6 +54,22 @@
             app:layout_constraintTop_toBottomOf="@id/img_runner"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- 성공 / 실패 여부 (예: "성공!" 또는 "실패!") -->
+        <TextView
+            android:id="@+id/tv_challenge_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="성공!"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_challenge_mate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
 
         <LinearLayout
             android:id="@+id/layout_participants"
@@ -103,25 +118,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/gray_400"
             android:layout_marginHorizontal="16dp"
             app:layout_constraintTop_toBottomOf="@id/layout_participants"
-            app:cardCornerRadius="16dp">
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardUseCompatPadding="false">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:background="@drawable/bg_solo_mate"
                 android:padding="16dp">
 
                 <ImageView
                     android:id="@+id/img_mate_profile"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/profile_trailrunner"
-                android:layout_gravity="center_vertical"/>
-
-
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/profile_trailrunner"
+                    android:layout_gravity="center_vertical"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -134,16 +148,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/default_name"
-                        android:textSize="18sp"
+                        android:textSize="14sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/purple_700"/>
 
                     <TextView
                         android:id="@+id/tv_lucy_status"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/challenge_success"
-                        android:textSize="14sp"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
                         android:textColor="@color/black"/>
                 </LinearLayout>
 
@@ -175,29 +190,20 @@
         </androidx.cardview.widget.CardView>
 
         <!-- 확인 버튼 -->
-        <ImageButton
+        <Button
             android:id="@+id/btn_confirm"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/rounded_button"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:layout_marginHorizontal="16dp"
             android:scaleType="centerCrop"
             android:contentDescription="@string/btn_check"
+            android:text="@string/btn_check"
+            android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/card_runner"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-        <TextView
-            android:id="@+id/btn_confirm_text"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="@string/btn_check"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@id/card_runner"
-            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

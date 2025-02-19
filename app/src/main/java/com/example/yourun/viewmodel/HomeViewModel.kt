@@ -90,34 +90,34 @@ class HomeViewModel(
         }
     }
 
-    fun fetchRecommendMates() {
-        viewModelScope.launch {
-            try {
-                Log.d("HomeViewModel", "추천 메이트 요청 시작")
-
-                val response = repository.getRecommendMates()
-
-                if (response == null) {
-                    Log.e("HomeViewModel", "response가 null입니다. 빈 리스트 반환")
-                    _recommendMates.value = emptyList()
-                    return@launch
-                }
-
-                response.data.let { mateList ->
-                    _recommendMates.value = if (mateList.isEmpty()) {
-                        Log.e("HomeViewModel", "추천 메이트 데이터 없음")
-                        emptyList()
-                    } else {
-                        Log.d("HomeViewModel", "추천 메이트 목록 가져오기 성공: ${mateList.size}명")
-                        mateList.take(5) // 최대 5명만 표시
-                    }
-                }
-            } catch (e: Exception) {
-                Log.e("HomeViewModel", "추천 메이트 가져오는 중 오류 발생", e)
-                _recommendMates.value = emptyList() // 네트워크 오류 발생 시 빈 리스트 할당
-            }
-        }
-    }
+//    fun fetchRecommendMates() {
+//        viewModelScope.launch {
+//            try {
+//                Log.d("HomeViewModel", "추천 메이트 요청 시작")
+//
+//                val response = repository.getRecommendMates()
+//
+//                if (response == null) {
+//                    Log.e("HomeViewModel", "response가 null입니다. 빈 리스트 반환")
+//                    _recommendMates.value = emptyList()
+//                    return@launch
+//                }
+//
+//                response.data.let { mateList ->
+//                    _recommendMates.value = if (mateList.isEmpty()) {
+//                        Log.e("HomeViewModel", "추천 메이트 데이터 없음")
+//                        emptyList()
+//                    } else {
+//                        Log.d("HomeViewModel", "추천 메이트 목록 가져오기 성공: ${mateList.size}명")
+//                        mateList.take(5) // 최대 5명만 표시
+//                    }
+//                }
+//            } catch (e: Exception) {
+//                Log.e("HomeViewModel", "추천 메이트 가져오는 중 오류 발생", e)
+//                _recommendMates.value = emptyList() // 네트워크 오류 발생 시 빈 리스트 할당
+//            }
+//        }
+//    }
 
     fun addMate(mateId: Long) {
         viewModelScope.launch {

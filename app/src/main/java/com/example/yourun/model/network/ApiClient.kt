@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.example.yourun.BuildConfig
 import com.example.yourun.MyApplication
-import okhttp3.OkHttpClient
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,6 +20,8 @@ object ApiClient {
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)
+            .followRedirects(false)
+            .followSslRedirects(false)
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
@@ -27,23 +29,42 @@ object ApiClient {
                 val originalRequest = chain.request()
                 val requestUrl = originalRequest.url.toString()
 
-                if (requestUrl.contains("/api/v1/users/login")) {
-                    Log.d("Interceptor", "로그인 요청이므로 Authorization 헤더를 추가하지 않음")
-                    return@addInterceptor chain.proceed(originalRequest)
-                }
+//                if (requestUrl.contains("/api/v1/users/login")) {
+//                    Log.d("Interceptor", "로그인 요청이므로 Authorization 헤더를 추가하지 않음")
+//                    return@addInterceptor chain.proceed(originalRequest)
+//                }
 
-                // 로그인 이외의 요청에만 토큰 추가
                 val token = TokenManager.getToken()
-                if (token.isNotEmpty()) {
-                    val requestWithAuth = originalRequest.newBuilder()
-                        .addHeader("Authorization", "Bearer $token") // 올바른 형식으로 추가
-                        .build()
+                val requestBuilder = originalRequest.newBuilder()
+
+                if (!token.isNullOrEmpty()) {
+                    requestBuilder.header("Authorization", "Bearer $token")
                     Log.d("Interceptor", "Authorization 헤더 추가됨: Bearer $token")
-                    return@addInterceptor chain.proceed(requestWithAuth)
                 }
 
-                return@addInterceptor chain.proceed(originalRequest)
+                val response = chain.proceed(requestBuilder.build())
+
+                if (response.code == 302 || response.code == 301 || response.code == 307) {
+                    val newUrl = response.header("Location")
+
+                    if (!newUrl.isNullOrEmpty()) {
+                        Log.d("Interceptor", "302 Redirect → 새로운 URL 요청: $newUrl")
+
+                        if (newUrl.contains("/oauth2/authorization/kakao")) {
+                            Log.e("Interceptor", "카카오 로그인 리디렉션 감지 - 수동 처리 필요!")
+                            return@addInterceptor response
+                        }
+
+                        val newRequest = originalRequest.newBuilder()
+                            .url(newUrl)
+                            .build()
+                        return@addInterceptor chain.proceed(newRequest)
+                    }
+                }
+
+                return@addInterceptor response
             }
+
             .build()
     }
 
@@ -56,8 +77,11 @@ object ApiClient {
     }
 
     fun getApiService(): ApiService = retrofit.create(ApiService::class.java)
-    fun getChallengeApiService(): ChallengeApiService = retrofit.create(ChallengeApiService::class.java)
 
+    fun getChallengeApiService(): ChallengeApiService {
+        Log.d("API_BASE_URL", "현재 BASE_URL: $BASE_URL")
+        return retrofit.create(ChallengeApiService::class.java)
+    }
     object TokenManager {
         private val context: Context
             get() = MyApplication.instance.applicationContext
