@@ -23,7 +23,7 @@ import com.example.yourun.model.data.response.UserSoloChallengeInfo
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.HomeRepository
 import com.example.yourun.view.activities.CalendarActivity
-import com.example.yourun.view.activities.ChallengeListActivity
+//import com.example.yourun.view.activities.ChallengeListActivity
 import com.example.yourun.view.activities.CreateChallengeActivity
 import com.example.yourun.view.activities.ResultContributionActivity
 import com.example.yourun.view.custom.CustomHomeChallenge
@@ -118,12 +118,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        binding.btnAddChallenge.setOnClickListener {
-            val intent = Intent(requireContext(), ChallengeListActivity::class.java)
-            startActivity(intent)
-            parentFragmentManager.popBackStack()
-        }
-
         binding.btnCalendar.setOnClickListener {
             val intent = Intent(requireContext(), CalendarActivity::class.java)
             startActivity(intent)
@@ -137,7 +131,7 @@ class HomeFragment : Fragment() {
 
         // 추천 메이트 UI 업데이트
         viewModel.recommendMates.observe(viewLifecycleOwner) { mates ->
-            updateRecommendMatesUI(mates, viewModel, showHeart = true)
+            //updateRecommendMatesUI(mates, viewModel, showHeart = true)
         }
 
         // btn_redirect 클릭 시 최신 메이트 데이터 다시 불러오기
@@ -180,13 +174,23 @@ class HomeFragment : Fragment() {
         customView.updatePeriodSolo(soloChallenge.challengePeriod)
         customView.updateDistance(soloChallenge.challengeDistance)
         customView.updateSoloImage(soloChallenge.challengeMateTendency)
+
         val soloChallengeLevel = when (soloChallenge.status) {
-            "PENDING" -> 0
-            "IN_PROGRESS" -> 1
-            "COMPLETED" -> 2
+            "PENDING" -> 0  // 매칭 대기중
+            "IN_PROGRESS" -> 1 // 진행 중
+            "COMPLETED" -> 2 // 완료
             else -> 0
         }
         customView.updateChallengeState(soloChallengeLevel)
+
+        // **진행 중(IN_PROGRESS)인 경우에만 클릭 가능**
+        if (soloChallenge.status == "IN_PROGRESS") {
+            customView.setOnClickListener {
+                val intent = Intent(requireContext(), ResultSoloActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
         return customView
     }
 
@@ -197,15 +201,24 @@ class HomeFragment : Fragment() {
         customView.updateCrewTitle(crewChallenge.crewName)
         customView.updateDates(startDate = crewChallenge.crewStartDate, dayCount = crewChallenge.crewDayCount)
         customView.updatePeriodCrew(crewChallenge.challengePeriod)
+
         val crewTendencies = crewChallenge.myParticipantIdsInfo.map { it.memberTendency }
-        customView.updateCrewImages(crewTendencies)
         val crewChallengeLevel = when (crewChallenge.challengeStatus) {
-            "PENDING" -> 0
-            "IN_PROGRESS" -> 1
-            "COMPLETED" -> 2
+            "PENDING" -> 0  // 매칭 대기중
+            "IN_PROGRESS" -> 1 // 진행 중
+            "COMPLETED" -> 2 // 완료
             else -> 0
         }
         customView.updateChallengeState(crewChallengeLevel)
+
+        // **진행 중(IN_PROGRESS)인 경우에만 클릭 가능**
+        if (crewChallenge.challengeStatus == "IN_PROGRESS") {
+            customView.setOnClickListener {
+                val intent = Intent(requireContext(), ResultCrewActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
         return customView
     }
 
@@ -318,3 +331,4 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
+

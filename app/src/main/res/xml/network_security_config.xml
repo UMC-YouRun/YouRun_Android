@@ -3,5 +3,7 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">yourun.co.kr</domain>
         <domain includeSubdomains="true">dapi.kakao.com</domain>
+        <domain includeSubdomains="true">apis.map.kakao.com</domain>
+        <domain includeSubdomains="true">kauth.kakao.com</domain>
     </domain-config>
 </network-security-config>

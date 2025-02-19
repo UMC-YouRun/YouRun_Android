@@ -1,72 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/top_bar_with_back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <View
-            android:id="@id/rounded_bottom_background"
-            android:layout_width="match_parent"
-            android:layout_height="83dp"
-            android:background="@drawable/rounded_bottom_background" />
-
-        <ImageButton
-            android:id="@+id/back_button"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="29dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="8dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/back_button"
-            android:src="@drawable/img_arrow_left" />
-
-        <TextView
-            android:id="@+id/txt_top_bar_with_back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center"
-            android:letterSpacing="0.03"
-            android:lineSpacingExtra="14sp"
-            android:text="@string/tv_challenge"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <ImageButton
-            android:id="@+id/calender_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginEnd="29dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginBottom="8dp"
-            android:background="@null"
-            android:cropToPadding="false"
-            android:padding="0dp"
-            app:srcCompat="@drawable/ic_calendar" />
-
-    </FrameLayout>
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/top_bar_with_calendar" />
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/top_bar_with_back_button">
+        app:layout_constraintTop_toBottomOf="@+id/top_bar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -103,26 +52,54 @@
                         app:srcCompat="@drawable/img_facemaker_challenge" />
 
                     <TextView
-                        android:id="@+id/user_character"
+                        android:id="@+id/crew_slogan"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
-                        android:text="@string/tv_personal_character"
+                        android:text="@string/tv_crew_slogan"
                         android:textColor="#F4AA3A"
                         android:textSize="20sp"
-                        android:textStyle="bold|italic"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/back_card"
                         app:layout_constraintStart_toStartOf="@+id/back_card" />
 
-
-
-                    <TextView
-                        android:id="@+id/team_slogan"
+                    <ImageView
+                        android:id="@+id/mini_pacemaker"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="24dp"
-                        android:layout_marginTop="18dp"
-                        android:text="@string/tv_username"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/back_card"
+                        app:layout_constraintStart_toStartOf="@+id/back_card"
+                        app:srcCompat="@drawable/img_mini_pacemaker" />
+
+                    <ImageView
+                        android:id="@+id/mini_sprinter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/back_card"
+                        app:layout_constraintStart_toEndOf="@+id/mini_pacemaker"
+                        app:srcCompat="@drawable/img_mini_sprinter" />
+
+                    <ImageView
+                        android:id="@+id/mini_trailrunner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/back_card"
+                        app:layout_constraintStart_toEndOf="@+id/mini_sprinter"
+                        app:srcCompat="@drawable/img_mini_trailrunner" />
+
+                    <TextView
+                        android:id="@+id/crew_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/tv_crew_name"
                         android:textColor="@color/black"
                         android:textSize="24sp"
                         android:textStyle="bold"
@@ -130,7 +107,7 @@
                         app:layout_constraintTop_toTopOf="@+id/back_card" />
 
                     <TextView
-                        android:id="@+id/challenge_personal_subtitle"
+                        android:id="@+id/challenge_crew_subtitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="24dp"
@@ -142,7 +119,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/back_card" />
 
                     <ImageView
-                        android:id="@+id/bg_headcount"
+                        android:id="@+id/bg_joincount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="68sp"
@@ -152,7 +129,7 @@
                         app:srcCompat="@drawable/bg_headcount" />
 
                     <TextView
-                        android:id="@+id/challenge_personal_title"
+                        android:id="@+id/challenge_crew_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="24dp"
@@ -160,49 +137,19 @@
                         android:textSize="20sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/challenge_personal_subtitle" />
+                        app:layout_constraintTop_toBottomOf="@+id/challenge_crew_subtitle" />
 
                     <TextView
-                        android:id="@+id/headcount"
+                        android:id="@+id/joincount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/tv_crew_headcount"
                         android:textColor="@color/gray"
                         android:textSize="13sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/bg_headcount"
-                        app:layout_constraintEnd_toEndOf="@+id/bg_headcount"
-                        app:layout_constraintStart_toStartOf="@+id/bg_headcount"
-                        app:layout_constraintTop_toTopOf="@+id/bg_headcount" />
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/tv_nickname2"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/team_slogan"
-                        app:layout_constraintTop_toBottomOf="@+id/team_slogan" />
-
-                    <TextView
-                        android:id="@+id/hashtag1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="13dp"
-                        android:text="@string/tv_hashtag1"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/back_card"
-                        app:layout_constraintStart_toStartOf="@+id/textView" />
-
-                    <TextView
-                        android:id="@+id/hashtag2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="@string/tv_hashtag2"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/hashtag1"
-                        app:layout_constraintStart_toEndOf="@+id/hashtag1" />
+                        app:layout_constraintBottom_toBottomOf="@+id/bg_joincount"
+                        app:layout_constraintEnd_toEndOf="@+id/bg_joincount"
+                        app:layout_constraintStart_toStartOf="@+id/bg_joincount"
+                        app:layout_constraintTop_toTopOf="@+id/bg_joincount" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -227,7 +174,7 @@
                     app:srcCompat="@drawable/img_bar_horizontal" />
 
                 <TextView
-                    android:id="@+id/challenge_reward"
+                    android:id="@+id/title_reward"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="24dp"
@@ -245,8 +192,8 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="12dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/challenge_reward"
-                    app:srcCompat="@drawable/img_badge_s" />
+                    app:layout_constraintTop_toBottomOf="@+id/title_reward"
+                    app:srcCompat="@drawable/img_badge_c" />
 
                 <TextView
                     android:id="@+id/tv_reward"
@@ -254,14 +201,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="8dp"
-                    android:text="@string/tv_personal_rewards"
+                    android:text="@string/tv_crew_rewards"
                     android:textColor="@color/gray"
                     android:textSize="13sp"
                     app:layout_constraintStart_toEndOf="@+id/badge_crew"
-                    app:layout_constraintTop_toBottomOf="@+id/challenge_reward" />
+                    app:layout_constraintTop_toBottomOf="@+id/title_reward" />
 
                 <TextView
-                    android:id="@+id/period"
+                    android:id="@+id/title_challenge_period"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
@@ -281,7 +228,7 @@
                     android:text="@string/tv_period_detail"
                     android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/period" />
+                    app:layout_constraintTop_toBottomOf="@+id/title_challenge_period" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -294,7 +241,7 @@
     </ScrollView>
 
     <ImageButton
-        android:id="@+id/imageButton4"
+        android:id="@+id/btn_join"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"

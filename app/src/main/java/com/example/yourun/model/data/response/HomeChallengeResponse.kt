@@ -1,5 +1,7 @@
 package com.example.yourun.model.data.response
 
+
+
 data class HomeChallengeResponse(
     val status: Int,
     val code: String,

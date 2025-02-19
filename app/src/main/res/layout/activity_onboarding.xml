@@ -4,16 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center">
 
     <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieAnimationView"
+        android:id="@+id/lottieAnimationView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:lottie_autoPlay="true"
         app:lottie_loop="false"
-        app:lottie_fileName="@string/animation_file"
-        android:scaleType="centerCrop"/>
-
+        app:lottie_fileName="onboarding_yourun1.json"
+        android:scaleType="centerCrop"/> <!-- 화면에 꽉차게 확장됨 -->
 
 </LinearLayout>

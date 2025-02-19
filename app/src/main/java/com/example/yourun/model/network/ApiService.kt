@@ -1,5 +1,8 @@
 package com.example.yourun.model.network
 
+import com.example.yourun.model.data.BaseResponse
+import com.example.yourun.model.data.CrewChallengeDetailRes
+import com.example.yourun.model.data.CrewChallengeResponse
 import com.example.yourun.model.data.response.ChallengeDataResponse
 import com.example.yourun.model.data.response.ChallengeResultResponse
 import com.example.yourun.model.data.response.EmailduplicateResponse
@@ -23,6 +26,8 @@ import com.example.yourun.model.data.response.RunningDataResponse
 import com.example.yourun.model.data.response.RunningResultResponse
 import com.example.yourun.model.data.response.MateResponse
 import com.example.yourun.model.data.MyPageResponse
+import com.example.yourun.model.data.PersonalChallengeResponse
+import com.example.yourun.model.data.SoloChallengeDetailRes
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -65,6 +70,9 @@ interface ApiService {
     @GET("users/mates")
     suspend fun getMatesList(): Response<MateResponse>
 
+    //@GET("users/mates")
+    //suspend fun getMates(): MateResponse<List<MateApiData>>
+
     @POST("users/mates/{mateId}")
     suspend fun addMate(
         @Path("mateId") mateId: Long
@@ -94,6 +102,21 @@ interface ApiService {
     @POST("challenges/solo")
     suspend fun createsolochallenge(@Body request: CreateSoloChallengeRequest): CreateSoloChallengeResponse
 
+    @GET("challenges/crew/pending")
+    suspend fun getPendingCrewChallenges(): Response<BaseResponse<CrewChallengeResponse>>
+
+    @GET("challenges/solo/pending")
+    suspend fun getPendingPersonalChallenges(): Response<BaseResponse<PersonalChallengeResponse>>
+
+    @GET("challenges/crew/pending/{challengeId}")
+    suspend fun getCrewChallengeDetail(
+        @Path("challengeId") challengeId: String
+    ): Response<BaseResponse<CrewChallengeDetailRes>>
+
+    @GET("challenges/solo/pending/{challengeId}")
+    suspend fun getSoloChallengeDetail(
+        @Path("challengeId") challengeId: String
+    ): Response<BaseResponse<SoloChallengeDetailRes>>
 }
 
 data class ApiResponse<T>(

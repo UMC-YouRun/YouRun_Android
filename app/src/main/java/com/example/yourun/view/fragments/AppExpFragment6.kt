@@ -39,7 +39,7 @@ class AppExpFragment6 : Fragment() {
         // "유런 시작하기" 버튼 클릭 시 MainActivity로 이동
         binding.btnStartYourun.setOnClickListener {
 
-            val sharedPref = requireActivity().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
+           val sharedPref = requireActivity().getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
             sharedPref.edit().putBoolean("isAppExpSeen", true).apply()
 
 

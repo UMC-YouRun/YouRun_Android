@@ -1,6 +1,9 @@
 package com.example.yourun.view.activities
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityCreateSoloBinding
@@ -17,11 +20,11 @@ class CreateSoloActivity : AppCompatActivity () {
         binding = ActivityCreateSoloBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         // Fragment 추가
         supportFragmentManager.beginTransaction()
             .replace(R.id.create_solo_fragment_container, CreateSolo1Fragment())
             .commit()
-
 
 
     }

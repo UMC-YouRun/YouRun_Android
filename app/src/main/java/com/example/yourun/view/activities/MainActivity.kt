@@ -23,6 +23,7 @@ import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import com.example.yourun.view.fragments.ChallengeFragment
+import com.example.yourun.view.fragments.ChallengeListFragment
 import com.example.yourun.view.fragments.RunningFragment
 import com.google.android.material.snackbar.Snackbar
 
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             val newFragment = when (item.itemId) {
                 R.id.nav_home -> HomeFragment()
                 /*R.id.nav_mate -> MateFragment()*/
-                R.id.nav_challenge -> ChallengeFragment()
+                R.id.nav_challenge -> ChallengeListFragment()
                 R.id.nav_my -> MyRunFragment()
                 else -> return@setOnItemSelectedListener false
             }
