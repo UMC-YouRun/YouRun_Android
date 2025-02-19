@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:tools="http://schemas.android.com/tools">
+        android:layout_height="match_parent">
 
 
         <FrameLayout
@@ -33,8 +35,8 @@
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="28dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/tv_myrun"
                 android:gravity="center"
+                android:text="@string/tv_myrun"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -43,11 +45,11 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="360dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginStart="360dp"
                 android:background="@drawable/ic_calendar"
-                android:importantForAccessibility="no"/>
+                android:importantForAccessibility="no" />
 
             <ImageView
                 android:id="@+id/img_profile"
@@ -62,12 +64,11 @@
                 android:id="@+id/tv_myrun_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tv_myrun_name"
-                android:textStyle="bold"
-                android:textSize="32sp"
                 android:layout_marginStart="170dp"
                 android:layout_marginTop="255dp"
-                />
+                android:text="@string/tv_myrun_name"
+                android:textSize="32sp"
+                android:textStyle="bold" />
 
 
             <ImageView
@@ -102,11 +103,11 @@
                 android:layout_height="47dp"
                 android:layout_marginTop="380dp"
                 android:background="@drawable/bg_gray_box"
+                android:importantForAccessibility="no"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:importantForAccessibility="no"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_myrun_edit"
@@ -123,16 +124,15 @@
                 app:layout_constraintTop_toTopOf="@+id/btn_edit" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/btn_test_again"
                 android:layout_width="330dp"
                 android:layout_height="47dp"
-                android:layout_marginTop="200dp"
+                android:layout_marginTop="160dp"
                 android:background="@drawable/btn_test_again"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.506"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/imageView"
-                />
+                app:layout_constraintTop_toTopOf="@+id/imageView" />
 
 
             <ImageView

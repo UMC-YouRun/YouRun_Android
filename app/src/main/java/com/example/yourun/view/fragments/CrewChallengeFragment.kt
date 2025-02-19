@@ -1,4 +1,4 @@
-package com.example.yourun.view.fragments
+/*package com.example.yourun.view.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -17,21 +17,22 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
+// import com.example.yourun.model.data.ChallengeItem
 import com.example.yourun.model.data.SoloChallengeRes
 import com.example.yourun.model.data.response.ChallengeItem
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.ChallengeRepository
 import com.example.yourun.view.activities.SoloChallengeDetailActivity
-import com.example.yourun.view.adapters.CrewChallengeAdapter
+// import com.example.yourun.view.adapters.CrewChallengeAdapter
 import com.example.yourun.viewmodel.ChallengeViewModel
 import com.example.yourun.viewmodel.ChallengeViewModelFactory
 
-class CrewChallengeFragment : Fragment() {
+/*class CrewChallengeFragment : Fragment() {
 
     private lateinit var viewModel: ChallengeViewModel
     private lateinit var recyclerView: RecyclerView
-    private lateinit var challengeAdapter: CrewChallengeAdapter
-    private var challengeItems: MutableList<ChallengeItem> = mutableListOf()
+    //private lateinit var challengeAdapter: CrewChallengeAdapter
+    // private var challengeItems: MutableList<ChallengeItem> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +44,8 @@ class CrewChallengeFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         // 어댑터 초기화
-        challengeAdapter = CrewChallengeAdapter(challengeItems)
-        recyclerView.adapter = challengeAdapter
+        //challengeAdapter = CrewChallengeAdapter(challengeItems)
+        //recyclerView.adapter = challengeAdapter
 
         viewModel = ViewModelProvider(
             this,
@@ -94,4 +95,4 @@ class CrewChallengeFragment : Fragment() {
         super.onResume()
         viewModel.fetchPendingCrewChallenges() // API 호출
     }
-}
+}*/
