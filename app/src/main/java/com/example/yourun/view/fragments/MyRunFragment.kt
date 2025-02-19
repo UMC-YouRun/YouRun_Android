@@ -27,8 +27,8 @@ class MyRunFragment : Fragment(R.layout.fragment_myrun) {
 
     private val tendencyImages = mapOf(
         "페이스메이커" to listOf(R.drawable.img_pace1, R.drawable.img_pace2, R.drawable.img_pace3, R.drawable.img_pace4),
-       "트레일러너" to listOf(R.drawable.img_trail1, R.drawable.img_trail2, R.drawable.img_trail3, R.drawable.img_trail4),
-       "스프린터" to listOf(R.drawable.img_sprinter1, R.drawable.img_sprinter2, R.drawable.img_sprinter3, R.drawable.img_sprinter4)
+        "트레일러너" to listOf(R.drawable.img_trail1, R.drawable.img_trail2, R.drawable.img_trail3, R.drawable.img_trail4),
+        "스프린터" to listOf(R.drawable.img_sprinter1, R.drawable.img_sprinter2, R.drawable.img_sprinter3, R.drawable.img_sprinter4)
     )
 
     private var selectedImageRes : Int = R.drawable.img_pace1

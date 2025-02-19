@@ -21,8 +21,11 @@ import com.example.yourun.model.data.response.ApiResponseBoolean
 import com.example.yourun.model.data.response.HomeChallengeResponse
 import com.example.yourun.model.data.response.RunningDataResponse
 import com.example.yourun.model.data.response.RunningResultResponse
-import com.example.yourun.model.data.MateResponse
-import com.example.yourun.model.data.MateApiData
+
+
+import com.example.yourun.model.data.response.MateResponse
+import com.example.yourun.model.data.MyPageResponse
+
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -60,8 +63,10 @@ interface ApiService {
 //    @GET("users/mates")
 //    suspend fun getMatesList(): Response<MateResponse>
 
-    @GET("users/mates")
-    suspend fun getMates(): MateResponse<List<MateApiData>>
+    /*@GET("users/mates")
+    suspend fun getMates(): MateResponse<List<MateApiData>>*/
+
+
 
     @POST("users/mates/{mateId}")
     suspend fun addMate(

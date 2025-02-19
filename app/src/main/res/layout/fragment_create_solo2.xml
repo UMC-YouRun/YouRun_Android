@@ -135,11 +135,6 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <include
-        layout="@layout/bottom_navigation" />
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
