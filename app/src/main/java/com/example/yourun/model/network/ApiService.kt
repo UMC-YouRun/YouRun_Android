@@ -66,6 +66,9 @@ interface ApiService {
     @GET("users/mates")
     suspend fun getMatesList(): Response<MateResponse>
 
+    /*@GET("users/mates")
+    suspend fun getMates(): MateResponse<List<MateApiData>>*/
+
 
 
     @POST("users/mates/{mateId}")
