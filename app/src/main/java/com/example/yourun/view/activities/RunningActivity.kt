@@ -3,6 +3,7 @@ package com.example.yourun.view.activities
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.os.Looper
 import android.text.SpannableString
@@ -64,9 +65,7 @@ class RunningActivity : AppCompatActivity() {
         mateName = intent.getStringExtra("mate_nickname") ?: "닉네임"
         // val targetTime = intent.getIntExtra("target_time", 0)
         mateRunningDistanceMeters = intent.getIntExtra("mate_running_distance", 0)
-        Log.d("mateRunningDistance", mateRunningDistanceMeters.toString())
         val matePaceInt = intent.getIntExtra("mate_running_pace", 0)
-        Log.d("matePaceInt", matePaceInt.toString())
         // matePace를 평균 속도로 변환 (km/h = 60 / pace)
         val mateSpeed = if (matePaceInt != 0) 60.0 / matePaceInt else 0.0
 
@@ -88,21 +87,22 @@ class RunningActivity : AppCompatActivity() {
         val characterAnimationView =
             binding.charcterRunningAnimation
         val layoutParams = characterAnimationView.layoutParams as ViewGroup.MarginLayoutParams
+        val density = Resources.getSystem().displayMetrics.density
 
         when (userTendency) {
             "페이스메이커" -> {
                 binding.charcterRunningAnimation.setAnimation(R.raw.facemaker_running)
-                layoutParams.setMargins(20, 60, 20, 0)
+                layoutParams.setMargins((6 * density).toInt(), (60 * density).toInt(), (20 * density).toInt(), 0)
                 characterAnimationView.layoutParams = layoutParams
             }
             "트레일러너" -> {
                 binding.charcterRunningAnimation.setAnimation(R.raw.trailrunner_running)
-                layoutParams.setMargins(16, 36, 16, 0)
+                layoutParams.setMargins((12 * density).toInt(), (34 * density).toInt(), (16 * density).toInt(), 0)
                 characterAnimationView.layoutParams = layoutParams
             }
             "스프린터" -> {
                 binding.charcterRunningAnimation.setAnimation(R.raw.sprinter_running)
-                layoutParams.setMargins(8, 54, 8, 0)
+                layoutParams.setMargins((8 * density).toInt(), (56 * density).toInt(), (8 * density).toInt(), 0)
                 characterAnimationView.layoutParams = layoutParams
             }
         }

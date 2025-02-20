@@ -122,7 +122,8 @@ class RunningResultActivity : AppCompatActivity() {
                         )
                     )
                     if (response.isSuccessful) {
-                        val data = response.body()
+                        val body = response.body()
+                        val data = body?.data
                         if (data != null) {
                             Log.d("solo", data.isSoloChallengeInProgress.toString())
                             Log.d("crew", data.isCrewChallengeInProgress.toString())

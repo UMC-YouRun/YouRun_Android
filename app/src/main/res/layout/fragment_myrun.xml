@@ -82,7 +82,7 @@
                 android:id="@+id/tv_myrun_tag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="170dp"
+                android:layout_marginStart="156dp"
                 android:layout_marginTop="312dp"
                 android:text="@string/tv_myrun_profile"
                 android:textSize="16sp" />

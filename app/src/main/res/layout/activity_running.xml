@@ -142,14 +142,14 @@
                 android:contentDescription="@string/distance"
                 android:src="@drawable/img_distance"
                 android:layout_marginTop="310dp"
-                android:layout_marginStart="294dp"
+                android:layout_marginStart="298dp"
                 android:layout_marginEnd="30dp"/>
 
             <TextView
                 android:id="@+id/txtAverageSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="288dp"
+                android:layout_marginStart="290dp"
                 android:layout_marginTop="346dp"
                 android:textColor="@color/txt_running_color"
                 android:textStyle="bold" />
