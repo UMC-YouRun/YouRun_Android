@@ -35,13 +35,13 @@ class ChallengeListFragment : Fragment() {
         crewButton.setOnClickListener {
             Log.d("ChallengeListFragment", "크루 버튼 클릭됨")
             setSelectedButton(true)
-        //    replaceFragment(CrewChallengeFragment())
+           replaceFragment(CrewChallengeFragment())
         }
 
         personalButton.setOnClickListener {
             Log.d("ChallengeListFragment", "개인 버튼 클릭됨")
             setSelectedButton(false)
-           // replaceFragment(SoloChallengeFragment())
+            replaceFragment(SoloChallengeFragment())
         }
 
         val fab = view.findViewById<FloatingActionButton>(R.id.fab_plus)

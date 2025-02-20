@@ -1,3 +1,4 @@
+
 package com.example.yourun.view.fragments
 
 import android.content.Context
@@ -114,8 +115,8 @@ class MyRunFragment : Fragment(R.layout.fragment_myrun) {
 
 
     override fun onDestroyView() {
-            super.onDestroyView()
-            _binding = null
-            Log.d("MyRunFragment", "onDestroyView() 호출됨") // Fragment 소멸 확인
-        }
+        super.onDestroyView()
+        _binding = null
+        Log.d("MyRunFragment", "onDestroyView() 호출됨") // Fragment 소멸 확인
     }
+}
