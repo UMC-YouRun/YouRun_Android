@@ -86,10 +86,14 @@ class RunningFragment : Fragment() {
             viewModel.mateId.value = mateId
         }
 
-        parentFragmentManager.setFragmentResultListener("targetTimeKey", this) { key, bundle ->
+        parentFragmentManager.setFragmentResultListener("mateRunningDataKey", this) { key, bundle ->
             val targetTime = bundle.getInt("targetTime")
+            val mateRunningDistance = bundle.getInt("mateRunningDistance")
+            val mateRunningPace = bundle.getInt("mateRunningPace")
 
             viewModel.targetTime.value = targetTime
+            viewModel.mateRunningDistance.value = mateRunningDistance
+            viewModel.mateRunningPace.value = mateRunningPace
         }
 
         // 메이트 닉네임 관찰

@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.StyleSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +49,9 @@ class RunningTimeFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val mateId = arguments?.getLong("mateId")
+        if (mateId != null) {
+            viewModel.fetchMateRunningData(mateId)
+        }
         viewModel.mateId.value = mateId
         val mateName = arguments?.getString("mateName")
         viewModel.mateName.value = mateName
@@ -68,6 +72,7 @@ class RunningTimeFragment : Fragment() {
         }
 
         viewModel.mateRunningData.observe(viewLifecycleOwner) { runningData ->
+            Log.d("mateRunningData", runningData.toString())
             val mateRunningDistance = runningData?.data?.totalDistance
             val mateRunningPace = runningData?.data?.pace
             viewModel.mateRunningDistance.value = mateRunningDistance
@@ -142,9 +147,11 @@ class RunningTimeFragment : Fragment() {
             // 데이터 저장 후 이전 Fragment로 이동
             val bundle = Bundle().apply {
                 putInt("targetTime", targetTime)
+                putInt("mateRunningDistance", viewModel.mateRunningDistance.value ?: 0)
+                putInt("mateRunningPace", viewModel.mateRunningPace.value ?: 0)
             }
 
-            parentFragmentManager.setFragmentResult("targetTimeKey", bundle)
+            parentFragmentManager.setFragmentResult("mateRunningDataKey", bundle)
             parentFragmentManager.popBackStack()
         }
     }

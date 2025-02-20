@@ -59,9 +59,11 @@ class RunningActivity : AppCompatActivity() {
         val sharedPreferences = this.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val userTendency = sharedPreferences.getString("user_tendency", "")
 
+        // 테스트용
+        val targetTime = 1
         // 초기 데이터 설정
         mateName = intent.getStringExtra("mate_nickname") ?: "닉네임"
-        val targetTime = intent.getIntExtra("target_time", 0)
+        // val targetTime = intent.getIntExtra("target_time", 0)
         mateRunningDistanceMeters = intent.getIntExtra("mate_running_distance", 0)
         val matePaceInt = intent.getIntExtra("mate_running_pace", 0)
         // matePace를 평균 속도로 변환 (km/h = 60 / pace)

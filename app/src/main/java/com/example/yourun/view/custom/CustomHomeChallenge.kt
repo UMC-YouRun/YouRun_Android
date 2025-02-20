@@ -84,14 +84,11 @@ class CustomHomeChallenge @JvmOverloads constructor(
     fun updateDates(startDate: String, dayCount: Int) {
         try {
             val parts = startDate.split("-")
-            if (parts.size == 3) {
-                val month = parts[1].toIntOrNull() ?: 0
-                val day = parts[2].toIntOrNull() ?: 0
+            val month = parts[1].toIntOrNull() ?: 0
+            val day = parts[2].toIntOrNull() ?: 0
 
-                startDateTextView.text = "${month}월 ${day}일부터"
-            } else {
-                startDateTextView.text = "날짜 오류"
-            }
+            startDateTextView.text = "${month}월 ${day}일부터"
+
         } catch (e: Exception) {
             Log.e("CustomHomeChallenge", "날짜 변환 오류: ${e.message}")
             startDateTextView.text = "날짜 오류"

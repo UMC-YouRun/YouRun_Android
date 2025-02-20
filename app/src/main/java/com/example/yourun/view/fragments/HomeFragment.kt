@@ -29,8 +29,6 @@ import com.example.yourun.view.activities.CalendarActivity
 import com.example.yourun.view.activities.CreateChallengeActivity
 import com.example.yourun.view.activities.CrewProgressActivity
 import com.example.yourun.view.activities.ResultContributionActivity
-import com.example.yourun.view.activities.ResultCrewActivity
-import com.example.yourun.view.activities.ResultSoloActivity
 import com.example.yourun.view.activities.SoloProgressActivity
 import com.example.yourun.view.custom.CustomHomeChallenge
 import com.example.yourun.view.custom.CustomMateView
@@ -314,6 +312,8 @@ class HomeFragment : Fragment() {
                 Log.e("HomeFragment", "날짜 파싱 오류", e)
             }
         }
+        // 테스트용
+        // binding.txtMainRunDay.text = "12일째!"
 
         binding.txtMainCrewReward.text = "${crewReward}개"
         binding.txtMainSoloReward.text = "${soloReward}개"

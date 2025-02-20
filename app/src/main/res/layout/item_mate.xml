@@ -22,8 +22,8 @@
 
     <ImageView
         android:id="@+id/img_user_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="12dp"
         android:contentDescription="@string/user_profile"
         android:src="@drawable/img_profile_trailrunner_red"
