@@ -1,4 +1,4 @@
-/*package com.example.yourun.viewmodel
+package com.example.yourun.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -105,4 +105,4 @@ class ChallengeViewModel(private val repository: ChallengeRepository) : ViewMode
         }
     }
 
-}*/
+}
