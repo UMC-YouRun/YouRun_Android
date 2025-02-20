@@ -120,6 +120,10 @@
                 android:exported="true" />
         <activity android:name=".view.activities.CrewProgressActivity"
             android:exported="true" />
+        <activity android:name=".view.activities.RequestionActivity"
+            android:exported="true" />
+        <activity android:name=".view.activities.ResultActivity"
+            android:exported="true" />
 
     </application>
 

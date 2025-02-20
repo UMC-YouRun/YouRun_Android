@@ -66,7 +66,7 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
 
-        ChallengeCheckManager.init(requireContext())
+        //ChallengeCheckManager.init(requireContext())
 
         return binding.root
     }
@@ -349,7 +349,7 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        ChallengeCheckManager.startPeriodicCheck(requireContext())
+        //ChallengeCheckManager.startPeriodicCheck(requireContext())
         viewModel.fetchHomeChallengeData() // 다른 화면에서 돌아올 때 다시 요청
     }
 

@@ -17,8 +17,10 @@ import com.example.yourun.viewmodel.MyRunViewModelFactory
 
 
 import android.util.Log
+import androidx.navigation.fragment.findNavController
 import com.example.yourun.R
 import com.example.yourun.view.activities.MyRun2Activity
+import com.example.yourun.view.activities.RequestionActivity
 import com.example.yourun.view.activities.SignUpActivity
 
 class MyRunFragment : Fragment(R.layout.fragment_myrun) {
@@ -88,12 +90,11 @@ class MyRunFragment : Fragment(R.layout.fragment_myrun) {
                 startActivity(intent)
             } ?: Log.e("MyRunFragment", "userInfo가 null이라 이미지 전달 불가")
         }
+
         binding.btnTestAgain.setOnClickListener {
-            val intent = Intent(requireContext(), SignUpActivity::class.java)
-            intent.putExtra("openQuestionFragment", true) // 데이터를 전달
+            val intent = Intent(requireContext(), RequestionActivity::class.java) // ✅ QuestionActivity로 이동
             startActivity(intent)
         }
-
 
 
     }

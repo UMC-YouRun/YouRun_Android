@@ -20,12 +20,5 @@ class SignUpActivity : AppCompatActivity() {
 
         signUpViewModel = ViewModelProvider(this)[SignUpViewModel::class.java]
 
-        val openQuestionFragment = intent.getBooleanExtra("openQuestionFragment", false)
-
-        if (openQuestionFragment) {
-            // QuestionFragment로 이동
-            val navController = findNavController(R.id.nav_host_fragment)
-            navController.navigate(R.id.questionFragment)
-        }
     }
 }

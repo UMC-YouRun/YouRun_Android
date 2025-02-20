@@ -43,4 +43,15 @@
         android:id="@+id/resultFragment"
         android:name="com.example.yourun.view.fragments.ResultFragment"
         android:label="결과 화면"/>
+
+    <fragment
+        android:id="@+id/myRunFragment"
+        android:name="com.example.yourun.view.fragments.MyRunFragment"
+        android:label="마이런 화면">
+        <action
+            android:id="@+id/action_myRunFragment_to_questionFragment"
+            app:destination="@id/questionFragment"/>
+    </fragment>
+
+
 </navigation>

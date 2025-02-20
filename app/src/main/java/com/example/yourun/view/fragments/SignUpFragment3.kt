@@ -92,7 +92,6 @@ class SignUpFragment3 : Fragment(R.layout.fragment_signup3) {
                     putString("nickname", nickname)
                     commit()
                 }
-
                 // Navigation으로 다른 Fragment로 이동
                 findNavController().navigate(R.id.action_signUpFragment3_to_questionFragment)
 
