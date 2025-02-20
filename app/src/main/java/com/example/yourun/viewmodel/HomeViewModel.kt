@@ -6,7 +6,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.yourun.model.data.response.UserInfo
 import com.example.yourun.model.data.response.ChallengeData
 import com.example.yourun.model.data.response.UserMateInfo
 import com.example.yourun.model.repository.HomeRepository
@@ -32,10 +31,6 @@ class HomeViewModel(
     private val _likedMates = MutableLiveData<Set<Long>>(mutableSetOf())
     val likedMates: LiveData<Set<Long>> get() = _likedMates
 
-    private val _userInfo = MutableLiveData<UserInfo?>()
-    val userInfo: LiveData<UserInfo?> get() = _userInfo
-
-
     fun toggleCrewButton() {
         _isPressedCrew.value = !(_isPressedCrew.value ?: false)
         _isPressedSolo.value = false // Solo 버튼 해제
@@ -44,27 +39,6 @@ class HomeViewModel(
     fun toggleSoloButton() {
         _isPressedSolo.value = !(_isPressedSolo.value ?: false)
         _isPressedCrew.value = false // Crew 버튼 해제
-    }
-
-    fun fetchUserInfo() {
-        viewModelScope.launch {
-            try {
-                Log.d("HomeViewModel", "사용자 정보 요청 시작")
-
-                val response = repository.getUserInfo()?.data
-                if (response != null) {
-                    _userInfo.value = response
-                    Log.d("HomeViewModel", "사용자 정보 가져오기 성공: $response")
-                } else {
-                    Log.e("HomeViewModel", "사용자 정보를 가져오지 못했습니다.")
-                    _userInfo.value = null
-                    return@launch
-                }
-            } catch (e: Exception) {
-                Log.e("HomeViewModel", "사용자 정보 가져오는 중 오류 발생", e)
-                _userInfo.value = null
-            }
-        }
     }
 
     fun fetchHomeChallengeData() {
@@ -90,34 +64,34 @@ class HomeViewModel(
         }
     }
 
-//    fun fetchRecommendMates() {
-//        viewModelScope.launch {
-//            try {
-//                Log.d("HomeViewModel", "추천 메이트 요청 시작")
-//
-//                val response = repository.getRecommendMates()
-//
-//                if (response == null) {
-//                    Log.e("HomeViewModel", "response가 null입니다. 빈 리스트 반환")
-//                    _recommendMates.value = emptyList()
-//                    return@launch
-//                }
-//
-//                response.data.let { mateList ->
-//                    _recommendMates.value = if (mateList.isEmpty()) {
-//                        Log.e("HomeViewModel", "추천 메이트 데이터 없음")
-//                        emptyList()
-//                    } else {
-//                        Log.d("HomeViewModel", "추천 메이트 목록 가져오기 성공: ${mateList.size}명")
-//                        mateList.take(5) // 최대 5명만 표시
-//                    }
-//                }
-//            } catch (e: Exception) {
-//                Log.e("HomeViewModel", "추천 메이트 가져오는 중 오류 발생", e)
-//                _recommendMates.value = emptyList() // 네트워크 오류 발생 시 빈 리스트 할당
-//            }
-//        }
-//    }
+    fun fetchRecommendMates() {
+        viewModelScope.launch {
+            try {
+                Log.d("HomeViewModel", "추천 메이트 요청 시작")
+
+                val response = repository.getRecommendMates()
+
+                if (response == null) {
+                    Log.e("HomeViewModel", "response가 null입니다. 빈 리스트 반환")
+                    _recommendMates.value = emptyList()
+                    return@launch
+                }
+
+                response.data.let { mateList ->
+                    _recommendMates.value = if (mateList.isEmpty()) {
+                        Log.e("HomeViewModel", "추천 메이트 데이터 없음")
+                        emptyList()
+                    } else {
+                        Log.d("HomeViewModel", "추천 메이트 목록 가져오기 성공: ${mateList.size}명")
+                        mateList.take(5) // 최대 5명만 표시
+                    }
+                }
+            } catch (e: Exception) {
+                Log.e("HomeViewModel", "추천 메이트 가져오는 중 오류 발생", e)
+                _recommendMates.value = emptyList() // 네트워크 오류 발생 시 빈 리스트 할당
+            }
+        }
+    }
 
     fun addMate(mateId: Long) {
         viewModelScope.launch {

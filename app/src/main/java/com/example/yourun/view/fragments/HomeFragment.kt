@@ -1,4 +1,3 @@
-/*
 package com.example.yourun.view.fragments
 
 import android.content.Context
@@ -17,7 +16,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentHomeBinding
-import com.example.yourun.model.data.response.UserInfo
 import com.example.yourun.model.data.response.ChallengeData
 import com.example.yourun.model.data.response.UserCrewChallengeInfo
 import com.example.yourun.model.data.response.UserMateInfo
@@ -27,11 +25,7 @@ import com.example.yourun.model.repository.HomeRepository
 import com.example.yourun.view.activities.CalendarActivity
 //import com.example.yourun.view.activities.ChallengeListActivity
 import com.example.yourun.view.activities.CreateChallengeActivity
-import com.example.yourun.view.activities.CrewProgressActivity
 import com.example.yourun.view.activities.ResultContributionActivity
-import com.example.yourun.view.activities.ResultCrewActivity
-import com.example.yourun.view.activities.ResultSoloActivity
-import com.example.yourun.view.activities.SoloProgressActivity
 import com.example.yourun.view.custom.CustomHomeChallenge
 import com.example.yourun.view.custom.CustomMateView
 import com.example.yourun.viewmodel.HomeViewModel
@@ -68,12 +62,10 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //테스트 위한 버튼 수정하기
+        // 테스트 위한 버튼 수정하기
         binding.imgMainBanner.setOnClickListener {
             val intent = Intent(requireContext(), ResultContributionActivity::class.java)
             startActivity(intent)
@@ -81,8 +73,7 @@ class HomeFragment : Fragment() {
 
         // 서버에서 챌린지 데이터 가져오기, 처음 한 번 호출
         viewModel.fetchHomeChallengeData()
-        //viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
-        viewModel.fetchUserInfo()
+        viewModel.fetchRecommendMates() // 추천 메이트 데이터 가져오기
 
         viewModel.isPressedCrew.observe(viewLifecycleOwner) { isPressed ->
             binding.btnCrew.setImageResource(
@@ -108,13 +99,6 @@ class HomeFragment : Fragment() {
             updateChallengeView()
         }
 
-        // 유저 정보 관리
-        viewModel.userInfo.observe(viewLifecycleOwner) { userInfo ->
-            userInfo?.let { safeUserInfo ->
-                updateUserInfoText(safeUserInfo)
-            }
-        }
-
         // challengeButtonContainer에 기본 btnAddChallenge 뷰를 저장
         originalChallengeButton = binding.challengeButtonContainer.findViewById(R.id.btnAddChallenge)
 
@@ -130,15 +114,8 @@ class HomeFragment : Fragment() {
                 Log.d("HomeFragment","홈 챌린지 데이터를 불러오지 못했습니다.")
             } else {
                 updateChallengeView(challengeData)
+                updateUserInfoText(challengeData)
             }
-        }
-
-        binding.btnAddChallenge.setOnClickListener {
-            /*
-            val intent = Intent(requireContext(), ChallengeListActivity::class.java)
-            startActivity(intent)
-             */
-            parentFragmentManager.popBackStack()
         }
 
         binding.btnCalendar.setOnClickListener {
@@ -154,13 +131,13 @@ class HomeFragment : Fragment() {
 
         // 추천 메이트 UI 업데이트
         viewModel.recommendMates.observe(viewLifecycleOwner) { mates ->
-            updateRecommendMatesUI(mates, viewModel, showHeart = true)
+            //updateRecommendMatesUI(mates, viewModel, showHeart = true)
         }
 
         // btn_redirect 클릭 시 최신 메이트 데이터 다시 불러오기
         binding.btnRedirect.setOnClickListener {
             Log.d("HomeFragment", "btn_redirect 클릭됨 - 추천 메이트 갱신")
-            //viewModel.fetchRecommendMates()
+            viewModel.fetchRecommendMates()
         }
     }
 
@@ -197,13 +174,23 @@ class HomeFragment : Fragment() {
         customView.updatePeriodSolo(soloChallenge.challengePeriod)
         customView.updateDistance(soloChallenge.challengeDistance)
         customView.updateSoloImage(soloChallenge.challengeMateTendency)
+
         val soloChallengeLevel = when (soloChallenge.status) {
-            "PENDING" -> 0
-            "IN_PROGRESS" -> 1
-            "COMPLETED" -> 2
+            "PENDING" -> 0  // 매칭 대기중
+            "IN_PROGRESS" -> 1 // 진행 중
+            "COMPLETED" -> 2 // 완료
             else -> 0
         }
         customView.updateChallengeState(soloChallengeLevel)
+
+        // **진행 중(IN_PROGRESS)인 경우에만 클릭 가능**
+        if (soloChallenge.status == "IN_PROGRESS") {
+            customView.setOnClickListener {
+                val intent = Intent(requireContext(), ResultSoloActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
         return customView
     }
 
@@ -214,15 +201,24 @@ class HomeFragment : Fragment() {
         customView.updateCrewTitle(crewChallenge.crewName)
         customView.updateDates(startDate = crewChallenge.crewStartDate, dayCount = crewChallenge.crewDayCount)
         customView.updatePeriodCrew(crewChallenge.challengePeriod)
+
         val crewTendencies = crewChallenge.myParticipantIdsInfo.map { it.memberTendency }
-        customView.updateCrewImages(crewTendencies)
         val crewChallengeLevel = when (crewChallenge.challengeStatus) {
-            "PENDING" -> 0
-            "IN_PROGRESS" -> 1
-            "COMPLETED" -> 2
+            "PENDING" -> 0  // 매칭 대기중
+            "IN_PROGRESS" -> 1 // 진행 중
+            "COMPLETED" -> 2 // 완료
             else -> 0
         }
         customView.updateChallengeState(crewChallengeLevel)
+
+        // **진행 중(IN_PROGRESS)인 경우에만 클릭 가능**
+        if (crewChallenge.challengeStatus == "IN_PROGRESS") {
+            customView.setOnClickListener {
+                val intent = Intent(requireContext(), ResultCrewActivity::class.java)
+                startActivity(intent)
+            }
+        }
+
         return customView
     }
 
@@ -277,14 +273,17 @@ class HomeFragment : Fragment() {
         return (this * context.resources.displayMetrics.density).toInt()
     }
 
-    private fun updateUserInfoText(userInfo: UserInfo) {
+    private fun updateUserInfoText(challengeData: ChallengeData?) {
 
         val sharedPref = requireContext().getSharedPreferences("UserData", Context.MODE_PRIVATE)
-        val userNickname = userInfo.nickname
+        val userNickname = challengeData?.homeNickName ?: ""
         val signupDateStr = sharedPref.getString("signup_date", "") ?: ""
-        val crewReward = userInfo.crewReward
-        val soloReward = userInfo.personalReward
-        val userTendency = userInfo.tendency
+        val crewReward = challengeData?.crewReward
+        val soloReward = challengeData?.soloReward
+        val userTendency = challengeData?.tendency
+        val editor = sharedPref.edit()
+        editor.putString("user_tendency", userTendency)
+        editor.apply()
 
         if (userNickname.isNotEmpty()) {
             val originalRunText = getString(R.string.main_run_together)
@@ -332,4 +331,4 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
- */
+

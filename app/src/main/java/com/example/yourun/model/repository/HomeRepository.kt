@@ -1,27 +1,11 @@
 package com.example.yourun.model.repository
 
 import android.util.Log
-import com.example.yourun.model.data.response.UserInfo
 import com.example.yourun.model.data.response.ChallengeData
 import com.example.yourun.model.data.response.MateResponse
-import com.example.yourun.model.network.ApiResponse
 import com.example.yourun.model.network.ApiService
 
 class HomeRepository(private val apiService: ApiService) {
-
-    suspend fun getUserInfo(): ApiResponse<UserInfo>? {
-        return try {
-            val response = apiService.getMyRunData()
-            if (response.isSuccessful) {
-                response.body()
-            } else {
-                null
-            }
-        } catch (e: Exception) {
-            Log.e("HomeRepository", "사용자 정보를 가져오지 못했습니다.")
-            null
-        }
-    }
 
     suspend fun getHomeChallengeData(): ChallengeData? {
         return try {
@@ -46,21 +30,21 @@ class HomeRepository(private val apiService: ApiService) {
         }
     }
 
-//    suspend fun getRecommendMates(): MateResponse? {
-//        return try {
-//            val response = apiService.getRecommendMate()
-//
-//            if (response.isSuccessful) {
-//                response.body()
-//            } else {
-//                Log.e("HomeRepository", "추천 메이트 요청 실패: ${response.errorBody()?.string()}")
-//                null
-//            }
-//        } catch (e: Exception) {
-//            Log.e("HomeRepository", "추천 메이트 가져오는 중 오류 발생", e)
-//            null
-//        }
-//    }
+    suspend fun getRecommendMates(): MateResponse? {
+        return try {
+            val response = apiService.getRecommendMate()
+
+            if (response.isSuccessful) {
+                response.body()
+            } else {
+                Log.e("HomeRepository", "추천 메이트 요청 실패: ${response.errorBody()?.string()}")
+                null
+            }
+        } catch (e: Exception) {
+            Log.e("HomeRepository", "추천 메이트 가져오는 중 오류 발생", e)
+            null
+        }
+    }
 
     suspend fun addMate(mateId: Long): Boolean {
         return try {
