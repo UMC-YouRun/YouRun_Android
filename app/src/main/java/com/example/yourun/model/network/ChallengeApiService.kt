@@ -30,7 +30,7 @@ interface ChallengeApiService {
     @GET("challenges/solo/progress")
     suspend fun getSoloChallengeProgress(): Response<ApiResponse<SoloChallengeProgressResponse>>
 
-    @GET("challenges/crew/progress")
+    @GET("challenges/crew/detail-progress")
     suspend fun getCrewChallengeProgress(): Response<ApiResponse<CrewChallengeProgressResponse>>
 
     @GET("users/challenges/check-matching")

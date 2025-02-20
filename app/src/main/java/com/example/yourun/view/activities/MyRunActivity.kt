@@ -24,6 +24,20 @@ class MyRunActivity : AppCompatActivity() {
             .commit()
 
 
+        val openFragment = intent.getStringExtra("openFragment")
+        if (openFragment == "MyRunFragment") {
+            openMyRunFragment()
+        }
+    }
+
+    // MyRunFragment로 이동하는 함수
+    private fun openMyRunFragment() {
+        val fragment = MyRunFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.my_run_fragment_container, fragment)
+            .commit()
+
+
 
 
 

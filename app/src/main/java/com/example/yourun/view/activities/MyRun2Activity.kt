@@ -98,8 +98,9 @@ class MyRun2Activity : AppCompatActivity() {
                     Toast.makeText(this@MyRun2Activity, "정보가 성공적으로 변경되었습니다.", Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(this@MyRun2Activity, MyRunActivity::class.java)
+                    intent.putExtra("openFragment", "MyRunFragment")
                     startActivity(intent)
-                    finish() // 현재 액티비티 종료
+                    finish() // 현재
                 } else {
                     Toast.makeText(this@MyRun2Activity, "업데이트 실패: ${response.message}", Toast.LENGTH_SHORT).show()
                 }
