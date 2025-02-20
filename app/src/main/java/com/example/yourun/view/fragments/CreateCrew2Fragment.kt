@@ -1,5 +1,6 @@
 package com.example.yourun.view.fragments
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Spannable
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.yourun.R
 import com.example.yourun.databinding.FragmentCreateCrew2Binding
+import com.example.yourun.view.activities.MainActivity
 
 
 class CreateCrew2Fragment : Fragment(R.layout.fragment_create_crew2) {
@@ -44,7 +46,7 @@ class CreateCrew2Fragment : Fragment(R.layout.fragment_create_crew2) {
         val challengePeriod = arguments?.getInt("challengePeriod") ?: 0
         val tendency = arguments?.getString("tendency") ?: ""
 
-        val formattedText = "$crewMotto,$crewName 와 \n${startDate} ~ ${endDate}($challengePeriod 일 동안) \n최대 거리 러닝하기!"
+        val formattedText = "$crewMotto,$crewName 와 \n${startDate} ~ \n${endDate}($challengePeriod 일 동안) \n최대 거리 러닝하기!"
 
         val spannable = SpannableString(formattedText)
 
@@ -110,6 +112,12 @@ class CreateCrew2Fragment : Fragment(R.layout.fragment_create_crew2) {
 
         val imageResId = tendencyImages[tendency] ?: R.drawable.img_mate_sprinter
         binding.resultCharacter.setImageResource(imageResId)
+
+
+        binding.startRunningButton.setOnClickListener {
+            val intent = Intent(requireContext(), MainActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }

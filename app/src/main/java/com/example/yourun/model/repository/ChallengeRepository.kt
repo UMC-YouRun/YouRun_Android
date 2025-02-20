@@ -15,7 +15,7 @@ import retrofit2.Response
 
 class ChallengeRepository(private val apiService: ApiService = ApiClient.getApiService()) {
 
-    suspend fun getPendingCrewChallenges(): List<CrewChallengeRes>? {
+   /* suspend fun getPendingCrewChallenges(): List<CrewChallengeRes>? {
         return try {
             val response = apiService.getPendingCrewChallenges()
 
@@ -39,7 +39,7 @@ class ChallengeRepository(private val apiService: ApiService = ApiClient.getApiS
             Log.e("API_EXCEPTION", "Exception: ${e.message}")
             null
         }
-    }
+    }*/
 
     suspend fun getPendingPersonalChallenges(): List<SoloChallengeRes>? {
         return try {

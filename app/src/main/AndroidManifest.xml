@@ -10,6 +10,8 @@
 
     <application
         android:networkSecurityConfig="@xml/network_security_config"
+        android:usesCleartextTraffic="false"
+        tools:replace="android:usesCleartextTraffic"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -30,23 +32,6 @@
             android:name=".view.activities.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.YouRun">
-
-        </activity>
-
-        <activity
-            android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:exported="true">
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <!-- Redirect URI: "kakao${NATIVE_APP_KEY}://oauth" -->
-                <data android:host="oauth"
-                    android:scheme="kakao${KAKAO_NATIVE_APP_KEY}" />
-
-            </intent-filter>
 
         </activity>
 
@@ -79,10 +64,7 @@
         <activity
             android:name=".view.activities.LoginActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
 
         </activity>
 
@@ -95,7 +77,12 @@
 
         <activity
             android:name=".view.activities.OnboardingActivity"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".view.activities.ResultContributionActivity"
@@ -124,20 +111,14 @@
             android:name=".view.activities.RunningActivity"
             android:exported="true" />
 
+        <activity
+            android:name=".view.activities.RunningResultActivity"
+            android:exported="true" />
+
         <activity android:name=".view.activities.SoloProgressActivity"
                 android:exported="true" />
         <activity android:name=".view.activities.CrewProgressActivity"
             android:exported="true" />
-
-        <activity
-            android:name=".view.activities.CrewChallengeDetailActivity"
-            android:exported="true">
-        </activity>
-
-        <activity
-            android:name=".view.activities.SoloChallengeDetailActivity"
-            android:exported="true">
-        </activity>
 
     </application>
 

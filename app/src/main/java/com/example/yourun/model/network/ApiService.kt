@@ -41,9 +41,6 @@ interface ApiService {
     @POST("users/login")
     suspend fun login(@Body request: LoginRequest): Response<LoginResponse>
 
-    @GET("users/kakao-login")
-    suspend fun loginWithKakao(@Query("kakaoAccessToken") kakaoAccessToken: String): Response<LoginResponse>
-
     @POST("users")
     suspend fun signUp(@Body request: SignUpRequest): ApiResponse<SignUpResponse>
 
@@ -62,7 +59,7 @@ interface ApiService {
     @GET("/challenges/solo/matching")
     suspend fun getChallengeData(): Response<ApiResponse<ChallengeDataResponse>>
 
-    @GET("/challenge/solo/running-result")
+    @GET("/challenges/solo/running-result")
     suspend fun getSoloChallengeResultData(): Response<ApiResponse<ChallengeResultResponse>>
 
     @GET("mypage")

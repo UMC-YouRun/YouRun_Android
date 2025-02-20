@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun isActivityRunning(context: Context, activityClass: Class<*>): Boolean {
+    private fun isActivityRunning(context: Context, activityClass: Class<*>): Boolean {
         val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val runningTasks = activityManager.appTasks // 현재 실행 중인 모든 태스크 가져오기
 

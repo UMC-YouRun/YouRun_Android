@@ -18,6 +18,7 @@ import com.example.yourun.viewmodel.MyRunViewModelFactory
 import android.util.Log
 import com.example.yourun.R
 import com.example.yourun.view.activities.MyRun2Activity
+import com.example.yourun.view.activities.SignUpActivity
 
 class MyRunFragment : Fragment(R.layout.fragment_myrun) {
     private var _binding: FragmentMyrunBinding? = null
@@ -25,7 +26,7 @@ class MyRunFragment : Fragment(R.layout.fragment_myrun) {
 
     private lateinit var viewModel: MyRunViewModel
 
-    private val tendencyImages = mapOf(
+    private val tendencyImage = mapOf(
         "페이스메이커" to listOf(R.drawable.img_pace1, R.drawable.img_pace2, R.drawable.img_pace3, R.drawable.img_pace4),
         "트레일러너" to listOf(R.drawable.img_trail1, R.drawable.img_trail2, R.drawable.img_trail3, R.drawable.img_trail4),
         "스프린터" to listOf(R.drawable.img_sprinter1, R.drawable.img_sprinter2, R.drawable.img_sprinter3, R.drawable.img_sprinter4)
@@ -86,6 +87,14 @@ class MyRunFragment : Fragment(R.layout.fragment_myrun) {
                 startActivity(intent)
             } ?: Log.e("MyRunFragment", "userInfo가 null이라 이미지 전달 불가")
         }
+        binding.btnTestAgain.setOnClickListener {
+            val intent = Intent(requireContext(), SignUpActivity::class.java)
+            intent.putExtra("openQuestionFragment", true) // 데이터를 전달
+            startActivity(intent)
+        }
+
+
+
     }
 
     private fun getRandomImageForTendency(tendency: String, context: Context): Int {
@@ -95,7 +104,7 @@ class MyRunFragment : Fragment(R.layout.fragment_myrun) {
         return if (savedImage != -1) {
             savedImage
         } else {
-            val images = tendencyImages[tendency] ?: emptyList()
+            val images = tendencyImage[tendency] ?: emptyList()
             val randomImage = images.randomOrNull() ?: R.drawable.img_pace1 // 기본 이미지 설정
             sharedPref.edit().putInt("tendency_image_$tendency", randomImage).apply()
             randomImage
