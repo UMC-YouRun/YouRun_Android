@@ -23,6 +23,7 @@ import com.example.yourun.model.data.response.UserMateInfo
 import com.example.yourun.model.data.response.UserSoloChallengeInfo
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.HomeRepository
+import com.example.yourun.utils.ChallengeCheckManager
 import com.example.yourun.view.activities.CalendarActivity
 //import com.example.yourun.view.activities.ChallengeListActivity
 import com.example.yourun.view.activities.CreateChallengeActivity
@@ -62,6 +63,9 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        ChallengeCheckManager.init(requireContext())
+
         return binding.root
     }
 
@@ -69,12 +73,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.toggleCrewButton() // 초기값 : 크루 버튼 선택됨
-
-        // 테스트 위한 버튼 수정하기
-        binding.imgMainBanner.setOnClickListener {
-            val intent = Intent(requireContext(), ResultContributionActivity::class.java)
-            startActivity(intent)
-        }
 
         // 서버에서 챌린지 데이터 가져오기, 처음 한 번 호출
         viewModel.fetchHomeChallengeData()
@@ -350,6 +348,8 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+        ChallengeCheckManager.startPeriodicCheck(requireContext())
         viewModel.fetchHomeChallengeData() // 다른 화면에서 돌아올 때 다시 요청
     }
 

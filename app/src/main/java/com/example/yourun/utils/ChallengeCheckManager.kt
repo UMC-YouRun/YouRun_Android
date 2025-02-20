@@ -20,29 +20,25 @@ object ChallengeCheckManager {
 
     fun init(context: Context) {
         prefs = context.getSharedPreferences("challenge_prefs", Context.MODE_PRIVATE)
-        resetApiCallStatus() // ✅ 앱 실행 시 is_api_called 초기화 (앱 재시작 시 다시 실행되도록)
+        resetApiCallStatus() // 앱 실행 시 is_api_called 초기화
     }
 
     fun startPeriodicCheck(context: Context) {
         checkJob?.cancel() // 기존 실행 중인 잡 취소
 
-        // ✅ 현재 실행 중인 액티비티 확인
         val activityName = getCurrentActivityName(context)
 
-        // ✅ MainActivity에서만 실행
         if (activityName !in allowedActivities) {
             Log.d("ChallengeCheckManager", "현재 액티비티: $activityName → MainActivity에서만 실행됨")
             return
         }
-
-        // ✅ 이미 실행된 적이 있으면 return (앱 실행 중에는 한 번만 실행)
         if (isApiAlreadyCalled()) {
             Log.d("ChallengeCheckManager", "API 체크 이미 완료됨 → 다시 실행 안함")
             return
         }
 
         checkJob = CoroutineScope(Dispatchers.IO).launch {
-            delay(30000) // 30초 후 실행
+            delay(10000) // 10초 후 실행
             val result = checkChallengeMatching()
             result?.let { (isSoloMatching, isCrewMatching) ->
                 if (isSoloMatching) {
