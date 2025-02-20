@@ -315,7 +315,7 @@ class HomeFragment : Fragment() {
             }
         }
         // 테스트용
-        binding.txtMainRunDay.text = "12일째!"
+        // binding.txtMainRunDay.text = "12일째!"
 
         binding.txtMainCrewReward.text = "${crewReward}개"
         binding.txtMainSoloReward.text = "${soloReward}개"

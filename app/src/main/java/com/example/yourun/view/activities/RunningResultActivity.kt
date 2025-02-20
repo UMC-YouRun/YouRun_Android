@@ -125,8 +125,6 @@ class RunningResultActivity : AppCompatActivity() {
                         val body = response.body()
                         val data = body?.data
                         if (data != null) {
-                            Log.d("solo", data.isSoloChallengeInProgress.toString())
-                            Log.d("crew", data.isCrewChallengeInProgress.toString())
                             if (data.isSoloChallengeInProgress && data.isCrewChallengeInProgress) {
                                 // 개인, 크루 챌린지 결과
                                 val intent = Intent(this@RunningResultActivity, ResultSoloActivity::class.java)
