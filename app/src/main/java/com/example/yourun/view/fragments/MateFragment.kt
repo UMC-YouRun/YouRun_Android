@@ -37,7 +37,9 @@ class MateFragment : Fragment() {
 
         // RecyclerView 설정
         recyclerView = view.findViewById(R.id.recycler_view)
-        mateAdapter = MateRankingAdapter(mateDataList, userInfo?.nickname ?: "")
+        mateAdapter = MateRankingAdapter(mateDataList, userInfo?.nickname ?: "") { mateId ->
+            deleteMate(mateId)  // 🔹 삭제 요청 함수 호출
+        }
         recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = mateAdapter
@@ -64,7 +66,7 @@ class MateFragment : Fragment() {
                 val userInfo = mateRepository.getMyRunData()
 
                 // ✅ 친구(메이트) 정보 조회
-                // val mates = mateRepository.getMates()
+                val mates = mateRepository.getMates()
 
                 // 리스트 초기화
                 mateDataList.clear()
@@ -75,6 +77,7 @@ class MateFragment : Fragment() {
 
                     // 🔹 내 정보를 MateData 형태로 변환하여 추가
                     val myMateData = MateData(
+                        mateId = user.id ,
                         rank = -1,  // 순위는 나중에 정렬 후 업데이트
                         profileImageResId = getProfileImageByTendency(user.tendency),
                         nickname = user.nickname,
@@ -88,7 +91,7 @@ class MateFragment : Fragment() {
                 }
 
                 // 🔹 친구(메이트) 정보 추가
-                // mateDataList.addAll(mates)
+                mateDataList.addAll(mates)
 
                 // 🔹 전체 정렬 (예: 총 거리 기준)
                 mateDataList.sortByDescending { it.totalDistance }
@@ -100,7 +103,9 @@ class MateFragment : Fragment() {
 
                 // 🔹 RecyclerView Adapter 업데이트
                 userInfo?.let { user ->
-                    mateAdapter = MateRankingAdapter(mateDataList, user.nickname)
+                    mateAdapter = MateRankingAdapter(mateDataList, user.nickname) { mateId ->
+                        deleteMate(mateId)
+                    }
                     recyclerView.adapter = mateAdapter
                 }
 
@@ -113,41 +118,6 @@ class MateFragment : Fragment() {
             }
         }
     }
-
-
-
-
-    /*private fun loadMates() {
-        val token = ApiClient.TokenManager.getToken()
-        Log.d("MateFragment", "불러온 토큰: $token")
-
-        if (token.isNullOrEmpty()) {
-            Log.e("MateFragment", "토큰이 없습니다. 로그인 상태를 확인하세요.")
-            return  // 토큰이 없으면 API 호출을 하지 않음
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            try {
-                val mates = mateRepository.getMates("Bearer $token") // Authorization 헤더 적용
-                if (mates.isEmpty()) {
-                    Log.d("MateFragment", "메이트 데이터가 없습니다.")
-                } else {
-                    Log.d("MateFragment", "메이트 데이터 로드 성공: ${mates.size}명")
-                }
-                mateDataList.clear()
-                mateDataList.addAll(mates)
-                mateAdapter.notifyDataSetChanged()
-
-                // 🔹 상위 3명 러너 정렬하여 UI 반영
-                updateTop3Mates()
-
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.e("MateFragment", "API 호출 오류: ${e.message}")
-            }
-        }
-    }*/
-
 
     private fun updateTop3Mates() {
         val topMates = mateDataList.sortedByDescending { it.totalDistance }.take(3)
@@ -189,6 +159,23 @@ class MateFragment : Fragment() {
             "트레일러너" -> R.drawable.img_profile_trailrunner_red
             "스프린터" -> R.drawable.img_profile_sprinter_yellow
             else -> R.drawable.img_profile_pacemaker_purple  // 경향 없을시 기본 이미지 불러오기
+        }
+    }
+
+    private fun deleteMate(mateId: Long) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val response = mateRepository.deleteMate(mateId)
+                if (response.status == 200 && response.data == true) {
+                    Log.d("MateFragment", "메이트 삭제 성공: $mateId")
+                    mateDataList.removeAll { it.mateId == mateId } // 🔹 리스트에서 삭제
+                    mateAdapter.notifyDataSetChanged()  // 🔹 RecyclerView 갱신
+                } else {
+                    Log.e("MateFragment", "메이트 삭제 실패")
+                }
+            } catch (e: Exception) {
+                Log.e("MateFragment", "메이트 삭제 API 호출 오류: ${e.message}")
+            }
         }
     }
 

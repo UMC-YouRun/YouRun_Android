@@ -32,6 +32,7 @@ import com.example.yourun.model.data.SoloChallengeDetailRes
 import com.example.yourun.model.data.response.CrewChallengeMateRes
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -79,6 +80,11 @@ interface ApiService {
     suspend fun addMate(
         @Path("mateId") mateId: Long
     ): Response<ApiResponseBoolean>
+
+    @DELETE("users/mates/{mateId}")
+    suspend fun deleteMate(
+        @Path("mateId") mateId: Long
+    ): ApiResponse<Boolean>
 
     @GET("users/mates/recommend")
     suspend fun getRecommendMate(): Response<MateResponse<Any?>>

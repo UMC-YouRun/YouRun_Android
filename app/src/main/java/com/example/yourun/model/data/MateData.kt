@@ -1,6 +1,7 @@
 package com.example.yourun.model.data
 
 data class MateData(
+    val mateId: Long,
     var rank: Int,               // 순위 (로컬에서 계산)
     val profileImageResId: Int,  // tendancy 값으로 매칭하기
     val nickname: String,

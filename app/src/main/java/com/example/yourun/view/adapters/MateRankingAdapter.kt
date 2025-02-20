@@ -12,8 +12,11 @@ import android.graphics.Color
 import android.util.Log
 
 
-class MateRankingAdapter(private val mateDataList: List<MateData>, private val userNickname: String) :
-    RecyclerView.Adapter<MateRankingAdapter.MateViewHolder>() {
+class MateRankingAdapter(
+    private val mateDataList: List<MateData>,
+    private val userNickname: String,
+    private val onDeleteClick: (Long) -> Unit
+) : RecyclerView.Adapter<MateRankingAdapter.MateViewHolder>() {
 
     class MateViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val rank: TextView = itemView.findViewById((R.id.idx_challenge_item))
@@ -24,6 +27,7 @@ class MateRankingAdapter(private val mateDataList: List<MateData>, private val u
         val change: TextView = itemView.findViewById(R.id.mate_change)
         val distance: TextView = itemView.findViewById(R.id.user_km)
         val itemLayout: View = itemView.findViewById(R.id.mate_item_layout) // 사용자는 배경색 변경
+        val btnX: ImageView = itemView.findViewById(R.id.btn_x)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MateViewHolder {
@@ -46,8 +50,15 @@ class MateRankingAdapter(private val mateDataList: List<MateData>, private val u
         // 현재 사용자의 닉네임과 리스트의 닉네임이 같다면 노란색 배경 적용
         if (mate.nickname == userNickname) {
             holder.itemLayout.setBackgroundColor(Color.parseColor("#FFDD85")) // 연한 노란색
+            holder.btnX.visibility = View.GONE
         } else {
             holder.itemLayout.setBackgroundColor(Color.WHITE) // 기본 흰색 배경
+            holder.btnX.visibility = View.VISIBLE
+        }
+        holder.btnX.setOnClickListener {
+            if (mate.nickname != userNickname) {
+                onDeleteClick(mate.mateId)
+            }
         }
     }
 
