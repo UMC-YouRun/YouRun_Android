@@ -36,7 +36,7 @@ class AppExpFragment : Fragment(R.layout.fragment_app_exp) {
         super.onViewCreated(view, savedInstanceState)
 
         val sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
-        val nickname = sharedPref.getString("nickname", "현민제") ?: "null"
+        val nickname = sharedPref.getString("nickname", "") ?: "null"
 
         if (nickname.isNotEmpty()) {
             val welcomeText = binding.txtAppExpWelcome.text.toString()
