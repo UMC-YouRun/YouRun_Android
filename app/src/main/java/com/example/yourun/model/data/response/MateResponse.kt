@@ -1,6 +1,6 @@
 package com.example.yourun.model.data.response
 
-data class MateResponse(
+data class MateResponse<T>(
     val status: Int,
     val code: String,
     val message: String,

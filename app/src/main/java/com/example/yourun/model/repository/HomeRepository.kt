@@ -30,7 +30,7 @@ class HomeRepository(private val apiService: ApiService) {
         }
     }
 
-    suspend fun getRecommendMates(): MateResponse? {
+    suspend fun getRecommendMates(): MateResponse<Any?>? {
         return try {
             val response = apiService.getRecommendMate()
 

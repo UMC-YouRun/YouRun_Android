@@ -3,6 +3,7 @@ package com.example.yourun.model.network
 import com.example.yourun.model.data.BaseResponse
 import com.example.yourun.model.data.CrewChallengeDetailRes
 import com.example.yourun.model.data.CrewChallengeResponse
+import com.example.yourun.model.data.MateData
 import com.example.yourun.model.data.response.ChallengeDataResponse
 import com.example.yourun.model.data.response.ChallengeResultResponse
 import com.example.yourun.model.data.response.EmailduplicateResponse
@@ -69,10 +70,10 @@ interface ApiService {
     suspend fun getHomeChallengesInfo(): Response<HomeChallengeResponse>
 
     @GET("users/mates")
-    suspend fun getMatesList(): Response<MateResponse>
+    suspend fun getMatesList(): Response<MateResponse<Any?>>
 
-    //@GET("users/mates")
-    //suspend fun getMates(): MateResponse<List<MateApiData>>
+    @GET("users/mates")
+    suspend fun getMates(): MateResponse<MateData>
 
     @POST("users/mates/{mateId}")
     suspend fun addMate(
@@ -80,7 +81,7 @@ interface ApiService {
     ): Response<ApiResponseBoolean>
 
     @GET("users/mates/recommend")
-    suspend fun getRecommendMate(): Response<MateResponse>
+    suspend fun getRecommendMate(): Response<MateResponse<Any?>>
 
     @GET("users/runnings/{id}")
     suspend fun getRunningData(

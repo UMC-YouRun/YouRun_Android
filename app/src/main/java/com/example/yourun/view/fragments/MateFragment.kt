@@ -146,8 +146,8 @@ class MateFragment : Fragment() {
                 Log.e("MateFragment", "API 호출 오류: ${e.message}")
             }
         }
-    }
-     */
+    }*/
+
 
     private fun updateTop3Mates() {
         val topMates = mateDataList.sortedByDescending { it.totalDistance }.take(3)
