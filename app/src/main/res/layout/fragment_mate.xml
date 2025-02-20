@@ -107,23 +107,25 @@
 
                 <ImageView
                     android:id="@+id/rank1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="24dp"
+                    android:scaleType="fitXY"
                     android:layout_marginStart="39dp"
                     android:layout_marginTop="-10dp"
                     app:layout_constraintStart_toStartOf="@+id/card_mate_rank1"
                     app:layout_constraintTop_toTopOf="@+id/card_mate_rank1"
-                    app:srcCompat="@drawable/img_rank_1st" />
+                    app:srcCompat="@drawable/rank1" />
 
                 <ImageView
                     android:id="@+id/character_mate_rank1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="101dp"
+                    android:layout_height="63dp"
+                    android:scaleType="fitXY"
                     android:layout_marginBottom="50dp"
                     app:layout_constraintBottom_toBottomOf="@+id/card_mate_rank1"
                     app:layout_constraintEnd_toEndOf="@+id/card_mate_rank1"
                     app:layout_constraintStart_toStartOf="@+id/card_mate_rank1"
-                    app:srcCompat="@drawable/img_mate_sprinter" />
+                    app:srcCompat="@drawable/character_mate_pacemaker" />
 
                 <TextView
                     android:id="@+id/name_mate_rank1"
@@ -161,18 +163,20 @@
 
                 <ImageView
                     android:id="@+id/rank2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="24dp"
+                    android:scaleType="fitXY"
                     android:layout_marginStart="39dp"
                     android:layout_marginTop="-10dp"
                     app:layout_constraintStart_toStartOf="@+id/card_mate_rank2"
                     app:layout_constraintTop_toTopOf="@+id/card_mate_rank2"
-                    app:srcCompat="@drawable/img_rank_2nd" />
+                    app:srcCompat="@drawable/rank2" />
 
                 <ImageView
                     android:id="@+id/character_mate_rank2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="101dp"
+                    android:layout_height="63dp"
+                    android:scaleType="fitXY"
                     android:layout_marginBottom="50dp"
                     app:layout_constraintBottom_toBottomOf="@+id/card_mate_rank2"
                     app:layout_constraintEnd_toEndOf="@+id/card_mate_rank2"
@@ -215,8 +219,9 @@
 
                 <ImageView
                     android:id="@+id/characeter_mate_rank3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="101dp"
+                    android:layout_height="63dp"
+                    android:scaleType="fitXY"
                     android:layout_marginBottom="50dp"
                     app:layout_constraintBottom_toBottomOf="@+id/card_mate_rank3"
                     app:layout_constraintEnd_toEndOf="@+id/card_mate_rank3"
@@ -225,13 +230,14 @@
 
                 <ImageView
                     android:id="@+id/rank3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="35dp"
+                    android:layout_height="24dp"
+                    android:scaleType="fitXY"
                     android:layout_marginStart="39dp"
                     android:layout_marginTop="-10dp"
                     app:layout_constraintStart_toStartOf="@+id/card_mate_rank3"
                     app:layout_constraintTop_toTopOf="@+id/card_mate_rank3"
-                    app:srcCompat="@drawable/img_rank_3rd" />
+                    app:srcCompat="@drawable/rank3" />
 
                 <TextView
                     android:id="@+id/name_mate_rank3"

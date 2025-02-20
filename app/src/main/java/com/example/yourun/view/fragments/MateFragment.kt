@@ -146,19 +146,19 @@ class MateFragment : Fragment() {
 
     private fun getTop3ProfileImage(tendency: String?): Int {
         return when (tendency) {
-            "페이스메이커" -> R.drawable.img_mate_pacemaker
+            "페이스메이커" -> R.drawable.character_mate_pacemaker
             "트레일러너" -> R.drawable.img_mate_trailrunner
             "스프린터" -> R.drawable.img_mate_sprinter
-            else -> R.drawable.img_mate_pacemaker // 기본 이미지
+            else -> R.drawable.character_mate_pacemaker // 기본 이미지
         }
     }
 
     private fun getProfileImageByTendency(tendency: String?): Int {
         return when (tendency) {
-            "페이스메이커" -> R.drawable.img_profile_pacemaker_purple
+            "페이스메이커" -> R.drawable.img_profile_pacemaker
             "트레일러너" -> R.drawable.img_profile_trailrunner_red
             "스프린터" -> R.drawable.img_profile_sprinter_yellow
-            else -> R.drawable.img_profile_pacemaker_purple  // 경향 없을시 기본 이미지 불러오기
+            else -> R.drawable.img_profile_pacemaker // 경향 없을시 기본 이미지 불러오기
         }
     }
 
