@@ -26,8 +26,8 @@ import com.example.yourun.view.activities.CalendarActivity
 //import com.example.yourun.view.activities.ChallengeListActivity
 import com.example.yourun.view.activities.CreateChallengeActivity
 import com.example.yourun.view.activities.ResultContributionActivity
-import com.example.yourun.view.activities.ResultCrewActivity
 import com.example.yourun.view.activities.ResultSoloActivity
+import com.example.yourun.view.activities.ResultCrewActivity
 import com.example.yourun.view.custom.CustomHomeChallenge
 import com.example.yourun.view.custom.CustomMateView
 import com.example.yourun.viewmodel.HomeViewModel
