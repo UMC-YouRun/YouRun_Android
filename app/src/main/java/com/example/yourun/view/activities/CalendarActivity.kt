@@ -7,6 +7,7 @@ import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.widget.GridLayout
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -39,6 +40,16 @@ class CalendarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_calendar)
+
+        val topBarTitle: TextView = findViewById(R.id.txtTopBarWithBackButton)
+
+        topBarTitle.text = "나의 러닝 기록"
+
+        val backButton: ImageButton = findViewById(R.id.backButton)
+
+        backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         statsDate = findViewById(R.id.statsDate)
 
@@ -164,14 +175,17 @@ class CalendarActivity : AppCompatActivity() {
     }
 
 
-    // 페이스(분/km) 계산 함수
     private fun calculatePace(distance: Int, time: Int): String {
-        if (distance == 0 || time == 0) return "0'00km"
-        val pace = (time.toDouble() / 60000) / (distance.toDouble() / 1000)
-        val minutes = pace.toInt()
-        val seconds = ((pace - minutes) * 60).toInt()
-        return String.format("%d:%02d 분/km", minutes, seconds)
+        if (distance == 0 || time == 0) return "00'0km"
+
+        val pace = time.toDouble() / distance // ✅ (시간(ms) / 거리(m)) → (초 / m)
+        val minutes = (pace / 60).toInt() // ✅ 분 계산
+        val seconds = ((pace % 60) / 10).toInt() // ✅ 초를 10 단위로 반올림
+
+        return String.format("%02d'%01dkm", minutes, seconds)
     }
+
+
 
 
     private fun updateMonthYearText(monthYearText: TextView) {

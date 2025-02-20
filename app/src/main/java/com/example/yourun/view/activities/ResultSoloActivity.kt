@@ -30,6 +30,11 @@ class ResultSoloActivity : AppCompatActivity() {
             val intent = Intent(this, CalendarActivity::class.java)
             startActivity(intent)
         }
+        val backButton: ImageButton = findViewById(R.id.backButton)
+
+        backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         val isCrewChallengeInProgress = intent.getBooleanExtra("isCrewChallengeInProgress", false)
         val isSoloChallengeInProgress = intent.getBooleanExtra("isSoloChallengeInProgress", false)

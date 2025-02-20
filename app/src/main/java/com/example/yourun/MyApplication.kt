@@ -22,7 +22,5 @@ class MyApplication : Application() {
         KakaoSdk.init(this, kakaoAppKey)
         KakaoMapSdk.init(this, kakaoAppKey)
 
-        ChallengeCheckManager.init(this)
-        ChallengeCheckManager.startPeriodicCheck(this)
     }
 }
