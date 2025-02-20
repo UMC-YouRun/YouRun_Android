@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.yourun.R
 import com.example.yourun.model.data.MateData
 import android.graphics.Color
-import android.util.Log
 
 
 class MateRankingAdapter(
@@ -45,8 +44,14 @@ class MateRankingAdapter(
         holder.countDay.text = "${mate.countDay}일째"
         val distanceKm = (mate.totalDistance / 1000)
         holder.distance.text = "${mate.totalDistance}km"
-        Log.d("MateAdapter", "메이트 거리 값 (변환 후 UI 표시): ${distanceKm}km")
-        holder.change.text = "${mate.change}위"
+        holder.change.text = if (mate.change == 0) {
+            "-"  // 거리가 0이면 변동값 대신 "-"
+        } else if (mate.change > 0) {
+            "+${mate.change}위"
+        } else {
+            "${mate.change}위"  // 음수면 그대로 표시 (예: "-2위")
+        }
+
         // 현재 사용자의 닉네임과 리스트의 닉네임이 같다면 노란색 배경 적용
         if (mate.nickname == userNickname) {
             holder.itemLayout.setBackgroundColor(Color.parseColor("#FFDD85")) // 연한 노란색
@@ -54,12 +59,14 @@ class MateRankingAdapter(
         } else {
             holder.itemLayout.setBackgroundColor(Color.WHITE) // 기본 흰색 배경
             holder.btnX.visibility = View.VISIBLE
+
         }
         holder.btnX.setOnClickListener {
             if (mate.nickname != userNickname) {
                 onDeleteClick(mate.mateId)
             }
         }
+        
     }
 
     override fun getItemCount(): Int {

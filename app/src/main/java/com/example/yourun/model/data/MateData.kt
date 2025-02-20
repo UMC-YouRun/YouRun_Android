@@ -7,7 +7,7 @@ data class MateData(
     val nickname: String,
     val tags: List<String>,
     val countDay: Int,             // 러닝 일수
-    val totalDistance: Int,           // 거리
-    val change: Int,              // 순위 변동 (로컬에서 계산)
-    val tendency: String?
+    var totalDistance: Int,           // 거리
+    var change: Int,              // 순위 변동 (로컬에서 계산)
+    val tendency: String?,
 )
