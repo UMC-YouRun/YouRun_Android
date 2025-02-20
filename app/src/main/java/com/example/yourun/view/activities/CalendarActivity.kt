@@ -176,13 +176,13 @@ class CalendarActivity : AppCompatActivity() {
 
 
     private fun calculatePace(distance: Int, time: Int): String {
-        if (distance == 0 || time == 0) return "00'0km"
+        if (distance == 0 || time == 0) return "0.0 km/h"
 
-        val pace = time.toDouble() / distance // ✅ (시간(ms) / 거리(m)) → (초 / m)
-        val minutes = (pace / 60).toInt() // ✅ 분 계산
-        val seconds = ((pace % 60) / 10).toInt() // ✅ 초를 10 단위로 반올림
+        val distanceKm = distance / 1000.0 // m → km 변환
+        val timeHours = time / 3600000.0 // ms → h 변환
+        val speed = distanceKm / timeHours // 속력 (km/h)
 
-        return String.format("%02d'%01dkm", minutes, seconds)
+        return String.format("%.1f km/h", speed) // 소수점 1자리까지 표시
     }
 
 
