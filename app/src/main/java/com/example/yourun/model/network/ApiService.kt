@@ -28,6 +28,7 @@ import com.example.yourun.model.data.response.MateResponse
 import com.example.yourun.model.data.MyPageResponse
 import com.example.yourun.model.data.PersonalChallengeResponse
 import com.example.yourun.model.data.SoloChallengeDetailRes
+import com.example.yourun.model.data.response.CrewChallengeMateRes
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -103,20 +104,26 @@ interface ApiService {
     suspend fun createsolochallenge(@Body request: CreateSoloChallengeRequest): CreateSoloChallengeResponse
 
     @GET("challenges/crew/pending")
-    suspend fun getPendingCrewChallenges(): Response<BaseResponse<CrewChallengeResponse>>
+    suspend fun getPendingCrewChallenges(): Response<ApiResponse<CrewChallengeResponse>>
 
     @GET("challenges/solo/pending")
-    suspend fun getPendingPersonalChallenges(): Response<BaseResponse<PersonalChallengeResponse>>
+    suspend fun getPendingPersonalChallenges(): Response<ApiResponse<PersonalChallengeResponse>>
 
     @GET("challenges/crew/pending/{challengeId}")
     suspend fun getCrewChallengeDetail(
         @Path("challengeId") challengeId: String
-    ): Response<BaseResponse<CrewChallengeDetailRes>>
+    ): Response<ApiResponse<CrewChallengeDetailRes>>
 
     @GET("challenges/solo/pending/{challengeId}")
     suspend fun getSoloChallengeDetail(
-        @Path("challengeId") challengeId: String
-    ): Response<BaseResponse<SoloChallengeDetailRes>>
+        @Path("challengeId") challengeId: Long
+    ): Response<ApiResponse<SoloChallengeDetailRes>>
+
+    @POST("/challenges/crew/{challengeId}/join")
+    suspend fun joinCrewChallenge(
+        @Path("challengeId") challengeId: Long,
+        @Body request: CrewChallengeMateRes
+    ): Response<ApiResponse<CrewChallengeMateRes>>
 }
 
 data class ApiResponse<T>(
