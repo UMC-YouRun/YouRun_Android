@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import com.example.yourun.R
+import com.example.yourun.model.data.Tendency
 
 class CustomHomeChallenge @JvmOverloads constructor(
     context: Context,
@@ -162,7 +163,7 @@ class CustomHomeChallenge @JvmOverloads constructor(
         return (this * context.resources.displayMetrics.density).toInt()
     }
 
-    fun updateCrewImages(tendencies: List<String>?) {
+    fun updateCrewImages(tendencies: List<Tendency>?) {
         if (tendencies == null) {
             Log.e("CustomHomeChallenge", "tendency 값이 null입니다.")
             return
@@ -170,7 +171,7 @@ class CustomHomeChallenge @JvmOverloads constructor(
         val imageViews = listOf(imgUser1, imgUser2, imgUser3, imgUser4)
 
         // 최대 4명까지만 표시
-        val userImages = tendencies.map { getTendencyImage(it) }
+        val userImages = tendencies.map { getTendencyImage(it.value) }
 
         // UI에 적용
         imageViews.forEachIndexed { index, imageView ->

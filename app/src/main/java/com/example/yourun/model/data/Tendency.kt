@@ -9,7 +9,7 @@ enum class Tendency(val value: String) {
 
     companion object {
         fun fromValue(value: String): Tendency {
-            return values().firstOrNull { it.value == value } ?: PACEMAKER
+            return entries.firstOrNull { it.value == value } ?: PACEMAKER
         }
     }
 }

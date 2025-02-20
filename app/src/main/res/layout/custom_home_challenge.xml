@@ -80,8 +80,8 @@
 
     <ImageView
         android:id="@+id/img_user1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:contentDescription="@string/img_user"
         android:src="@drawable/img_circle_profile_facemaker"
         android:layout_marginTop="32dp"
@@ -90,8 +90,8 @@
 
     <ImageView
         android:id="@+id/img_user2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:contentDescription="@string/img_user"
         android:src="@drawable/img_circle_profile_facemaker"
         android:layout_marginTop="32dp"
@@ -100,8 +100,8 @@
 
     <ImageView
         android:id="@+id/img_user3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:contentDescription="@string/img_user"
         android:src="@drawable/img_circle_profile_facemaker"
         android:layout_marginTop="62dp"
@@ -110,8 +110,8 @@
 
     <ImageView
         android:id="@+id/img_user4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:contentDescription="@string/img_user"
         android:src="@drawable/img_circle_profile_facemaker"
         android:layout_marginTop="62dp"

@@ -2,6 +2,7 @@ package com.example.yourun.view.fragments
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
@@ -26,6 +27,8 @@ import com.example.yourun.view.activities.CalendarActivity
 //import com.example.yourun.view.activities.ChallengeListActivity
 import com.example.yourun.view.activities.CreateChallengeActivity
 import com.example.yourun.view.activities.ResultContributionActivity
+import com.example.yourun.view.activities.ResultCrewActivity
+import com.example.yourun.view.activities.ResultSoloActivity
 import com.example.yourun.view.custom.CustomHomeChallenge
 import com.example.yourun.view.custom.CustomMateView
 import com.example.yourun.viewmodel.HomeViewModel
@@ -64,6 +67,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.toggleCrewButton() // 초기값 : 크루 버튼 선택됨
 
         // 테스트 위한 버튼 수정하기
         binding.imgMainBanner.setOnClickListener {
@@ -131,7 +136,7 @@ class HomeFragment : Fragment() {
 
         // 추천 메이트 UI 업데이트
         viewModel.recommendMates.observe(viewLifecycleOwner) { mates ->
-            //updateRecommendMatesUI(mates, viewModel, showHeart = true)
+            updateRecommendMatesUI(mates, viewModel, showHeart = true)
         }
 
         // btn_redirect 클릭 시 최신 메이트 데이터 다시 불러오기
@@ -203,6 +208,8 @@ class HomeFragment : Fragment() {
         customView.updatePeriodCrew(crewChallenge.challengePeriod)
 
         val crewTendencies = crewChallenge.myParticipantIdsInfo.map { it.memberTendency }
+        customView.updateCrewImages(crewTendencies)
+
         val crewChallengeLevel = when (crewChallenge.challengeStatus) {
             "PENDING" -> 0  // 매칭 대기중
             "IN_PROGRESS" -> 1 // 진행 중
@@ -311,14 +318,32 @@ class HomeFragment : Fragment() {
         binding.txtMainCrewReward.text = "${crewReward}개"
         binding.txtMainSoloReward.text = "${soloReward}개"
 
-        val imageRes = when (userTendency) {
-            "페이스메이커" -> R.drawable.img_home_facemaker
-            "스프린터" -> R.drawable.img_home_sprinter
-            "트레일러너" -> R.drawable.img_home_trailrunner
-            else -> R.drawable.img_home_facemaker // 기본 이미지
-        }
+        val homeCharacterView = binding.imgHomeCharacter
+        val layoutParams = homeCharacterView.layoutParams as ViewGroup.MarginLayoutParams
+        val density = Resources.getSystem().displayMetrics.density
 
-        binding.imgHomeCharacter.setImageResource(imageRes)
+        when (userTendency) {
+            "페이스메이커" -> {
+                binding.imgHomeCharacter.setImageResource(R.drawable.img_home_facemaker)
+                layoutParams.setMargins(0, (30 * density).toInt(), (8 * density).toInt(), 0)
+                homeCharacterView.layoutParams = layoutParams
+            }
+            "스프린터" -> {
+                binding.imgHomeCharacter.setImageResource(R.drawable.img_home_sprinter)
+                layoutParams.setMargins(0, (50 * density).toInt(), (10 * density).toInt(), 0)
+                homeCharacterView.layoutParams = layoutParams
+            }
+            "트레일러너" -> {
+                binding.imgHomeCharacter.setImageResource(R.drawable.img_home_trailrunner)
+                layoutParams.setMargins(0, (20 * density).toInt(), (12 * density).toInt(), 0)
+                homeCharacterView.layoutParams = layoutParams
+            }
+            else -> {
+                binding.imgHomeCharacter.setImageResource(R.drawable.img_home_facemaker)
+                layoutParams.setMargins(0, (30 * density).toInt(), (8 * density).toInt(), 0)
+                homeCharacterView.layoutParams = layoutParams
+            } // 기본 이미지
+        }
     }
 
     override fun onResume() {

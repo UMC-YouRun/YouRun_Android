@@ -60,9 +60,10 @@ class RunningActivity : AppCompatActivity() {
         val sharedPreferences = this.getSharedPreferences("UserData", Context.MODE_PRIVATE)
         val userTendency = sharedPreferences.getString("user_tendency", "")
 
+        val targetTime = 1
         // 초기 데이터 설정
         mateName = intent.getStringExtra("mate_nickname") ?: "닉네임"
-        val targetTime = intent.getIntExtra("target_time", 0)
+        // val targetTime = intent.getIntExtra("target_time", 0)
         mateRunningDistanceMeters = intent.getIntExtra("mate_running_distance", 0)
         Log.d("mateRunningDistance", mateRunningDistanceMeters.toString())
         val matePaceInt = intent.getIntExtra("mate_running_pace", 0)
@@ -86,7 +87,7 @@ class RunningActivity : AppCompatActivity() {
         binding.loadingRunningAnimation.playAnimation()
 
         val characterAnimationView =
-            findViewById<LottieAnimationView>(R.id.charcterRunningAnimation)
+            binding.charcterRunningAnimation
         val layoutParams = characterAnimationView.layoutParams as ViewGroup.MarginLayoutParams
 
         when (userTendency) {
@@ -133,7 +134,7 @@ class RunningActivity : AppCompatActivity() {
 
         // 버튼 누를 시 러닝 시작, 중지
         binding.btnRunningPlayPause.setOnClickListener {
-          //  viewModel.toggleRunningState()
+            viewModel.toggleRunningState()
         }
 
         // 목표 시간 도달 또는 수동 종료 시 RunningResultActivity로 이동
@@ -175,11 +176,11 @@ class RunningActivity : AppCompatActivity() {
             .setMinUpdateIntervalMillis(1000) // 1초마다 최소 업데이트
             .build()
 
-      //  fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
     }
 
     private fun stopLocationUpdates() {
-      //  fusedLocationClient.removeLocationUpdates(locationCallback)
+        fusedLocationClient.removeLocationUpdates(locationCallback)
     }
 
     private fun applySpannable(text: String, numberSize: Int, unitSize: Int): SpannableString {
@@ -283,7 +284,7 @@ class RunningActivity : AppCompatActivity() {
         binding.charcterRunningAnimation.pauseAnimation()
         stopLocationUpdates() // 액티비티 종료 시 위치 업데이트 중지
         if (viewModel.isStopped.value != true) {
-            //viewModel.stopTracking()
+            viewModel.stopTracking()
         }
     }
 }

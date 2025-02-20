@@ -117,14 +117,14 @@ class LoginActivity : AppCompatActivity() {
     startActivity(Intent(this, AppExpActivity::class.java))
 
 
-    // 앱 설명을 이미 봤다면 MainActivity로 이동
-//        if (isAppExpSeen)  {
-//            startActivity(Intent(this, MainActivity::class.java))
-//        } else{
-//            // 앱 설명을 안 봤다면 AppExpActivity로 이동
-//            startActivity(Intent(this, AppExpActivity::class.java))
-//
-//        }
+     // 앱 설명을 이미 봤다면 MainActivity로 이동
+        if (isAppExpSeen)  {
+            startActivity(Intent(this, MainActivity::class.java))
+        } else{
+            // 앱 설명을 안 봤다면 AppExpActivity로 이동
+            startActivity(Intent(this, AppExpActivity::class.java))
+
+        }
 
         finish() // 현재 Activity 종료하여 뒤로 가기 방지
     }

@@ -64,7 +64,7 @@ class RunningResultActivity : AppCompatActivity() {
         // Intent에서 데이터 받기
         val userRunningDistance = intent.getDoubleExtra("user_running_distance", 0.0) // km 단위
         val userRunningDistanceMeters = (userRunningDistance * 1000).toInt()
-        val runningTime = intent.getStringExtra("running_time") ?: "0.00"
+        val runningTime = intent.getIntExtra("running_time", 0)
         val avgSpeed = intent.getStringExtra("average_speed") ?: "0.00 /km"
         val mateNickname = intent.getStringExtra("mate_nickname") ?: ""
         val distanceDifference = intent.getDoubleExtra("distance_difference", 0.0) // km
@@ -124,6 +124,8 @@ class RunningResultActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         val data = response.body()
                         if (data != null) {
+                            Log.d("solo", data.isSoloChallengeInProgress.toString())
+                            Log.d("crew", data.isCrewChallengeInProgress.toString())
                             if (data.isSoloChallengeInProgress && data.isCrewChallengeInProgress) {
                                 // 개인, 크루 챌린지 결과
                                 val intent = Intent(this@RunningResultActivity, ResultSoloActivity::class.java)

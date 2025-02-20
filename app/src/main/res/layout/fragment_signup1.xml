@@ -64,7 +64,7 @@
 
     <EditText
         android:id="@+id/et_id"
-        android:layout_width="310dp"
+        android:layout_width="310sp"
         android:layout_height="60sp"
         android:layout_marginTop="20dp"
         android:background="@drawable/bg_edittext_rounded_corner"
@@ -79,7 +79,7 @@
         android:id="@+id/btn_duplicate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="18dp"
         android:layout_marginEnd="10dp"
         android:background="@drawable/img_againcheck"
         app:layout_constraintEnd_toEndOf="@id/et_id"
