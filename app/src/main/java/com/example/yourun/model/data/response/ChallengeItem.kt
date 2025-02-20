@@ -6,6 +6,7 @@ data class ChallengeItem(
     val title: String,
     val description: String,
     val members: List<Int>,
+    val memberTendencies: List<String>,
     val remaining: String,
     val isCrewChallenge: Boolean
 )

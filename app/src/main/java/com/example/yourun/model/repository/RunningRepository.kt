@@ -8,7 +8,7 @@ import com.example.yourun.model.network.ApiService
 class RunningRepository(private val apiService: ApiService) {
 
     // 서버에서 추천 메이트 데이터를 가져오는 함수
-    suspend fun getRecommendMates(): MateResponse? {
+    suspend fun getRecommendMates(): MateResponse<Any?>? {
         return try {
             val response = apiService.getRecommendMate()
 
@@ -25,7 +25,7 @@ class RunningRepository(private val apiService: ApiService) {
     }
 
     // 서버에서 메이트 목록을 조회하는 함수
-    suspend fun getMatesList(): MateResponse? {
+    suspend fun getMatesList(): MateResponse<Any?>? {
         return try {
             val response = apiService.getMatesList()
 

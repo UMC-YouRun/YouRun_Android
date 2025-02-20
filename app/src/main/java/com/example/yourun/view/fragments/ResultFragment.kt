@@ -47,9 +47,9 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
         val finalScore = arguments?.getInt("FINAL_SCORE") ?: 0
 
         val resultType = when (finalScore) {
-            in 4..6 -> "스프린터"
-            in 6..7 -> "페이스메이커"
-            in 7..8 -> "트레일러너"
+            in 1..6 -> "스프린터"
+            in 6..8 -> "페이스메이커"
+            in 8..100 -> "트레일러너"
             else -> "알 수 없음"
         }
 

@@ -1,4 +1,4 @@
-/*package com.example.yourun.viewmodel
+package com.example.yourun.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,7 +18,6 @@ class ChallengeViewModel(private val repository: ChallengeRepository) : ViewMode
 
     fun fetchPendingCrewChallenges() {
         viewModelScope.launch {
-            /*
             val challenges = repository.getPendingCrewChallenges()
             if (challenges.isNullOrEmpty()) {
                 _pendingCrewChallenges.postValue(emptyList()) // 🔥 빈 리스트라도 post
@@ -27,8 +26,8 @@ class ChallengeViewModel(private val repository: ChallengeRepository) : ViewMode
                 println("VIEWMODEL_DEBUG: 받은 크루 챌린지 리스트 = $challenges")
                 _pendingCrewChallenges.postValue(challenges)
             }
-            */
 
+            /*
             val challenges = repository.getPendingCrewChallenges()
 
             if (challenges.isNullOrEmpty()) {
@@ -52,6 +51,7 @@ class ChallengeViewModel(private val repository: ChallengeRepository) : ViewMode
                 _pendingCrewChallenges.postValue(challenges)
                 println("VIEWMODEL_DEBUG: 받은 솔로 챌린지 리스트 = $challenges")
             }
+             */
 
         }
     }
@@ -61,7 +61,6 @@ class ChallengeViewModel(private val repository: ChallengeRepository) : ViewMode
 
     fun fetchPendingPersonalChallenges() {
         viewModelScope.launch {
-            /*
             val challenges = repository.getPendingPersonalChallenges()
             if (challenges.isNullOrEmpty()) {
                 _pendingPersonalChallenges.postValue(emptyList()) // 🔥 빈 리스트라도 post
@@ -70,8 +69,8 @@ class ChallengeViewModel(private val repository: ChallengeRepository) : ViewMode
                 println("VIEWMODEL_DEBUG: 받은 솔로 챌린지 리스트 = $challenges")
                 _pendingPersonalChallenges.postValue(challenges)
             }
-             */
 
+            /*
             val challenges = repository.getPendingPersonalChallenges()
 
             if (challenges.isNullOrEmpty()) {
@@ -102,7 +101,8 @@ class ChallengeViewModel(private val repository: ChallengeRepository) : ViewMode
                 _pendingPersonalChallenges.postValue(challenges)
                 println("VIEWMODEL_DEBUG: 받은 솔로 챌린지 리스트 = $challenges")
             }
+             */
         }
     }
 
-}*/
+}

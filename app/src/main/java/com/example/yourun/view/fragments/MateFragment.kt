@@ -1,4 +1,4 @@
-/*package com.example.yourun.view.fragments
+package com.example.yourun.view.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -16,7 +16,6 @@ import com.example.yourun.model.data.MateData
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.MateRepository
 import com.example.yourun.model.data.response.UserInfo
-import com.example.yourun.utils.TokenManager
 import com.example.yourun.view.adapters.MateRankingAdapter
 import kotlinx.coroutines.launch
 
@@ -51,7 +50,7 @@ class MateFragment : Fragment() {
     }
 
     private fun loadUserAndMates() {
-        val token = TokenManager.getInstance(requireContext()).getToken()
+        val token = ApiClient.TokenManager.getToken()
         Log.d("MateFragment", "불러온 토큰: $token")
 
         if (token.isNullOrEmpty()) {
@@ -117,9 +116,9 @@ class MateFragment : Fragment() {
 
 
 
-    /*
-    private fun loadMates() {
-        val token = TokenManager.getInstance(requireContext()).getToken()
+
+    /*private fun loadMates() {
+        val token = ApiClient.TokenManager.getToken()
         Log.d("MateFragment", "불러온 토큰: $token")
 
         if (token.isNullOrEmpty()) {
@@ -147,8 +146,8 @@ class MateFragment : Fragment() {
                 Log.e("MateFragment", "API 호출 오류: ${e.message}")
             }
         }
-    }
-     */
+    }*/
+
 
     private fun updateTop3Mates() {
         val topMates = mateDataList.sortedByDescending { it.totalDistance }.take(3)
@@ -193,4 +192,4 @@ class MateFragment : Fragment() {
         }
     }
 
-}*/
+}
