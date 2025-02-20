@@ -6,6 +6,7 @@ import com.example.yourun.model.data.CrewChallengeRes
 import com.example.yourun.model.data.CrewChallengeResponse
 import com.example.yourun.model.data.SoloChallengeDetailRes
 import com.example.yourun.model.data.SoloChallengeRes
+import com.example.yourun.model.data.response.CrewChallengeMateRes
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.network.ApiResponse
 import com.example.yourun.model.network.ApiService
@@ -66,5 +67,9 @@ class ChallengeRepository(private val apiService: ApiService = ApiClient.getApiS
 
     suspend fun getSoloChallengeDetail(challengeId: String): Response<ApiResponse<SoloChallengeDetailRes>> {
         return apiService.getSoloChallengeDetail(challengeId.toLong())
+    }
+
+    suspend fun joinCrewChallenge(challengeId: Long, participantIds: List<Long>): Response<ApiResponse<CrewChallengeMateRes>> {
+        return apiService.joinCrewChallenge(challengeId, CrewChallengeMateRes(challengeId, participantIds))
     }
 }

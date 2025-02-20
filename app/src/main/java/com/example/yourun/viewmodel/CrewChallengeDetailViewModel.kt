@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.yourun.model.data.CrewChallengeDetailRes
+import com.example.yourun.model.network.ApiResponse
 import com.example.yourun.model.repository.ChallengeRepository
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 class CrewChallengeDetailViewModel(private val repository: ChallengeRepository) : ViewModel() {
 
@@ -21,6 +23,25 @@ class CrewChallengeDetailViewModel(private val repository: ChallengeRepository) 
                 _crewChallengeDetail.postValue(responseBody?.data) // ✅ data 필드만 저장
             } else {
                 _crewChallengeDetail.postValue(null)
+            }
+        }
+    }
+
+    private val _joinSuccess = MutableLiveData<Boolean>()
+    val joinSuccess: LiveData<Boolean> get() = _joinSuccess
+
+    fun joinCrewChallenge(challengeId: Long, participantIds: List<Long>) {
+        viewModelScope.launch {
+            try {
+                val response = repository.joinCrewChallenge(challengeId, participantIds)
+
+                if (response.isSuccessful && response.body()?.status == 200) {
+                    _joinSuccess.postValue(true)
+                } else {
+                    _joinSuccess.postValue(false)
+                }
+            } catch (e: Exception) {
+                _joinSuccess.postValue(false)
             }
         }
     }

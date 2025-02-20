@@ -28,6 +28,7 @@ import com.example.yourun.model.data.response.MateResponse
 import com.example.yourun.model.data.MyPageResponse
 import com.example.yourun.model.data.PersonalChallengeResponse
 import com.example.yourun.model.data.SoloChallengeDetailRes
+import com.example.yourun.model.data.response.CrewChallengeMateRes
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -120,6 +121,12 @@ interface ApiService {
     suspend fun getSoloChallengeDetail(
         @Path("challengeId") challengeId: Long
     ): Response<ApiResponse<SoloChallengeDetailRes>>
+
+    @POST("/challenges/crew/{challengeId}/join")
+    suspend fun joinCrewChallenge(
+        @Path("challengeId") challengeId: Long,
+        @Body request: CrewChallengeMateRes
+    ): Response<ApiResponse<CrewChallengeMateRes>>
 }
 
 data class ApiResponse<T>(

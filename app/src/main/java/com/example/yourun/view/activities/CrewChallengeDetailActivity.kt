@@ -2,11 +2,13 @@ package com.example.yourun.view.activities
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.yourun.R
 import com.example.yourun.model.data.CrewChallengeDetailRes
 import com.example.yourun.model.data.ParticipantIdInfo
@@ -14,6 +16,7 @@ import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.ChallengeRepository
 import com.example.yourun.viewmodel.CrewChallengeDetailViewModel
 import com.example.yourun.viewmodel.CrewChallengeDetailViewModelFactory
+import kotlinx.coroutines.launch
 
 class CrewChallengeDetailActivity : AppCompatActivity() {
 
@@ -24,19 +27,45 @@ class CrewChallengeDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val storedUserId = sharedPreferences.getLong("userId", -1)
+
+        Log.d("CrewChallengeDetailActivity", "🔍 가져온 userId 값: $storedUserId")
+
+        if (storedUserId == -1L) {
+            Log.e("CrewChallengeDetailActivity", "🚨 SharedPreferences에서 userId를 찾을 수 없음!")
+        }
+
         setContentView(R.layout.activity_crew_challenge_detail)
 
-        val challengeId = intent.getStringExtra("challengeId") ?: ""
-        if (challengeId.isNotEmpty()) {
-            viewModel.fetchCrewChallengeDetail(challengeId)
+        val challengeIdStr = intent.getStringExtra("challengeId") ?: ""
+        val challengeId = challengeIdStr.toLongOrNull() // String → Long 변환
+
+        if (challengeId != null) {
+            viewModel.fetchCrewChallengeDetail(challengeId.toString()) // API 호출
         } else {
             Toast.makeText(this, "잘못된 접근입니다.", Toast.LENGTH_SHORT).show()
             finish()
         }
 
+        val joinButton = findViewById<ImageButton>(R.id.btn_join) // "참여하기" 버튼
+        joinButton.setOnClickListener {
+            joinCrewChallenge(challengeId.toString()) // ✅ 버튼 클릭 시 참여 API 호출
+        }
+
         viewModel.crewChallengeDetail.observe(this) { detail ->
             Log.d("DEBUG", "API에서 받은 데이터: $detail")
             detail?.let { updateUI(it) }
+        }
+
+        viewModel.joinSuccess.observe(this) { success ->
+            if (success) {
+                Toast.makeText(this, "챌린지에 성공적으로 참여했습니다!", Toast.LENGTH_SHORT).show()
+                finish() // ✅ 성공 시 화면 종료 or 새로고침
+            } else {
+                Toast.makeText(this, "참여에 실패했습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -69,6 +98,24 @@ class CrewChallengeDetailActivity : AppCompatActivity() {
         updateParticipantImages(participants, listOf(participantImage1, participantImage2, participantImage3))
 
         crewSlogan.text = detail.slogan ?: "슬로건 없음"
+    }
+
+    private fun joinCrewChallenge(challengeIdStr: String) {
+        val challengeId = challengeIdStr.toLongOrNull() ?: return // String → Long 변환
+
+        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val userId = sharedPreferences.getLong("userId", -1)
+
+        if (userId == -1L) {
+            Log.e("ERROR", "로그인된 사용자 ID를 찾을 수 없음!")
+            return
+        }
+
+        val participantIds = listOf(userId)
+
+        lifecycleScope.launch {
+            viewModel.joinCrewChallenge(challengeId, participantIds)
+        }
     }
 
     /** 🚀 크루 챌린지 생성자의 성향을 기반으로 캐릭터 이미지 설정 */
