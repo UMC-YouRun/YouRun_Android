@@ -26,9 +26,11 @@ import com.example.yourun.model.repository.HomeRepository
 import com.example.yourun.view.activities.CalendarActivity
 //import com.example.yourun.view.activities.ChallengeListActivity
 import com.example.yourun.view.activities.CreateChallengeActivity
+import com.example.yourun.view.activities.CrewProgressActivity
 import com.example.yourun.view.activities.ResultContributionActivity
 import com.example.yourun.view.activities.ResultCrewActivity
 import com.example.yourun.view.activities.ResultSoloActivity
+import com.example.yourun.view.activities.SoloProgressActivity
 import com.example.yourun.view.custom.CustomHomeChallenge
 import com.example.yourun.view.custom.CustomMateView
 import com.example.yourun.viewmodel.HomeViewModel
@@ -191,7 +193,7 @@ class HomeFragment : Fragment() {
         // **진행 중(IN_PROGRESS)인 경우에만 클릭 가능**
         if (soloChallenge.status == "IN_PROGRESS") {
             customView.setOnClickListener {
-                val intent = Intent(requireContext(), ResultSoloActivity::class.java)
+                val intent = Intent(requireContext(), SoloProgressActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -221,7 +223,7 @@ class HomeFragment : Fragment() {
         // **진행 중(IN_PROGRESS)인 경우에만 클릭 가능**
         if (crewChallenge.challengeStatus == "IN_PROGRESS") {
             customView.setOnClickListener {
-                val intent = Intent(requireContext(), ResultCrewActivity::class.java)
+                val intent = Intent(requireContext(), CrewProgressActivity::class.java)
                 startActivity(intent)
             }
         }
