@@ -1,5 +1,6 @@
 package com.example.yourun.view.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.example.yourun.model.data.MateData
 import com.example.yourun.model.network.ApiClient
 import com.example.yourun.model.repository.MateRepository
 import com.example.yourun.model.data.response.UserInfo
+import com.example.yourun.view.activities.CalendarActivity
 import com.example.yourun.view.adapters.MateRankingAdapter
 import kotlinx.coroutines.launch
 
@@ -43,6 +45,12 @@ class MateFragment : Fragment() {
         recyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = mateAdapter
+        }
+
+        val calendarButton = view.findViewById<ImageView>(R.id.calender_button)
+        calendarButton.setOnClickListener {
+            val intent = Intent(requireContext(), CalendarActivity::class.java)
+            startActivity(intent)
         }
 
         // 데이터 로드 (API 요청)
@@ -129,7 +137,11 @@ class MateFragment : Fragment() {
             // 1등
             view?.findViewById<TextView>(R.id.name_mate_rank1)?.text = topMates[0].nickname
             view?.findViewById<TextView>(R.id.change_mate_rank1)?.text =
-                if (topMates[0].change > 0) "+${topMates[0].change}위" else "${topMates[0].change}위"
+                when {
+                    topMates[0].change > 0 -> "+${topMates[0].change}위"
+                    topMates[0].change < 0 -> "${topMates[0].change}위"
+                    else -> "-"
+                }
             view?.findViewById<ImageView>(R.id.character_mate_rank1)?.setImageResource(getTop3ProfileImage(topMates[0].tendency))
             view?.findViewById<ImageView>(R.id.card_mate_rank1)?.setImageResource(getTop3BgImage(topMates[0].tendency))
 
@@ -137,7 +149,11 @@ class MateFragment : Fragment() {
             if (topMates.size > 1) {
                 view?.findViewById<TextView>(R.id.name_mate_rank2)?.text = topMates[1].nickname
                 view?.findViewById<TextView>(R.id.change_mate_rank2)?.text =
-                    if (topMates[1].change > 0) "+${topMates[1].change}위" else "${topMates[1].change}위"
+                    when {
+                        topMates[1].change > 1 -> "+${topMates[1].change}위"
+                        topMates[1].change < 1 -> "${topMates[1].change}위"
+                        else -> "-"
+                    }
                 view?.findViewById<ImageView>(R.id.character_mate_rank2)?.setImageResource(getTop3ProfileImage(topMates[1].tendency))
                 view?.findViewById<ImageView>(R.id.card_mate_rank2)?.setImageResource(getTop3BgImage(topMates[1].tendency))
             }
@@ -146,7 +162,11 @@ class MateFragment : Fragment() {
             if (topMates.size > 2) {
                 view?.findViewById<TextView>(R.id.name_mate_rank3)?.text = topMates[2].nickname
                 view?.findViewById<TextView>(R.id.change_mate_rank3)?.text =
-                    if (topMates[2].change > 0) "+${topMates[2].change}위" else "${topMates[2].change}위"
+                    when {
+                        topMates[2].change > 0 -> "+${topMates[2].change}위"
+                        topMates[2].change < 0 -> "${topMates[2].change}위"
+                        else -> "-"
+                    }
                 view?.findViewById<ImageView>(R.id.characeter_mate_rank3)?.setImageResource(getTop3ProfileImage(topMates[2].tendency))
                 view?.findViewById<ImageView>(R.id.card_mate_rank3)?.setImageResource(getTop3BgImage(topMates[2].tendency))
             }
@@ -192,7 +212,7 @@ class MateFragment : Fragment() {
                 if (mate.rank == listSize && change < 0) continue
 
                 // 변동값을 적용한 등수가 1 이상, 리스트 크기 이하인지 확인
-                if (!(1 <= mate.rank + change && mate.rank + change <= listSize)) continue
+                if ((1 <= mate.rank + change && mate.rank + change <= listSize)) continue
 
             } while ((mate.rank - change) in previousRanks)
 
