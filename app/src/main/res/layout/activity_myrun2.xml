@@ -257,8 +257,5 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include
-        layout="@layout/bottom_navigation" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
