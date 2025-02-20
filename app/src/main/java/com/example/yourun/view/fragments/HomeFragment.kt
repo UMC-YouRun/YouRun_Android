@@ -316,6 +316,8 @@ class HomeFragment : Fragment() {
                 Log.e("HomeFragment", "날짜 파싱 오류", e)
             }
         }
+        // 테스트용
+        binding.txtMainRunDay.text = "12일째!"
 
         binding.txtMainCrewReward.text = "${crewReward}개"
         binding.txtMainSoloReward.text = "${soloReward}개"
