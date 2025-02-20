@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.yourun.R
 import com.example.yourun.model.data.MateData
 import com.example.yourun.model.data.response.UserInfo
+import com.example.yourun.model.network.ApiResponse
 import com.example.yourun.model.network.ApiService
 
 class MateRepository(private val apiService: ApiService) {
@@ -33,7 +34,7 @@ class MateRepository(private val apiService: ApiService) {
     }
 
     // ✅ 메이트(친구) 정보 조회 API
-    suspend fun getMates(s: String): List<MateData> {
+    suspend fun getMates(): List<MateData> {
         return try {
             val response = apiService.getMates()
 
@@ -43,6 +44,7 @@ class MateRepository(private val apiService: ApiService) {
                 Log.d("MateRepository", "메이트 거리 값: ${apiData.totalDistance}")
 
                 MateData(
+                    mateId = apiData.id,
                     rank = index + 1,
                     profileImageResId = getProfileImageByTendency(apiData.tendency),
                     nickname = apiData.nickname ?: "이름 없음",
@@ -77,5 +79,9 @@ class MateRepository(private val apiService: ApiService) {
             "스프린터" -> R.drawable.img_profile_sprinter_yellow
             else -> R.drawable.img_profile_pacemaker_purple
         }
+    }
+
+    suspend fun deleteMate(mateId: Long): ApiResponse<Boolean> {
+        return apiService.deleteMate(mateId)
     }
 }
