@@ -11,6 +11,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
@@ -41,6 +42,12 @@ class CrewChallengeStartActivity : AppCompatActivity() {
 
         val topBarTitle: TextView = findViewById(R.id.txtTopBarWithBackButton)
         topBarTitle.text = "러닝 챌린지"
+
+        val backButton: ImageButton = findViewById(R.id.backButton)
+
+        backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         tvCrewName = findViewById(R.id.tv_crew1_name)
         tvCrewSlogan = findViewById(R.id.tv_crew1_title)

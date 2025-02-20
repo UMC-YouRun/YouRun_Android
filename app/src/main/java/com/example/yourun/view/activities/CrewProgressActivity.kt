@@ -1,6 +1,7 @@
 package com.example.yourun.view.activities
 
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -21,6 +22,12 @@ class CrewProgressActivity : AppCompatActivity() {
 
         val topBarTitle: TextView = findViewById(R.id.txtTopBarWithBackButton)
         topBarTitle.text = "크루 챌린지 진행도"
+
+        val backButton: ImageButton = findViewById(R.id.backButton)
+
+        backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
 
         val tvTitle: TextView = findViewById(R.id.tv_title)
         val tvDate: TextView = findViewById(R.id.tv_date)
