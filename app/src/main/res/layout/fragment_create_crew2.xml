@@ -85,10 +85,11 @@
 
         <ImageButton
             android:id="@+id/startRunningButton"
-            android:layout_width="328dp"
+            android:layout_width="318dp"
             android:layout_height="48dp"
-            android:layout_margin="22dp"
+            android:layout_margin="20dp"
             android:layout_marginTop="80dp"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/btn_check"
             android:importantForAccessibility="no"
             android:textColor="@color/white"

@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="28dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:gravity="center"
             android:letterSpacing="0.03"
             android:lineSpacingExtra="14sp"
@@ -43,12 +43,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="45dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="16dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/ic_calendar" />
-
-
-
 
     </FrameLayout>
 
@@ -128,15 +125,14 @@
         android:layout_width="360dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
-        android:layout_marginStart="0dp"
         android:layout_marginTop="300dp"
+        android:layout_marginStart="6dp"
         android:background="@drawable/btn_choice"
         android:gravity="center"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/checkbox_solo"
-        app:layout_constraintTop_toTopOf="@id/checkbox_solo" />
-
-
+        app:layout_constraintTop_toTopOf="@id/checkbox_solo"
+        app:layout_constraintEnd_toEndOf="@id/checkbox_solo"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -22,7 +22,6 @@ import android.net.Uri
 import android.provider.Settings
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
-import com.example.yourun.view.fragments.ChallengeFragment
 import com.example.yourun.view.fragments.ChallengeListFragment
 import com.example.yourun.view.fragments.RunningFragment
 import com.google.android.material.snackbar.Snackbar

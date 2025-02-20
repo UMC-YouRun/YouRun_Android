@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.airbnb.lottie.LottieAnimationView
 import com.example.yourun.R
 import com.example.yourun.databinding.ActivityRunningBinding
 import com.example.yourun.model.network.ApiClient

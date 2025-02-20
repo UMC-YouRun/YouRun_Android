@@ -188,22 +188,23 @@
                 android:useDefaultMargins="false"
                 android:clickable="true">
 
-
             </LinearLayout>
 
         </LinearLayout>
-    </LinearLayout>
 
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/next_btn"
-        android:layout_width="360dp"
+        android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginTop="85dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/btn_create"
         app:layout_constraintStart_toStartOf="@id/tv_date"
-        app:layout_constraintTop_toBottomOf="@+id/calender" />
+        app:layout_constraintTop_toBottomOf="@id/calender"
+        app:layout_constraintEnd_toEndOf="@id/calender"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

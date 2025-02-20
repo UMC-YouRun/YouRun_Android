@@ -176,24 +176,23 @@
                 android:useDefaultMargins="false"
                 android:clickable="true">
 
-
             </LinearLayout>
 
         </LinearLayout>
+
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/create_btn"
-        android:layout_width="360dp"
+        android:layout_width="350dp"
         android:layout_height="48dp"
         android:layout_gravity="center"
         android:layout_marginTop="410dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/btn_create"
         app:layout_constraintEnd_toEndOf="@+id/create_checkbox"
         app:layout_constraintStart_toStartOf="@id/create_checkbox"
         app:layout_constraintTop_toTopOf="@id/create_checkbox" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
