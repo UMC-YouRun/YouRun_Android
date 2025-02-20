@@ -25,6 +25,12 @@ class ResultContributionActivity : AppCompatActivity() {
         val topBarTitle: TextView = findViewById(R.id.txtTopBarWithBackButton)
         topBarTitle.text = "크루 챌린지 결과"
 
+        val backButton: ImageButton = findViewById(R.id.backButton)
+
+        backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
 //        val topBarTitle: TextView = findViewById(R.id.txt_top_bar_with_back_button)
         val tvWin: TextView = findViewById(R.id.tv_win)
         val layoutContributionList: LinearLayout = findViewById(R.id.layout_contribution_list)

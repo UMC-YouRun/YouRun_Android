@@ -9,23 +9,62 @@ import com.example.yourun.model.network.ApiClient
 import kotlinx.coroutines.*
 
 object ChallengeCheckManager {
-
     private lateinit var prefs: SharedPreferences
     private val challengeApiService by lazy { ApiClient.getChallengeApiService() }
-    private var checkJob: Job? = null // 코루틴 잡을 저장
-    private val handler = Handler(Looper.getMainLooper()) // UI 스레드에서 실행
+    private var checkJob: Job? = null
+    private val handler = Handler(Looper.getMainLooper())
 
-    private val excludedActivities = setOf(
-        "com.example.yourun.view.activities.OnboardingActivity",
-        "com.example.yourun.view.activities.SignUpActivity",
-        "com.example.yourun.view.activities.LoginActivity"
+    private val allowedActivities = setOf(
+        "com.example.yourun.view.activities.MainActivity" // ✅ 메인 액티비티에서만 실행
     )
 
     fun init(context: Context) {
         prefs = context.getSharedPreferences("challenge_prefs", Context.MODE_PRIVATE)
+        resetApiCallStatus() // ✅ 앱 실행 시 is_api_called 초기화 (앱 재시작 시 다시 실행되도록)
     }
 
-    fun isApiAlreadyCalled(): Boolean {
+    fun startPeriodicCheck(context: Context) {
+        checkJob?.cancel() // 기존 실행 중인 잡 취소
+
+        // ✅ 현재 실행 중인 액티비티 확인
+        val activityName = getCurrentActivityName(context)
+
+        // ✅ MainActivity에서만 실행
+        if (activityName !in allowedActivities) {
+            Log.d("ChallengeCheckManager", "현재 액티비티: $activityName → MainActivity에서만 실행됨")
+            return
+        }
+
+        // ✅ 이미 실행된 적이 있으면 return (앱 실행 중에는 한 번만 실행)
+        if (isApiAlreadyCalled()) {
+            Log.d("ChallengeCheckManager", "API 체크 이미 완료됨 → 다시 실행 안함")
+            return
+        }
+
+        checkJob = CoroutineScope(Dispatchers.IO).launch {
+            delay(30000) // 30초 후 실행
+            val result = checkChallengeMatching()
+            result?.let { (isSoloMatching, isCrewMatching) ->
+                if (isSoloMatching) {
+                    Log.d("ChallengeCheckManager", "솔로 챌린지 매칭됨!")
+                    openChallengeActivity(context, "SOLO")
+                } else if (isCrewMatching) {
+                    Log.d("ChallengeCheckManager", "크루 챌린지 매칭됨!")
+                    openChallengeActivity(context, "CREW")
+                }
+            }
+            setApiCalled() // ✅ API 호출 상태 저장 → 앱 실행 중에는 다시 실행되지 않도록
+        }
+    }
+
+    /**
+     * ✅ 앱을 처음 실행할 때 API 호출 상태 초기화
+     */
+    private fun resetApiCallStatus() {
+        prefs.edit().putBoolean("is_api_called", false).apply()
+    }
+
+    private fun isApiAlreadyCalled(): Boolean {
         return prefs.getBoolean("is_api_called", false)
     }
 
@@ -33,44 +72,6 @@ object ChallengeCheckManager {
         prefs.edit().putBoolean("is_api_called", true).apply()
     }
 
-    /**
-     * ✅ 특정 액티비티에서는 `startPeriodicCheck` 실행 방지
-     */
-    fun startPeriodicCheck(context: Context) {
-        checkJob?.cancel() // 기존 실행 중인 잡이 있다면 취소
-
-        // ✅ 현재 실행 중인 액티비티 확인
-        val activityName = getCurrentActivityName(context)
-
-        // 특정 액티비티라면 실행하지 않음
-        if (activityName in excludedActivities) {
-            Log.d("ChallengeCheckManager", "현재 액티비티 제외 목록에 있음: $activityName → 주기적 체크 실행 안함")
-            return
-        }
-
-        checkJob = CoroutineScope(Dispatchers.IO).launch {
-            delay(30000) //30초후
-            while (true) {
-                val result = checkChallengeMatching()
-                result?.let { (isSoloMatching, isCrewMatching) ->
-                    if (isSoloMatching) {
-                        Log.d("ChallengeCheckManager", "솔로 챌린지 매칭됨!")
-                        openChallengeActivity(context, "SOLO")
-                        cancel() // 매칭되었으면 주기적 호출 중단
-                    } else if (isCrewMatching) {
-                        Log.d("ChallengeCheckManager", "크루 챌린지 매칭됨!")
-                        openChallengeActivity(context, "CREW")
-                        cancel() // 매칭되었으면 주기적 호출 중단
-                    }
-                }
-                delay(60000) // ✅ 60초(1분)마다 확인
-            }
-        }
-    }
-
-    /**
-     * ✅ API 요청 (호출 후 `Pair<Boolean, Boolean>` 반환)
-     */
     private suspend fun checkChallengeMatching(): Pair<Boolean, Boolean>? {
         return withContext(Dispatchers.IO) {
             try {
@@ -101,9 +102,6 @@ object ChallengeCheckManager {
         }
     }
 
-    /**
-     * ✅ 현재 실행 중인 액티비티 이름 가져오기
-     */
     private fun getCurrentActivityName(context: Context): String? {
         return try {
             val activityManager = context.getSystemService(Context.ACTIVITY_SERVICE) as android.app.ActivityManager

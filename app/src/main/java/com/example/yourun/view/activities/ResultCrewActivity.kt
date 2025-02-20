@@ -3,6 +3,7 @@ package com.example.yourun.view.activities
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -25,6 +26,12 @@ class ResultCrewActivity : AppCompatActivity() {
         val topBarTitle: TextView = findViewById(R.id.txtTopBarWithBackButton)
         topBarTitle.text = "크루 챌린지 결과"
 
+        val backButton: ImageButton = findViewById(R.id.backButton)
+
+        backButton.setOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+
         val btnConfirm: Button = findViewById(R.id.btn_next)
         val tvRunningMessage: TextView = findViewById(R.id.tv_running_message)
         val tvOverlayText:TextView = findViewById(R.id.tv_overlay_text)
@@ -34,6 +41,15 @@ class ResultCrewActivity : AppCompatActivity() {
         val tvMyCrewDistance: TextView = findViewById(R.id.tv_mate_status)
         val imgMateProfile: ImageView = findViewById(R.id.img_mate_profile)
 
+        val imgRunner: ImageView = findViewById(R.id.img_runner)
+
+        val images = arrayOf(
+            R.drawable.img_crew_success_01,
+            R.drawable.img_crew_success_02,
+            R.drawable.img_crew_success_03
+        )
+
+        imgRunner.setImageResource(images.random())
 
         viewModel.fetchCrewChallengeResult()
 
