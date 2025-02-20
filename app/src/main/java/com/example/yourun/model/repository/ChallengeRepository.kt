@@ -6,11 +6,16 @@ import com.example.yourun.model.data.CrewChallengeRes
 import com.example.yourun.model.data.CrewChallengeResponse
 import com.example.yourun.model.data.SoloChallengeDetailRes
 import com.example.yourun.model.data.SoloChallengeRes
+import com.example.yourun.model.data.response.CrewChallengeMateRes
+import com.example.yourun.model.network.ApiClient
+import com.example.yourun.model.network.ApiResponse
 import com.example.yourun.model.network.ApiService
+import com.google.android.gms.common.api.Api
+import retrofit2.Response
 
-class ChallengeRepository(private val apiService: ApiService) {
+class ChallengeRepository(private val apiService: ApiService = ApiClient.getApiService()) {
 
-   /* suspend fun getPendingCrewChallenges(): List<CrewChallengeRes>? {
+   suspend fun getPendingCrewChallenges(): List<CrewChallengeRes>? {
         return try {
             val response = apiService.getPendingCrewChallenges()
 
@@ -34,7 +39,7 @@ class ChallengeRepository(private val apiService: ApiService) {
             Log.e("API_EXCEPTION", "Exception: ${e.message}")
             null
         }
-    }*/
+    }
 
     suspend fun getPendingPersonalChallenges(): List<SoloChallengeRes>? {
         return try {
@@ -56,36 +61,15 @@ class ChallengeRepository(private val apiService: ApiService) {
         }
     }
 
-    suspend fun getCrewChallengeDetail(challengeId: String): CrewChallengeDetailRes? {
-        return try {
-            val response = apiService.getCrewChallengeDetail(challengeId)
-
-            if (response.isSuccessful) {
-                val body = response.body()
-                Log.d("API_SUCCESS", "Raw Response Body: ${response.body()}") // 전체 응답 로그
-                body?.data
-            } else {
-                Log.e("API_ERROR", "Error: ${response.errorBody()?.string()}")
-                null
-            }
-        } catch (e: Exception) {
-            Log.e("API_EXCEPTION", "Exception: ${e.message}")
-            null
-        }
+    suspend fun getCrewChallengeDetail(challengeId: String): Response<ApiResponse<CrewChallengeDetailRes>> {
+        return apiService.getCrewChallengeDetail(challengeId)
     }
 
-    suspend fun getSoloChallengeDetail(challengeId: String): SoloChallengeDetailRes? {
-        return try {
-            val response = apiService.getSoloChallengeDetail(challengeId)
-            if (response.isSuccessful) {
-                response.body()?.data
-            } else {
-                Log.e("API_ERROR", "Error: ${response.errorBody()?.string()}")
-                null
-            }
-        } catch (e: Exception) {
-            Log.e("API_EXCEPTION", "Exception: ${e.message}")
-            null
-        }
+    suspend fun getSoloChallengeDetail(challengeId: String): Response<ApiResponse<SoloChallengeDetailRes>> {
+        return apiService.getSoloChallengeDetail(challengeId.toLong())
+    }
+
+    suspend fun joinCrewChallenge(challengeId: Long, participantIds: List<Long>): Response<ApiResponse<CrewChallengeMateRes>> {
+        return apiService.joinCrewChallenge(challengeId, CrewChallengeMateRes(challengeId, participantIds))
     }
 }

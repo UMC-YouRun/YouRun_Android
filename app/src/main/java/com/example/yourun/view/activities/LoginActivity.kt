@@ -43,6 +43,14 @@ class LoginActivity : AppCompatActivity() {
             result.onSuccess { response ->
                 Log.d("LoginActivity", "로그인 성공!")
 
+                /*
+                response.data?.userId?.let { userId ->
+                    Log.d("LoginActivity", "로그인 응답에서 받은 userId: $userId")
+                    saveUserIdToPreferences(userId)
+                } ?: Log.e("LoginActivity", "🚨 로그인 응답에 userId 없음!")
+
+                handleAppExpNavigation()
+                 */
 
             }.onFailure { error ->
                 Log.e("LoginActivity", "로그인 실패: ${error.message}")
@@ -127,5 +135,14 @@ class LoginActivity : AppCompatActivity() {
 //        }
 
         finish() // 현재 Activity 종료하여 뒤로 가기 방지
+    }
+
+    private fun saveUserIdToPreferences(userId: Long) {
+        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putLong("userId", userId)
+            apply()
+        }
+        Log.d("LoginActivity", "✅ SharedPreferences에 userId 저장 완료: $userId")
     }
 }
