@@ -51,7 +51,7 @@ class MateRepository(private val apiService: ApiService) {
                     tags = apiData.tags ?: emptyList(),
                     countDay = apiData.countDay ?: 0,
                     totalDistance = apiData.totalDistance ?: 0,
-                    change = apiData.countDay ?: 0,
+                    change = 0, // 이 부분은 지난 주? 지난 달?과 비교해서 순위변동 알려주는 란인데 api에 필드가 없음ㅅ
                     tendency = apiData.tendency ?: ""
                 )
             } ?: emptyList()
@@ -61,23 +61,12 @@ class MateRepository(private val apiService: ApiService) {
         }
     }
 
-    /*
-    private fun getRandomProfileImage(): Int {
-        val images = listOf(
-            R.drawable.img_profile_pacemaker_purple,
-            R.drawable.img_profile_trailrunner_red,
-            R.drawable.img_profile_sprinter_yellow
-        )
-        return images.random()
-    }
-    */
-
     private fun getProfileImageByTendency(tendency: String?): Int {
         return when (tendency) {
-            "페이스메이커" -> R.drawable.img_profile_pacemaker_purple
+            "페이스메이커" -> R.drawable.img_profile_pacemaker
             "트레일러너" -> R.drawable.img_profile_trailrunner_red
             "스프린터" -> R.drawable.img_profile_sprinter_yellow
-            else -> R.drawable.img_profile_pacemaker_purple
+            else -> R.drawable.img_profile_pacemaker
         }
     }
 
