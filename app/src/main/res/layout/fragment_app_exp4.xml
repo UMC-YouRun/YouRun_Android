@@ -21,20 +21,19 @@
         app:layout_constraintTop_toBottomOf="@id/app_exp_top_bar_with_back_button">
 
         <TextView
-            android:id="@+id/txt_app_exp_who_run"
+            android:id="@+id/txtAppExpWhoRun"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="121dp"
-            android:layout_marginBottom="26dp"
+            android:layout_marginBottom="54dp"
             android:letterSpacing="-0.03"
             android:lineSpacingExtra="8sp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="32dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="121dp"/>
-
+            android:text="@string/app_exp_4"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
