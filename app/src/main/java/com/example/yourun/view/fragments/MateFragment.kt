@@ -136,24 +136,28 @@ class MateFragment : Fragment() {
         if (topMates.isNotEmpty()) {
             // 1등
             view?.findViewById<TextView>(R.id.name_mate_rank1)?.text = topMates[0].nickname
-            view?.findViewById<TextView>(R.id.change_mate_rank1)?.text =
+            view?.findViewById<TextView>(R.id.change_mate_rank1)?.text = "-"
+            /*
                 when {
                     topMates[0].change > 0 -> "+${topMates[0].change}위"
                     topMates[0].change < 0 -> "${topMates[0].change}위"
                     else -> "-"
                 }
+             */
             view?.findViewById<ImageView>(R.id.character_mate_rank1)?.setImageResource(getTop3ProfileImage(topMates[0].tendency))
             view?.findViewById<ImageView>(R.id.card_mate_rank1)?.setImageResource(getTop3BgImage(topMates[0].tendency))
 
             // 2등 (데이터 존재할 때만)
             if (topMates.size > 1) {
                 view?.findViewById<TextView>(R.id.name_mate_rank2)?.text = topMates[1].nickname
-                view?.findViewById<TextView>(R.id.change_mate_rank2)?.text =
+                view?.findViewById<TextView>(R.id.change_mate_rank2)?.text = "-"
+                /*
                     when {
                         topMates[1].change > 1 -> "+${topMates[1].change}위"
                         topMates[1].change < 1 -> "${topMates[1].change}위"
                         else -> "-"
                     }
+                 */
                 view?.findViewById<ImageView>(R.id.character_mate_rank2)?.setImageResource(getTop3ProfileImage(topMates[1].tendency))
                 view?.findViewById<ImageView>(R.id.card_mate_rank2)?.setImageResource(getTop3BgImage(topMates[1].tendency))
             }
@@ -161,12 +165,14 @@ class MateFragment : Fragment() {
             // 3등 (데이터 존재할 때만)
             if (topMates.size > 2) {
                 view?.findViewById<TextView>(R.id.name_mate_rank3)?.text = topMates[2].nickname
-                view?.findViewById<TextView>(R.id.change_mate_rank3)?.text =
+                view?.findViewById<TextView>(R.id.change_mate_rank3)?.text = "-"
+                /*
                     when {
                         topMates[2].change > 0 -> "+${topMates[2].change}위"
                         topMates[2].change < 0 -> "${topMates[2].change}위"
                         else -> "-"
                     }
+                 */
                 view?.findViewById<ImageView>(R.id.characeter_mate_rank3)?.setImageResource(getTop3ProfileImage(topMates[2].tendency))
                 view?.findViewById<ImageView>(R.id.card_mate_rank3)?.setImageResource(getTop3BgImage(topMates[2].tendency))
             }
@@ -216,7 +222,7 @@ class MateFragment : Fragment() {
 
             } while ((mate.rank - change) in previousRanks)
 
-            mate.change = change
+            mate.change = 0
             previousRanks.add(mate.rank - change)
         }
     }

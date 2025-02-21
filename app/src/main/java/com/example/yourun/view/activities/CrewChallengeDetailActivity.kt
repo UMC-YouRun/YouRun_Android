@@ -39,6 +39,11 @@ class CrewChallengeDetailActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_crew_challenge_detail)
 
+        val backButton = findViewById<ImageButton>(R.id.backButton)
+        backButton.setOnClickListener {
+            finish() // 🔹 현재 액티비티 종료하고 이전 화면으로 돌아감
+        }
+
         val challengeIdStr = intent.getStringExtra("challengeId") ?: ""
         val challengeId = challengeIdStr.toLongOrNull() // String → Long 변환
 

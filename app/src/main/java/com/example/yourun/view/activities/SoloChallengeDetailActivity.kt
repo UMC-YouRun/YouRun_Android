@@ -1,6 +1,7 @@
 package com.example.yourun.view.activities
 
 import android.os.Bundle
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -24,6 +25,11 @@ class SoloChallengeDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_solo_challenge_detail) // XML 파일 지정
+
+        val backButton = findViewById<ImageButton>(R.id.backButton)
+        backButton.setOnClickListener {
+            finish() // 🔹 현재 액티비티 종료하고 이전 화면으로 돌아감
+        }
 
         val challengeId = intent.getLongExtra("challengeId", -1)
         if (challengeId != -1L) {
