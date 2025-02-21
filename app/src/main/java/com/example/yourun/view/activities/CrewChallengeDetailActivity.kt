@@ -106,22 +106,13 @@ class CrewChallengeDetailActivity : AppCompatActivity() {
     }
 
     private fun joinCrewChallenge(challengeIdStr: String) {
-        val challengeId = challengeIdStr.toLongOrNull() ?: return // String → Long 변환
-
-        val sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-        val userId = sharedPreferences.getLong("userId", -1)
-
-        if (userId == -1L) {
-            Log.e("ERROR", "로그인된 사용자 ID를 찾을 수 없음!")
-            return
-        }
-
-        val participantIds = listOf(userId)
+        val challengeId = challengeIdStr.toLongOrNull() ?: return // ✅ String → Long 변환
 
         lifecycleScope.launch {
-            viewModel.joinCrewChallenge(challengeId, participantIds)
+            viewModel.joinCrewChallenge(challengeId) // ✅ 불필요한 userId 제거
         }
     }
+
 
     /** 🚀 크루 챌린지 생성자의 성향을 기반으로 캐릭터 이미지 설정 */
     private fun setCreatorCharacterImage(participants: List<ParticipantIdInfo>?, imageView: ImageView) {

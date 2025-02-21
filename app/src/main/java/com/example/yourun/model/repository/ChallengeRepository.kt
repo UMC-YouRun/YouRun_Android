@@ -68,8 +68,7 @@ class ChallengeRepository(private val apiService: ApiService = ApiClient.getApiS
     suspend fun getSoloChallengeDetail(challengeId: String): Response<ApiResponse<SoloChallengeDetailRes>> {
         return apiService.getSoloChallengeDetail(challengeId.toLong())
     }
-
-    suspend fun joinCrewChallenge(challengeId: Long, participantIds: List<Long>): Response<ApiResponse<CrewChallengeMateRes>> {
-        return apiService.joinCrewChallenge(challengeId, CrewChallengeMateRes(challengeId, participantIds))
+    suspend fun joinCrewChallenge(challengeId: Long): Response<ApiResponse<CrewChallengeMateRes>> {
+        return apiService.joinCrewChallenge(challengeId)
     }
 }

@@ -126,11 +126,11 @@ interface ApiService {
         @Path("challengeId") challengeId: Long
     ): Response<ApiResponse<SoloChallengeDetailRes>>
 
-    @POST("/challenges/crew/{challengeId}/join")
+    @POST("challenges/crew/{challengeId}/join")
     suspend fun joinCrewChallenge(
-        @Path("challengeId") challengeId: Long,
-        @Body request: CrewChallengeMateRes
-    ): Response<ApiResponse<CrewChallengeMateRes>>
+        @Path("challengeId") challengeId: Long
+    ): Response<ApiResponse<CrewChallengeMateRes>> // ✅ 올바른 응답 타입 적용
+
 }
 
 data class ApiResponse<T>(
