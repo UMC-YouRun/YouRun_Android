@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 클릭했을 때 (선택됨) -->
+    <item
+        android:drawable="@drawable/rounded_time_button_selected"
+        android:state_selected="true" />
+    <!-- 기본 배경색 -->
+    <item android:drawable="@drawable/rounded_corners_map" />
+
+</selector>

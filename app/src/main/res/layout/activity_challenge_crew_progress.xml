@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/top_bar_with_both"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="챌린지 0일차!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_bar" />
+
+    <!-- 날짜 정보 -->
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="2월 19일 00:00 기준"
+        android:paddingTop="6dp"
+        android:paddingLeft="16dp"
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+            <!-- 오른쪽 말풍선 -->
+            <TextView
+                android:id="@+id/tv_running_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/ic_challenge_crew_bubble"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="0일 동안 최대 거리 러닝!"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:layout_marginRight="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_title"
+                app:layout_constraintBottom_toBottomOf="@id/tv_date"
+                app:layout_constraintHorizontal_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/img_running"
+        android:layout_width="353dp"
+        android:layout_height="202dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="340dp"
+        android:src="@drawable/img_facemaker_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+                android:id="@+id/tv_image_top_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="236dp"
+                android:paddingTop="16dp"
+                android:layout_marginLeft="20dp"
+                android:text="어차피 승리는 우리 것"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.07"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/img_running" />
+
+            <TextView
+                android:id="@+id/tv_image_inner_text_top"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="96dp"
+                android:text="크루명"
+                android:textColor="@android:color/black"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/img_running"
+                app:layout_constraintEnd_toEndOf="@id/img_running"
+                app:layout_constraintHorizontal_bias="0.136"
+                app:layout_constraintStart_toStartOf="@id/img_running" />
+
+            <TextView
+                android:id="@+id/tv_image_inner_text_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="62dp"
+                android:text="0km 러닝 중!"
+                android:textColor="@color/yellow_900"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/img_running"
+                app:layout_constraintEnd_toEndOf="@id/img_running"
+                app:layout_constraintHorizontal_bias="0.169"
+                app:layout_constraintStart_toStartOf="@id/img_running" />
+
+    <ImageView
+            android:id="@+id/img_crew_box"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_crew_box"
+            app:layout_constraintTop_toBottomOf="@id/img_running"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 크루 1 -->
+        <LinearLayout
+            android:id="@+id/crew_1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginLeft="18dp"
+            app:layout_constraintTop_toTopOf="@id/img_crew_box"
+            app:layout_constraintBottom_toBottomOf="@id/img_crew_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/crew_2">
+
+            <ImageView
+                android:id="@+id/img_crew_1"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/profile_sprinter" />
+
+            <TextView
+                android:id="@+id/tv_crew_name_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_name"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_crew_km_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_distance"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/purple_700" />
+        </LinearLayout>
+
+        <!-- 크루 2 -->
+        <LinearLayout
+            android:id="@+id/crew_2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="@id/img_crew_box"
+            app:layout_constraintBottom_toBottomOf="@id/img_crew_box"
+            app:layout_constraintStart_toEndOf="@id/crew_1"
+            app:layout_constraintEnd_toStartOf="@id/crew_3">
+
+            <ImageView
+                android:id="@+id/img_crew_2"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/profile_sprinter" />
+
+            <TextView
+                android:id="@+id/tv_crew_name_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_name"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_crew_km_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_distance"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <!-- 크루 3 -->
+        <LinearLayout
+            android:id="@+id/crew_3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="@id/img_crew_box"
+            app:layout_constraintBottom_toBottomOf="@id/img_crew_box"
+            app:layout_constraintStart_toEndOf="@id/crew_2"
+            app:layout_constraintEnd_toStartOf="@id/crew_4">
+
+            <ImageView
+                android:id="@+id/img_crew_3"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/profile_sprinter" />
+
+            <TextView
+                android:id="@+id/tv_crew_name_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_name"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_crew_km_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_distance"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <!-- 크루 4 -->
+        <LinearLayout
+            android:id="@+id/crew_4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_marginRight="18dp"
+            app:layout_constraintTop_toTopOf="@id/img_crew_box"
+            app:layout_constraintBottom_toBottomOf="@id/img_crew_box"
+            app:layout_constraintStart_toEndOf="@id/crew_3"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:id="@+id/img_crew_4"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/profile_sprinter" />
+
+            <TextView
+                android:id="@+id/tv_crew_name_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_name"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/tv_crew_km_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/default_distance"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_grayboxline"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/gray_400"
+            app:layout_constraintTop_toBottomOf="@id/img_crew_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- 상대 크루 섹션 -->
+    <TextView
+        android:id="@+id/tv_opponent_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="상대 크루는?"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/img_grayboxline"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp" />
+
+    <ImageView
+        android:id="@+id/img_opponent_box"
+        android:layout_width="300dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="12dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/bg_box_crew"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_opponent_title" />
+
+    <ImageView
+        android:id="@+id/img_opponent_character"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/img_challenge_sprinter"
+        app:layout_constraintTop_toTopOf="@id/img_opponent_box"
+        app:layout_constraintBottom_toBottomOf="@id/img_opponent_box"
+        app:layout_constraintStart_toStartOf="@id/img_opponent_box"
+        />
+
+    <TextView
+        android:id="@+id/tv_opponent_slogan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-10dp"
+        android:layout_marginLeft="16dp"
+        android:text="끝까지 가보자고"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/purple_700"
+        app:layout_constraintTop_toTopOf="@id/img_opponent_box"
+        app:layout_constraintStart_toEndOf="@id/img_opponent_character"
+        />
+
+    <TextView
+        android:id="@+id/tv_opponent_crew_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_name"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@id/tv_opponent_slogan"
+        app:layout_constraintStart_toStartOf="@id/tv_opponent_slogan" />
+
+    <TextView
+        android:id="@+id/tv_opponent_km"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0km 러닝 중!"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/tv_opponent_crew_name"
+        app:layout_constraintStart_toStartOf="@id/tv_opponent_crew_name" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

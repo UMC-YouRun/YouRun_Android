@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="4dp"
+    android:paddingVertical="12dp">
+
+    <ImageView
+        android:id="@+id/img_reward_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/img_crew_badge_count_2" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:text="관악산사슴 크루와 함께!"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_goal_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_goal_title" />
+
+    <TextView
+        android:id="@+id/tv_goal_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="4일 동안 최대 거리 러닝!"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/img_reward_count"
+        app:layout_constraintStart_toEndOf="@+id/img_reward_count"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/img_member_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@+id/tv_goal_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_goal_title"
+        app:srcCompat="@drawable/img_mini2_pacemaker" />
+
+    <ImageView
+        android:id="@+id/img_member_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/img_member_1"
+        app:layout_constraintTop_toTopOf="@+id/img_member_1"
+        app:srcCompat="@drawable/img_mini2_trailrunner" />
+
+    <ImageView
+        android:id="@+id/img_member_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@+id/img_member_2"
+        app:layout_constraintTop_toTopOf="@+id/img_member_1"
+        app:srcCompat="@drawable/img_mini2_sprinter" />
+
+    <ImageView
+        android:id="@+id/bg_remaincount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_description"
+        app:srcCompat="@drawable/img_grey_box" />
+
+    <TextView
+        android:id="@+id/tv_remaincount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="남은 1명!"
+        android:textSize="10sp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_remaincount"
+        app:layout_constraintEnd_toEndOf="@+id/bg_remaincount"
+        app:layout_constraintStart_toStartOf="@+id/bg_remaincount"
+        app:layout_constraintTop_toTopOf="@+id/bg_remaincount" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

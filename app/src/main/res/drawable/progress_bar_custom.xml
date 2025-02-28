@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 진행 바 배경 -->
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="10dp"/>
+            <solid android:color="@color/gray_400"/>
+        </shape>
+    </item>
+
+    <!-- 진행 바 채워지는 부분 -->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="10dp"/>
+                <solid android:color="@color/yellow"/>
+            </shape>
+        </clip>
+    </item>
+
+</layer-list>

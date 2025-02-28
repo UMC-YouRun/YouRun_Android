@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/top_bar_with_back_button" />
+
+    <TextView
+        android:id="@+id/tv_running_message"
+        android:layout_width="250dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="130dp"
+        android:background="@drawable/bgd_yellow_bubble"
+        android:text="@string/default_daylog_crew"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="top|center_horizontal"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <ImageView
+        android:id="@+id/bgd_crew_yellow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bgd_crew_yellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@id/tv_running_message" />
+
+    <!-- FACE MAKER 컨테이너 -->
+    <FrameLayout
+        android:id="@+id/facemaker_container"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/bgd_crew_yellow"
+        app:layout_constraintBottom_toBottomOf="@id/bgd_crew_yellow"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"> <!-- 우측 정렬 -->
+
+        <!-- FACE MAKER 텍스트 -->
+        <TextView
+            android:id="@+id/tv_crew1_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|top"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="-6dp"
+            android:text="FACE MAKER"
+            android:textColor="@color/yellow"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <!-- FACE MAKER 캐릭터 -->
+        <ImageView
+            android:id="@+id/img_crew1"
+            android:layout_width="140dp"
+            android:layout_height="180dp"
+            android:src="@drawable/img_crew_facemaker"
+            android:scaleType="centerInside"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="16dp"
+            android:translationY="4dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="45dp"
+            android:gravity="start">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_crew1_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_name"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="40dp">
+
+                <ImageView
+                    android:id="@+id/img_crew1_profile1"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_facemaker"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="8dp"/>
+
+                <ImageView
+                    android:id="@+id/img_crew1_profile2"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_sprinter"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="8dp"/>
+
+                <ImageView
+                    android:id="@+id/img_crew1_profile3"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_trailrunner"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="8dp"/>
+
+                <ImageView
+                    android:id="@+id/img_crew1_profile4"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_trailrunner"
+                    android:scaleType="centerCrop"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <View
+        android:id="@+id/bgd_crew_bar"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bgd_crew_bar"
+        app:layout_constraintTop_toBottomOf="@id/facemaker_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- SOLO CHALLENGE 텍스트 -->
+    <TextView
+        android:id="@+id/tv_solo_challenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CREW CHALLENGE"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/bgd_crew_bar"
+        app:layout_constraintBottom_toBottomOf="@id/bgd_crew_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- TRAIL RUNNER 배경 (좌측 정렬) -->
+    <ImageView
+        android:id="@+id/bgd_crew_purple"
+        android:layout_width="336dp"
+        android:layout_height="135dp"
+        android:layout_marginTop="45dp"
+        android:background="@drawable/bgd_crew_purple"
+        app:layout_constraintTop_toBottomOf="@id/bgd_crew_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0" /> <!-- 완전 좌측 정렬 -->
+
+    <!-- TRAIL RUNNER 컨테이너 (좌측 정렬) -->
+    <FrameLayout
+        android:id="@+id/trailrunner_container"
+        android:layout_width="336dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/bgd_crew_purple"
+        app:layout_constraintBottom_toBottomOf="@id/bgd_crew_purple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"> <!-- 완전 좌측 정렬 -->
+
+        <!-- TRAIL RUNNER 텍스트 (좌측 상단) -->
+        <TextView
+            android:id="@+id/tv_crew2_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TRAIL RUNNER"
+            android:textColor="@color/purple"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="-3dp"
+            android:layout_gravity="end|top" />
+
+        <!-- TRAIL RUNNER 캐릭터 (배경보다 크게 설정) -->
+        <ImageView
+            android:id="@+id/img_crew2"
+            android:layout_width="140dp"
+            android:layout_height="180dp"
+            android:src="@drawable/img_crew_trailrunner"
+            android:scaleType="centerInside"
+            android:layout_gravity="start|bottom"
+            android:layout_marginStart="16dp"
+            android:translationY="6dp" />
+
+        <!-- TRAIL RUNNER 정보 텍스트 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_crew2_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_name"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="40dp">
+
+                <ImageView
+                    android:id="@+id/img_crew2_profile1"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_facemaker"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="8dp"/>
+
+                <ImageView
+                    android:id="@+id/img_crew2_profile2"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_sprinter"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="8dp"/>
+
+                <ImageView
+                    android:id="@+id/img_crew2_profile3"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_trailrunner"
+                    android:scaleType="centerCrop"
+                    android:layout_marginEnd="8dp"/>
+
+                <ImageView
+                    android:id="@+id/img_crew2_profile4"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:src="@drawable/profile_trailrunner"
+                    android:scaleType="centerCrop"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

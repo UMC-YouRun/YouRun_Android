@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.yourun.viewmodel.RunningViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/running_top_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/main_color">
+
+            <ImageButton
+                android:id="@id/backButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/back_button"
+                android:src="@drawable/img_arrow_left"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="28dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/txtTopBarWithBackButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center"
+                android:letterSpacing="0.03"
+                android:lineSpacingExtra="14sp"
+                android:text="@string/app_exp_up_you_run"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@id/btnCalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:contentDescription="@string/btn_calendar"
+                android:src="@drawable/ic_calendar"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="17dp"
+                android:backgroundTint="@android:color/transparent"
+                android:layout_gravity="end" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/running_middle_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/running_top_frame"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="@drawable/rounded_bottom_corners" />
+            
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/loadingRunningAnimation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center_horizontal"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/speech_bubble"
+                android:src="@drawable/img_speech_bubble"
+                android:layout_marginTop="7dp"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/txtTimeToRun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time_to_run"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="23dp"
+                android:layout_gravity="center_horizontal" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/charcterRunningAnimation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true" />
+
+            <TextView
+                android:id="@+id/txtRunningDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/txt_running_color"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="286dp"
+                android:layout_marginStart="6dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="54dp"
+                android:layout_marginTop="318dp"
+                android:contentDescription="@string/clock"
+                android:src="@drawable/img_clock" />
+
+            <TextView
+                android:id="@+id/txtRunningTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="@color/txt_running_color"
+                android:layout_marginTop="346dp"
+                android:layout_marginStart="50dp" />
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@string/distance"
+                android:src="@drawable/img_distance"
+                android:layout_marginTop="310dp"
+                android:layout_marginStart="298dp"
+                android:layout_marginEnd="30dp"/>
+
+            <TextView
+                android:id="@+id/txtAverageSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="290dp"
+                android:layout_marginTop="346dp"
+                android:textColor="@color/txt_running_color"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/running_bottom_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/running_middle_frame"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/running_bottom_background" />
+
+            <TextView
+                android:id="@+id/txtRunningComment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="170dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBarDistance"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="312dp"
+                android:layout_height="28dp"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/custom_progress_bar"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="90dp"
+                android:layout_marginHorizontal="16dp" />
+
+            <TextView
+                android:id="@+id/txtDistanceDiff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bgd_small_speech_bubble"
+                android:padding="6dp"
+                android:textStyle="bold"
+                android:text=""
+                android:layout_gravity="end"
+                android:layout_marginTop="54dp"
+                android:layout_marginEnd="50dp" />
+
+            <TextView
+                android:id="@+id/txtMateRunningPace"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/text_gray"
+                android:layout_marginTop="122dp"
+                android:layout_marginStart="32dp" />
+
+            <TextView
+                android:id="@+id/txtMateRunningDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/text_gray"
+                android:layout_gravity="end"
+                android:layout_marginTop="122dp"
+                android:layout_marginEnd="32dp" />
+
+        </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/btnRunningPlayPause"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/running_play_pause"
+            android:src="@drawable/ic_play_pause_selector"
+            android:background="@android:color/transparent"
+            app:layout_constraintTop_toBottomOf="@id/running_top_frame"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="354dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

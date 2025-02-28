@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/top_bar_with_back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@id/rounded_bottom_background"
+            android:layout_width="match_parent"
+            android:layout_height="83dp"
+            android:background="@drawable/rounded_bottom_background" />
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/back_button"
+            android:src="@drawable/img_arrow_left"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="28dp"
+            android:layout_marginStart="29dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/txt_top_bar_with_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:letterSpacing="0.03"
+            android:lineSpacingExtra="14sp"
+            android:text="@string/tv_challenge"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/calender_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="29dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="8dp"
+            android:background="@null"
+            android:cropToPadding="false"
+            android:padding="0dp"
+            app:srcCompat="@drawable/ic_calendar" />
+
+    </FrameLayout>
+
+    <!-- 상단 버튼 + UI -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="83dp"
+        android:paddingHorizontal="4dp"
+        android:paddingVertical="36dp">
+
+        <TextView
+            android:id="@+id/tv_challenge_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="2월 모집 중인 챌린지!"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_challenge_encouraging"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="바로 도전해보세요!"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_challenge_month"
+            app:layout_constraintTop_toBottomOf="@+id/tv_challenge_month" />
+
+        <ImageButton
+            android:id="@+id/btn_crew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@null"
+            android:cropToPadding="false"
+            android:padding="0dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_challenge_encouraging"
+            app:layout_constraintTop_toBottomOf="@+id/tv_challenge_encouraging"
+            app:srcCompat="@drawable/btn_crew_default" />
+
+        <ImageButton
+            android:id="@+id/btn_personal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:background="@null"
+            android:cropToPadding="false"
+            android:padding="0dp"
+            app:layout_constraintStart_toEndOf="@+id/btn_crew"
+            app:layout_constraintTop_toTopOf="@+id/btn_crew"
+            app:srcCompat="@drawable/btn_personal_selected" />
+
+        <ImageView
+            android:id="@+id/img_user_profile_challenge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/img_user" />
+
+        <ImageView
+            android:id="@+id/img_badge_background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/img_user_profile_challenge"
+            app:layout_constraintTop_toBottomOf="@+id/img_user_profile_challenge"
+            app:srcCompat="@drawable/img_rewards" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 크루/개인 프래그먼트 컨테이너 -->
+    <FrameLayout
+        android:id="@+id/challenge_fragment_container"
+        android:layout_width="match_parent"
+        android:layout_marginTop="253dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="22dp"
+                android:layout_marginBottom="82dp"
+                android:src="@drawable/btn_floating_plus"
+                app:borderWidth="0dp"
+                app:elevation="2dp"
+                app:backgroundTint="@color/purple_400"
+                app:tint="@android:color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                 />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/bottom_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:contentInsetStart="0dp">
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/bottom_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+
+                android:background="@color/black"
+                app:itemIconTint="@color/selector_icon_color"
+                app:itemTextColor="@color/selector_icon_color"
+                app:labelVisibilityMode="labeled"
+                app:menu="@menu/bottom_nav_menu" />
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="2dp"
+            android:padding="8dp">
+
+            <!-- FloatingActionButton -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_running"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:contentDescription="@string/fab_running"
+                android:elevation="12dp"
+                android:src="@drawable/img_running"
+                app:backgroundTint="@color/round_button_background"
+                app:borderWidth="0dp"
+                app:layout_anchor="@id/bottom_app_bar"
+                app:maxImageSize="44dp"
+                app:tint="@color/round_button" />
+
+            <!-- Title -->
+            <TextView
+                android:id="@+id/fab_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:elevation="12dp"
+                android:fontFamily="@font/roboto_semibold"
+                android:text="@string/running"
+                android:textColor="@color/round_button"
+                android:textSize="11sp" />
+        </FrameLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <!-- Floating Center Button -->
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

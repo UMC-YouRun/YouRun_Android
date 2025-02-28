@@ -1,0 +1,12 @@
+<!-- res/drawable/range_gradient_yellow.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:startColor="@color/date_yellow"
+        android:endColor="@color/date_yellow"
+        android:angle="0" /> <!-- 수평 그라디언트 -->
+    <corners android:radius="30dp" /> <!-- 동그라미 모양 -->
+    <size android:width="27dp" android:height="27dp"/>
+    <path
+        android:pathData="M13.5,13.5m-9,0a9,9 0,1 1,20 0a9,9 0,1 1,-20 0"
+        android:fillColor="@color/date_yellow"/>
+</shape>
