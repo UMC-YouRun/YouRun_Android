@@ -34,37 +34,33 @@ This project was developed to provide the **"joy of running together"** beyond s
 ### Environment
 | Category | Version / Detail |
 | :--- | :--- |
-| **IDE** | Android Studio Meerkat \| 2024.3.1 |
-| **Language** | Kotlin 2.1.0 |
+| **IDE** | Android Studio |
+| **Language** | Kotlin (JVM Target 11) |
 | **Min / Target SDK** | API 31 / API 34 |
 
 ### Libraries & Frameworks
-* **UI:** Jetpack Compose (BOM 2025.03), Material 3
-* **Architecture:** MVVM Pattern, Multi-Module Architecture
-* **DI (Dependency Injection):** Hilt
-* **Network:** Retrofit2, OkHttp
-* **Concurrency:** Coroutines, Flow
-* **Navigation:** Jetpack Navigation (Compose)
-* **Local Data:** SharedPreference
-* **Map/Location:** Kakao Map SDK, Lifecycle Runtime KTX (2.8.7)
-* **Testing:** Android JUnit 5 (5.12.0)
-* **Utils:** Core KTX (1.9.0)
+* **UI Architecture:** MVVM Pattern, Single Activity Architecture (Navigation Component)
+* **UI Implementation:** XML Layouts, DataBinding, ViewBinding, RecyclerView, SwipeRefreshLayout
+* **Design & Motion:** Material Components, Lottie (Animations), ConstraintLayout
+* **Network:** Retrofit2, OkHttp, Gson Converter
+* **Map & Location:** Kakao Map SDK, Google Fused Location Provider, Google Places API
+* **Security & Auth:** Kakao SDK (Login), JJWT (JWT Handling)
+* **Utils:** Jsoup (HTML Parsing), Firebase App Distribution
 
 ---
 
 ## 🏗 Architecture
-이 프로젝트는 **MVVM (Model-View-ViewModel)** 패턴을 기반으로 관심사를 분리하여, 코드의 가독성과 유지보수성을 높였습니다.
-This project is based on the **MVVM (Model-View-ViewModel)** pattern, separating concerns to enhance code readability and maintainability.
+이 프로젝트는 **Android View System**과 **MVVM 패턴**을 기반으로 안정적인 구조를 갖추고 있습니다. **Jetpack Navigation**을 활용하여 Single Activity 구조로 화면 전환을 관리합니다.
+This project relies on the **Android View System** and **MVVM pattern** for a robust structure. It manages screen transitions using a Single Activity structure powered by **Jetpack Navigation**.
 
-### 📂 Package Structure
-* **view:** Jetpack Compose로 구현된 UI 화면 (Activity, Screen Composable)
-* **viewModel:** UI 상태(State) 관리 및 비즈니스 로직 처리 (`HiltViewModel` 활용)
-* **model:** 데이터 클래스(Data Class), Repository 패턴을 통한 데이터 소스 관리
-* **utils:** 확장 함수(Extension Functions) 및 공통 헬퍼 클래스
+### 📂 Key Features of Architecture
+* **ViewBinding & DataBinding:** XML 레이아웃과 비즈니스 로직을 효율적으로 연결하여 보일러플레이트 코드를 줄였습니다.
+* **Separation of Concerns:** UI(Fragment)와 로직(ViewModel)을 분리하여 유지보수성을 높였습니다.
+* **Secret Management:** API 키 등 민감한 정보는 `local.properties`와 `BuildConfig`를 통해 안전하게 관리합니다.
 
 ```mermaid
 graph LR
-    View["View (UI)"] --> ViewModel
-    ViewModel --> Model["Model (Repository)"]
-    Model --> Remote["Remote Data (Retrofit)"]
-    Model --> Local["Local Data (SharedPrefs)"]
+    Fragment["Fragment (UI)"] --> ViewModel
+    ViewModel --> Repository["Repository"]
+    Repository --> Remote["Remote Data (Retrofit/Jsoup)"]
+    Repository --> Local["Local Data (SharedPrefs)"]
